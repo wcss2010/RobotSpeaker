@@ -40,7 +40,7 @@
             this.pbButtonImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbButtonImage.Location = new System.Drawing.Point(0, 0);
             this.pbButtonImage.Name = "pbButtonImage";
-            this.pbButtonImage.Size = new System.Drawing.Size(177, 128);
+            this.pbButtonImage.Size = new System.Drawing.Size(177, 129);
             this.pbButtonImage.TabIndex = 0;
             this.pbButtonImage.TabStop = false;
             this.pbButtonImage.Click += new System.EventHandler(this.pbButtonImage_Click);
@@ -54,9 +54,9 @@
             this.lblButtonTxt.BackColor = System.Drawing.Color.Transparent;
             this.lblButtonTxt.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblButtonTxt.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblButtonTxt.Location = new System.Drawing.Point(0, 128);
+            this.lblButtonTxt.Location = new System.Drawing.Point(0, 129);
             this.lblButtonTxt.Name = "lblButtonTxt";
-            this.lblButtonTxt.Size = new System.Drawing.Size(177, 36);
+            this.lblButtonTxt.Size = new System.Drawing.Size(177, 35);
             this.lblButtonTxt.TabIndex = 1;
             this.lblButtonTxt.Text = "Text";
             this.lblButtonTxt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

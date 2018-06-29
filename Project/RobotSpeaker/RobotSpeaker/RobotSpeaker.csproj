@@ -62,6 +62,12 @@
     <Compile Include="Controls\ImageButton.Designer.cs">
       <DependentUpon>ImageButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MainFormUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainFormUI.Designer.cs">
+      <DependentUpon>MainFormUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ImageButton.resx">
       <DependentUpon>ImageButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainFormUI.resx">
+      <DependentUpon>MainFormUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

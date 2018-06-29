@@ -47,6 +47,28 @@ namespace RobotSpeaker.Controls
         /// </summary>
         public PictureBox ImageBox { get { return pbButtonImage; } }
 
+        /// <summary>
+        /// 是否允许显示文本标签
+        /// </summary>
+        public bool EnabledTextLabel
+        {
+            get
+            {
+                return TextLabel.Height > 0;
+            }
+            set
+            {
+                if (value)
+                {
+                    TextLabel.Height = 35;
+                }
+                else
+                {
+                    TextLabel.Height = 0;
+                }
+            }
+        }
+
         public ImageButton()
         {
             InitializeComponent();

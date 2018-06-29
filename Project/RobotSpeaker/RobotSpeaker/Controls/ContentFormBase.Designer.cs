@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.plTopBar = new System.Windows.Forms.Panel();
-            this.pbLogo = new System.Windows.Forms.PictureBox();
-            this.ibBack = new RobotSpeaker.Controls.ImageButton();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.ibBack = new RobotSpeaker.Controls.ImageButton();
+            this.pbLogo = new System.Windows.Forms.PictureBox();
             this.plTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
@@ -48,28 +48,6 @@
             this.plTopBar.Size = new System.Drawing.Size(1031, 64);
             this.plTopBar.TabIndex = 0;
             // 
-            // pbLogo
-            // 
-            this.pbLogo.BackColor = System.Drawing.Color.Transparent;
-            this.pbLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbLogo.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pbLogo.Location = new System.Drawing.Point(967, 0);
-            this.pbLogo.Name = "pbLogo";
-            this.pbLogo.Size = new System.Drawing.Size(64, 64);
-            this.pbLogo.TabIndex = 0;
-            this.pbLogo.TabStop = false;
-            // 
-            // ibBack
-            // 
-            this.ibBack.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ibBack.FocusImage = null;
-            this.ibBack.Location = new System.Drawing.Point(0, 0);
-            this.ibBack.Name = "ibBack";
-            this.ibBack.NoFocusImage = null;
-            this.ibBack.Size = new System.Drawing.Size(64, 64);
-            this.ibBack.TabIndex = 1;
-            this.ibBack.Click += new System.EventHandler(this.ibBack_Click);
-            // 
             // lblTitle
             // 
             this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -80,6 +58,29 @@
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Title";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // ibBack
+            // 
+            this.ibBack.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ibBack.EnabledTextLabel = false;
+            this.ibBack.FocusImage = null;
+            this.ibBack.Location = new System.Drawing.Point(0, 0);
+            this.ibBack.Name = "ibBack";
+            this.ibBack.NoFocusImage = null;
+            this.ibBack.Size = new System.Drawing.Size(64, 64);
+            this.ibBack.TabIndex = 1;
+            this.ibBack.Click += new System.EventHandler(this.ibBack_Click);
+            // 
+            // pbLogo
+            // 
+            this.pbLogo.BackColor = System.Drawing.Color.Transparent;
+            this.pbLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbLogo.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pbLogo.Location = new System.Drawing.Point(967, 0);
+            this.pbLogo.Name = "pbLogo";
+            this.pbLogo.Size = new System.Drawing.Size(64, 64);
+            this.pbLogo.TabIndex = 0;
+            this.pbLogo.TabStop = false;
             // 
             // ContentFormBase
             // 
