@@ -31,8 +31,8 @@
             this.plTopBar = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.ibBack = new RobotSpeaker.Controls.ImageButton();
+            this.lblEmpty = new System.Windows.Forms.Label();
             this.pbLogo = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.plTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
@@ -42,7 +42,7 @@
             this.plTopBar.BackColor = System.Drawing.Color.Transparent;
             this.plTopBar.Controls.Add(this.lblTitle);
             this.plTopBar.Controls.Add(this.ibBack);
-            this.plTopBar.Controls.Add(this.label1);
+            this.plTopBar.Controls.Add(this.lblEmpty);
             this.plTopBar.Controls.Add(this.pbLogo);
             this.plTopBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.plTopBar.Location = new System.Drawing.Point(0, 0);
@@ -73,6 +73,14 @@
             this.ibBack.TabIndex = 1;
             this.ibBack.Click += new System.EventHandler(this.ibBack_Click);
             // 
+            // lblEmpty
+            // 
+            this.lblEmpty.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblEmpty.Location = new System.Drawing.Point(0, 0);
+            this.lblEmpty.Name = "lblEmpty";
+            this.lblEmpty.Size = new System.Drawing.Size(33, 64);
+            this.lblEmpty.TabIndex = 3;
+            // 
             // pbLogo
             // 
             this.pbLogo.BackColor = System.Drawing.Color.Transparent;
@@ -83,14 +91,6 @@
             this.pbLogo.Size = new System.Drawing.Size(64, 64);
             this.pbLogo.TabIndex = 0;
             this.pbLogo.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 64);
-            this.label1.TabIndex = 3;
             // 
             // ContentFormBase
             // 
@@ -112,6 +112,6 @@
         private System.Windows.Forms.PictureBox pbLogo;
         private ImageButton ibBack;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblEmpty;
     }
 }
