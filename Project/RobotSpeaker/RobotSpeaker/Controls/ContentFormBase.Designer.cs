@@ -30,6 +30,8 @@
         {
             this.plTopBar = new System.Windows.Forms.Panel();
             this.pbLogo = new System.Windows.Forms.PictureBox();
+            this.ibBack = new RobotSpeaker.Controls.ImageButton();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.plTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
@@ -37,6 +39,8 @@
             // plTopBar
             // 
             this.plTopBar.BackColor = System.Drawing.Color.Transparent;
+            this.plTopBar.Controls.Add(this.lblTitle);
+            this.plTopBar.Controls.Add(this.ibBack);
             this.plTopBar.Controls.Add(this.pbLogo);
             this.plTopBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.plTopBar.Location = new System.Drawing.Point(0, 0);
@@ -54,6 +58,28 @@
             this.pbLogo.Size = new System.Drawing.Size(64, 64);
             this.pbLogo.TabIndex = 0;
             this.pbLogo.TabStop = false;
+            // 
+            // ibBack
+            // 
+            this.ibBack.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ibBack.FocusImage = null;
+            this.ibBack.Location = new System.Drawing.Point(0, 0);
+            this.ibBack.Name = "ibBack";
+            this.ibBack.NoFocusImage = null;
+            this.ibBack.Size = new System.Drawing.Size(64, 64);
+            this.ibBack.TabIndex = 1;
+            this.ibBack.Click += new System.EventHandler(this.ibBack_Click);
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTitle.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTitle.Location = new System.Drawing.Point(64, 0);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(903, 64);
+            this.lblTitle.TabIndex = 2;
+            this.lblTitle.Text = "Title";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ContentFormBase
             // 
@@ -73,5 +99,7 @@
 
         private System.Windows.Forms.Panel plTopBar;
         private System.Windows.Forms.PictureBox pbLogo;
+        private ImageButton ibBack;
+        private System.Windows.Forms.Label lblTitle;
     }
 }
