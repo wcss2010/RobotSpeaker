@@ -28,7 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // ContentPanel
+            // 
+            this.AutoScroll = true;
+            this.Name = "ContentPanel";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

@@ -19,6 +19,15 @@ namespace RobotSpeaker.Forms
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+
+            cpChatContent.AddRecvMsg("收到消息！！！");
+            cpChatContent.AddSendMsg("消息发出！！！");
+
+            cpChatContent.AddRecvMsg("收到消息！！！");
+            cpChatContent.AddSendMsg("消息发出！！！");
+
+            cpChatContent.AddRecvMsg("收到消息！！！");
+            cpChatContent.AddSendMsg("消息发出！！！");
         }
 
         protected override void OnClickBackButton(EventArgs e)

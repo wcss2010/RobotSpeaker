@@ -9,17 +9,17 @@ using System.Windows.Forms;
 
 namespace RobotSpeaker.Controls.Chat
 {
-    public partial class ContentPanel : Panel
+    public partial class ContentPanel : UserControl
     {
         /// <summary>
         /// 当前消息气泡起始位置
         /// </summary>
-        private int top = 0;
+        public int top = 0;
 
         /// <summary>
         /// 当前消息气泡高度
         /// </summary>
-        private int height = 0;
+        public int height = 0;
 
         public ContentPanel()
         {
@@ -31,7 +31,7 @@ namespace RobotSpeaker.Controls.Chat
         /// 显示接收消息
         /// </summary>
         /// <param name="model"></param>
-        private void AddReceiveMessage(string content)
+        public void AddRecvMsg(string content)
         {
             ContentItem item = new ContentItem();
             item.messageType = ContentItem.MessageType.receive;
@@ -50,7 +50,7 @@ namespace RobotSpeaker.Controls.Chat
         // <summary>
         /// 更新界面，显示发送消息
         /// </summary>
-        private void AddSendMessage(string content)
+        public void AddSendMsg(string content)
         {
             ContentItem item = new ContentItem();
             item.messageType = ContentItem.MessageType.send;
