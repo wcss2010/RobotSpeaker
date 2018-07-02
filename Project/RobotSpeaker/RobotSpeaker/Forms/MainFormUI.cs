@@ -21,9 +21,9 @@ namespace RobotSpeaker.Forms
         {
             base.OnLoad(e);
 
-            TitleLabel.ForeColor = Color.White;
-            BackButton.NoFocusImage = Image.FromFile(@"C:\MyCode\RobotSpeaker\Image\goback.png");
-            LogoBox.Image = Image.FromFile(@"C:\MyCode\RobotSpeaker\Image\logo.png");
+            //TitleLabel.ForeColor = Color.White;
+            //BackButton.NoFocusImage = Image.FromFile(@"C:\MyCode\RobotSpeaker\Image\goback.png");
+            //LogoBox.Image = Image.FromFile(@"C:\MyCode\RobotSpeaker\Image\logo.png");
         }
 
         protected override void OnClickBackButton(EventArgs e)

@@ -42,6 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ButtonExt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ButtonExt.Designer.cs">
+      <DependentUpon>ButtonExt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ContentFormBase.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -37,12 +37,17 @@ namespace RobotSpeaker.Controls
             if (IsPressed)
             {
                 //按下状态
-                e.Graphics.FillRectangle(new SolidBrush(Color.Orange), new Rectangle(0, 0, Width, Height));
+                e.Graphics.FillRectangle(new SolidBrush(Color.Orange), new Rectangle(1, 1, Width - 4, Height - 4));
             }
 
-            //画白框和白文字
-            e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.White)), new Rectangle(0, 0, Width, Height));
-            e.Graphics.DrawString(this.Text, this.Font, new SolidBrush(Color.White), 0, 0);
+            //画白框
+            e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.White), 2), new Rectangle(1, 1, Width - 4, Height - 4));
+
+            //写白色的文字
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
+            e.Graphics.DrawString(this.Text, this.Font, new SolidBrush(Color.White), new RectangleF(2, 2, Width - 4, Height - 4), sf);
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
@@ -50,6 +55,7 @@ namespace RobotSpeaker.Controls
             base.OnMouseDown(e);
 
             IsPressed = true;
+            this.Invalidate();
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
@@ -57,6 +63,7 @@ namespace RobotSpeaker.Controls
             base.OnMouseUp(e);
 
             IsPressed = false;
+            this.Invalidate();
         }
     }
 }
