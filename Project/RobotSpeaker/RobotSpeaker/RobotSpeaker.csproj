@@ -66,23 +66,47 @@
     <Compile Include="Controls\ImageButton.Designer.cs">
       <DependentUpon>ImageButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MainFormUI.cs">
+    <Compile Include="Forms\AboutUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MainFormUI.Designer.cs">
-      <DependentUpon>MainFormUI.cs</DependentUpon>
+    <Compile Include="Forms\AboutUI.Designer.cs">
+      <DependentUpon>AboutUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PageFormBase.cs">
+    <Compile Include="Forms\FaceUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PageFormBase.Designer.cs">
-      <DependentUpon>PageFormBase.cs</DependentUpon>
+    <Compile Include="Forms\FaceUI.Designer.cs">
+      <DependentUpon>FaceUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SystemConfig.cs">
+    <Compile Include="Forms\GoUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SystemConfig.Designer.cs">
-      <DependentUpon>SystemConfig.cs</DependentUpon>
+    <Compile Include="Forms\GoUI.Designer.cs">
+      <DependentUpon>GoUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainUI.Designer.cs">
+      <DependentUpon>MainUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PageUIBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PageUIBase.Designer.cs">
+      <DependentUpon>PageUIBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ConfigUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ConfigUI.Designer.cs">
+      <DependentUpon>ConfigUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\VoiceUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\VoiceUI.Designer.cs">
+      <DependentUpon>VoiceUI.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -101,14 +125,26 @@
     <EmbeddedResource Include="Controls\ImageButton.resx">
       <DependentUpon>ImageButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainFormUI.resx">
-      <DependentUpon>MainFormUI.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\AboutUI.resx">
+      <DependentUpon>AboutUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PageFormBase.resx">
-      <DependentUpon>PageFormBase.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FaceUI.resx">
+      <DependentUpon>FaceUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SystemConfig.resx">
-      <DependentUpon>SystemConfig.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\GoUI.resx">
+      <DependentUpon>GoUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainUI.resx">
+      <DependentUpon>MainUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PageUIBase.resx">
+      <DependentUpon>PageUIBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ConfigUI.resx">
+      <DependentUpon>ConfigUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\VoiceUI.resx">
+      <DependentUpon>VoiceUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

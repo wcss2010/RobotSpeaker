@@ -50,22 +50,26 @@ namespace RobotSpeaker.Forms
 
         private void ibAbout_Click(object sender, EventArgs e)
         {
-
+            AboutUI ui = new AboutUI();
+            ui.Show();
         }
 
         private void ibGo_Click(object sender, EventArgs e)
         {
-
+            GoUI ui = new GoUI();
+            ui.Show();
         }
 
         private void ibFace_Click(object sender, EventArgs e)
         {
-
+            FaceUI ui = new FaceUI();
+            ui.Show();
         }
 
         private void ibVoice_Click(object sender, EventArgs e)
         {
-
+            VoiceUI ui = new VoiceUI();
+            ui.Show();
         }
 
         private void ibSetting_Click(object sender, EventArgs e)
