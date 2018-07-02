@@ -22,7 +22,7 @@ namespace RobotSpeaker.Forms
         {
             base.OnLoad(e);
 
-            TitleLabel.ForeColor = Color.White;
+            TitleTextColor = Color.White;
             try
             {
                 BackButton.NoFocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\goback.png"));
