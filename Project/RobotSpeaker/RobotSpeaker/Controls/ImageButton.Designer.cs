@@ -41,6 +41,7 @@
             this.pbButtonImage.Location = new System.Drawing.Point(0, 0);
             this.pbButtonImage.Name = "pbButtonImage";
             this.pbButtonImage.Size = new System.Drawing.Size(177, 129);
+            this.pbButtonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbButtonImage.TabIndex = 0;
             this.pbButtonImage.TabStop = false;
             this.pbButtonImage.Click += new System.EventHandler(this.pbButtonImage_Click);

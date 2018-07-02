@@ -23,8 +23,12 @@ namespace RobotSpeaker.Forms
             base.OnLoad(e);
 
             TitleLabel.ForeColor = Color.White;
-            BackButton.NoFocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\goback.png"));
-            LogoBox.Image = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\logo.png"));
+            try
+            {
+                BackButton.NoFocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\goback.png"));
+                LogoBox.Image = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\logo.png"));
+            }
+            catch (Exception ex) { }
         }
     }
 }
