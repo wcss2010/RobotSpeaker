@@ -72,6 +72,12 @@
     <Compile Include="Forms\MainFormUI.Designer.cs">
       <DependentUpon>MainFormUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PageFormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PageFormBase.Designer.cs">
+      <DependentUpon>PageFormBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainFormUI.resx">
       <DependentUpon>MainFormUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PageFormBase.resx">
+      <DependentUpon>PageFormBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
