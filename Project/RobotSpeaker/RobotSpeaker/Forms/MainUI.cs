@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace RobotSpeaker.Forms
 {
-    public partial class MainFormUI : PageFormBase
+    public partial class MainUI : PageUIBase
     {
-        public MainFormUI()
+        public MainUI()
         {
             InitializeComponent();
         }
@@ -21,6 +21,11 @@ namespace RobotSpeaker.Forms
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+
+            plTabPanel.Top = (Screen.PrimaryScreen.Bounds.Height - plTabPanel.Height) / 2;
+            plTabPanel.Left = (Screen.PrimaryScreen.Bounds.Width - plTabPanel.Width) / 2;
+
+            BackButton.NoFocusImage = null;
 
             ibAbout.NoFocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\machine1.png"));
             ibAbout.FocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\machine2.png"));
@@ -41,6 +46,32 @@ namespace RobotSpeaker.Forms
         protected override void OnClickBackButton(EventArgs e)
         {
             base.OnClickBackButton(e);
+        }
+
+        private void ibAbout_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ibGo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ibFace_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ibVoice_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ibSetting_Click(object sender, EventArgs e)
+        {
+            ConfigUI sc = new ConfigUI();
+            sc.ShowDialog();
         }
     }
 }

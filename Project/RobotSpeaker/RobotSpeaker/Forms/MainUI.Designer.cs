@@ -1,6 +1,6 @@
 ﻿namespace RobotSpeaker.Forms
 {
-    partial class MainFormUI
+    partial class MainUI
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFormUI));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainUI));
             this.ibAbout = new RobotSpeaker.Controls.ImageButton();
             this.ibGo = new RobotSpeaker.Controls.ImageButton();
             this.ibFace = new RobotSpeaker.Controls.ImageButton();
@@ -52,6 +52,7 @@
             this.ibAbout.NoFocusImage = ((System.Drawing.Image)(resources.GetObject("ibAbout.NoFocusImage")));
             this.ibAbout.Size = new System.Drawing.Size(178, 200);
             this.ibAbout.TabIndex = 5;
+            this.ibAbout.Click += new System.EventHandler(this.ibAbout_Click);
             // 
             // ibGo
             // 
@@ -67,6 +68,7 @@
             this.ibGo.NoFocusImage = null;
             this.ibGo.Size = new System.Drawing.Size(178, 200);
             this.ibGo.TabIndex = 6;
+            this.ibGo.Click += new System.EventHandler(this.ibGo_Click);
             // 
             // ibFace
             // 
@@ -82,6 +84,7 @@
             this.ibFace.NoFocusImage = null;
             this.ibFace.Size = new System.Drawing.Size(178, 200);
             this.ibFace.TabIndex = 7;
+            this.ibFace.Click += new System.EventHandler(this.ibFace_Click);
             // 
             // ibVoice
             // 
@@ -97,6 +100,7 @@
             this.ibVoice.NoFocusImage = null;
             this.ibVoice.Size = new System.Drawing.Size(178, 200);
             this.ibVoice.TabIndex = 8;
+            this.ibVoice.Click += new System.EventHandler(this.ibVoice_Click);
             // 
             // ibSetting
             // 
@@ -112,11 +116,10 @@
             this.ibSetting.NoFocusImage = null;
             this.ibSetting.Size = new System.Drawing.Size(178, 200);
             this.ibSetting.TabIndex = 9;
+            this.ibSetting.Click += new System.EventHandler(this.ibSetting_Click);
             // 
             // plTabPanel
             // 
-            this.plTabPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.plTabPanel.Controls.Add(this.ibAbout);
             this.plTabPanel.Controls.Add(this.ibSetting);
             this.plTabPanel.Controls.Add(this.ibGo);

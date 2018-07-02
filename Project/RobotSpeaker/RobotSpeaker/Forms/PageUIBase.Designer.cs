@@ -1,6 +1,6 @@
 ﻿namespace RobotSpeaker.Forms
 {
-    partial class PageFormBase
+    partial class PageUIBase
     {
         /// <summary>
         /// Required designer variable.
@@ -36,6 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1031, 487);
+            this.KeyPreview = true;
             this.Name = "PageFormBase";
             this.Text = "PageFormBase";
             this.ResumeLayout(false);

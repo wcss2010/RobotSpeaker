@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace RobotSpeaker.Forms
 {
-    public partial class PageFormBase : ContentFormBase
+    public partial class PageUIBase : ContentFormBase
     {
-        public PageFormBase()
+        public PageUIBase()
         {
             InitializeComponent();
         }
@@ -29,6 +29,17 @@ namespace RobotSpeaker.Forms
                 LogoBox.Image = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\logo.png"));
             }
             catch (Exception ex) { }
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+
+            //屏掉alt+f4
+            if ((e.KeyCode == Keys.F4) && (e.Alt == true))
+            {
+                e.Handled = true;
+            }
         }
     }
 }
