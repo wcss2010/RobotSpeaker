@@ -22,6 +22,9 @@ namespace RobotSpeaker.Forms
         {
             base.OnLoad(e);
 
+            this.TitleLabel.Text = "";
+            this.BackButton.NoFocusImage = null;
+
             ibAbout.NoFocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\machine1.png"));
             ibAbout.FocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\machine2.png"));
             ibAbout.TextLabel.Text = "自我介绍";
@@ -51,8 +54,6 @@ namespace RobotSpeaker.Forms
         protected override void OnClickBackButton(EventArgs e)
         {
             base.OnClickBackButton(e);
-
-            Close();
         }
     }
 }

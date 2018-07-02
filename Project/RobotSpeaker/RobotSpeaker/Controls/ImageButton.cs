@@ -40,11 +40,13 @@ namespace RobotSpeaker.Controls
         /// <summary>
         /// 文本标签
         /// </summary>
+        [Browsable(false)]
         public Label TextLabel { get { return lblButtonTxt; } }
 
         /// <summary>
         /// 图片容器
         /// </summary>
+        [Browsable(false)]
         public PictureBox ImageBox { get { return pbButtonImage; } }
 
         /// <summary>
@@ -67,6 +69,30 @@ namespace RobotSpeaker.Controls
                     TextLabel.Height = 0;
                 }
             }
+        }
+
+        public string BottomText 
+        {
+            get { return TextLabel.Text; }
+            set { TextLabel.Text = value; }
+        }
+
+        public Color BottomTextColor
+        {
+            get { return TextLabel.ForeColor; }
+            set { TextLabel.ForeColor = value; }
+        }
+
+        public Font BottomTextFont
+        {
+            get { return TextLabel.Font; }
+            set { TextLabel.Font = value; }
+        }
+
+        public int BottomTextHeight
+        {
+            get { return TextLabel.Height; }
+            set { TextLabel.Height = value; }
         }
 
         public ImageButton()
