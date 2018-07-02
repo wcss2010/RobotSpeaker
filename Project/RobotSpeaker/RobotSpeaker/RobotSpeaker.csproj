@@ -48,6 +48,18 @@
     <Compile Include="Controls\ButtonExt.Designer.cs">
       <DependentUpon>ButtonExt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Chat\ContentItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Chat\ContentItem.Designer.cs">
+      <DependentUpon>ContentItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Chat\ContentPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Chat\ContentPanel.Designer.cs">
+      <DependentUpon>ContentPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ContentFormBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +128,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\Chat\ContentItem.resx">
+      <DependentUpon>ContentItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ContentFormBase.resx">
       <DependentUpon>ContentFormBase.cs</DependentUpon>
     </EmbeddedResource>
