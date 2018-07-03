@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RobotSpeaker.Forms.Player;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -59,7 +60,7 @@ namespace RobotSpeaker.Forms
             }
 
             textObj.ForeColor = Color.White;
-            textObj.Font = new Font("微软雅黑", 16);
+            textObj.Font = new Font("微软雅黑", 18);
             textObj.TextAlign = ContentAlignment.MiddleLeft;
             textObj.Text = content;
 
@@ -120,6 +121,38 @@ namespace RobotSpeaker.Forms
         {
             Label clickItem = (Label)sender;
             FileInfo fi = (FileInfo)clickItem.Tag;
+
+            //查找需要哪个播放器打开
+            string extName = fi.Extension;
+            if (ImagePlayerUI.SupportedExtName.Contains(extName))
+            {
+                //图片
+                ImagePlayerUI p1 = new ImagePlayerUI(fi.FullName);
+                p1.Show();
+            }
+            else if (TextPlayerUI.SupportedExtName.Contains(extName))
+            {
+                //文本
+                TextPlayerUI p2 = new TextPlayerUI(fi.FullName);
+                p2.Show();
+            }
+            else if (VideoAndAudioPlayerUI.SupportedExtName.Contains(extName))
+            {
+                //视频
+                VideoAndAudioPlayerUI p3 = new VideoAndAudioPlayerUI(fi.FullName);
+                p3.Show();
+            }
+            else if (WebPlayerUI.SupportedExtName.Contains(extName))
+            {
+                //网页
+                WebPlayerUI p3 = new WebPlayerUI(fi.FullName);
+                p3.Show();
+            }
+            else
+            {
+                //未知
+                System.Diagnostics.Process.Start(fi.FullName);
+            }
         }
 
         protected override void OnClickBackButton(EventArgs e)

@@ -11,7 +11,9 @@ namespace RobotSpeaker.Forms.Player
 {
     public partial class ImagePlayerUI : PageUIBase
     {
-        public ImagePlayerUI()
+        public static List<string> SupportedExtName = new List<string>(new string[] { ".bmp", ".jpg", ".jpeg", ".png", ".gif" });
+
+        public ImagePlayerUI(string imageFile)
         {
             InitializeComponent();
         }

@@ -40,18 +40,18 @@
             this.plListBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.plListBar.Location = new System.Drawing.Point(0, 64);
             this.plListBar.Name = "plListBar";
-            this.plListBar.Size = new System.Drawing.Size(1031, 60);
+            this.plListBar.Size = new System.Drawing.Size(1031, 80);
             this.plListBar.TabIndex = 1;
             // 
             // lblListBarLabel
             // 
             this.lblListBarLabel.BackColor = System.Drawing.Color.Transparent;
             this.lblListBarLabel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblListBarLabel.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblListBarLabel.Font = new System.Drawing.Font("微软雅黑", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblListBarLabel.ForeColor = System.Drawing.Color.White;
             this.lblListBarLabel.Location = new System.Drawing.Point(0, 0);
             this.lblListBarLabel.Name = "lblListBarLabel";
-            this.lblListBarLabel.Size = new System.Drawing.Size(205, 60);
+            this.lblListBarLabel.Size = new System.Drawing.Size(205, 80);
             this.lblListBarLabel.TabIndex = 0;
             this.lblListBarLabel.Text = "本地资源";
             this.lblListBarLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -61,9 +61,9 @@
             this.plListContent.AutoScroll = true;
             this.plListContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plListContent.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.plListContent.Location = new System.Drawing.Point(0, 124);
+            this.plListContent.Location = new System.Drawing.Point(0, 144);
             this.plListContent.Name = "plListContent";
-            this.plListContent.Size = new System.Drawing.Size(1031, 363);
+            this.plListContent.Size = new System.Drawing.Size(1031, 343);
             this.plListContent.TabIndex = 2;
             this.plListContent.WrapContents = false;
             // 

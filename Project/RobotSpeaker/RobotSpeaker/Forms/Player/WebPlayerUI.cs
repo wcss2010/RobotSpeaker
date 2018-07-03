@@ -12,6 +12,8 @@ namespace RobotSpeaker.Forms.Player
 {
     public partial class WebPlayerUI : PageUIBase
     {
+        public static List<string> SupportedExtName = new List<string>(new string[] { ".htm", ".html"});
+
         private Image listItemC;
         public WebPlayerUI(string webUrl)
         {
@@ -26,7 +28,7 @@ namespace RobotSpeaker.Forms.Player
 
             listItemC = Image.FromFile(Path.Combine(Application.StartupPath, "Images/listBar.png"));
 
-            plListBar.BackgroundImage = listItemC;
+            //plListBar.BackgroundImage = listItemC;
             plListBar.BackgroundImageLayout = ImageLayout.Stretch;
         }
 
@@ -40,6 +42,11 @@ namespace RobotSpeaker.Forms.Player
         private void btnBack_Click(object sender, EventArgs e)
         {
             web.GoBack();
+        }
+
+        private void btnBefore_Click(object sender, EventArgs e)
+        {
+            web.GoForward();
         }
     }
 }

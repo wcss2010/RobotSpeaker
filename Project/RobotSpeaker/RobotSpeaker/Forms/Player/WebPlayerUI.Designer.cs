@@ -31,6 +31,7 @@
             this.web = new System.Windows.Forms.WebBrowser();
             this.plListBar = new System.Windows.Forms.Panel();
             this.btnBack = new RobotSpeaker.Controls.ButtonExt();
+            this.btnBefore = new RobotSpeaker.Controls.ButtonExt();
             this.plListBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,6 +47,7 @@
             // plListBar
             // 
             this.plListBar.Controls.Add(this.btnBack);
+            this.plListBar.Controls.Add(this.btnBefore);
             this.plListBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.plListBar.Location = new System.Drawing.Point(0, 64);
             this.plListBar.Name = "plListBar";
@@ -54,14 +56,25 @@
             // 
             // btnBack
             // 
-            this.btnBack.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnBack.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnBack.Location = new System.Drawing.Point(0, 0);
+            this.btnBack.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnBack.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnBack.Location = new System.Drawing.Point(791, 0);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(120, 60);
             this.btnBack.TabIndex = 0;
-            this.btnBack.Text = "上一页";
+            this.btnBack.Text = "后退";
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // btnBefore
+            // 
+            this.btnBefore.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnBefore.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnBefore.Location = new System.Drawing.Point(911, 0);
+            this.btnBefore.Name = "btnBefore";
+            this.btnBefore.Size = new System.Drawing.Size(120, 60);
+            this.btnBefore.TabIndex = 1;
+            this.btnBefore.Text = "前进";
+            this.btnBefore.Click += new System.EventHandler(this.btnBefore_Click);
             // 
             // WebPlayerUI
             // 
@@ -86,5 +99,6 @@
         private System.Windows.Forms.WebBrowser web;
         private System.Windows.Forms.Panel plListBar;
         private Controls.ButtonExt btnBack;
+        private Controls.ButtonExt btnBefore;
     }
 }

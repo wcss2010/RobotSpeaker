@@ -11,6 +11,8 @@ namespace RobotSpeaker.Forms.Player
 {
     public partial class TextPlayerUI : PageUIBase
     {
+        public static List<string> SupportedExtName = new List<string>(new string[] { ".txt" });
+
         public TextPlayerUI(string txtFile)
         {
             InitializeComponent();
