@@ -48,7 +48,7 @@ namespace RobotSpeaker.Controls.Chat
             //自己发送的消息箭头在右上角
             if (messageType == MessageType.send)
             {
-                Color color = System.Drawing.Color.LightGreen;
+                Color color = System.Drawing.Color.DarkSeaGreen;
                 plContent.BackColor = color;
                 Brush brushes = new SolidBrush(color);
                 Point[] point = new Point[3];
@@ -59,7 +59,8 @@ namespace RobotSpeaker.Controls.Chat
             }
             else
             {
-                Color color = System.Drawing.Color.LightGray;
+                Color color = System.Drawing.Color.Gray;
+                plContent.BackColor = color;
                 Brush brushes = new SolidBrush(color);
                 Point[] point = new Point[3];
                 point[0] = new Point(10, 10);

@@ -20,14 +20,14 @@ namespace RobotSpeaker.Forms
         {
             base.OnLoad(e);
 
-            cpChatContent.AddRecvMsg("收到消息！！！");
-            cpChatContent.AddSendMsg("消息发出！！！");
+            cpChatContent.AddMachineMsg("请问我能帮您做什么？");
+            cpChatContent.AddUserMsg("今天天气如何？");
 
-            cpChatContent.AddRecvMsg("收到消息！！！");
-            cpChatContent.AddSendMsg("消息发出！！！");
+            cpChatContent.AddMachineMsg("不知道啊，你自己看看天不就知道了");
+            cpChatContent.AddUserMsg("那我还用你干嘛？");
 
-            cpChatContent.AddRecvMsg("收到消息！！！");
-            cpChatContent.AddSendMsg("消息发出！！！");
+            cpChatContent.AddMachineMsg("说的也是哦。。。我帮您看看哈");
+            cpChatContent.AddUserMsg("好的，快点啊");
         }
 
         protected override void OnClickBackButton(EventArgs e)

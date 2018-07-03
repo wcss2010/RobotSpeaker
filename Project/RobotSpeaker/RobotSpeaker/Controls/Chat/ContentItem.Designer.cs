@@ -42,33 +42,33 @@
             this.plContent.MaximumSize = new System.Drawing.Size(370, 400);
             this.plContent.Name = "plContent";
             this.plContent.Padding = new System.Windows.Forms.Padding(10, 10, 5, 10);
-            this.plContent.Size = new System.Drawing.Size(26, 36);
+            this.plContent.Size = new System.Drawing.Size(28, 47);
             this.plContent.TabIndex = 0;
             // 
             // lblContent
             // 
             this.lblContent.AutoSize = true;
-            this.lblContent.Font = new System.Drawing.Font("宋体", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblContent.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblContent.ForeColor = System.Drawing.Color.White;
             this.lblContent.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lblContent.Location = new System.Drawing.Point(5, 10);
             this.lblContent.Margin = new System.Windows.Forms.Padding(0);
             this.lblContent.MaximumSize = new System.Drawing.Size(280, 1000);
             this.lblContent.Name = "lblContent";
-            this.lblContent.Size = new System.Drawing.Size(16, 16);
+            this.lblContent.Size = new System.Drawing.Size(18, 27);
             this.lblContent.TabIndex = 5;
             this.lblContent.Text = " ";
             this.lblContent.Visible = false;
             // 
-            // Item
+            // ContentItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.plContent);
-            this.Name = "Item";
+            this.Name = "ContentItem";
             this.Padding = new System.Windows.Forms.Padding(20, 10, 10, 5);
-            this.Size = new System.Drawing.Size(59, 54);
+            this.Size = new System.Drawing.Size(61, 65);
             this.plContent.ResumeLayout(false);
             this.plContent.PerformLayout();
             this.ResumeLayout(false);

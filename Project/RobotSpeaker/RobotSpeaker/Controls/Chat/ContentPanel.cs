@@ -31,7 +31,7 @@ namespace RobotSpeaker.Controls.Chat
         /// 显示接收消息
         /// </summary>
         /// <param name="model"></param>
-        public void AddRecvMsg(string content)
+        public void AddMachineMsg(string content)
         {
             ContentItem item = new ContentItem();
             item.messageType = ContentItem.MessageType.receive;
@@ -50,13 +50,13 @@ namespace RobotSpeaker.Controls.Chat
         // <summary>
         /// 更新界面，显示发送消息
         /// </summary>
-        public void AddSendMsg(string content)
+        public void AddUserMsg(string content)
         {
             ContentItem item = new ContentItem();
             item.messageType = ContentItem.MessageType.send;
             item.SetWeChatContent(content);
             item.Top = top + height;
-            item.Left = (Width - 10) - item.WIDTH;
+            item.Left = (Width - 20) - item.WIDTH;
 
             top = item.Top;
             height = item.HEIGHT;
