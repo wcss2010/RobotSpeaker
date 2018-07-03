@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -11,6 +12,9 @@ namespace RobotSpeaker.Forms
 {
     public partial class AboutUI : PageUIBase
     {
+        private Image listItemA;
+        private Image listItemB;
+        private Image listItemC;
         public AboutUI()
         {
             InitializeComponent();
@@ -19,6 +23,103 @@ namespace RobotSpeaker.Forms
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+
+            listItemA = Image.FromFile(Path.Combine(Application.StartupPath, "Images/listItem1.png"));
+            listItemB = Image.FromFile(Path.Combine(Application.StartupPath, "Images/listItem2.png"));
+            listItemC = Image.FromFile(Path.Combine(Application.StartupPath,"Images/listBar.png"));
+
+            plListBar.BackgroundImage = listItemC;
+            plListBar.BackgroundImageLayout = ImageLayout.Stretch;
+            
+            ListReadmeFiles();
+        }
+
+        /// <summary>
+        /// 创建列表项
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="isBlackBackground"></param>
+        /// <returns></returns>
+        protected Label CreateListItem(string content, bool isBlackBackground)
+        {
+            Label textObj = new Label();
+            textObj.AutoSize = false;
+            textObj.Width = plListBar.Width;
+            textObj.Height = plListBar.Height;
+
+            textObj.Name = isBlackBackground + "";
+            textObj.BackgroundImageLayout = ImageLayout.Stretch;
+            if (isBlackBackground)
+            {   
+                textObj.BackgroundImage = listItemA;
+            }
+            else
+            {
+                textObj.BackgroundImage = listItemB;
+            }
+
+            textObj.ForeColor = Color.White;
+            textObj.Font = new Font("微软雅黑", 16);
+            textObj.TextAlign = ContentAlignment.MiddleLeft;
+            textObj.Text = content;
+
+            return textObj;
+        }
+
+        protected void ListReadmeFiles()
+        {
+            bool isBlack = true;
+
+            //清空列表
+            plListContent.Controls.Clear();
+
+            //表头
+            plListContent.Controls.Add(CreateListItem("文件名称", isBlack));
+            isBlack = !isBlack;
+            
+            string[] files = Directory.GetFiles(SuperObject.ReadmeDir);
+            if (files != null)
+            {
+                foreach (string f in files)
+                {
+                    FileInfo fi = new FileInfo(f);
+
+                    Label item = CreateListItem(fi.Name + "               上一次修改日期：" + fi.LastWriteTime, isBlack);
+                    item.Tag = fi;
+                    plListContent.Controls.Add(item);
+
+                    item.Click += item_Click;
+                    item.MouseDown += item_MouseDown;
+                    item.MouseUp += item_MouseUp;
+
+                    isBlack = !isBlack;
+                }
+            }
+        }
+
+        void item_MouseUp(object sender, MouseEventArgs e)
+        {
+            Label clickItem = (Label)sender;
+            if (bool.Parse(clickItem.Name))
+            {
+                clickItem.BackgroundImage = listItemA;
+            }
+            else
+            {
+                clickItem.BackgroundImage = listItemB;
+            }
+        }
+
+        void item_MouseDown(object sender, MouseEventArgs e)
+        {
+            Label clickItem = (Label)sender;
+            clickItem.BackgroundImage = listItemC;            
+        }
+
+        void item_Click(object sender, EventArgs e)
+        {
+            Label clickItem = (Label)sender;
+            FileInfo fi = (FileInfo)clickItem.Tag;
         }
 
         protected override void OnClickBackButton(EventArgs e)

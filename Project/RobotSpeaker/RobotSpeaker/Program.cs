@@ -14,6 +14,24 @@ namespace RobotSpeaker
         [STAThread]
         static void Main()
         {
+            try
+            {
+                System.IO.Directory.CreateDirectory(SuperObject.ReadmeDir);
+            }
+            catch (Exception ex) { }
+
+            try
+            {
+                System.IO.Directory.CreateDirectory(SuperObject.CameraPhotoDir);
+            }
+            catch (Exception ex) { }
+
+            try
+            {
+                System.IO.Directory.CreateDirectory(SuperObject.CameraVideoDir);
+            }
+            catch (Exception ex) { }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainUI());
