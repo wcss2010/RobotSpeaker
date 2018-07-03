@@ -68,78 +68,94 @@
             this.plButtons.Controls.Add(this.btnLast);
             this.plButtons.Controls.Add(this.btnFirst);
             this.plButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.plButtons.Location = new System.Drawing.Point(0, 272);
+            this.plButtons.Location = new System.Drawing.Point(0, 240);
             this.plButtons.Name = "plButtons";
-            this.plButtons.Size = new System.Drawing.Size(340, 32);
+            this.plButtons.Size = new System.Drawing.Size(340, 64);
             this.plButtons.TabIndex = 0;
             // 
             // lblPageInfo
             // 
             this.lblPageInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblPageInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPageInfo.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblPageInfo.ForeColor = System.Drawing.Color.Blue;
+            this.lblPageInfo.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblPageInfo.ForeColor = System.Drawing.Color.White;
             this.lblPageInfo.Location = new System.Drawing.Point(150, 0);
             this.lblPageInfo.Name = "lblPageInfo";
-            this.lblPageInfo.Size = new System.Drawing.Size(38, 30);
+            this.lblPageInfo.Size = new System.Drawing.Size(38, 62);
             this.lblPageInfo.TabIndex = 1;
             this.lblPageInfo.Text = "0/0";
             this.lblPageInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnNext
             // 
+            this.btnNext.ButtonNormalBackColor = System.Drawing.Color.Transparent;
+            this.btnNext.ButtonNormalForeColor = System.Drawing.Color.White;
+            this.btnNext.ButtonPressedBackColor = System.Drawing.Color.Orange;
+            this.btnNext.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnNext.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNext.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnNext.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnNext.Location = new System.Drawing.Point(188, 0);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(75, 30);
+            this.btnNext.Size = new System.Drawing.Size(75, 62);
             this.btnNext.TabIndex = 0;
             this.btnNext.Text = "下一张";
             this.toolTip1.SetToolTip(this.btnNext, "下一张");
-            this.btnNext.AutoSize = false;
             this.btnNext.Click += new System.EventHandler(this.button4_Click);
             // 
             // btnEnd
             // 
+            this.btnEnd.ButtonNormalBackColor = System.Drawing.Color.Transparent;
+            this.btnEnd.ButtonNormalForeColor = System.Drawing.Color.White;
+            this.btnEnd.ButtonPressedBackColor = System.Drawing.Color.Orange;
+            this.btnEnd.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnEnd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEnd.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnEnd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnEnd.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnEnd.Location = new System.Drawing.Point(263, 0);
             this.btnEnd.Name = "btnEnd";
-            this.btnEnd.Size = new System.Drawing.Size(75, 30);
+            this.btnEnd.Size = new System.Drawing.Size(75, 62);
             this.btnEnd.TabIndex = 0;
             this.btnEnd.Text = "末  张";
             this.toolTip1.SetToolTip(this.btnEnd, "最后一张");
-            this.btnEnd.AutoSize = false;
             this.btnEnd.Click += new System.EventHandler(this.button3_Click);
             // 
             // btnLast
             // 
+            this.btnLast.ButtonNormalBackColor = System.Drawing.Color.Transparent;
+            this.btnLast.ButtonNormalForeColor = System.Drawing.Color.White;
+            this.btnLast.ButtonPressedBackColor = System.Drawing.Color.Orange;
+            this.btnLast.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnLast.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLast.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnLast.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLast.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnLast.Location = new System.Drawing.Point(75, 0);
             this.btnLast.Name = "btnLast";
-            this.btnLast.Size = new System.Drawing.Size(75, 30);
+            this.btnLast.Size = new System.Drawing.Size(75, 62);
             this.btnLast.TabIndex = 0;
             this.btnLast.Text = "上一张";
             this.toolTip1.SetToolTip(this.btnLast, "上一张");
-            this.btnLast.AutoSize = false;
             this.btnLast.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnFirst
             // 
+            this.btnFirst.ButtonNormalBackColor = System.Drawing.Color.Transparent;
+            this.btnFirst.ButtonNormalForeColor = System.Drawing.Color.White;
+            this.btnFirst.ButtonPressedBackColor = System.Drawing.Color.Orange;
+            this.btnFirst.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnFirst.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFirst.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnFirst.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnFirst.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnFirst.Location = new System.Drawing.Point(0, 0);
             this.btnFirst.Name = "btnFirst";
-            this.btnFirst.Size = new System.Drawing.Size(75, 30);
+            this.btnFirst.Size = new System.Drawing.Size(75, 62);
             this.btnFirst.TabIndex = 0;
             this.btnFirst.Text = "首  张";
             this.toolTip1.SetToolTip(this.btnFirst, "第一张");
-            this.btnFirst.AutoSize = false;
             this.btnFirst.Click += new System.EventHandler(this.button1_Click);
             // 
             // picCurrent
@@ -149,7 +165,7 @@
             this.picCurrent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picCurrent.Location = new System.Drawing.Point(0, 0);
             this.picCurrent.Name = "picCurrent";
-            this.picCurrent.Size = new System.Drawing.Size(340, 227);
+            this.picCurrent.Size = new System.Drawing.Size(340, 195);
             this.picCurrent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picCurrent.TabIndex = 1;
             this.picCurrent.TabStop = false;
@@ -177,7 +193,7 @@
             this.plImageList.Controls.Add(this.picItem2);
             this.plImageList.Controls.Add(this.picItem1);
             this.plImageList.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.plImageList.Location = new System.Drawing.Point(0, 227);
+            this.plImageList.Location = new System.Drawing.Point(0, 195);
             this.plImageList.Name = "plImageList";
             this.plImageList.Size = new System.Drawing.Size(340, 45);
             this.plImageList.TabIndex = 2;
@@ -243,7 +259,7 @@
             this.plCurrent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plCurrent.Location = new System.Drawing.Point(0, 0);
             this.plCurrent.Name = "plCurrent";
-            this.plCurrent.Size = new System.Drawing.Size(340, 227);
+            this.plCurrent.Size = new System.Drawing.Size(340, 195);
             this.plCurrent.TabIndex = 3;
             // 
             // ImageViewerEx

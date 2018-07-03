@@ -21,6 +21,8 @@ namespace RobotSpeaker.Forms.Player
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+
+            imageViewerEx.SetImagePath(SuperObject.ReadmeDir);
         }
 
         protected override void OnClickBackButton(EventArgs e)
