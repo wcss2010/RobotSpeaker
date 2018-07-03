@@ -93,6 +93,8 @@
     <Compile Include="Forms\AboutUI.Designer.cs">
       <DependentUpon>AboutUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CameraAPI\AviCapture.cs" />
+    <Compile Include="Forms\CameraAPI\Video.cs" />
     <Compile Include="Forms\FaceUI.cs">
       <SubType>Form</SubType>
     </Compile>
