@@ -129,6 +129,12 @@
     <Compile Include="Forms\Player\ImagePlayerUI.Designer.cs">
       <DependentUpon>ImagePlayerUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Player\ImageViewerEx.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Player\ImageViewerEx.designer.cs">
+      <DependentUpon>ImageViewerEx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Player\TextPlayerUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Player\ImagePlayerUI.resx">
       <DependentUpon>ImagePlayerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Player\ImageViewerEx.resx">
+      <DependentUpon>ImageViewerEx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Player\TextPlayerUI.resx">
       <DependentUpon>TextPlayerUI.cs</DependentUpon>
