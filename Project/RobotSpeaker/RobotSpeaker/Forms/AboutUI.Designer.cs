@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.plListBar = new System.Windows.Forms.Panel();
+            this.btnToHome = new RobotSpeaker.Controls.ButtonExt();
+            this.btnExplorer = new RobotSpeaker.Controls.ButtonExt();
             this.lblListBarLabel = new System.Windows.Forms.Label();
             this.plListContent = new System.Windows.Forms.FlowLayoutPanel();
             this.plListBar.SuspendLayout();
@@ -36,12 +38,50 @@
             // 
             // plListBar
             // 
+            this.plListBar.BackColor = System.Drawing.Color.Transparent;
+            this.plListBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.plListBar.Controls.Add(this.btnToHome);
+            this.plListBar.Controls.Add(this.btnExplorer);
             this.plListBar.Controls.Add(this.lblListBarLabel);
             this.plListBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.plListBar.Location = new System.Drawing.Point(0, 64);
             this.plListBar.Name = "plListBar";
             this.plListBar.Size = new System.Drawing.Size(1031, 80);
             this.plListBar.TabIndex = 1;
+            // 
+            // btnToHome
+            // 
+            this.btnToHome.BackColor = System.Drawing.Color.Transparent;
+            this.btnToHome.ButtonNormalBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(146)))), ((int)(((byte)(11)))));
+            this.btnToHome.ButtonNormalForeColor = System.Drawing.Color.White;
+            this.btnToHome.ButtonPressedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnToHome.ButtonPressedForeColor = System.Drawing.Color.White;
+            this.btnToHome.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnToHome.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnToHome.Location = new System.Drawing.Point(751, 0);
+            this.btnToHome.Name = "btnToHome";
+            this.btnToHome.Size = new System.Drawing.Size(140, 80);
+            this.btnToHome.TabIndex = 2;
+            this.btnToHome.Text = "转到首页";
+            this.btnToHome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnToHome.Click += new System.EventHandler(this.btnToHome_Click);
+            // 
+            // btnExplorer
+            // 
+            this.btnExplorer.BackColor = System.Drawing.Color.Transparent;
+            this.btnExplorer.ButtonNormalBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(146)))), ((int)(((byte)(11)))));
+            this.btnExplorer.ButtonNormalForeColor = System.Drawing.Color.White;
+            this.btnExplorer.ButtonPressedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnExplorer.ButtonPressedForeColor = System.Drawing.Color.White;
+            this.btnExplorer.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnExplorer.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnExplorer.Location = new System.Drawing.Point(891, 0);
+            this.btnExplorer.Name = "btnExplorer";
+            this.btnExplorer.Size = new System.Drawing.Size(140, 80);
+            this.btnExplorer.TabIndex = 1;
+            this.btnExplorer.Text = "资源管理器";
+            this.btnExplorer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnExplorer.Click += new System.EventHandler(this.btnExplorer_Click);
             // 
             // lblListBarLabel
             // 
@@ -90,5 +130,7 @@
         private System.Windows.Forms.Panel plListBar;
         private System.Windows.Forms.Label lblListBarLabel;
         private System.Windows.Forms.FlowLayoutPanel plListContent;
+        private Controls.ButtonExt btnExplorer;
+        private Controls.ButtonExt btnToHome;
     }
 }

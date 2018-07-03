@@ -26,6 +26,7 @@ namespace RobotSpeaker.Forms
             try
             {
                 BackButton.NoFocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\goback.png"));
+                BackButton.FocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\goback.png"));
                 LogoBox.Image = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\logo.png"));
             }
             catch (Exception ex) { }

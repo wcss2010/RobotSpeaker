@@ -161,5 +161,16 @@ namespace RobotSpeaker.Forms
 
             Close();
         }
+
+        private void btnExplorer_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("Explorer.exe", SuperObject.ReadmeDir);
+        }
+
+        private void btnToHome_Click(object sender, EventArgs e)
+        {
+            WebPlayerUI player = new WebPlayerUI(SuperObject.WebSiteUrl);
+            player.Show();
+        }
     }
 }

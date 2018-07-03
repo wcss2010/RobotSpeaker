@@ -26,6 +26,7 @@ namespace RobotSpeaker.Forms
             plTabPanel.Left = (Screen.PrimaryScreen.Bounds.Width - plTabPanel.Width) / 2;
 
             BackButton.NoFocusImage = null;
+            BackButton.FocusImage = null;
 
             ibAbout.NoFocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\machine1.png"));
             ibAbout.FocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\machine2.png"));
