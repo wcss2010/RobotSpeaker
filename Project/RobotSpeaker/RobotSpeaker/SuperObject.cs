@@ -28,5 +28,10 @@ namespace RobotSpeaker
         /// 视频
         /// </summary>
         public static string CameraVideoDir = Path.Combine(CameraDir, "video");
+
+        /// <summary>
+        /// 默认首页
+        /// </summary>
+        public static string WebSiteUrl = "www.baidu.com";
     }
 }
