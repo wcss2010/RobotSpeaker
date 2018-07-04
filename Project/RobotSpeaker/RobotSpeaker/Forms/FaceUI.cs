@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RobotSpeaker.Forms.CameraAPI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,6 +12,8 @@ namespace RobotSpeaker.Forms
 {
     public partial class FaceUI : PageUIBase
     {
+        Video videoObj = null;
+
         public FaceUI()
         {
             InitializeComponent();
