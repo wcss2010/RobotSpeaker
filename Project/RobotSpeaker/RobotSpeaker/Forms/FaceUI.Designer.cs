@@ -42,11 +42,11 @@
             // 
             // pbImage
             // 
-            this.pbImage.BackColor = System.Drawing.Color.Gray;
+            this.pbImage.BackColor = System.Drawing.Color.Black;
             this.pbImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbImage.Location = new System.Drawing.Point(24, 19);
+            this.pbImage.Location = new System.Drawing.Point(38, 35);
             this.pbImage.Name = "pbImage";
-            this.pbImage.Size = new System.Drawing.Size(320, 640);
+            this.pbImage.Size = new System.Drawing.Size(320, 480);
             this.pbImage.TabIndex = 1;
             this.pbImage.TabStop = false;
             // 
@@ -56,8 +56,9 @@
             this.btnStopRecord.ButtonNormalForeColor = System.Drawing.Color.White;
             this.btnStopRecord.ButtonPressedBackColor = System.Drawing.Color.Orange;
             this.btnStopRecord.ButtonPressedForeColor = System.Drawing.Color.White;
+            this.btnStopRecord.EnabledMouseDownAndMouseUp = true;
             this.btnStopRecord.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnStopRecord.Location = new System.Drawing.Point(101, 677);
+            this.btnStopRecord.Location = new System.Drawing.Point(110, 538);
             this.btnStopRecord.Name = "btnStopRecord";
             this.btnStopRecord.Size = new System.Drawing.Size(80, 40);
             this.btnStopRecord.TabIndex = 2;
@@ -71,8 +72,9 @@
             this.btnPauseRecord.ButtonNormalForeColor = System.Drawing.Color.White;
             this.btnPauseRecord.ButtonPressedBackColor = System.Drawing.Color.Orange;
             this.btnPauseRecord.ButtonPressedForeColor = System.Drawing.Color.White;
+            this.btnPauseRecord.EnabledMouseDownAndMouseUp = true;
             this.btnPauseRecord.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnPauseRecord.Location = new System.Drawing.Point(187, 677);
+            this.btnPauseRecord.Location = new System.Drawing.Point(196, 538);
             this.btnPauseRecord.Name = "btnPauseRecord";
             this.btnPauseRecord.Size = new System.Drawing.Size(80, 40);
             this.btnPauseRecord.TabIndex = 3;
@@ -84,15 +86,17 @@
             // 
             this.btnGetPic.BottomText = "拍    照";
             this.btnGetPic.BottomTextColor = System.Drawing.Color.White;
-            this.btnGetPic.BottomTextFont = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnGetPic.BottomTextFont = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnGetPic.BottomTextHeight = 35;
             this.btnGetPic.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnGetPic.EnabledMouseDownAndMouseUp = true;
             this.btnGetPic.EnabledTextLabel = true;
             this.btnGetPic.FocusImage = null;
+            this.btnGetPic.IsPressed = false;
             this.btnGetPic.Location = new System.Drawing.Point(0, 0);
             this.btnGetPic.Name = "btnGetPic";
             this.btnGetPic.NoFocusImage = null;
-            this.btnGetPic.Size = new System.Drawing.Size(172, 180);
+            this.btnGetPic.Size = new System.Drawing.Size(70, 90);
             this.btnGetPic.TabIndex = 4;
             this.btnGetPic.Click += new System.EventHandler(this.btnGetPic_Click);
             // 
@@ -100,15 +104,17 @@
             // 
             this.btnRecord.BottomText = "开始录像";
             this.btnRecord.BottomTextColor = System.Drawing.Color.White;
-            this.btnRecord.BottomTextFont = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnRecord.BottomTextFont = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnRecord.BottomTextHeight = 35;
             this.btnRecord.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnRecord.EnabledMouseDownAndMouseUp = true;
             this.btnRecord.EnabledTextLabel = true;
             this.btnRecord.FocusImage = null;
-            this.btnRecord.Location = new System.Drawing.Point(0, 205);
+            this.btnRecord.IsPressed = false;
+            this.btnRecord.Location = new System.Drawing.Point(0, 160);
             this.btnRecord.Name = "btnRecord";
             this.btnRecord.NoFocusImage = null;
-            this.btnRecord.Size = new System.Drawing.Size(172, 180);
+            this.btnRecord.Size = new System.Drawing.Size(70, 90);
             this.btnRecord.TabIndex = 4;
             this.btnRecord.Click += new System.EventHandler(this.btnRecord_Click);
             // 
@@ -116,9 +122,9 @@
             // 
             this.plMiddleButtons.Controls.Add(this.btnGetPic);
             this.plMiddleButtons.Controls.Add(this.btnRecord);
-            this.plMiddleButtons.Location = new System.Drawing.Point(457, 135);
+            this.plMiddleButtons.Location = new System.Drawing.Point(475, 161);
             this.plMiddleButtons.Name = "plMiddleButtons";
-            this.plMiddleButtons.Size = new System.Drawing.Size(172, 385);
+            this.plMiddleButtons.Size = new System.Drawing.Size(70, 250);
             this.plMiddleButtons.TabIndex = 5;
             // 
             // plContent
@@ -129,7 +135,7 @@
             this.plContent.Controls.Add(this.pbImage);
             this.plContent.Location = new System.Drawing.Point(181, 76);
             this.plContent.Name = "plContent";
-            this.plContent.Size = new System.Drawing.Size(661, 720);
+            this.plContent.Size = new System.Drawing.Size(661, 600);
             this.plContent.TabIndex = 6;
             this.plContent.Paint += new System.Windows.Forms.PaintEventHandler(this.plContent_Paint);
             // 

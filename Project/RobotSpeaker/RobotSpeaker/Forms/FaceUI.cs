@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace RobotSpeaker.Forms
@@ -35,12 +36,8 @@ namespace RobotSpeaker.Forms
             btnRecord.FocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\video2.png"));
 
             //启动摄像头
-            try
-            {
-                videoObj = new Video(pbImage.Handle, pbImage.Width, pbImage.Height);
-                videoObj.StartWebCam();
-            }
-            catch (Exception ex) { }
+            videoObj = new Video(pbImage.Handle, pbImage.Width, pbImage.Height);
+            videoObj.StartWebCam();
         }
 
         protected override void OnClickBackButton(EventArgs e)
@@ -55,11 +52,14 @@ namespace RobotSpeaker.Forms
             base.OnFormClosing(e);
 
             //停止录像
-            try
+            if (btnRecord.Enabled)
             {
-                videoObj.StopKinescope();
+                try
+                {
+                    videoObj.StopKinescope();
+                }
+                catch (Exception ex) { }
             }
-            catch (Exception ex) { }
 
             //关闭摄像头
             try
@@ -84,7 +84,11 @@ namespace RobotSpeaker.Forms
             { }
 
             btnStopRecord.Visible = false;
+
             btnRecord.Enabled = true;
+            btnRecord.EnabledMouseDownAndMouseUp = true;
+            btnRecord.IsPressed = false;
+            btnRecord.BottomText = "开始录像";
         }
 
         private void btnGetPic_Click(object sender, EventArgs e)
@@ -103,7 +107,11 @@ namespace RobotSpeaker.Forms
             {
                 videoObj.StarKinescope(Path.Combine(SuperObject.CameraPhotoDir, DateTime.Now.Ticks + ".avi"));
                 btnStopRecord.Visible = true;
+
                 btnRecord.Enabled = false;
+                btnRecord.EnabledMouseDownAndMouseUp = false;
+                btnRecord.IsPressed = true;
+                btnRecord.BottomText = "正在录像";
             }
             catch (Exception ex) { }
         }
