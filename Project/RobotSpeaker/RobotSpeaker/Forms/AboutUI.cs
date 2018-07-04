@@ -32,7 +32,7 @@ namespace RobotSpeaker.Forms
             plListBar.BackgroundImage = listItemC;
             plListBar.BackgroundImageLayout = ImageLayout.Stretch;
             
-            ListReadmeFiles();
+            UpdateReadmeFiles();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace RobotSpeaker.Forms
             return textObj;
         }
 
-        protected void ListReadmeFiles()
+        protected void UpdateReadmeFiles()
         {
             bool isBlack = true;
 
@@ -119,39 +119,47 @@ namespace RobotSpeaker.Forms
 
         void item_Click(object sender, EventArgs e)
         {
-            Label clickItem = (Label)sender;
-            FileInfo fi = (FileInfo)clickItem.Tag;
+            try
+            {
+                Label clickItem = (Label)sender;
+                FileInfo fi = (FileInfo)clickItem.Tag;
 
-            //查找需要哪个播放器打开
-            string extName = fi.Extension;
-            if (ImagePlayerUI.SupportedExtName.Contains(extName))
-            {
-                //图片
-                ImagePlayerUI p1 = new ImagePlayerUI(fi.FullName);
-                p1.Show();
+                //查找需要哪个播放器打开
+                string extName = fi.Extension;
+                if (ImagePlayerUI.SupportedExtName.Contains(extName))
+                {
+                    //图片
+                    ImagePlayerUI p1 = new ImagePlayerUI(fi.FullName);
+                    p1.Show();
+                }
+                else if (TextPlayerUI.SupportedExtName.Contains(extName))
+                {
+                    //文本
+                    TextPlayerUI p2 = new TextPlayerUI(fi.FullName);
+                    p2.Show();
+                }
+                else if (VideoAndAudioPlayerUI.SupportedExtName.Contains(extName))
+                {
+                    //视频
+                    VideoAndAudioPlayerUI p3 = new VideoAndAudioPlayerUI(fi.FullName);
+                    p3.Show();
+                }
+                else if (WebPlayerUI.SupportedExtName.Contains(extName))
+                {
+                    //网页
+                    WebPlayerUI p3 = new WebPlayerUI(fi.FullName);
+                    p3.Show();
+                }
+                else
+                {
+                    //未知
+                    System.Diagnostics.Process.Start(fi.FullName);
+                }
             }
-            else if (TextPlayerUI.SupportedExtName.Contains(extName))
+            catch (Exception ex)
             {
-                //文本
-                TextPlayerUI p2 = new TextPlayerUI(fi.FullName);
-                p2.Show();
-            }
-            else if (VideoAndAudioPlayerUI.SupportedExtName.Contains(extName))
-            {
-                //视频
-                VideoAndAudioPlayerUI p3 = new VideoAndAudioPlayerUI(fi.FullName);
-                p3.Show();
-            }
-            else if (WebPlayerUI.SupportedExtName.Contains(extName))
-            {
-                //网页
-                WebPlayerUI p3 = new WebPlayerUI(fi.FullName);
-                p3.Show();
-            }
-            else
-            {
-                //未知
-                System.Diagnostics.Process.Start(fi.FullName);
+                //打开失败
+                MessageBox.Show("操作失败！Ex:" + ex.ToString());
             }
         }
 
@@ -164,7 +172,15 @@ namespace RobotSpeaker.Forms
 
         private void btnExplorer_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("Explorer.exe", SuperObject.ReadmeDir);
+            try
+            {
+               System.Diagnostics.Process pro = System.Diagnostics.Process.Start("explorer.exe", SuperObject.ReadmeDir);
+               pro.WaitForExit();
+            }
+            catch (Exception ex) { }
+
+            //刷新列表
+            UpdateReadmeFiles();
         }
 
         private void btnToHome_Click(object sender, EventArgs e)

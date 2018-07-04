@@ -118,12 +118,20 @@ namespace RobotSpeaker.Forms
 
         private void btnReadmeDir_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", SuperObject.ReadmeDir);
+            try
+            {
+                Process.Start("explorer.exe", SuperObject.ReadmeDir);
+            }
+            catch (Exception ex) { }
         }
 
         private void btnCameraDir_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", SuperObject.CameraDir);
+            try
+            {
+                Process.Start("explorer.exe", SuperObject.CameraDir);
+            }
+            catch (Exception ex) { }
         }
 
         private void btnSelect_Click(object sender, EventArgs e)

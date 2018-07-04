@@ -101,7 +101,11 @@ namespace RobotSpeaker.Forms
 
             if (File.Exists(SuperObject.Config.GoAppPath))
             {
-                System.Diagnostics.Process.Start(SuperObject.Config.GoAppPath);
+                try
+                {
+                    System.Diagnostics.Process.Start(SuperObject.Config.GoAppPath);
+                }
+                catch (Exception ex) { }
             }
         }
     }

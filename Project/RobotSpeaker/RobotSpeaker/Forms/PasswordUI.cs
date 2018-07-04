@@ -35,5 +35,10 @@ namespace RobotSpeaker.Forms
                 btnOK.PerformClick();
             }
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = System.Windows.Forms.DialogResult.Cancel;
+        }
     }
 }

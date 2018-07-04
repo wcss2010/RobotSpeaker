@@ -19,7 +19,7 @@ namespace RobotSpeaker.Forms.Player
         {
             InitializeComponent();
 
-            web.Navigate(webUrl);
+            NowUrl = webUrl;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -30,6 +30,9 @@ namespace RobotSpeaker.Forms.Player
 
             //plListBar.BackgroundImage = listItemC;
             plListBar.BackgroundImageLayout = ImageLayout.Stretch;
+
+            //显示网页
+            web.Navigate(NowUrl);
         }
 
         protected override void OnClickBackButton(EventArgs e)
@@ -48,5 +51,7 @@ namespace RobotSpeaker.Forms.Player
         {
             web.GoForward();
         }
+
+        public string NowUrl { get; set; }
     }
 }
