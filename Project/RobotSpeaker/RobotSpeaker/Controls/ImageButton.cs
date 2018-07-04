@@ -95,6 +95,40 @@ namespace RobotSpeaker.Controls
             set { TextLabel.Height = value; }
         }
 
+        private bool _isPressed = false;
+        /// <summary>
+        /// 按键状态
+        /// </summary>
+        public bool IsPressed
+        {
+            get { return _isPressed; }
+            set
+            { 
+                _isPressed = value;
+
+                if (value)
+                {
+                    //按下
+                    pbButtonImage.Image = FocusImage;
+                }
+                else
+                {
+                    //抬起
+                    pbButtonImage.Image = NoFocusImage;
+                }
+            }
+        }
+
+        private bool _enabledMouseDownAndMouseUp = true;
+        /// <summary>
+        /// 是否允许处理Down和Up
+        /// </summary>
+        public bool EnabledMouseDownAndMouseUp
+        {
+            get { return _enabledMouseDownAndMouseUp; }
+            set { _enabledMouseDownAndMouseUp = value; }
+        }
+
         public ImageButton()
         {
             InitializeComponent();
@@ -119,14 +153,20 @@ namespace RobotSpeaker.Controls
         {
             this.OnMouseDown(e);
 
-            pbButtonImage.Image = FocusImage;
+            if (EnabledMouseDownAndMouseUp)
+            {
+                IsPressed = true;
+            }
         }
 
         private void pbButtonImage_MouseUp(object sender, MouseEventArgs e)
         {
             this.OnMouseUp(e);
 
-            pbButtonImage.Image = NoFocusImage;
+            if (EnabledMouseDownAndMouseUp)
+            {
+                IsPressed = false;
+            }
         }
 
         private void lblButtonTxt_Click(object sender, EventArgs e)
@@ -148,14 +188,20 @@ namespace RobotSpeaker.Controls
         {
             this.OnMouseDown(e);
 
-            pbButtonImage.Image = FocusImage;
+            if (EnabledMouseDownAndMouseUp)
+            {
+                IsPressed = true;
+            }
         }
 
         private void lblButtonTxt_MouseUp(object sender, MouseEventArgs e)
         {
             this.OnMouseUp(e);
 
-            pbButtonImage.Image = NoFocusImage;
+            if (EnabledMouseDownAndMouseUp)
+            {
+                IsPressed = false;
+            }
         }
     }
 }

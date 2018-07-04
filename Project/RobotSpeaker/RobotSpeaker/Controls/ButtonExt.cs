@@ -63,11 +63,31 @@ namespace RobotSpeaker.Controls
                 this.Invalidate();
             }
         }
-
+        
+        private bool _isPressed = false;
         /// <summary>
         /// 是否已经按下
         /// </summary>
-        protected bool IsPressed { get; set; }
+        protected bool IsPressed
+        {
+            get { return _isPressed; }
+            set
+            {
+                _isPressed = value;
+
+                Invalidate();
+            }
+        }
+
+        private bool _enabledMouseDownAndMouseUp = true;
+        /// <summary>
+        /// 是否允许处理Down和Up
+        /// </summary>
+        public bool EnabledMouseDownAndMouseUp
+        {
+            get { return _enabledMouseDownAndMouseUp; }
+            set { _enabledMouseDownAndMouseUp = value; }
+        }
 
         public ButtonExt()
         {
@@ -121,16 +141,20 @@ namespace RobotSpeaker.Controls
         {
             base.OnMouseDown(e);
 
-            IsPressed = true;
-            this.Invalidate();
+            if (EnabledMouseDownAndMouseUp)
+            {
+                IsPressed = true;
+            }
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
 
-            IsPressed = false;
-            this.Invalidate();
+            if (EnabledMouseDownAndMouseUp)
+            {
+                IsPressed = false;
+            }
         }
     }
 }

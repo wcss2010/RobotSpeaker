@@ -75,6 +75,16 @@ namespace RobotSpeaker
     /// </summary>
     public class RobotConfig
     {
+        /// <summary>
+        /// 运动规划程序路径
+        /// </summary>
+        public string GoAppPath { get; set; }
+
+        /// <summary>
+        /// 当前运动类型
+        /// </summary>
+        public GoType CurrentGoType { get; set; }
+
         private string _webSiteUrl = "www.baidu.com";
         /// <summary>
         /// 默认首页
@@ -96,6 +106,14 @@ namespace RobotSpeaker
         }
 
         
+    }
+
+    /// <summary>
+    /// 运行类型
+    /// </summary>
+    public enum GoType
+    {
+       Normal,Joy,GoApp
     }
 
     /// <summary>
