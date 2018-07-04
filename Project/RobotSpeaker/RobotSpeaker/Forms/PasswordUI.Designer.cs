@@ -49,6 +49,7 @@
             this.tbText.PasswordChar = '#';
             this.tbText.Size = new System.Drawing.Size(148, 21);
             this.tbText.TabIndex = 1;
+            this.tbText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbText_KeyDown);
             // 
             // btnOK
             // 

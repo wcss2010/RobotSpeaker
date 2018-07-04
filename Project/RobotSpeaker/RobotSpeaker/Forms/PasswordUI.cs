@@ -27,5 +27,13 @@ namespace RobotSpeaker.Forms
         {
             DialogResult = System.Windows.Forms.DialogResult.OK;
         }
+
+        private void tbText_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == 13)
+            {
+                btnOK.PerformClick();
+            }
+        }
     }
 }
