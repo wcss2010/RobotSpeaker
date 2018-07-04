@@ -76,6 +76,16 @@ namespace RobotSpeaker
     public class RobotConfig
     {
         /// <summary>
+        /// 语音端口
+        /// </summary>
+        public string VoicePort { get; set; }
+
+        /// <summary>
+        /// 运动端口
+        /// </summary>
+        public string GoPort { get; set; }
+
+        /// <summary>
         /// 运动规划程序路径
         /// </summary>
         public string GoAppPath { get; set; }

@@ -108,6 +108,11 @@
     <Compile Include="Forms\GoUI.Designer.cs">
       <DependentUpon>GoUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\JoyAPI\API.cs" />
+    <Compile Include="Forms\JoyAPI\JoystickAPI.cs" />
+    <Compile Include="Forms\JoyAPI\JoystickEventArgs.cs" />
+    <Compile Include="Forms\JoyAPI\Joystick_P.cs" />
+    <Compile Include="Forms\JoyAPI\Joystick_V.cs" />
     <Compile Include="Forms\MainUI.cs">
       <SubType>Form</SubType>
     </Compile>
