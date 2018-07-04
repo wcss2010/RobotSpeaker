@@ -17,15 +17,17 @@ namespace RobotSpeaker.Forms.Player
         {
             InitializeComponent();
 
-            if (System.IO.File.Exists(videoFile))
-            {
-                player.URL = videoFile;
-            }
+            VideoUrl = videoFile;
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+
+            if (System.IO.File.Exists(VideoUrl))
+            {
+                player.URL = VideoUrl;
+            }
         }
 
         protected override void OnClickBackButton(EventArgs e)
@@ -34,5 +36,7 @@ namespace RobotSpeaker.Forms.Player
 
             Close();
         }
+
+        public string VideoUrl { get; set; }
     }
 }

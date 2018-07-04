@@ -67,6 +67,9 @@ namespace RobotSpeaker.Forms
             return textObj;
         }
 
+        /// <summary>
+        /// 刷新文件列表
+        /// </summary>
         protected void UpdateReadmeFiles()
         {
             bool isBlack = true;
@@ -74,8 +77,10 @@ namespace RobotSpeaker.Forms
             //清空列表
             plListContent.Controls.Clear();
 
+            List<Label> tempList = new List<Label>();
+
             //表头
-            plListContent.Controls.Add(CreateListItem("文件名称", isBlack));
+            tempList.Add(CreateListItem("文件名称", isBlack));
             isBlack = !isBlack;
             
             string[] files = Directory.GetFiles(SuperObject.ReadmeDir);
@@ -87,7 +92,7 @@ namespace RobotSpeaker.Forms
 
                     Label item = CreateListItem(fi.Name + "               上一次修改日期：" + fi.LastWriteTime, isBlack);
                     item.Tag = fi;
-                    plListContent.Controls.Add(item);
+                    tempList.Add(item);
 
                     item.Click += item_Click;
                     item.MouseDown += item_MouseDown;
@@ -96,6 +101,9 @@ namespace RobotSpeaker.Forms
                     isBlack = !isBlack;
                 }
             }
+
+            //向列表中增加条目
+            plListContent.Controls.AddRange(tempList.ToArray());
         }
 
         void item_MouseUp(object sender, MouseEventArgs e)
