@@ -123,7 +123,7 @@ namespace RobotSpeaker
     /// </summary>
     public enum GoType
     {
-       Normal,Joy,GoApp
+       Normal,Joy,Free
     }
 
     /// <summary>

@@ -26,12 +26,50 @@ namespace RobotSpeaker.Forms
 
             ibNormal.NoFocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\face1.png"));
             ibNormal.FocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\face2.png"));
+            ibNormal.EnabledMouseDownAndMouseUp = false;
 
             ibUseDevice.NoFocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\voice1.png"));
             ibUseDevice.FocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\voice2.png"));
+            ibUseDevice.EnabledMouseDownAndMouseUp = false;
 
             ibFree.NoFocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\set1.png"));
             ibFree.FocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\set2.png"));
+            ibFree.EnabledMouseDownAndMouseUp = false;
+
+            //切换按钮状态
+            SwitchButtonState(SuperObject.Config.CurrentGoType);
+        }
+
+        /// <summary>
+        /// 切换按钮状态
+        /// </summary>
+        /// <param name="goTypes"></param>
+        private void SwitchButtonState(GoType goTypes)
+        {
+            switch (goTypes)
+            {
+                case GoType.Normal:
+                    ibNormal.IsPressed = true;
+                    ibUseDevice.IsPressed = false;
+                    ibFree.IsPressed = false;
+                    break;
+                case GoType.Joy:
+                    ibNormal.IsPressed = false;
+                    ibUseDevice.IsPressed = true;
+                    ibFree.IsPressed = false;
+                    break;
+                case GoType.Free:
+                    ibNormal.IsPressed = false;
+                    ibUseDevice.IsPressed = false;
+                    ibFree.IsPressed = true;
+                    break;
+
+                default:
+                    ibNormal.IsPressed = true;
+                    ibUseDevice.IsPressed = false;
+                    ibFree.IsPressed = false;
+                    break;
+            }
         }
 
         protected override void OnClickBackButton(EventArgs e)
@@ -43,17 +81,28 @@ namespace RobotSpeaker.Forms
 
         private void ibNormal_Click(object sender, EventArgs e)
         {
-
+            SuperObject.Config.CurrentGoType = GoType.Normal;
+            SwitchButtonState(SuperObject.Config.CurrentGoType);
+            SuperObject.SaveConfig();
         }
 
         private void ibUseDevice_Click(object sender, EventArgs e)
         {
-
+            SuperObject.Config.CurrentGoType = GoType.Joy;
+            SwitchButtonState(SuperObject.Config.CurrentGoType);
+            SuperObject.SaveConfig();
         }
 
         private void ibFree_Click(object sender, EventArgs e)
         {
+            SuperObject.Config.CurrentGoType = GoType.Free;
+            SwitchButtonState(SuperObject.Config.CurrentGoType);
+            SuperObject.SaveConfig();
 
+            if (File.Exists(SuperObject.Config.GoAppPath))
+            {
+                System.Diagnostics.Process.Start(SuperObject.Config.GoAppPath);
+            }
         }
     }
 }
