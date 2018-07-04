@@ -87,6 +87,7 @@
     <Compile Include="Controls\ImageButton.Designer.cs">
       <DependentUpon>ImageButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataService.cs" />
     <Compile Include="Forms\AboutUI.cs">
       <SubType>Form</SubType>
     </Compile>
