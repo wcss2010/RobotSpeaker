@@ -30,14 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // PageFormBase
+            // PageUIBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1031, 487);
             this.KeyPreview = true;
-            this.Name = "PageFormBase";
+            this.Name = "PageUIBase";
             this.Text = "PageFormBase";
             this.ResumeLayout(false);
 

@@ -35,8 +35,12 @@ namespace RobotSpeaker.Forms
             btnRecord.FocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\video2.png"));
 
             //启动摄像头
-            videoObj = new Video(pbImage.Handle, pbImage.Width, pbImage.Height);
-            videoObj.StartWebCam();
+            try
+            {
+                videoObj = new Video(pbImage.Handle, pbImage.Width, pbImage.Height);
+                videoObj.StartWebCam();
+            }
+            catch (Exception ex) { }
         }
 
         protected override void OnClickBackButton(EventArgs e)
@@ -72,22 +76,49 @@ namespace RobotSpeaker.Forms
 
         private void btnStopRecord_Click(object sender, EventArgs e)
         {
-            videoObj.StopKinescope();
+            try
+            {
+                videoObj.StopKinescope();
+            }
+            catch (Exception ex)
+            { }
+
             btnStopRecord.Visible = false;
             btnRecord.Enabled = true;
         }
 
         private void btnGetPic_Click(object sender, EventArgs e)
         {
-            videoObj.grabImage(Path.Combine(SuperObject.CameraPhotoDir, DateTime.Now.Ticks + ".bmp"));
-            MessageBox.Show("操作完成！");
+            try
+            {
+                videoObj.grabImage(Path.Combine(SuperObject.CameraPhotoDir, DateTime.Now.Ticks + ".bmp"));
+                MessageBox.Show("操作完成！");
+            }
+            catch (Exception ex) { }
         }
 
         private void btnRecord_Click(object sender, EventArgs e)
-        {            
-            videoObj.StarKinescope(Path.Combine(SuperObject.CameraPhotoDir, DateTime.Now.Ticks + ".avi"));
-            btnStopRecord.Visible = true;
-            btnRecord.Enabled = false;
+        {
+            try
+            {
+                videoObj.StarKinescope(Path.Combine(SuperObject.CameraPhotoDir, DateTime.Now.Ticks + ".avi"));
+                btnStopRecord.Visible = true;
+                btnRecord.Enabled = false;
+            }
+            catch (Exception ex) { }
+        }
+
+        private void plContent_Paint(object sender, PaintEventArgs e)
+        {
+            //画图像框上面的白线框
+            e.Graphics.DrawLine(new Pen(new SolidBrush(Color.LightGray)), new Point(pbImage.Left - 5, pbImage.Top - 5), new Point(pbImage.Right + 5, pbImage.Top - 5));
+            e.Graphics.DrawLine(new Pen(new SolidBrush(Color.LightGray)), new Point(pbImage.Left - 5, pbImage.Bottom + 5), new Point(pbImage.Right + 5, pbImage.Bottom + 5));
+
+            e.Graphics.DrawLine(new Pen(new SolidBrush(Color.LightGray)), new Point(pbImage.Left - 5, pbImage.Top - 5), new Point(pbImage.Left - 5, pbImage.Top + 50));
+            e.Graphics.DrawLine(new Pen(new SolidBrush(Color.LightGray)), new Point(pbImage.Right + 5, pbImage.Top - 5), new Point(pbImage.Right + 5, pbImage.Top + 50));
+
+            e.Graphics.DrawLine(new Pen(new SolidBrush(Color.LightGray)), new Point(pbImage.Left - 5, pbImage.Bottom - 50), new Point(pbImage.Left - 5, pbImage.Bottom + 5));
+            e.Graphics.DrawLine(new Pen(new SolidBrush(Color.LightGray)), new Point(pbImage.Right + 5, pbImage.Bottom - 50), new Point(pbImage.Right + 5, pbImage.Bottom + 5));
         }
     }
 }
