@@ -17,6 +17,10 @@ namespace RobotSpeaker.Controls
         public FullScreenFormBase()
         {
             InitializeComponent();
+
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);//防止窗口跳动
+            SetStyle(ControlStyles.DoubleBuffer, true); //防止控件跳动 
         }
 
         protected override void OnLoad(EventArgs e)
