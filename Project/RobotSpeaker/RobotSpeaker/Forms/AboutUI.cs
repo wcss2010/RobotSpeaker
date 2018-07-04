@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace RobotSpeaker.Forms
@@ -72,38 +73,47 @@ namespace RobotSpeaker.Forms
         /// </summary>
         protected void UpdateReadmeFiles()
         {
-            bool isBlack = true;
-
-            //清空列表
-            plListContent.Controls.Clear();
-
-            List<Label> tempList = new List<Label>();
-
-            //表头
-            tempList.Add(CreateListItem("文件名称", isBlack));
-            isBlack = !isBlack;
-            
-            string[] files = Directory.GetFiles(SuperObject.ReadmeDir);
-            if (files != null)
-            {
-                foreach (string f in files)
+            new Thread(new ThreadStart(delegate()
                 {
-                    FileInfo fi = new FileInfo(f);
+                    bool isBlack = true;
 
-                    Label item = CreateListItem(fi.Name + "               上一次修改日期：" + fi.LastWriteTime, isBlack);
-                    item.Tag = fi;
-                    tempList.Add(item);
+                    List<Label> tempList = new List<Label>();
 
-                    item.Click += item_Click;
-                    item.MouseDown += item_MouseDown;
-                    item.MouseUp += item_MouseUp;
-
+                    //表头
+                    tempList.Add(CreateListItem("文件名称", isBlack));
                     isBlack = !isBlack;
-                }
-            }
 
-            //向列表中增加条目
-            plListContent.Controls.AddRange(tempList.ToArray());
+                    string[] files = Directory.GetFiles(SuperObject.ReadmeDir);
+                    if (files != null)
+                    {
+                        foreach (string f in files)
+                        {
+                            FileInfo fi = new FileInfo(f);
+
+                            Label item = CreateListItem(fi.Name + "               上一次修改日期：" + fi.LastWriteTime, isBlack);
+                            item.Tag = fi;
+                            tempList.Add(item);
+
+                            item.Click += item_Click;
+                            item.MouseDown += item_MouseDown;
+                            item.MouseUp += item_MouseUp;
+
+                            isBlack = !isBlack;
+                        }
+                    }
+
+                    if (IsHandleCreated)
+                    {
+                        Invoke(new MethodInvoker(delegate()
+                            {
+                                //清空列表
+                                plListContent.Controls.Clear();
+
+                                //向列表中增加条目
+                                plListContent.Controls.AddRange(tempList.ToArray());
+                            }));
+                    }
+                })).Start();
         }
 
         void item_MouseUp(object sender, MouseEventArgs e)
