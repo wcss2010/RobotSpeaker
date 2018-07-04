@@ -57,9 +57,9 @@
             this.btnStopRecord.ButtonPressedBackColor = System.Drawing.Color.Orange;
             this.btnStopRecord.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnStopRecord.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnStopRecord.Location = new System.Drawing.Point(376, 609);
+            this.btnStopRecord.Location = new System.Drawing.Point(101, 677);
             this.btnStopRecord.Name = "btnStopRecord";
-            this.btnStopRecord.Size = new System.Drawing.Size(80, 50);
+            this.btnStopRecord.Size = new System.Drawing.Size(80, 40);
             this.btnStopRecord.TabIndex = 2;
             this.btnStopRecord.Text = "停止";
             this.btnStopRecord.Visible = false;
@@ -72,9 +72,9 @@
             this.btnPauseRecord.ButtonPressedBackColor = System.Drawing.Color.Orange;
             this.btnPauseRecord.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnPauseRecord.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnPauseRecord.Location = new System.Drawing.Point(376, 545);
+            this.btnPauseRecord.Location = new System.Drawing.Point(187, 677);
             this.btnPauseRecord.Name = "btnPauseRecord";
-            this.btnPauseRecord.Size = new System.Drawing.Size(80, 50);
+            this.btnPauseRecord.Size = new System.Drawing.Size(80, 40);
             this.btnPauseRecord.TabIndex = 3;
             this.btnPauseRecord.Text = "暂停";
             this.btnPauseRecord.Visible = false;
@@ -129,7 +129,7 @@
             this.plContent.Controls.Add(this.pbImage);
             this.plContent.Location = new System.Drawing.Point(181, 76);
             this.plContent.Name = "plContent";
-            this.plContent.Size = new System.Drawing.Size(661, 680);
+            this.plContent.Size = new System.Drawing.Size(661, 720);
             this.plContent.TabIndex = 6;
             this.plContent.Paint += new System.Windows.Forms.PaintEventHandler(this.plContent_Paint);
             // 
@@ -137,7 +137,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1031, 768);
+            this.ClientSize = new System.Drawing.Size(1031, 804);
             this.Controls.Add(this.plContent);
             this.Name = "FaceUI";
             this.Text = "FaceUI";
