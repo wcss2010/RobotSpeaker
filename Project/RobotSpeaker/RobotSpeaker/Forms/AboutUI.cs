@@ -25,9 +25,9 @@ namespace RobotSpeaker.Forms
         {
             base.OnLoad(e);
 
-            listItemA = Image.FromFile(Path.Combine(Application.StartupPath, "Images/listItem1.png"));
-            listItemB = Image.FromFile(Path.Combine(Application.StartupPath, "Images/listItem2.png"));
-            listItemC = Image.FromFile(Path.Combine(Application.StartupPath,"Images/listBar.png"));
+            listItemA = DataService.GetImage(Path.Combine(Application.StartupPath, "Images/listItem1.png"));
+            listItemB = DataService.GetImage(Path.Combine(Application.StartupPath, "Images/listItem2.png"));
+            listItemC = DataService.GetImage(Path.Combine(Application.StartupPath,"Images/listBar.png"));
 
             plListBar.BackgroundImage = listItemC;
             plListBar.BackgroundImageLayout = ImageLayout.Stretch;

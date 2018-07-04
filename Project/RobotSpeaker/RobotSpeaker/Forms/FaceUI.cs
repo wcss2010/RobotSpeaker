@@ -28,11 +28,11 @@ namespace RobotSpeaker.Forms
             plContent.Top = (Screen.PrimaryScreen.Bounds.Height - plContent.Height) / 2;
             plContent.Left = (Screen.PrimaryScreen.Bounds.Width - plContent.Width) / 2;
 
-            btnGetPic.NoFocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\pic1.png"));
-            btnGetPic.FocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\pic2.png"));
+            btnGetPic.NoFocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\pic1.png"));
+            btnGetPic.FocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\pic2.png"));
 
-            btnRecord.NoFocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\video1.png"));
-            btnRecord.FocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\video2.png"));
+            btnRecord.NoFocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\video1.png"));
+            btnRecord.FocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\video2.png"));
 
             //启动摄像头
             try

@@ -25,9 +25,9 @@ namespace RobotSpeaker.Forms
             TitleTextColor = Color.White;
             try
             {
-                BackButton.NoFocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\back1.png"));
-                BackButton.FocusImage = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\back2.png"));
-                LogoBox.Image = Image.FromFile(Path.Combine(Application.StartupPath, @"Images\logo.png"));
+                BackButton.NoFocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\back1.png"));
+                BackButton.FocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\back2.png"));
+                LogoBox.Image = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\logo.png"));
             }
             catch (Exception ex) { }
         }
