@@ -75,8 +75,12 @@ namespace RobotSpeaker.Forms
 
         private void ibSetting_Click(object sender, EventArgs e)
         {
-            ConfigUI sc = new ConfigUI();
-            sc.ShowDialog();
+            PasswordUI pf = new PasswordUI();
+            if (pf.ShowDialog() == System.Windows.Forms.DialogResult.OK && pf.TextObj.Text.Equals(SuperObject.Config.ManagerPassword))
+            {
+                ConfigUI sc = new ConfigUI();
+                sc.ShowDialog();
+            }
         }
     }
 }

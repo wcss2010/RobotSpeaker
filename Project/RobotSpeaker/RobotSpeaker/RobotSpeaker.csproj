@@ -131,6 +131,12 @@
     <Compile Include="Forms\ConfigUI.Designer.cs">
       <DependentUpon>ConfigUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PasswordUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PasswordUI.Designer.cs">
+      <DependentUpon>PasswordUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Player\ImagePlayerUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ConfigUI.resx">
       <DependentUpon>ConfigUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PasswordUI.resx">
+      <DependentUpon>PasswordUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Player\ImagePlayerUI.resx">
       <DependentUpon>ImagePlayerUI.cs</DependentUpon>

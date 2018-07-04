@@ -15,5 +15,10 @@ namespace RobotSpeaker.Forms
         {
             InitializeComponent();
         }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+        }
     }
 }

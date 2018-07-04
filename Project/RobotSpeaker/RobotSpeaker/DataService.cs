@@ -15,7 +15,7 @@ namespace RobotSpeaker
         /// </summary>
         public static void Init()
         {
-        
+            
         }
     }
 }
