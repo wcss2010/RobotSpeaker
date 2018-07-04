@@ -14,6 +14,10 @@ namespace RobotSpeaker
         [STAThread]
         static void Main()
         {
+            //载入配置
+            SuperObject.LoadConfig();
+
+            //创建目录
             try
             {
                 System.IO.Directory.CreateDirectory(SuperObject.ReadmeDir);

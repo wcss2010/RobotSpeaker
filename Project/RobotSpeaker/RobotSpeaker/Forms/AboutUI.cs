@@ -169,7 +169,7 @@ namespace RobotSpeaker.Forms
 
         private void btnToHome_Click(object sender, EventArgs e)
         {
-            WebPlayerUI player = new WebPlayerUI(SuperObject.WebSiteUrl);
+            WebPlayerUI player = new WebPlayerUI(SuperObject.Config.WebSiteUrl);
             player.Show();
         }
     }
