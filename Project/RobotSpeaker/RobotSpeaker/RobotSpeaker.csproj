@@ -59,6 +59,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>..\..\..\Lib\Interop.WMPLib.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -66,7 +67,9 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ButtonExt.cs">
@@ -114,6 +117,7 @@
     </Compile>
     <Compile Include="Forms\CameraAPI\AviCapture.cs" />
     <Compile Include="Forms\CameraAPI\Video.cs" />
+    <Compile Include="Forms\CameraAPI\VideoOperate.cs" />
     <Compile Include="Forms\FaceUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -257,6 +261,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

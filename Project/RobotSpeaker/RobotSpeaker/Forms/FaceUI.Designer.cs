@@ -28,27 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pbImage = new System.Windows.Forms.PictureBox();
+            this.vsVideoSource = new AForge.Controls.VideoSourcePlayer();
             this.btnStopRecord = new RobotSpeaker.Controls.ButtonExt();
             this.btnPauseRecord = new RobotSpeaker.Controls.ButtonExt();
             this.btnGetPic = new RobotSpeaker.Controls.ImageButton();
             this.btnRecord = new RobotSpeaker.Controls.ImageButton();
             this.plMiddleButtons = new System.Windows.Forms.Panel();
             this.plContent = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.plMiddleButtons.SuspendLayout();
             this.plContent.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pbImage
+            // vsVideoSource
             // 
-            this.pbImage.BackColor = System.Drawing.Color.Black;
-            this.pbImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbImage.Location = new System.Drawing.Point(38, 35);
-            this.pbImage.Name = "pbImage";
-            this.pbImage.Size = new System.Drawing.Size(320, 480);
-            this.pbImage.TabIndex = 1;
-            this.pbImage.TabStop = false;
+            this.vsVideoSource.BackColor = System.Drawing.Color.Black;
+            this.vsVideoSource.BorderColor = System.Drawing.Color.White;
+            this.vsVideoSource.Location = new System.Drawing.Point(26, 29);
+            this.vsVideoSource.Name = "vsVideoSource";
+            this.vsVideoSource.Size = new System.Drawing.Size(480, 320);
+            this.vsVideoSource.TabIndex = 1;
+            this.vsVideoSource.TabStop = false;
+            this.vsVideoSource.VideoSource = null;
+            this.vsVideoSource.NewFrame += new AForge.Controls.VideoSourcePlayer.NewFrameHandler(this.vsVideoSource_NewFrame);
             // 
             // btnStopRecord
             // 
@@ -58,7 +59,7 @@
             this.btnStopRecord.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnStopRecord.EnabledMouseDownAndMouseUp = true;
             this.btnStopRecord.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnStopRecord.Location = new System.Drawing.Point(110, 538);
+            this.btnStopRecord.Location = new System.Drawing.Point(176, 366);
             this.btnStopRecord.Name = "btnStopRecord";
             this.btnStopRecord.Size = new System.Drawing.Size(80, 40);
             this.btnStopRecord.TabIndex = 2;
@@ -74,7 +75,7 @@
             this.btnPauseRecord.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnPauseRecord.EnabledMouseDownAndMouseUp = true;
             this.btnPauseRecord.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnPauseRecord.Location = new System.Drawing.Point(196, 538);
+            this.btnPauseRecord.Location = new System.Drawing.Point(262, 366);
             this.btnPauseRecord.Name = "btnPauseRecord";
             this.btnPauseRecord.Size = new System.Drawing.Size(80, 40);
             this.btnPauseRecord.TabIndex = 3;
@@ -122,7 +123,7 @@
             // 
             this.plMiddleButtons.Controls.Add(this.btnGetPic);
             this.plMiddleButtons.Controls.Add(this.btnRecord);
-            this.plMiddleButtons.Location = new System.Drawing.Point(475, 161);
+            this.plMiddleButtons.Location = new System.Drawing.Point(554, 66);
             this.plMiddleButtons.Name = "plMiddleButtons";
             this.plMiddleButtons.Size = new System.Drawing.Size(70, 250);
             this.plMiddleButtons.TabIndex = 5;
@@ -132,10 +133,10 @@
             this.plContent.Controls.Add(this.btnPauseRecord);
             this.plContent.Controls.Add(this.btnStopRecord);
             this.plContent.Controls.Add(this.plMiddleButtons);
-            this.plContent.Controls.Add(this.pbImage);
+            this.plContent.Controls.Add(this.vsVideoSource);
             this.plContent.Location = new System.Drawing.Point(181, 76);
             this.plContent.Name = "plContent";
-            this.plContent.Size = new System.Drawing.Size(661, 600);
+            this.plContent.Size = new System.Drawing.Size(661, 430);
             this.plContent.TabIndex = 6;
             this.plContent.Paint += new System.Windows.Forms.PaintEventHandler(this.plContent_Paint);
             // 
@@ -150,7 +151,6 @@
             this.TitleText = "摄像模式";
             this.TitleTextColor = System.Drawing.Color.White;
             this.Controls.SetChildIndex(this.plContent, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.plMiddleButtons.ResumeLayout(false);
             this.plContent.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -159,7 +159,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pbImage;
+        private AForge.Controls.VideoSourcePlayer vsVideoSource;
         private Controls.ButtonExt btnStopRecord;
         private Controls.ButtonExt btnPauseRecord;
         private Controls.ImageButton btnGetPic;
