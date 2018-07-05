@@ -308,7 +308,7 @@ namespace RobotSpeaker.Forms.Player
             }
         }
 
-        public bool hasNext()
+        public bool HasNext()
         {
             return index < pageCount - 1;
         }

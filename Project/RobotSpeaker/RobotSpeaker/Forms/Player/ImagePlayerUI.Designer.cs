@@ -35,6 +35,7 @@
             // pbView
             // 
             this.pbView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pbView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbView.Location = new System.Drawing.Point(0, 64);
             this.pbView.Name = "pbView";
