@@ -62,6 +62,18 @@ namespace RobotSpeaker.Forms.Player
             }
         }
 
+        [Browsable(false)]
+        public Panel ImageListControl
+        {
+            get { return plImageList; }
+        }
+
+        [Browsable(false)]
+        public Panel ButtonListControl
+        {
+            get { return plButtons; }
+        }
+
         public event EventHandler<ImageArgsEx> ImageChanged;
 
         private void OnImageChanged(ImageArgsEx e)
@@ -141,7 +153,7 @@ namespace RobotSpeaker.Forms.Player
             Last();
         }
 
-        private void First()
+        public void First()
         {
             index = 0;
             if (LoadImage())
@@ -158,7 +170,7 @@ namespace RobotSpeaker.Forms.Player
             }
         }
 
-        private void Prex()
+        public void Prex()
         {
             if (index > 0)
             {
@@ -178,7 +190,7 @@ namespace RobotSpeaker.Forms.Player
             }
         }
 
-        private void Next()
+        public void Next()
         {
             if (index < pageCount - 1)
             {
@@ -198,7 +210,7 @@ namespace RobotSpeaker.Forms.Player
             }
         }
 
-        private void Last()
+        public void Last()
         {
             index = pageCount - 1;
             if (LoadImage())

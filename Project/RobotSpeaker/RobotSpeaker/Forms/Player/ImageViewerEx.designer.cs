@@ -68,9 +68,9 @@
             this.plButtons.Controls.Add(this.btnLast);
             this.plButtons.Controls.Add(this.btnFirst);
             this.plButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.plButtons.Location = new System.Drawing.Point(0, 240);
+            this.plButtons.Location = new System.Drawing.Point(0, 387);
             this.plButtons.Name = "plButtons";
-            this.plButtons.Size = new System.Drawing.Size(340, 64);
+            this.plButtons.Size = new System.Drawing.Size(992, 64);
             this.plButtons.TabIndex = 0;
             // 
             // lblPageInfo
@@ -81,7 +81,7 @@
             this.lblPageInfo.ForeColor = System.Drawing.Color.White;
             this.lblPageInfo.Location = new System.Drawing.Point(150, 0);
             this.lblPageInfo.Name = "lblPageInfo";
-            this.lblPageInfo.Size = new System.Drawing.Size(38, 62);
+            this.lblPageInfo.Size = new System.Drawing.Size(690, 62);
             this.lblPageInfo.TabIndex = 1;
             this.lblPageInfo.Text = "0/0";
             this.lblPageInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -94,9 +94,10 @@
             this.btnNext.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnNext.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNext.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnNext.EnabledMouseDownAndMouseUp = true;
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNext.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnNext.Location = new System.Drawing.Point(188, 0);
+            this.btnNext.Location = new System.Drawing.Point(840, 0);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 62);
             this.btnNext.TabIndex = 0;
@@ -112,9 +113,10 @@
             this.btnEnd.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnEnd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEnd.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnEnd.EnabledMouseDownAndMouseUp = true;
             this.btnEnd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEnd.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnEnd.Location = new System.Drawing.Point(263, 0);
+            this.btnEnd.Location = new System.Drawing.Point(915, 0);
             this.btnEnd.Name = "btnEnd";
             this.btnEnd.Size = new System.Drawing.Size(75, 62);
             this.btnEnd.TabIndex = 0;
@@ -130,6 +132,7 @@
             this.btnLast.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnLast.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLast.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnLast.EnabledMouseDownAndMouseUp = true;
             this.btnLast.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLast.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnLast.Location = new System.Drawing.Point(75, 0);
@@ -148,6 +151,7 @@
             this.btnFirst.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnFirst.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFirst.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnFirst.EnabledMouseDownAndMouseUp = true;
             this.btnFirst.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnFirst.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnFirst.Location = new System.Drawing.Point(0, 0);
@@ -165,7 +169,7 @@
             this.picCurrent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picCurrent.Location = new System.Drawing.Point(0, 0);
             this.picCurrent.Name = "picCurrent";
-            this.picCurrent.Size = new System.Drawing.Size(340, 195);
+            this.picCurrent.Size = new System.Drawing.Size(992, 342);
             this.picCurrent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picCurrent.TabIndex = 1;
             this.picCurrent.TabStop = false;
@@ -193,9 +197,9 @@
             this.plImageList.Controls.Add(this.picItem2);
             this.plImageList.Controls.Add(this.picItem1);
             this.plImageList.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.plImageList.Location = new System.Drawing.Point(0, 195);
+            this.plImageList.Location = new System.Drawing.Point(0, 342);
             this.plImageList.Name = "plImageList";
-            this.plImageList.Size = new System.Drawing.Size(340, 45);
+            this.plImageList.Size = new System.Drawing.Size(992, 45);
             this.plImageList.TabIndex = 2;
             // 
             // picItem5
@@ -259,7 +263,7 @@
             this.plCurrent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plCurrent.Location = new System.Drawing.Point(0, 0);
             this.plCurrent.Name = "plCurrent";
-            this.plCurrent.Size = new System.Drawing.Size(340, 195);
+            this.plCurrent.Size = new System.Drawing.Size(992, 342);
             this.plCurrent.TabIndex = 3;
             // 
             // ImageViewerEx
@@ -272,7 +276,7 @@
             this.Controls.Add(this.plButtons);
             this.MinimumSize = new System.Drawing.Size(340, 260);
             this.Name = "ImageViewerEx";
-            this.Size = new System.Drawing.Size(340, 304);
+            this.Size = new System.Drawing.Size(992, 451);
             this.Resize += new System.EventHandler(this.ImageViewerEx_Resize);
             this.plButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picCurrent)).EndInit();
