@@ -206,5 +206,11 @@ namespace RobotSpeaker.Forms
             WebPlayerUI player = new WebPlayerUI(SuperObject.Config.WebSiteUrl);
             player.Show();
         }
+
+        private void btnImagListPPT_Click(object sender, EventArgs e)
+        {
+            ImageListPlayerUI form = new ImageListPlayerUI();
+            form.Show();
+        }
     }
 }

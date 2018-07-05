@@ -33,6 +33,7 @@
             this.btnExplorer = new RobotSpeaker.Controls.ButtonExt();
             this.lblListBarLabel = new System.Windows.Forms.Label();
             this.plListContent = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnImagListPPT = new RobotSpeaker.Controls.ButtonExt();
             this.plListBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,6 +41,7 @@
             // 
             this.plListBar.BackColor = System.Drawing.Color.Transparent;
             this.plListBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.plListBar.Controls.Add(this.btnImagListPPT);
             this.plListBar.Controls.Add(this.btnToHome);
             this.plListBar.Controls.Add(this.btnExplorer);
             this.plListBar.Controls.Add(this.lblListBarLabel);
@@ -57,6 +59,7 @@
             this.btnToHome.ButtonPressedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnToHome.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnToHome.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnToHome.EnabledMouseDownAndMouseUp = true;
             this.btnToHome.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnToHome.Location = new System.Drawing.Point(751, 0);
             this.btnToHome.Name = "btnToHome";
@@ -74,6 +77,7 @@
             this.btnExplorer.ButtonPressedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnExplorer.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnExplorer.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnExplorer.EnabledMouseDownAndMouseUp = true;
             this.btnExplorer.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExplorer.Location = new System.Drawing.Point(891, 0);
             this.btnExplorer.Name = "btnExplorer";
@@ -107,6 +111,24 @@
             this.plListContent.TabIndex = 2;
             this.plListContent.WrapContents = false;
             // 
+            // btnImagListPPT
+            // 
+            this.btnImagListPPT.BackColor = System.Drawing.Color.Transparent;
+            this.btnImagListPPT.ButtonNormalBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(146)))), ((int)(((byte)(11)))));
+            this.btnImagListPPT.ButtonNormalForeColor = System.Drawing.Color.White;
+            this.btnImagListPPT.ButtonPressedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnImagListPPT.ButtonPressedForeColor = System.Drawing.Color.White;
+            this.btnImagListPPT.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnImagListPPT.EnabledMouseDownAndMouseUp = true;
+            this.btnImagListPPT.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnImagListPPT.Location = new System.Drawing.Point(611, 0);
+            this.btnImagListPPT.Name = "btnImagListPPT";
+            this.btnImagListPPT.Size = new System.Drawing.Size(140, 80);
+            this.btnImagListPPT.TabIndex = 3;
+            this.btnImagListPPT.Text = "图片展示";
+            this.btnImagListPPT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnImagListPPT.Click += new System.EventHandler(this.btnImagListPPT_Click);
+            // 
             // AboutUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -114,8 +136,10 @@
             this.ClientSize = new System.Drawing.Size(1031, 487);
             this.Controls.Add(this.plListContent);
             this.Controls.Add(this.plListBar);
+            this.EnabledDisplayWifiLogo = true;
             this.Name = "AboutUI";
             this.Text = "AboutUI";
+            this.TimeTextForeColor = System.Drawing.Color.White;
             this.TitleText = "业务介绍";
             this.TitleTextForeColor = System.Drawing.Color.White;
             this.Controls.SetChildIndex(this.plListBar, 0);
@@ -132,5 +156,6 @@
         private System.Windows.Forms.FlowLayoutPanel plListContent;
         private Controls.ButtonExt btnExplorer;
         private Controls.ButtonExt btnToHome;
+        private Controls.ButtonExt btnImagListPPT;
     }
 }
