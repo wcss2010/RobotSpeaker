@@ -115,7 +115,15 @@ namespace RobotSpeaker
             set { _managerPassword = value; }
         }
 
-        
+        private string _voiceWelcomeText = "您好，我有什么能够帮你？";
+        /// <summary>
+        /// 语音对话欢迎词
+        /// </summary>
+        public string VoiceWelcomeText
+        {
+            get { return _voiceWelcomeText; }
+            set { _voiceWelcomeText = value; }
+        }
     }
 
     /// <summary>

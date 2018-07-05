@@ -38,6 +38,7 @@ namespace RobotSpeaker.Forms
 
         private void LoadFromConfig()
         {
+            tbVoiceWelcomeText.Text = SuperObject.Config.VoiceWelcomeText;
             tbPassword.Text = SuperObject.Config.ManagerPassword;
             tbWebSiteUrl.Text = SuperObject.Config.WebSiteUrl;
             tbGoAppPath.Text = SuperObject.Config.GoAppPath;
@@ -89,7 +90,13 @@ namespace RobotSpeaker.Forms
                 MessageBox.Show("对不起，RobotStudio启动路径不能为空！");
                 return false;
             }
+            if (string.IsNullOrEmpty(tbVoiceWelcomeText.Text))
+            {
+                MessageBox.Show("对不起，欢迎词不能为空！");
+                return false;
+            }
 
+            SuperObject.Config.VoiceWelcomeText = tbVoiceWelcomeText.Text;
             SuperObject.Config.ManagerPassword = tbPassword.Text;
             SuperObject.Config.WebSiteUrl = tbWebSiteUrl.Text;
             SuperObject.Config.GoAppPath = tbGoAppPath.Text;

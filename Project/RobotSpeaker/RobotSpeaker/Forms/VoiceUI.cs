@@ -29,7 +29,7 @@ namespace RobotSpeaker.Forms
         {
             base.OnLoad(e);
 
-            ChatPanel.AddMachineMsg("您好，我有什么能够帮你");
+            ChatPanel.AddMachineMsg(SuperObject.Config.VoiceWelcomeText);
         }
 
         protected override void OnClickBackButton(EventArgs e)
