@@ -35,11 +35,13 @@
             this.cbGoPort = new System.Windows.Forms.ComboBox();
             this.cbVoicePort = new System.Windows.Forms.ComboBox();
             this.tbGoAppPath = new System.Windows.Forms.TextBox();
+            this.tbVoiceWelcomeText = new System.Windows.Forms.TextBox();
             this.tbWebSiteUrl = new System.Windows.Forms.TextBox();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,11 +52,12 @@
             this.btnReadmeDir = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.ofdApp = new System.Windows.Forms.OpenFileDialog();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tbVoiceWelcomeText = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tbImageListPlayerSleepSeconds = new System.Windows.Forms.NumericUpDown();
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).BeginInit();
             this.SuspendLayout();
             // 
             // tcPage
@@ -71,6 +74,8 @@
             // 
             // tpNormal
             // 
+            this.tpNormal.Controls.Add(this.tbImageListPlayerSleepSeconds);
+            this.tpNormal.Controls.Add(this.label8);
             this.tpNormal.Controls.Add(this.btnSelect);
             this.tpNormal.Controls.Add(this.clbGoTypes);
             this.tpNormal.Controls.Add(this.cbGoPort);
@@ -143,6 +148,13 @@
             this.tbGoAppPath.Size = new System.Drawing.Size(439, 21);
             this.tbGoAppPath.TabIndex = 1;
             // 
+            // tbVoiceWelcomeText
+            // 
+            this.tbVoiceWelcomeText.Location = new System.Drawing.Point(141, 16);
+            this.tbVoiceWelcomeText.Name = "tbVoiceWelcomeText";
+            this.tbVoiceWelcomeText.Size = new System.Drawing.Size(439, 21);
+            this.tbVoiceWelcomeText.TabIndex = 1;
+            // 
             // tbWebSiteUrl
             // 
             this.tbWebSiteUrl.Location = new System.Drawing.Point(141, 80);
@@ -184,6 +196,15 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "语音卡串口：";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(93, 19);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "欢迎词：";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -216,7 +237,7 @@
             this.tpVoice.Location = new System.Drawing.Point(4, 22);
             this.tpVoice.Name = "tpVoice";
             this.tpVoice.Padding = new System.Windows.Forms.Padding(3);
-            this.tpVoice.Size = new System.Drawing.Size(799, 284);
+            this.tpVoice.Size = new System.Drawing.Size(799, 366);
             this.tpVoice.TabIndex = 1;
             this.tpVoice.Text = "语音问答题库";
             this.tpVoice.UseVisualStyleBackColor = true;
@@ -226,7 +247,7 @@
             this.tpGo.Location = new System.Drawing.Point(4, 22);
             this.tpGo.Name = "tpGo";
             this.tpGo.Padding = new System.Windows.Forms.Padding(3);
-            this.tpGo.Size = new System.Drawing.Size(799, 284);
+            this.tpGo.Size = new System.Drawing.Size(799, 366);
             this.tpGo.TabIndex = 2;
             this.tpGo.Text = "运动指令库";
             this.tpGo.UseVisualStyleBackColor = true;
@@ -279,21 +300,36 @@
             // 
             this.ofdApp.Filter = "*.Exe|*.exe";
             // 
-            // label7
+            // label8
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(93, 19);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 12);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "欢迎词：";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(14, 285);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(161, 12);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "图片展示每张图的停留时间：";
             // 
-            // tbVoiceWelcomeText
+            // tbImageListPlayerSleepSeconds
             // 
-            this.tbVoiceWelcomeText.Location = new System.Drawing.Point(141, 16);
-            this.tbVoiceWelcomeText.Name = "tbVoiceWelcomeText";
-            this.tbVoiceWelcomeText.Size = new System.Drawing.Size(439, 21);
-            this.tbVoiceWelcomeText.TabIndex = 1;
+            this.tbImageListPlayerSleepSeconds.Location = new System.Drawing.Point(172, 283);
+            this.tbImageListPlayerSleepSeconds.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.tbImageListPlayerSleepSeconds.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.tbImageListPlayerSleepSeconds.Name = "tbImageListPlayerSleepSeconds";
+            this.tbImageListPlayerSleepSeconds.Size = new System.Drawing.Size(50, 21);
+            this.tbImageListPlayerSleepSeconds.TabIndex = 6;
+            this.tbImageListPlayerSleepSeconds.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
             // 
             // ConfigUI
             // 
@@ -312,6 +348,7 @@
             this.tpNormal.ResumeLayout(false);
             this.tpNormal.PerformLayout();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -342,5 +379,7 @@
         private System.Windows.Forms.OpenFileDialog ofdApp;
         private System.Windows.Forms.TextBox tbVoiceWelcomeText;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown tbImageListPlayerSleepSeconds;
+        private System.Windows.Forms.Label label8;
     }
 }

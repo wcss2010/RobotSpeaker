@@ -124,6 +124,17 @@ namespace RobotSpeaker
             get { return _voiceWelcomeText; }
             set { _voiceWelcomeText = value; }
         }
+
+        private int _imageListPlayerSleepSeconds = 8;
+        /// <summary>
+        /// 图片展示每张图的停留时间(秒)
+        /// </summary>
+        public int ImageListPlayerSleepSeconds
+        {
+            get { return _imageListPlayerSleepSeconds; }
+            set { _imageListPlayerSleepSeconds = value; }
+        }
+
     }
 
     /// <summary>

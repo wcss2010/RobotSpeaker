@@ -308,6 +308,16 @@ namespace RobotSpeaker.Forms.Player
             }
         }
 
+        public bool hasNext()
+        {
+            return index < pageCount - 1;
+        }
+
+        public int GetPageCount()
+        {
+            return pageCount;
+        }
+
         private void ImageViewerEx_Resize(object sender, EventArgs e)
         {
             int width = plImageList.Width;

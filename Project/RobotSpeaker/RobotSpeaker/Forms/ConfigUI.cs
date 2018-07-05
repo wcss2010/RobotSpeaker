@@ -44,6 +44,7 @@ namespace RobotSpeaker.Forms
             tbGoAppPath.Text = SuperObject.Config.GoAppPath;
             cbVoicePort.Text = SuperObject.Config.VoicePort;
             cbGoPort.Text = SuperObject.Config.GoPort;
+            tbImageListPlayerSleepSeconds.Value = SuperObject.Config.ImageListPlayerSleepSeconds;
 
             switch (SuperObject.Config.CurrentGoType)
             {
@@ -96,6 +97,7 @@ namespace RobotSpeaker.Forms
                 return false;
             }
 
+            SuperObject.Config.ImageListPlayerSleepSeconds = (int)tbImageListPlayerSleepSeconds.Value;
             SuperObject.Config.VoiceWelcomeText = tbVoiceWelcomeText.Text;
             SuperObject.Config.ManagerPassword = tbPassword.Text;
             SuperObject.Config.WebSiteUrl = tbWebSiteUrl.Text;

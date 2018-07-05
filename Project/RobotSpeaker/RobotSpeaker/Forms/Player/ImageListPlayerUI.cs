@@ -20,7 +20,9 @@ namespace RobotSpeaker.Forms.Player
         {
             base.OnLoad(e);
 
-
+            imageViewerEx.ImageListControl.Height = 0;
+            imageViewerEx.ButtonListControl.Height = 0;
+            imageViewerEx.SetImagePath(SuperObject.ReadmeDir);
         }
 
         protected override void OnClickBackButton(EventArgs e)
@@ -28,6 +30,11 @@ namespace RobotSpeaker.Forms.Player
             base.OnClickBackButton(e);
 
             Close();
+        }
+
+        private void trImageSwitch_Tick(object sender, EventArgs e)
+        {
+
         }
     }
 }
