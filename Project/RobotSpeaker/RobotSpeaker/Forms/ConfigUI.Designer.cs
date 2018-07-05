@@ -30,6 +30,8 @@
         {
             this.tcPage = new System.Windows.Forms.TabControl();
             this.tpNormal = new System.Windows.Forms.TabPage();
+            this.tbImageListPlayerSleepSeconds = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
             this.btnSelect = new System.Windows.Forms.Button();
             this.clbGoTypes = new System.Windows.Forms.CheckedListBox();
             this.cbGoPort = new System.Windows.Forms.ComboBox();
@@ -52,12 +54,10 @@
             this.btnReadmeDir = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.ofdApp = new System.Windows.Forms.OpenFileDialog();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tbImageListPlayerSleepSeconds = new System.Windows.Forms.NumericUpDown();
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcPage
@@ -98,6 +98,37 @@
             this.tpNormal.TabIndex = 0;
             this.tpNormal.Text = "基础配置";
             this.tpNormal.UseVisualStyleBackColor = true;
+            // 
+            // tbImageListPlayerSleepSeconds
+            // 
+            this.tbImageListPlayerSleepSeconds.Location = new System.Drawing.Point(172, 283);
+            this.tbImageListPlayerSleepSeconds.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.tbImageListPlayerSleepSeconds.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.tbImageListPlayerSleepSeconds.Name = "tbImageListPlayerSleepSeconds";
+            this.tbImageListPlayerSleepSeconds.Size = new System.Drawing.Size(50, 21);
+            this.tbImageListPlayerSleepSeconds.TabIndex = 6;
+            this.tbImageListPlayerSleepSeconds.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(14, 285);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(161, 12);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "图片展示每张图的停留时间：";
             // 
             // btnSelect
             // 
@@ -300,37 +331,6 @@
             // 
             this.ofdApp.Filter = "*.Exe|*.exe";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(14, 285);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(161, 12);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "图片展示每张图的停留时间：";
-            // 
-            // tbImageListPlayerSleepSeconds
-            // 
-            this.tbImageListPlayerSleepSeconds.Location = new System.Drawing.Point(172, 283);
-            this.tbImageListPlayerSleepSeconds.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.tbImageListPlayerSleepSeconds.Minimum = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.tbImageListPlayerSleepSeconds.Name = "tbImageListPlayerSleepSeconds";
-            this.tbImageListPlayerSleepSeconds.Size = new System.Drawing.Size(50, 21);
-            this.tbImageListPlayerSleepSeconds.TabIndex = 6;
-            this.tbImageListPlayerSleepSeconds.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            // 
             // ConfigUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -339,6 +339,7 @@
             this.Controls.Add(this.tcPage);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConfigUI";
@@ -347,8 +348,8 @@
             this.tcPage.ResumeLayout(false);
             this.tpNormal.ResumeLayout(false);
             this.tpNormal.PerformLayout();
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

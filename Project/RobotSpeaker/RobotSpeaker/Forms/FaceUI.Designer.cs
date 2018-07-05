@@ -45,7 +45,7 @@
             this.vsVideoSource.BorderColor = System.Drawing.Color.White;
             this.vsVideoSource.Location = new System.Drawing.Point(26, 29);
             this.vsVideoSource.Name = "vsVideoSource";
-            this.vsVideoSource.Size = new System.Drawing.Size(480, 320);
+            this.vsVideoSource.Size = new System.Drawing.Size(640, 480);
             this.vsVideoSource.TabIndex = 1;
             this.vsVideoSource.TabStop = false;
             this.vsVideoSource.VideoSource = null;
@@ -58,10 +58,10 @@
             this.btnStopRecord.ButtonPressedBackColor = System.Drawing.Color.Orange;
             this.btnStopRecord.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnStopRecord.EnabledMouseDownAndMouseUp = true;
-            this.btnStopRecord.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnStopRecord.Location = new System.Drawing.Point(176, 366);
+            this.btnStopRecord.Font = new System.Drawing.Font("微软雅黑", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnStopRecord.Location = new System.Drawing.Point(25, 526);
             this.btnStopRecord.Name = "btnStopRecord";
-            this.btnStopRecord.Size = new System.Drawing.Size(80, 40);
+            this.btnStopRecord.Size = new System.Drawing.Size(104, 60);
             this.btnStopRecord.TabIndex = 2;
             this.btnStopRecord.Text = "停止";
             this.btnStopRecord.Visible = false;
@@ -74,10 +74,10 @@
             this.btnPauseRecord.ButtonPressedBackColor = System.Drawing.Color.Orange;
             this.btnPauseRecord.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnPauseRecord.EnabledMouseDownAndMouseUp = true;
-            this.btnPauseRecord.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnPauseRecord.Location = new System.Drawing.Point(262, 366);
+            this.btnPauseRecord.Font = new System.Drawing.Font("微软雅黑", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPauseRecord.Location = new System.Drawing.Point(562, 526);
             this.btnPauseRecord.Name = "btnPauseRecord";
-            this.btnPauseRecord.Size = new System.Drawing.Size(80, 40);
+            this.btnPauseRecord.Size = new System.Drawing.Size(104, 60);
             this.btnPauseRecord.TabIndex = 3;
             this.btnPauseRecord.Text = "暂停";
             this.btnPauseRecord.Visible = false;
@@ -97,7 +97,7 @@
             this.btnGetPic.Location = new System.Drawing.Point(0, 0);
             this.btnGetPic.Name = "btnGetPic";
             this.btnGetPic.NoFocusImage = null;
-            this.btnGetPic.Size = new System.Drawing.Size(70, 90);
+            this.btnGetPic.Size = new System.Drawing.Size(133, 123);
             this.btnGetPic.TabIndex = 4;
             this.btnGetPic.Click += new System.EventHandler(this.btnGetPic_Click);
             // 
@@ -112,10 +112,10 @@
             this.btnRecord.EnabledTextLabel = true;
             this.btnRecord.FocusImage = null;
             this.btnRecord.IsPressed = false;
-            this.btnRecord.Location = new System.Drawing.Point(0, 160);
+            this.btnRecord.Location = new System.Drawing.Point(0, 184);
             this.btnRecord.Name = "btnRecord";
             this.btnRecord.NoFocusImage = null;
-            this.btnRecord.Size = new System.Drawing.Size(70, 90);
+            this.btnRecord.Size = new System.Drawing.Size(133, 123);
             this.btnRecord.TabIndex = 4;
             this.btnRecord.Click += new System.EventHandler(this.btnRecord_Click);
             // 
@@ -123,9 +123,9 @@
             // 
             this.plMiddleButtons.Controls.Add(this.btnGetPic);
             this.plMiddleButtons.Controls.Add(this.btnRecord);
-            this.plMiddleButtons.Location = new System.Drawing.Point(554, 66);
+            this.plMiddleButtons.Location = new System.Drawing.Point(693, 113);
             this.plMiddleButtons.Name = "plMiddleButtons";
-            this.plMiddleButtons.Size = new System.Drawing.Size(70, 250);
+            this.plMiddleButtons.Size = new System.Drawing.Size(133, 307);
             this.plMiddleButtons.TabIndex = 5;
             // 
             // plContent
@@ -134,9 +134,9 @@
             this.plContent.Controls.Add(this.btnStopRecord);
             this.plContent.Controls.Add(this.plMiddleButtons);
             this.plContent.Controls.Add(this.vsVideoSource);
-            this.plContent.Location = new System.Drawing.Point(181, 76);
+            this.plContent.Location = new System.Drawing.Point(33, 76);
             this.plContent.Name = "plContent";
-            this.plContent.Size = new System.Drawing.Size(661, 430);
+            this.plContent.Size = new System.Drawing.Size(851, 599);
             this.plContent.TabIndex = 6;
             this.plContent.Paint += new System.Windows.Forms.PaintEventHandler(this.plContent_Paint);
             // 
@@ -144,10 +144,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1031, 804);
+            this.ClientSize = new System.Drawing.Size(1280, 800);
             this.Controls.Add(this.plContent);
+            this.EnabledDisplayWifiLogo = true;
             this.Name = "FaceUI";
             this.Text = "FaceUI";
+            this.TimeTextForeColor = System.Drawing.Color.White;
             this.TitleText = "摄像模式";
             this.TitleTextForeColor = System.Drawing.Color.White;
             this.Controls.SetChildIndex(this.plContent, 0);
