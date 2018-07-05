@@ -18,13 +18,15 @@ namespace RobotSpeaker.Forms
 
             foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
             {
-                cbVoicePort.Items.Add(port);
+                cbOnlineVoicePort.Items.Add(port);
+                cbOfflineVoicePort.Items.Add(port);
                 cbGoPort.Items.Add(port);
             }
 
-            if (cbVoicePort.Items.Count > 0)
+            if (cbOnlineVoicePort.Items.Count > 0)
             {
-                cbVoicePort.SelectedIndex = 0;
+                cbOnlineVoicePort.SelectedIndex = 0;
+                cbOfflineVoicePort.SelectedIndex = 0;
                 cbGoPort.SelectedIndex = 0;
             }
         }
@@ -42,7 +44,8 @@ namespace RobotSpeaker.Forms
             tbPassword.Text = SuperObject.Config.ManagerPassword;
             tbWebSiteUrl.Text = SuperObject.Config.WebSiteUrl;
             tbGoAppPath.Text = SuperObject.Config.GoAppPath;
-            cbVoicePort.Text = SuperObject.Config.VoicePort;
+            cbOnlineVoicePort.Text = SuperObject.Config.OnlineVoicePort;
+            cbOfflineVoicePort.Text = SuperObject.Config.OfflineVoicePort;
             cbGoPort.Text = SuperObject.Config.GoPort;
             tbImageListPlayerSleepSeconds.Value = SuperObject.Config.ImageListPlayerSleepSeconds;
 
@@ -102,7 +105,8 @@ namespace RobotSpeaker.Forms
             SuperObject.Config.ManagerPassword = tbPassword.Text;
             SuperObject.Config.WebSiteUrl = tbWebSiteUrl.Text;
             SuperObject.Config.GoAppPath = tbGoAppPath.Text;
-            SuperObject.Config.VoicePort = cbVoicePort.Text;
+            SuperObject.Config.OnlineVoicePort = cbOnlineVoicePort.Text;
+            SuperObject.Config.OfflineVoicePort = cbOfflineVoicePort.Text;
             SuperObject.Config.GoPort = cbGoPort.Text;
 
             if (clbGoTypes.GetItemChecked(0))

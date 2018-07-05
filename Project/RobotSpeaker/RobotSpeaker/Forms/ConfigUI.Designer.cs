@@ -35,7 +35,7 @@
             this.btnSelect = new System.Windows.Forms.Button();
             this.clbGoTypes = new System.Windows.Forms.CheckedListBox();
             this.cbGoPort = new System.Windows.Forms.ComboBox();
-            this.cbVoicePort = new System.Windows.Forms.ComboBox();
+            this.cbOnlineVoicePort = new System.Windows.Forms.ComboBox();
             this.tbGoAppPath = new System.Windows.Forms.TextBox();
             this.tbVoiceWelcomeText = new System.Windows.Forms.TextBox();
             this.tbWebSiteUrl = new System.Windows.Forms.TextBox();
@@ -54,6 +54,8 @@
             this.btnReadmeDir = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.ofdApp = new System.Windows.Forms.OpenFileDialog();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cbOfflineVoicePort = new System.Windows.Forms.ComboBox();
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).BeginInit();
@@ -69,7 +71,7 @@
             this.tcPage.Location = new System.Drawing.Point(0, 0);
             this.tcPage.Name = "tcPage";
             this.tcPage.SelectedIndex = 0;
-            this.tcPage.Size = new System.Drawing.Size(807, 392);
+            this.tcPage.Size = new System.Drawing.Size(807, 420);
             this.tcPage.TabIndex = 0;
             // 
             // tpNormal
@@ -79,12 +81,14 @@
             this.tpNormal.Controls.Add(this.btnSelect);
             this.tpNormal.Controls.Add(this.clbGoTypes);
             this.tpNormal.Controls.Add(this.cbGoPort);
-            this.tpNormal.Controls.Add(this.cbVoicePort);
+            this.tpNormal.Controls.Add(this.cbOfflineVoicePort);
+            this.tpNormal.Controls.Add(this.cbOnlineVoicePort);
             this.tpNormal.Controls.Add(this.tbGoAppPath);
             this.tpNormal.Controls.Add(this.tbVoiceWelcomeText);
             this.tpNormal.Controls.Add(this.tbWebSiteUrl);
             this.tpNormal.Controls.Add(this.tbPassword);
             this.tpNormal.Controls.Add(this.label6);
+            this.tpNormal.Controls.Add(this.label9);
             this.tpNormal.Controls.Add(this.label5);
             this.tpNormal.Controls.Add(this.label4);
             this.tpNormal.Controls.Add(this.label7);
@@ -94,14 +98,14 @@
             this.tpNormal.Location = new System.Drawing.Point(4, 22);
             this.tpNormal.Name = "tpNormal";
             this.tpNormal.Padding = new System.Windows.Forms.Padding(3);
-            this.tpNormal.Size = new System.Drawing.Size(799, 366);
+            this.tpNormal.Size = new System.Drawing.Size(799, 394);
             this.tpNormal.TabIndex = 0;
             this.tpNormal.Text = "基础配置";
             this.tpNormal.UseVisualStyleBackColor = true;
             // 
             // tbImageListPlayerSleepSeconds
             // 
-            this.tbImageListPlayerSleepSeconds.Location = new System.Drawing.Point(172, 283);
+            this.tbImageListPlayerSleepSeconds.Location = new System.Drawing.Point(172, 316);
             this.tbImageListPlayerSleepSeconds.Maximum = new decimal(new int[] {
             200,
             0,
@@ -124,7 +128,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(14, 285);
+            this.label8.Location = new System.Drawing.Point(14, 318);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(161, 12);
             this.label8.TabIndex = 5;
@@ -132,7 +136,7 @@
             // 
             // btnSelect
             // 
-            this.btnSelect.Location = new System.Drawing.Point(586, 109);
+            this.btnSelect.Location = new System.Drawing.Point(617, 111);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(48, 23);
             this.btnSelect.TabIndex = 4;
@@ -148,7 +152,7 @@
             "静止模式",
             "遥控模式",
             "自由导航模式"});
-            this.clbGoTypes.Location = new System.Drawing.Point(141, 204);
+            this.clbGoTypes.Location = new System.Drawing.Point(172, 239);
             this.clbGoTypes.Name = "clbGoTypes";
             this.clbGoTypes.Size = new System.Drawing.Size(208, 67);
             this.clbGoTypes.TabIndex = 3;
@@ -158,44 +162,44 @@
             // 
             this.cbGoPort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGoPort.FormattingEnabled = true;
-            this.cbGoPort.Location = new System.Drawing.Point(141, 173);
+            this.cbGoPort.Location = new System.Drawing.Point(172, 208);
             this.cbGoPort.Name = "cbGoPort";
             this.cbGoPort.Size = new System.Drawing.Size(114, 20);
             this.cbGoPort.TabIndex = 2;
             // 
-            // cbVoicePort
+            // cbOnlineVoicePort
             // 
-            this.cbVoicePort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbVoicePort.FormattingEnabled = true;
-            this.cbVoicePort.Location = new System.Drawing.Point(141, 143);
-            this.cbVoicePort.Name = "cbVoicePort";
-            this.cbVoicePort.Size = new System.Drawing.Size(114, 20);
-            this.cbVoicePort.TabIndex = 2;
+            this.cbOnlineVoicePort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOnlineVoicePort.FormattingEnabled = true;
+            this.cbOnlineVoicePort.Location = new System.Drawing.Point(172, 145);
+            this.cbOnlineVoicePort.Name = "cbOnlineVoicePort";
+            this.cbOnlineVoicePort.Size = new System.Drawing.Size(114, 20);
+            this.cbOnlineVoicePort.TabIndex = 2;
             // 
             // tbGoAppPath
             // 
-            this.tbGoAppPath.Location = new System.Drawing.Point(141, 111);
+            this.tbGoAppPath.Location = new System.Drawing.Point(172, 113);
             this.tbGoAppPath.Name = "tbGoAppPath";
             this.tbGoAppPath.Size = new System.Drawing.Size(439, 21);
             this.tbGoAppPath.TabIndex = 1;
             // 
             // tbVoiceWelcomeText
             // 
-            this.tbVoiceWelcomeText.Location = new System.Drawing.Point(141, 16);
+            this.tbVoiceWelcomeText.Location = new System.Drawing.Point(172, 18);
             this.tbVoiceWelcomeText.Name = "tbVoiceWelcomeText";
             this.tbVoiceWelcomeText.Size = new System.Drawing.Size(439, 21);
             this.tbVoiceWelcomeText.TabIndex = 1;
             // 
             // tbWebSiteUrl
             // 
-            this.tbWebSiteUrl.Location = new System.Drawing.Point(141, 80);
+            this.tbWebSiteUrl.Location = new System.Drawing.Point(172, 82);
             this.tbWebSiteUrl.Name = "tbWebSiteUrl";
             this.tbWebSiteUrl.Size = new System.Drawing.Size(439, 21);
             this.tbWebSiteUrl.TabIndex = 1;
             // 
             // tbPassword
             // 
-            this.tbPassword.Location = new System.Drawing.Point(141, 49);
+            this.tbPassword.Location = new System.Drawing.Point(172, 51);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.Size = new System.Drawing.Size(208, 21);
             this.tbPassword.TabIndex = 1;
@@ -203,7 +207,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(56, 207);
+            this.label6.Location = new System.Drawing.Point(87, 242);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(89, 12);
             this.label6.TabIndex = 0;
@@ -212,25 +216,25 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(44, 176);
+            this.label5.Location = new System.Drawing.Point(75, 211);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(101, 12);
             this.label5.TabIndex = 0;
-            this.label5.Text = "运动控制卡串口：";
+            this.label5.Text = "运动控制器串口：";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(68, 146);
+            this.label4.Location = new System.Drawing.Point(26, 148);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 12);
+            this.label4.Size = new System.Drawing.Size(149, 12);
             this.label4.TabIndex = 0;
-            this.label4.Text = "语音卡串口：";
+            this.label4.Text = "讯飞语音卡串口（在线）：";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(93, 19);
+            this.label7.Location = new System.Drawing.Point(124, 21);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 0;
@@ -239,7 +243,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 114);
+            this.label3.Location = new System.Drawing.Point(45, 116);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 12);
             this.label3.TabIndex = 0;
@@ -248,7 +252,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(80, 83);
+            this.label2.Location = new System.Drawing.Point(111, 85);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 0;
@@ -257,7 +261,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(68, 52);
+            this.label1.Location = new System.Drawing.Point(99, 54);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 0;
@@ -289,7 +293,7 @@
             this.panel1.Controls.Add(this.btnReadmeDir);
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 392);
+            this.panel1.Location = new System.Drawing.Point(0, 420);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(807, 46);
             this.panel1.TabIndex = 1;
@@ -331,11 +335,29 @@
             // 
             this.ofdApp.Filter = "*.Exe|*.exe";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(26, 178);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(149, 12);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "讯飞语音卡串口（离线）：";
+            // 
+            // cbOfflineVoicePort
+            // 
+            this.cbOfflineVoicePort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOfflineVoicePort.FormattingEnabled = true;
+            this.cbOfflineVoicePort.Location = new System.Drawing.Point(172, 175);
+            this.cbOfflineVoicePort.Name = "cbOfflineVoicePort";
+            this.cbOfflineVoicePort.Size = new System.Drawing.Size(114, 20);
+            this.cbOfflineVoicePort.TabIndex = 2;
+            // 
             // ConfigUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(807, 438);
+            this.ClientSize = new System.Drawing.Size(807, 466);
             this.Controls.Add(this.tcPage);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
@@ -374,7 +396,7 @@
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.TextBox tbGoAppPath;
         private System.Windows.Forms.ComboBox cbGoPort;
-        private System.Windows.Forms.ComboBox cbVoicePort;
+        private System.Windows.Forms.ComboBox cbOnlineVoicePort;
         private System.Windows.Forms.CheckedListBox clbGoTypes;
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.OpenFileDialog ofdApp;
@@ -382,5 +404,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown tbImageListPlayerSleepSeconds;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cbOfflineVoicePort;
+        private System.Windows.Forms.Label label9;
     }
 }
