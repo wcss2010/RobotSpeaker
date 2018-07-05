@@ -33,6 +33,12 @@ namespace RobotSpeaker.Controls
         public PictureBox LogoBox { get { return this.pbLogo; } }
 
         /// <summary>
+        /// Wifi图标
+        /// </summary>
+        [Browsable(false)]
+        public PictureBox WifiBox { get { return this.pbWifi; } }
+
+        /// <summary>
         /// 标题栏面板
         /// </summary>
         [Browsable(false)]
@@ -56,6 +62,18 @@ namespace RobotSpeaker.Controls
             set { TitleLabel.ForeColor = value; }
         }
 
+        public Font TimeTextFont 
+        {
+            get { return lblTime.Font; }
+            set { lblTime.Font = value; }
+        }
+
+        public Color TimeTextColor
+        {
+            get { return lblTime.ForeColor; }
+            set { lblTime.ForeColor = value; }
+        }
+
         public ContentFormBase()
         {
             InitializeComponent();
@@ -76,5 +94,10 @@ namespace RobotSpeaker.Controls
         /// </summary>
         /// <param name="e"></param>
         protected virtual void OnClickBackButton(EventArgs e) { }
+
+        private void trTimeUpdate_Tick(object sender, EventArgs e)
+        {
+            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ddd");
+        }
     }
 }

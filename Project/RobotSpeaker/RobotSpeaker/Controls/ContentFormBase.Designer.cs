@@ -28,12 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.plTopBar = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.pbWifi = new System.Windows.Forms.PictureBox();
             this.ibBack = new RobotSpeaker.Controls.ImageButton();
             this.lblEmpty = new System.Windows.Forms.Label();
             this.pbLogo = new System.Windows.Forms.PictureBox();
+            this.trTimeUpdate = new System.Windows.Forms.Timer(this.components);
             this.plTopBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbWifi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,6 +46,8 @@
             // 
             this.plTopBar.BackColor = System.Drawing.Color.Transparent;
             this.plTopBar.Controls.Add(this.lblTitle);
+            this.plTopBar.Controls.Add(this.lblTime);
+            this.plTopBar.Controls.Add(this.pbWifi);
             this.plTopBar.Controls.Add(this.ibBack);
             this.plTopBar.Controls.Add(this.lblEmpty);
             this.plTopBar.Controls.Add(this.pbLogo);
@@ -56,16 +63,45 @@
             this.lblTitle.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTitle.Location = new System.Drawing.Point(97, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(870, 64);
+            this.lblTitle.Size = new System.Drawing.Size(481, 64);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Title";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // lblTime
+            // 
+            this.lblTime.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblTime.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTime.Location = new System.Drawing.Point(578, 0);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(325, 64);
+            this.lblTime.TabIndex = 5;
+            this.lblTime.Text = "0000-00-00 00:00:00 XXX";
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pbWifi
+            // 
+            this.pbWifi.BackColor = System.Drawing.Color.Transparent;
+            this.pbWifi.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbWifi.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pbWifi.Location = new System.Drawing.Point(903, 0);
+            this.pbWifi.Name = "pbWifi";
+            this.pbWifi.Size = new System.Drawing.Size(64, 64);
+            this.pbWifi.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbWifi.TabIndex = 4;
+            this.pbWifi.TabStop = false;
+            // 
             // ibBack
             // 
+            this.ibBack.BottomText = "Text";
+            this.ibBack.BottomTextColor = System.Drawing.SystemColors.ControlText;
+            this.ibBack.BottomTextFont = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ibBack.BottomTextHeight = 0;
             this.ibBack.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ibBack.EnabledMouseDownAndMouseUp = true;
             this.ibBack.EnabledTextLabel = false;
             this.ibBack.FocusImage = null;
+            this.ibBack.IsPressed = false;
             this.ibBack.Location = new System.Drawing.Point(33, 0);
             this.ibBack.Name = "ibBack";
             this.ibBack.NoFocusImage = null;
@@ -89,8 +125,15 @@
             this.pbLogo.Location = new System.Drawing.Point(967, 0);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(64, 64);
+            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbLogo.TabIndex = 0;
             this.pbLogo.TabStop = false;
+            // 
+            // trTimeUpdate
+            // 
+            this.trTimeUpdate.Enabled = true;
+            this.trTimeUpdate.Interval = 500;
+            this.trTimeUpdate.Tick += new System.EventHandler(this.trTimeUpdate_Tick);
             // 
             // ContentFormBase
             // 
@@ -101,6 +144,7 @@
             this.Name = "ContentFormBase";
             this.Text = "ContentFormBase";
             this.plTopBar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbWifi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.ResumeLayout(false);
 
@@ -113,5 +157,8 @@
         private ImageButton ibBack;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblEmpty;
+        private System.Windows.Forms.PictureBox pbWifi;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Timer trTimeUpdate;
     }
 }

@@ -23,11 +23,13 @@ namespace RobotSpeaker.Forms
             base.OnLoad(e);
 
             TitleTextColor = Color.White;
+            TimeTextColor = Color.White;
             try
             {
                 BackButton.NoFocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\back1.png"));
                 BackButton.FocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\back2.png"));
                 LogoBox.Image = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\logo.png"));
+                WifiBox.Image = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\wifi.jpg"));
             }
             catch (Exception ex) { }
         }
