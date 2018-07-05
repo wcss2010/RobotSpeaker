@@ -102,7 +102,7 @@
             this.Name = "GoUI";
             this.Text = "GoUI";
             this.TitleText = "运动模式";
-            this.TitleTextColor = System.Drawing.Color.White;
+            this.TitleTextForeColor = System.Drawing.Color.White;
             this.Controls.SetChildIndex(this.plTabPanel, 0);
             this.plTabPanel.ResumeLayout(false);
             this.ResumeLayout(false);

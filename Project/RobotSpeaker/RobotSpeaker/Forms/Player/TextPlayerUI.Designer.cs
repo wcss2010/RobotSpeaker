@@ -49,7 +49,7 @@
             this.Name = "TextPlayerUI";
             this.Text = "TextPlayerUI";
             this.TitleText = "文本";
-            this.TitleTextColor = System.Drawing.Color.White;
+            this.TitleTextForeColor = System.Drawing.Color.White;
             this.Controls.SetChildIndex(this.txtContent, 0);
             this.ResumeLayout(false);
 

@@ -22,8 +22,8 @@ namespace RobotSpeaker.Forms
         {
             base.OnLoad(e);
 
-            TitleTextColor = Color.White;
-            TimeTextColor = Color.White;
+            TitleTextForeColor = Color.White;
+            TimeTextForeColor = Color.White;
             try
             {
                 BackButton.NoFocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\back1.png"));

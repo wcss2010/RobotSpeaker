@@ -149,7 +149,7 @@
             this.Name = "FaceUI";
             this.Text = "FaceUI";
             this.TitleText = "摄像模式";
-            this.TitleTextColor = System.Drawing.Color.White;
+            this.TitleTextForeColor = System.Drawing.Color.White;
             this.Controls.SetChildIndex(this.plContent, 0);
             this.plMiddleButtons.ResumeLayout(false);
             this.plContent.ResumeLayout(false);

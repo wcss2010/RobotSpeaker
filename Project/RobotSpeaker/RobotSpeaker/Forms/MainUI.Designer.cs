@@ -139,7 +139,7 @@
             this.Name = "MainFormUI";
             this.Text = "MainFormUI";
             this.TitleText = "";
-            this.TitleTextColor = System.Drawing.Color.White;
+            this.TitleTextForeColor = System.Drawing.Color.White;
             this.Controls.SetChildIndex(this.plTabPanel, 0);
             this.plTabPanel.ResumeLayout(false);
             this.ResumeLayout(false);

@@ -52,7 +52,7 @@
             this.Name = "VideoAndAudioPlayerUI";
             this.Text = "VideoAndAudioPlayerUI";
             this.TitleText = "音频与视频";
-            this.TitleTextColor = System.Drawing.Color.White;
+            this.TitleTextForeColor = System.Drawing.Color.White;
             this.Controls.SetChildIndex(this.player, 0);
             ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
             this.ResumeLayout(false);

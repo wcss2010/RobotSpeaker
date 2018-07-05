@@ -52,7 +52,7 @@
             this.Name = "ImagePlayerUI";
             this.Text = "ImagePlayerUI";
             this.TitleText = "图片";
-            this.TitleTextColor = System.Drawing.Color.White;
+            this.TitleTextForeColor = System.Drawing.Color.White;
             this.Controls.SetChildIndex(this.imageViewerEx, 0);
             this.ResumeLayout(false);
 

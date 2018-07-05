@@ -117,7 +117,7 @@
             this.Name = "AboutUI";
             this.Text = "AboutUI";
             this.TitleText = "业务介绍";
-            this.TitleTextColor = System.Drawing.Color.White;
+            this.TitleTextForeColor = System.Drawing.Color.White;
             this.Controls.SetChildIndex(this.plListBar, 0);
             this.Controls.SetChildIndex(this.plListContent, 0);
             this.plListBar.ResumeLayout(false);

@@ -86,7 +86,7 @@
             this.Name = "WebPlayerUI";
             this.Text = "WebPlayerUI";
             this.TitleText = "网页";
-            this.TitleTextColor = System.Drawing.Color.White;
+            this.TitleTextForeColor = System.Drawing.Color.White;
             this.Controls.SetChildIndex(this.plListBar, 0);
             this.Controls.SetChildIndex(this.web, 0);
             this.plListBar.ResumeLayout(false);

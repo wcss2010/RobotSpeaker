@@ -44,36 +44,92 @@ namespace RobotSpeaker.Controls
         [Browsable(false)]
         public Panel TitlePanel { get { return this.plTopBar; } }
 
+        /// <summary>
+        /// 标题文本
+        /// </summary>
         public string TitleText
         {
             get { return TitleLabel.Text; }
             set { TitleLabel.Text = value; }
         }
 
+        /// <summary>
+        /// 标题字体
+        /// </summary>
         public Font TitleTextFont
         {
             get { return TitleLabel.Font; }
             set { TitleLabel.Font = value; }
         }
 
-        public Color TitleTextColor
+        /// <summary>
+        /// 标题前景色
+        /// </summary>
+        public Color TitleTextForeColor
         {
             get { return TitleLabel.ForeColor; }
             set { TitleLabel.ForeColor = value; }
         }
 
+        /// <summary>
+        /// 时间字体
+        /// </summary>
         public Font TimeTextFont 
         {
             get { return lblTime.Font; }
             set { lblTime.Font = value; }
         }
 
-        public Color TimeTextColor
+        /// <summary>
+        /// 时间前景色
+        /// </summary>
+        public Color TimeTextForeColor
         {
             get { return lblTime.ForeColor; }
             set { lblTime.ForeColor = value; }
         }
 
+        /// <summary>
+        /// 是否显示时间
+        /// </summary>
+        public bool EnabledDisplayTime
+        {
+            get { return trTimeUpdate.Enabled; }
+            set { trTimeUpdate.Enabled = value; }
+        }
+
+        /// <summary>
+        /// 是否显示WifiLogo
+        /// </summary>
+        public bool EnabledDisplayWifiLogo
+        {
+            get { return WifiBox.Visible; }
+            set { WifiBox.Visible = value; }
+        }
+
+        [Browsable(false)]
+        public override string Text
+        {
+            get
+            {
+                return base.Text;
+            }
+            set
+            {
+                base.Text = value;
+            }
+        }
+
+        private string _customTimeFormat = "yyyy-MM-dd HH:mm:ss ddd";
+        /// <summary>
+        /// 自定义时间格式字符串
+        /// </summary>
+        public string CustomTimeFormat
+        {
+            get { return _customTimeFormat; }
+            set { _customTimeFormat = value; }
+        }
+        
         public ContentFormBase()
         {
             InitializeComponent();
@@ -97,7 +153,7 @@ namespace RobotSpeaker.Controls
 
         private void trTimeUpdate_Tick(object sender, EventArgs e)
         {
-            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ddd");
+            lblTime.Text = DateTime.Now.ToString(CustomTimeFormat);
         }
     }
 }

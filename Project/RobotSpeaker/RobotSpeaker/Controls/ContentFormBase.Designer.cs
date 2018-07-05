@@ -63,7 +63,7 @@
             this.lblTitle.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTitle.Location = new System.Drawing.Point(97, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(481, 64);
+            this.lblTitle.Size = new System.Drawing.Size(469, 64);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Title";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -72,11 +72,10 @@
             // 
             this.lblTime.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblTime.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblTime.Location = new System.Drawing.Point(578, 0);
+            this.lblTime.Location = new System.Drawing.Point(566, 0);
             this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(325, 64);
+            this.lblTime.Size = new System.Drawing.Size(337, 64);
             this.lblTime.TabIndex = 5;
-            this.lblTime.Text = "0000-00-00 00:00:00 XXX";
             this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pbWifi

@@ -50,7 +50,7 @@
             this.Name = "VoiceUI";
             this.Text = "VoiceUI";
             this.TitleText = "语音对话";
-            this.TitleTextColor = System.Drawing.Color.White;
+            this.TitleTextForeColor = System.Drawing.Color.White;
             this.Controls.SetChildIndex(this.cpChatContent, 0);
             this.ResumeLayout(false);
 
