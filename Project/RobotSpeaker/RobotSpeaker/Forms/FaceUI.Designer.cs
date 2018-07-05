@@ -87,7 +87,7 @@
             // 
             this.btnGetPic.BottomText = "拍    照";
             this.btnGetPic.BottomTextColor = System.Drawing.Color.White;
-            this.btnGetPic.BottomTextFont = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnGetPic.BottomTextFont = new System.Drawing.Font("微软雅黑", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnGetPic.BottomTextHeight = 35;
             this.btnGetPic.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnGetPic.EnabledMouseDownAndMouseUp = true;
@@ -105,7 +105,7 @@
             // 
             this.btnRecord.BottomText = "开始录像";
             this.btnRecord.BottomTextColor = System.Drawing.Color.White;
-            this.btnRecord.BottomTextFont = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnRecord.BottomTextFont = new System.Drawing.Font("微软雅黑", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnRecord.BottomTextHeight = 35;
             this.btnRecord.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnRecord.EnabledMouseDownAndMouseUp = true;
