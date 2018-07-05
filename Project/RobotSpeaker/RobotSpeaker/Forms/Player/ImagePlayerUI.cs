@@ -16,13 +16,15 @@ namespace RobotSpeaker.Forms.Player
         public ImagePlayerUI(string imageFile)
         {
             InitializeComponent();
+
+            ImgUrl = imageFile;
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
-            imageViewerEx.SetImagePath(SuperObject.ReadmeDir);
+            pbView.Image = Image.FromFile(ImgUrl);
         }
 
         protected override void OnClickBackButton(EventArgs e)
@@ -31,5 +33,7 @@ namespace RobotSpeaker.Forms.Player
 
             Close();
         }
+
+        public string ImgUrl { get; set; }
     }
 }
