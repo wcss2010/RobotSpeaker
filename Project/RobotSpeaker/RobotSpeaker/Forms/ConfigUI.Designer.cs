@@ -35,12 +35,14 @@
             this.btnSelect = new System.Windows.Forms.Button();
             this.clbGoTypes = new System.Windows.Forms.CheckedListBox();
             this.cbGoPort = new System.Windows.Forms.ComboBox();
+            this.cbOfflineVoicePort = new System.Windows.Forms.ComboBox();
             this.cbOnlineVoicePort = new System.Windows.Forms.ComboBox();
             this.tbGoAppPath = new System.Windows.Forms.TextBox();
             this.tbVoiceWelcomeText = new System.Windows.Forms.TextBox();
             this.tbWebSiteUrl = new System.Windows.Forms.TextBox();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -54,8 +56,7 @@
             this.btnReadmeDir = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.ofdApp = new System.Windows.Forms.OpenFileDialog();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cbOfflineVoicePort = new System.Windows.Forms.ComboBox();
+            this.btnExitApp = new System.Windows.Forms.Button();
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).BeginInit();
@@ -167,6 +168,15 @@
             this.cbGoPort.Size = new System.Drawing.Size(114, 20);
             this.cbGoPort.TabIndex = 2;
             // 
+            // cbOfflineVoicePort
+            // 
+            this.cbOfflineVoicePort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOfflineVoicePort.FormattingEnabled = true;
+            this.cbOfflineVoicePort.Location = new System.Drawing.Point(172, 175);
+            this.cbOfflineVoicePort.Name = "cbOfflineVoicePort";
+            this.cbOfflineVoicePort.Size = new System.Drawing.Size(114, 20);
+            this.cbOfflineVoicePort.TabIndex = 2;
+            // 
             // cbOnlineVoicePort
             // 
             this.cbOnlineVoicePort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -212,6 +222,15 @@
             this.label6.Size = new System.Drawing.Size(89, 12);
             this.label6.TabIndex = 0;
             this.label6.Text = "当前运动状态：";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(26, 178);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(149, 12);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "讯飞语音卡串口（离线）：";
             // 
             // label5
             // 
@@ -272,7 +291,7 @@
             this.tpVoice.Location = new System.Drawing.Point(4, 22);
             this.tpVoice.Name = "tpVoice";
             this.tpVoice.Padding = new System.Windows.Forms.Padding(3);
-            this.tpVoice.Size = new System.Drawing.Size(799, 366);
+            this.tpVoice.Size = new System.Drawing.Size(799, 394);
             this.tpVoice.TabIndex = 1;
             this.tpVoice.Text = "语音问答题库";
             this.tpVoice.UseVisualStyleBackColor = true;
@@ -282,13 +301,14 @@
             this.tpGo.Location = new System.Drawing.Point(4, 22);
             this.tpGo.Name = "tpGo";
             this.tpGo.Padding = new System.Windows.Forms.Padding(3);
-            this.tpGo.Size = new System.Drawing.Size(799, 366);
+            this.tpGo.Size = new System.Drawing.Size(799, 394);
             this.tpGo.TabIndex = 2;
             this.tpGo.Text = "运动指令库";
             this.tpGo.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnExitApp);
             this.panel1.Controls.Add(this.btnCameraDir);
             this.panel1.Controls.Add(this.btnReadmeDir);
             this.panel1.Controls.Add(this.btnSave);
@@ -335,23 +355,16 @@
             // 
             this.ofdApp.Filter = "*.Exe|*.exe";
             // 
-            // label9
+            // btnExitApp
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(26, 178);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(149, 12);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "讯飞语音卡串口（离线）：";
-            // 
-            // cbOfflineVoicePort
-            // 
-            this.cbOfflineVoicePort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbOfflineVoicePort.FormattingEnabled = true;
-            this.cbOfflineVoicePort.Location = new System.Drawing.Point(172, 175);
-            this.cbOfflineVoicePort.Name = "cbOfflineVoicePort";
-            this.cbOfflineVoicePort.Size = new System.Drawing.Size(114, 20);
-            this.cbOfflineVoicePort.TabIndex = 2;
+            this.btnExitApp.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnExitApp.Location = new System.Drawing.Point(150, 0);
+            this.btnExitApp.Name = "btnExitApp";
+            this.btnExitApp.Size = new System.Drawing.Size(75, 46);
+            this.btnExitApp.TabIndex = 3;
+            this.btnExitApp.Text = "退出软件";
+            this.btnExitApp.UseVisualStyleBackColor = true;
+            this.btnExitApp.Click += new System.EventHandler(this.btnExitApp_Click);
             // 
             // ConfigUI
             // 
@@ -406,5 +419,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cbOfflineVoicePort;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnExitApp;
     }
 }

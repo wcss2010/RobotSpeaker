@@ -172,5 +172,13 @@ namespace RobotSpeaker.Forms
                 }
             }
         }
+
+        private void btnExitApp_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("真的要退出吗？", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
     }
 }

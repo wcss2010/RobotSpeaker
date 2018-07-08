@@ -22,6 +22,9 @@ namespace RobotSpeaker.Forms
         {
             base.OnLoad(e);
 
+            //打开服务
+            DataService.Open();
+
             plTabPanel.Top = (Screen.PrimaryScreen.Bounds.Height - plTabPanel.Height) / 2;
             plTabPanel.Left = (Screen.PrimaryScreen.Bounds.Width - plTabPanel.Width) / 2;
 
@@ -42,6 +45,13 @@ namespace RobotSpeaker.Forms
 
             ibSetting.NoFocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\set1.png"));
             ibSetting.FocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\set2.png"));
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            DataService.Close();
         }
 
         protected override void OnClickBackButton(EventArgs e)

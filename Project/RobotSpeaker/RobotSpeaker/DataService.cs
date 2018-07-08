@@ -56,5 +56,21 @@ namespace RobotSpeaker
         {
             
         }
+
+        /// <summary>
+        /// 打开服务 
+        /// </summary>
+        public static void Open()
+        {
+            
+        }
+
+        /// <summary>
+        /// 关闭服务
+        /// </summary>
+        public static void Close()
+        {
+           
+        }
     }
 }
