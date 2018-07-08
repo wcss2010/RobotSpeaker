@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Drawing;
 
-namespace RobotSpeaker.Forms.JoyAPI
+namespace JoyKeys.DirectInputJoy
 {
     public class Joystick_P : IMessageFilter, IDisposable
     {

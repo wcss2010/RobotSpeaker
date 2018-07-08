@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace RobotSpeaker.Forms.JoyAPI
+namespace JoyKeys.DirectInputJoy
 {
     /// <summary>
     /// 游戏手柄的相关API

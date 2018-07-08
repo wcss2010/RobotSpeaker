@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Diagnostics;
 
-namespace RobotSpeaker.Forms.JoyAPI
+namespace JoyKeys.DirectInputJoy
 {
     /// <summary>
     /// 游戏手柄类
