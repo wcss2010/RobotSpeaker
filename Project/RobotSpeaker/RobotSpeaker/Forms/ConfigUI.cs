@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RobotSpeaker.Forms.JoyAPI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,16 @@ namespace RobotSpeaker.Forms
 {
     public partial class ConfigUI : Form
     {
+        /// <summary>
+        /// 手柄按键状态
+        /// </summary>
+        public JoystickStateInfo JoystickStateInfo { get { return jsijoystickInfo; } }
+
         public ConfigUI()
         {
             InitializeComponent();
+
+            DataService.ConfigUIObj = this;
 
             foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
             {

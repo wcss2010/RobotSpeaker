@@ -30,6 +30,7 @@
         {
             this.tcPage = new System.Windows.Forms.TabControl();
             this.tpNormal = new System.Windows.Forms.TabPage();
+            this.jsijoystickInfo = new RobotSpeaker.Forms.JoyAPI.JoystickStateInfo();
             this.tbImageListPlayerSleepSeconds = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.btnSelect = new System.Windows.Forms.Button();
@@ -52,11 +53,12 @@
             this.tpVoice = new System.Windows.Forms.TabPage();
             this.tpGo = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnExitApp = new System.Windows.Forms.Button();
             this.btnCameraDir = new System.Windows.Forms.Button();
             this.btnReadmeDir = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.ofdApp = new System.Windows.Forms.OpenFileDialog();
-            this.btnExitApp = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).BeginInit();
@@ -72,11 +74,13 @@
             this.tcPage.Location = new System.Drawing.Point(0, 0);
             this.tcPage.Name = "tcPage";
             this.tcPage.SelectedIndex = 0;
-            this.tcPage.Size = new System.Drawing.Size(807, 420);
+            this.tcPage.Size = new System.Drawing.Size(807, 533);
             this.tcPage.TabIndex = 0;
             // 
             // tpNormal
             // 
+            this.tpNormal.Controls.Add(this.jsijoystickInfo);
+            this.tpNormal.Controls.Add(this.label10);
             this.tpNormal.Controls.Add(this.tbImageListPlayerSleepSeconds);
             this.tpNormal.Controls.Add(this.label8);
             this.tpNormal.Controls.Add(this.btnSelect);
@@ -99,10 +103,17 @@
             this.tpNormal.Location = new System.Drawing.Point(4, 22);
             this.tpNormal.Name = "tpNormal";
             this.tpNormal.Padding = new System.Windows.Forms.Padding(3);
-            this.tpNormal.Size = new System.Drawing.Size(799, 394);
+            this.tpNormal.Size = new System.Drawing.Size(799, 507);
             this.tpNormal.TabIndex = 0;
             this.tpNormal.Text = "基础配置";
             this.tpNormal.UseVisualStyleBackColor = true;
+            // 
+            // jsijoystickInfo
+            // 
+            this.jsijoystickInfo.Location = new System.Drawing.Point(166, 337);
+            this.jsijoystickInfo.Name = "jsijoystickInfo";
+            this.jsijoystickInfo.Size = new System.Drawing.Size(416, 167);
+            this.jsijoystickInfo.TabIndex = 7;
             // 
             // tbImageListPlayerSleepSeconds
             // 
@@ -291,7 +302,7 @@
             this.tpVoice.Location = new System.Drawing.Point(4, 22);
             this.tpVoice.Name = "tpVoice";
             this.tpVoice.Padding = new System.Windows.Forms.Padding(3);
-            this.tpVoice.Size = new System.Drawing.Size(799, 394);
+            this.tpVoice.Size = new System.Drawing.Size(799, 507);
             this.tpVoice.TabIndex = 1;
             this.tpVoice.Text = "语音问答题库";
             this.tpVoice.UseVisualStyleBackColor = true;
@@ -301,7 +312,7 @@
             this.tpGo.Location = new System.Drawing.Point(4, 22);
             this.tpGo.Name = "tpGo";
             this.tpGo.Padding = new System.Windows.Forms.Padding(3);
-            this.tpGo.Size = new System.Drawing.Size(799, 394);
+            this.tpGo.Size = new System.Drawing.Size(799, 507);
             this.tpGo.TabIndex = 2;
             this.tpGo.Text = "运动指令库";
             this.tpGo.UseVisualStyleBackColor = true;
@@ -313,10 +324,21 @@
             this.panel1.Controls.Add(this.btnReadmeDir);
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 420);
+            this.panel1.Location = new System.Drawing.Point(0, 533);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(807, 46);
             this.panel1.TabIndex = 1;
+            // 
+            // btnExitApp
+            // 
+            this.btnExitApp.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnExitApp.Location = new System.Drawing.Point(150, 0);
+            this.btnExitApp.Name = "btnExitApp";
+            this.btnExitApp.Size = new System.Drawing.Size(75, 46);
+            this.btnExitApp.TabIndex = 3;
+            this.btnExitApp.Text = "退出软件";
+            this.btnExitApp.UseVisualStyleBackColor = true;
+            this.btnExitApp.Click += new System.EventHandler(this.btnExitApp_Click);
             // 
             // btnCameraDir
             // 
@@ -355,22 +377,20 @@
             // 
             this.ofdApp.Filter = "*.Exe|*.exe";
             // 
-            // btnExitApp
+            // label10
             // 
-            this.btnExitApp.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnExitApp.Location = new System.Drawing.Point(150, 0);
-            this.btnExitApp.Name = "btnExitApp";
-            this.btnExitApp.Size = new System.Drawing.Size(75, 46);
-            this.btnExitApp.TabIndex = 3;
-            this.btnExitApp.Text = "退出软件";
-            this.btnExitApp.UseVisualStyleBackColor = true;
-            this.btnExitApp.Click += new System.EventHandler(this.btnExitApp_Click);
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(86, 406);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(89, 12);
+            this.label10.TabIndex = 8;
+            this.label10.Text = "手柄状态查看：";
             // 
             // ConfigUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(807, 466);
+            this.ClientSize = new System.Drawing.Size(807, 579);
             this.Controls.Add(this.tcPage);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
@@ -420,5 +440,7 @@
         private System.Windows.Forms.ComboBox cbOfflineVoicePort;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnExitApp;
+        private JoyAPI.JoystickStateInfo jsijoystickInfo;
+        private System.Windows.Forms.Label label10;
     }
 }

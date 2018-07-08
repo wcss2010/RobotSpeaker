@@ -80,18 +80,11 @@ namespace RobotSpeaker
 
         }
 
-        private static string lastJoystickButton = "";
-        static void JoystickService_JoystickPressEvent(object sender, JoystickPressEventArgs args)
+        private static void JoystickService_JoystickPressEvent(object sender, JoystickPressEventArgs args)
         {
-            if (VoiceUIObj != null) 
+            if (ConfigUIObj != null) 
             {
-                string buttonStr = args.ButtonType + "";
-                if (lastJoystickButton != buttonStr)
-                {
-                    lastJoystickButton = buttonStr;
-
-                    VoiceUIObj.ChatPanel.AddUserMsg(lastJoystickButton);
-                }
+                ConfigUIObj.JoystickStateInfo.ProcessorJoystickButtons(args);
             }
         }
 
