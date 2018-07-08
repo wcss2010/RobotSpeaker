@@ -23,7 +23,7 @@ namespace RobotSpeaker.Forms
             base.OnLoad(e);
 
             //打开服务
-            DataService.Open();
+            DataService.Open(this);
 
             plTabPanel.Top = (Screen.PrimaryScreen.Bounds.Height - plTabPanel.Height) / 2;
             plTabPanel.Left = (Screen.PrimaryScreen.Bounds.Width - plTabPanel.Width) / 2;
