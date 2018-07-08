@@ -203,5 +203,10 @@ namespace RobotSpeaker.Controls
                 IsPressed = false;
             }
         }
+
+        public void PerformClick()
+        {
+            OnClick(new EventArgs());
+        }
     }
 }

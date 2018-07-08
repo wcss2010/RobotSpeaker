@@ -68,15 +68,6 @@
     <Reference Include="AForge.Video.FFMPEG">
       <HintPath>..\..\..\Lib\AForge\AForge.Video.FFMPEG.dll</HintPath>
     </Reference>
-    <Reference Include="AxInterop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Lib\AxInterop.WMPLib.dll</HintPath>
-    </Reference>
-    <Reference Include="Interop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>..\..\..\Lib\Interop.WMPLib.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -216,6 +207,13 @@
     <Compile Include="Forms\Player\WebPlayerUI.Designer.cs">
       <DependentUpon>WebPlayerUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\VideoPlayerForVlc\VlcPlayerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\VideoPlayerForVlc\VlcPlayerControl.designer.cs">
+      <DependentUpon>VlcPlayerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\VideoPlayerForVlc\VlcPlayerCore.cs" />
     <Compile Include="Forms\VoiceUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -282,6 +280,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Player\WebPlayerUI.resx">
       <DependentUpon>WebPlayerUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\VideoPlayerForVlc\VlcPlayerControl.resx">
+      <DependentUpon>VlcPlayerControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\VoiceUI.resx">
       <DependentUpon>VoiceUI.cs</DependentUpon>

@@ -28,20 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoAndAudioPlayerUI));
-            this.player = new AxWMPLib.AxWindowsMediaPlayer();
-            ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
+            this.player = new VLCPlayerLib.VlcPlayerControl();
             this.SuspendLayout();
             // 
             // player
             // 
             this.player.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.player.Enabled = true;
+            this.player.EnabledDisplayPlayerControlPanel = true;
             this.player.Location = new System.Drawing.Point(0, 64);
+            this.player.MediaUrl = null;
             this.player.Name = "player";
-            this.player.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("player.OcxState")));
             this.player.Size = new System.Drawing.Size(1031, 423);
             this.player.TabIndex = 1;
+            this.player.VlcPluginPath = null;
             // 
             // VideoAndAudioPlayerUI
             // 
@@ -49,18 +48,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1031, 487);
             this.Controls.Add(this.player);
+            this.EnabledDisplayWifiLogo = true;
             this.Name = "VideoAndAudioPlayerUI";
             this.Text = "VideoAndAudioPlayerUI";
+            this.TimeTextForeColor = System.Drawing.Color.White;
             this.TitleText = "音频与视频";
             this.TitleTextForeColor = System.Drawing.Color.White;
             this.Controls.SetChildIndex(this.player, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private AxWMPLib.AxWindowsMediaPlayer player;
+        private VLCPlayerLib.VlcPlayerControl player;
+
     }
 }

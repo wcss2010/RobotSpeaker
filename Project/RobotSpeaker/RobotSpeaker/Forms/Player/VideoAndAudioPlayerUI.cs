@@ -24,9 +24,10 @@ namespace RobotSpeaker.Forms.Player
         {
             base.OnLoad(e);
 
+            player.InitPlayer();
             if (System.IO.File.Exists(VideoUrl))
             {
-                player.URL = VideoUrl;
+                player.SetMediaUrl(VideoUrl);
             }
         }
 
