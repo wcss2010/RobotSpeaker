@@ -136,7 +136,6 @@
     <Compile Include="Forms\AiuiAPI\AIUIConnection.cs" />
     <Compile Include="Forms\AiuiAPI\PacketBuilder.cs" />
     <Compile Include="Forms\AiuiAPI\CommandConst.cs" />
-    <Compile Include="Forms\AiuiAPI\SerialPortExForAIUI.cs" />
     <Compile Include="Forms\AiuiAPI\Utils.cs" />
     <Compile Include="Forms\CameraAPI\AviCapture.cs" />
     <Compile Include="Forms\CameraAPI\Video.cs" />

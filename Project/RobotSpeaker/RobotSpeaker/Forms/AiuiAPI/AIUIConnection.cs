@@ -6,6 +6,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Runtime.Remoting.Contexts;
 using System.Windows.Forms;
+using SerialPortLib;
 
 namespace AIUISerials
 {
@@ -23,11 +24,11 @@ namespace AIUISerials
 
     public class AIUIConnection
     {
-        private SerialPortExForAIUI _serialPort = null;
+        private SerialPortInput _serialPort = null;
         /// <summary>
         /// 串口连接
         /// </summary>
-        public SerialPortExForAIUI SerialPort
+        public SerialPortInput SerialPort
         {
             get { return _serialPort; }
         }
@@ -56,18 +57,21 @@ namespace AIUISerials
             }
         }
 
-        public AIUIConnection(string port)
+        public AIUIConnection(string comPort)
         {
-            _serialPort = new SerialPortExForAIUI(port);
-            _serialPort.DataReceived += comm_DataReceived;
+            _serialPort = new SerialPortInput();
+            _serialPort.SetPort(comPort, 115200, System.IO.Ports.StopBits.One, System.IO.Ports.Parity.None);
+            _serialPort.MessageReceived += _serialPort_MessageReceived;
+            
         }
 
-        void comm_DataReceived(byte[] readBuffer)
+        void _serialPort_MessageReceived(object sender, MessageReceivedEventArgs args)
         {
+            byte[] readBuffer = args.Data;
+
             for (int i = 0; i < readBuffer.Length; i++)
             {
                 dataList.Add(readBuffer[i]);
-
                 if (dataList.Count == 5)
                 {
                     if (dataList[0] == 0xa5 && dataList[1] == 0x01)
@@ -98,11 +102,12 @@ namespace AIUISerials
                                 SendConfirmMessage();
                             }
 
+                            //处理消息
                             dealMsg(dataList, serailDataLength);
                         }
                     }
 
-                    //清空缓冲区
+                    //清理缓冲区
                     ClearDataList();
                 }
             }
@@ -135,52 +140,52 @@ namespace AIUISerials
 
         public void SendShake()
         {
-            SerialPort.WritePort(packetBuilder.buildShakePacket().ToArray());
+            SerialPort.SendMessage(packetBuilder.buildShakePacket().ToArray());
         }
 
         public void SendConfirmMessage()
         {
-            SerialPort.WritePort(packetBuilder.buildConfirmPacket().ToArray());
+            SerialPort.SendMessage(packetBuilder.buildConfirmPacket().ToArray());
         }
 
         public void SendTTSMessage(string text)
         {
-            SerialPort.WritePort(packetBuilder.buildTtsPacket(text).ToArray());
+            SerialPort.SendMessage(packetBuilder.buildTtsPacket(text).ToArray());
         }
 
         public void ConfigWifiMessage(string config)
         {
-            SerialPort.WritePort(packetBuilder.buildWifiCfgPacket(config).ToArray());
+            SerialPort.SendMessage(packetBuilder.buildWifiCfgPacket(config).ToArray());
         }
 
         public void SendAIUIConfigMessage(string config)
         {
-            SerialPort.WritePort(packetBuilder.buildAIUIConfigPacket(config).ToArray());
+            SerialPort.SendMessage(packetBuilder.buildAIUIConfigPacket(config).ToArray());
         }
 
         public void SendLauchVoiceMessage(Boolean isOn)
         {
-            SerialPort.WritePort(packetBuilder.buildVoiceControlPacket(isOn).ToArray());
+            SerialPort.SendMessage(packetBuilder.buildVoiceControlPacket(isOn).ToArray());
         }
 
         public void SendSmartConfigMessage(Boolean isOn)
         {
-            SerialPort.WritePort(packetBuilder.buildSmartConfigPacket(isOn).ToArray());
+            SerialPort.SendMessage(packetBuilder.buildSmartConfigPacket(isOn).ToArray());
         }
 
         public void SendWakeUpMessage(Boolean isReset)
         {
-            SerialPort.WritePort(packetBuilder.buildResetWakePacket(isReset).ToArray());
+            SerialPort.SendMessage(packetBuilder.buildResetWakePacket(isReset).ToArray());
         }
 
         public void SendCustomMessage(byte[] data)
         {
-            SerialPort.WritePort(packetBuilder.buildCustomDataPacket(data).ToArray());
+            SerialPort.SendMessage(packetBuilder.buildCustomDataPacket(data).ToArray());
         }
 
         public void SendCmd(string sendCmd)
         {
-            SerialPort.WritePort(packetBuilder.buildCmdPacket(sendCmd).ToArray());
+            SerialPort.SendMessage(packetBuilder.buildCmdPacket(sendCmd).ToArray());
         }
     }
 }
