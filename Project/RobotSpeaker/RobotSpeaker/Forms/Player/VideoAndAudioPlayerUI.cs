@@ -45,6 +45,13 @@ namespace RobotSpeaker.Forms.Player
             Close();
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            PlayerCore.VlcPlayerCore.Stop();
+        }
+
         public string VideoUrl { get; set; }
     }
 }
