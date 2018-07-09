@@ -188,5 +188,11 @@ namespace RobotSpeaker.Forms
                 Application.Exit();
             }
         }
+
+        private void btnInitAIUI_Click(object sender, EventArgs e)
+        {
+            AIUIInitUI aiui = new AIUIInitUI();
+            aiui.ShowDialog();
+        }
     }
 }

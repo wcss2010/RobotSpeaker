@@ -31,6 +31,7 @@
             this.tcPage = new System.Windows.Forms.TabControl();
             this.tpNormal = new System.Windows.Forms.TabPage();
             this.jsijoystickInfo = new RobotSpeaker.Forms.JoyAPI.JoystickStateInfo();
+            this.label10 = new System.Windows.Forms.Label();
             this.tbImageListPlayerSleepSeconds = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.btnSelect = new System.Windows.Forms.Button();
@@ -58,7 +59,7 @@
             this.btnReadmeDir = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.ofdApp = new System.Windows.Forms.OpenFileDialog();
-            this.label10 = new System.Windows.Forms.Label();
+            this.btnInitAIUI = new System.Windows.Forms.Button();
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).BeginInit();
@@ -114,6 +115,15 @@
             this.jsijoystickInfo.Name = "jsijoystickInfo";
             this.jsijoystickInfo.Size = new System.Drawing.Size(416, 167);
             this.jsijoystickInfo.TabIndex = 7;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(86, 406);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(89, 12);
+            this.label10.TabIndex = 8;
+            this.label10.Text = "手柄状态查看：";
             // 
             // tbImageListPlayerSleepSeconds
             // 
@@ -319,10 +329,11 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnSave);
             this.panel1.Controls.Add(this.btnExitApp);
+            this.panel1.Controls.Add(this.btnInitAIUI);
             this.panel1.Controls.Add(this.btnCameraDir);
             this.panel1.Controls.Add(this.btnReadmeDir);
-            this.panel1.Controls.Add(this.btnSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 533);
             this.panel1.Name = "panel1";
@@ -332,7 +343,7 @@
             // btnExitApp
             // 
             this.btnExitApp.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnExitApp.Location = new System.Drawing.Point(150, 0);
+            this.btnExitApp.Location = new System.Drawing.Point(225, 0);
             this.btnExitApp.Name = "btnExitApp";
             this.btnExitApp.Size = new System.Drawing.Size(75, 46);
             this.btnExitApp.TabIndex = 3;
@@ -377,14 +388,16 @@
             // 
             this.ofdApp.Filter = "*.Exe|*.exe";
             // 
-            // label10
+            // btnInitAIUI
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(86, 406);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(89, 12);
-            this.label10.TabIndex = 8;
-            this.label10.Text = "手柄状态查看：";
+            this.btnInitAIUI.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnInitAIUI.Location = new System.Drawing.Point(150, 0);
+            this.btnInitAIUI.Name = "btnInitAIUI";
+            this.btnInitAIUI.Size = new System.Drawing.Size(75, 46);
+            this.btnInitAIUI.TabIndex = 4;
+            this.btnInitAIUI.Text = "AIUI测试";
+            this.btnInitAIUI.UseVisualStyleBackColor = true;
+            this.btnInitAIUI.Click += new System.EventHandler(this.btnInitAIUI_Click);
             // 
             // ConfigUI
             // 
@@ -442,5 +455,6 @@
         private System.Windows.Forms.Button btnExitApp;
         private JoyAPI.JoystickStateInfo jsijoystickInfo;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnInitAIUI;
     }
 }
