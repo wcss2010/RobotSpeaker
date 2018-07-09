@@ -1,4 +1,5 @@
-﻿using JoyKeys.DirectInputJoy;
+﻿using AIUISerials;
+using JoyKeys.DirectInputJoy;
 using RobotSpeaker.Forms;
 using RobotSpeaker.Forms.Player;
 using System;
@@ -70,6 +71,11 @@ namespace RobotSpeaker
         private static JoystickService _joystickServiceObj = new JoystickService();
 
         /// <summary>
+        /// AIUI服务
+        /// </summary>
+        private static AIUIService _aiuiService = new AIUIService();
+
+        /// <summary>
         /// 初始化
         /// </summary>
         public static void Init()
@@ -86,7 +92,8 @@ namespace RobotSpeaker
             _joystickServiceObj.JoystickPressEvent += JoystickService_JoystickPressEvent;
             _joystickServiceObj.Open(main);
 
-
+            //打开语音服务
+            _aiuiService.Open();
         }
 
         private static void JoystickService_JoystickPressEvent(object sender, JoystickPressEventArgs args)
@@ -104,6 +111,9 @@ namespace RobotSpeaker
         {
             //关闭手柄服务
             _joystickServiceObj.Close();
+
+            //关闭语音服务
+            _aiuiService.Close();
         }
     }
 
@@ -363,5 +373,44 @@ namespace RobotSpeaker
     public enum JoystickRunningModeType
     {
         AutoScan, ReceiveOnly
+    }
+
+    /// <summary>
+    /// AIUI监听服务
+    /// </summary>
+    public class AIUIService
+    {
+        private AIUIConnection _aiuiConnection = null;
+        /// <summary>
+        /// AIUI连接
+        /// </summary>
+        public AIUIConnection AiuiConnection
+        {
+            get { return _aiuiConnection; }
+        }
+
+        public void Open()
+        {
+            //先关闭之前的
+            Close();
+
+            _aiuiConnection = new AIUIConnection(SuperObject.Config.OnlineVoicePort);
+            _aiuiConnection.AIUIConnectionReceivedEvent += _aiuiConnection_AIUIConnectionReceivedEvent;
+            _aiuiConnection.SerialPort.Connect();
+        }
+
+        void _aiuiConnection_AIUIConnectionReceivedEvent(object sender, AIUIConnectionReceivedEventArgs args)
+        {
+            System.Console.WriteLine(args.Json);
+        }
+
+        public void Close()
+        {
+            if (_aiuiConnection != null)
+            {
+                _aiuiConnection.SerialPort.Disconnect();
+            }
+        }
+
     }
 }
