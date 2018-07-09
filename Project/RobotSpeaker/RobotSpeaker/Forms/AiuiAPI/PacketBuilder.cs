@@ -84,7 +84,7 @@ namespace AIUISerials
 
         public List<byte> buildTtsPacket(string text)
         {
-            string data = RequestConstant.START_TTS.Replace("******", text);
+            string data = CommandConst.START_TTS.Replace("******", text);
             UTF8Encoding utf8 = new UTF8Encoding();
             Byte[] encodedBytes = utf8.GetBytes(data);
 
@@ -164,7 +164,7 @@ namespace AIUISerials
         public List<byte> buildAIUIConfigPacket(string config)
         {
             string[] cfg = config.Split('|');
-            string aiui_config_msg = RequestConstant.AIUI_CONFIG_MESSAGE.Replace("MYAPPID", cfg[0]);
+            string aiui_config_msg = CommandConst.AIUI_CONFIG_MESSAGE.Replace("MYAPPID", cfg[0]);
             aiui_config_msg = aiui_config_msg.Replace("MYKEY", cfg[1]);
             aiui_config_msg = aiui_config_msg.Replace("MYSCENE", cfg[2]);
             if (cfg[3].Equals("Checked"))
@@ -204,7 +204,7 @@ namespace AIUISerials
 
         public List<byte> buildVoiceControlPacket(Boolean isOn)
         {
-            string aiui_config_msg = RequestConstant.VOICE_CONTROL_MESSAGE;
+            string aiui_config_msg = CommandConst.VOICE_CONTROL_MESSAGE;
             if (isOn)
             {
                 aiui_config_msg = aiui_config_msg.Replace("MYVOICE", "true");
@@ -242,7 +242,7 @@ namespace AIUISerials
 
         public List<byte> buildResetWakePacket(Boolean isResetWake)
         {
-            string msg = RequestConstant.RESET_WAKE_MESSAGE;
+            string msg = CommandConst.RESET_WAKE_MESSAGE;
             if (isResetWake)
             {
                 msg = msg.Replace("MY_MSG_TYPE", "8");
@@ -280,7 +280,7 @@ namespace AIUISerials
 
         public List<byte> buildSmartConfigPacket(Boolean isOn)
         {
-            string smart_config = RequestConstant.SMART_CONFIG_MESSAGE;
+            string smart_config = CommandConst.SMART_CONFIG_MESSAGE;
 
             if (isOn)
             {
@@ -319,7 +319,7 @@ namespace AIUISerials
 
         public List<byte> buildACKPacket()
         {
-            string s = RequestConstant.ACK_MESSAGE;
+            string s = CommandConst.ACK_MESSAGE;
 
 
             UTF8Encoding utf8 = new UTF8Encoding();
