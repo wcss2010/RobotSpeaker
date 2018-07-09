@@ -47,7 +47,7 @@ namespace AIUISerials
         {
             get
             {
-                return serialPort.IsOpen;
+                return _serialPort.IsOpen;
             }
         }
 
@@ -75,9 +75,9 @@ namespace AIUISerials
         {
             while (_keepReading)
             {
-                if (serialPort.IsOpen)
+                if (_serialPort.IsOpen)
                 {
-                    int count = serialPort.BytesToRead;
+                    int count = _serialPort.BytesToRead;
                     if (count > 0)
                     {
                         byte[] readBuffer = new byte[count];
@@ -85,7 +85,7 @@ namespace AIUISerials
                         try
                         {
                             Application.DoEvents();
-                            serialPort.Read(readBuffer, 0, count);
+                            _serialPort.Read(readBuffer, 0, count);
                             if (DataReceived != null)
                                 DataReceived(readBuffer);
 
@@ -105,8 +105,8 @@ namespace AIUISerials
         public void Open()
         {
             Close();
-            serialPort.Open();
-            if (serialPort.IsOpen)
+            _serialPort.Open();
+            if (_serialPort.IsOpen)
             {
                 StartReading();
             }
@@ -119,14 +119,14 @@ namespace AIUISerials
         public void Close()
         {
             StopReading();
-            serialPort.Close();
+            _serialPort.Close();
         }
 
         public void WritePort(byte[] send, int offSet, int count)
         {
             if (IsOpen)
             {
-                serialPort.Write(send, offSet, count);
+                _serialPort.Write(send, offSet, count);
             }
         }
 
