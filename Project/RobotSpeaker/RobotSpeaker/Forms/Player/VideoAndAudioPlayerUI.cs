@@ -13,11 +13,18 @@ namespace RobotSpeaker.Forms.Player
     {
         public static List<string> SupportedExtName = new List<string>(new string[] { ".avi",".mp4",".mpg",".3gp",".wav",".mp3",".wmv",".mov" });
 
+        [Browsable(false)]
+        public VLCPlayerLib.VlcPlayerControl PlayerCore 
+        {
+            get { return player; }
+        }
+
         public VideoAndAudioPlayerUI(string videoFile)
         {
             InitializeComponent();
 
             VideoUrl = videoFile;
+            DataService.VideoPlayerUIObj = this;
         }
 
         protected override void OnLoad(EventArgs e)

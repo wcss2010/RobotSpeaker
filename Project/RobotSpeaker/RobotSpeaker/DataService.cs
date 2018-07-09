@@ -1,5 +1,6 @@
 ﻿using JoyKeys.DirectInputJoy;
 using RobotSpeaker.Forms;
+using RobotSpeaker.Forms.Player;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -58,6 +59,14 @@ namespace RobotSpeaker
         /// </summary>
         public static ConfigUI ConfigUIObj { get; set; }
 
+        /// <summary>
+        /// 视频播放器对象
+        /// </summary>
+        public static VideoAndAudioPlayerUI VideoPlayerUIObj { get; set; }
+
+        /// <summary>
+        /// 手柄服务
+        /// </summary>
         private static JoystickService _joystickServiceObj = new JoystickService();
 
         /// <summary>
