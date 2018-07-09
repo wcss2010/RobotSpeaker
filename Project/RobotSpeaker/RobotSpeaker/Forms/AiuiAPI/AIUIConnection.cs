@@ -9,43 +9,75 @@ using System.Windows.Forms;
 
 namespace AIUISerials
 {
+    public delegate void AIUIConnectionReceivedDelegate(object sender, AIUIConnectionReceivedEventArgs args);
+
+    public class AIUIConnectionReceivedEventArgs : EventArgs
+    {
+        public string Json { get; set; }
+
+        public AIUIConnectionReceivedEventArgs(string str)
+        {
+            Json = str;
+        }
+    }
+
     public class AIUIConnection
     {
-        SerialPortExForAIUI comm;
-        AIUI aiui;
-        int serailDataLength = 0;
-        Packet packet = new Packet();
-
-        List<byte> dataList = new List<byte>();
-
-        public DataHandle(SerialPortExForAIUI comm, AIUI aiui)
+        private SerialPortExForAIUI _serialPort = null;
+        /// <summary>
+        /// 串口连接
+        /// </summary>
+        public SerialPortExForAIUI SerialPort
         {
-            this.comm = comm;
-            this.aiui = aiui;
+            get { return _serialPort; }
         }
 
-        public void sendShake() {
-            SendCardToOut(packet.buildShakePacket());
+        private int serailDataLength = 0;
+        private PacketBuilder packetBuilder = new PacketBuilder();
+        private List<byte> dataList = new List<byte>();
+
+        private bool _enabledAutoReply = true;
+        /// <summary>
+        /// 是否支持自动回复
+        /// </summary>
+        public bool EnabledAutoReply
+        {
+            get { return _enabledAutoReply; }
+            set { _enabledAutoReply = value; }
         }
 
-        public void clearDataList() {
-            dataList.Clear();
-            serailDataLength = 0;
+        public event AIUIConnectionReceivedDelegate AIUIConnectionReceivedEvent;
+
+        protected void OnAIUIConnectionReceivedEvent(string json)
+        {
+            if (AIUIConnectionReceivedEvent != null)
+            {
+                AIUIConnectionReceivedEvent(this, new AIUIConnectionReceivedEventArgs(json));
+            }
         }
 
-        public void handleRecieveData(byte[] data) {
-            for (int i = 0; i < data.Length; i++) {
-                dataList.Add(data[i]);
+        public AIUIConnection(string port)
+        {
+            _serialPort = new SerialPortExForAIUI(port);
+            _serialPort.DataReceived += comm_DataReceived;
+        }
+
+        void comm_DataReceived(byte[] readBuffer)
+        {
+            for (int i = 0; i < readBuffer.Length; i++)
+            {
+                dataList.Add(readBuffer[i]);
+
                 if (dataList.Count == 5)
                 {
                     if (dataList[0] == 0xa5 && dataList[1] == 0x01)
                     {
                         serailDataLength = ((dataList[4] & 0xff) << 8) + (dataList[3] & 0xff);
                     }
-                    else {
+                    else
+                    {
                         dataList.RemoveAt(0);
                     }
-                    
                 }
 
                 if (serailDataLength != 0 && dataList.Count != 0 && dataList.Count == 8 + serailDataLength)
@@ -54,27 +86,39 @@ namespace AIUISerials
                     {
                         if (dataList[dataList.Count - 1] == Utils.CalcCheckCode(dataList))
                         {
+                            //取ID
                             int id = ((dataList[6] & 0xff) << 8) + dataList[5];
-                            packet.setSeqId(id);
-                            if (aiui.getIsConsoleOn())
-                            {
-                                LogRecieve(dataList);
-                            }
 
-                            if (aiui.getAutoReply())
+                            //设置ID
+                            packetBuilder.setSeqId(id);
+
+                            //自动回复
+                            if (EnabledAutoReply)
                             {
                                 SendConfirmMessage();
                             }
-                            
+
                             dealMsg(dataList, serailDataLength);
                         }
                     }
-                    clearDataList();
+
+                    //清空缓冲区
+                    ClearDataList();
                 }
             }
-            
         }
 
+        public void ClearDataList()
+        {
+            dataList.Clear();
+            serailDataLength = 0;
+        }
+        
+        /// <summary>
+        /// 投递Json消息
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="contentLen"></param>
         private void dealMsg(List<byte> list, int contentLen) {
             if (list[2] == 0x04)
             {
@@ -84,102 +128,59 @@ namespace AIUISerials
                     data[j] = list[j + 7];
                 }
 
-                string result = Utils.Decompress(data);
-                aiui.SetAIUIMsg(result);
+                //投递消息事件
+                OnAIUIConnectionReceivedEvent(Utils.Decompress(data));
             }
         }
 
-        private void SendConfirmMessage() {
-            SendCardToOut(packet.buildConfirmPacket());
+        public void SendShake()
+        {
+            SerialPort.WritePort(packetBuilder.buildShakePacket().ToArray());
         }
 
-        public void SendTTSMessage(string text) {
-            SendCardToOut(packet.buildTtsPacket(text));
+        public void SendConfirmMessage()
+        {
+            SerialPort.WritePort(packetBuilder.buildConfirmPacket().ToArray());
         }
 
-        public void ConfigWifiMessage(string config) {
-            SendCardToOut(packet.buildWifiCfgPacket(config));
+        public void SendTTSMessage(string text)
+        {
+            SerialPort.WritePort(packetBuilder.buildTtsPacket(text).ToArray());
+        }
+
+        public void ConfigWifiMessage(string config)
+        {
+            SerialPort.WritePort(packetBuilder.buildWifiCfgPacket(config).ToArray());
         }
 
         public void SendAIUIConfigMessage(string config)
         {
-            SendCardToOut(packet.buildAIUIConfigPacket(config));
+            SerialPort.WritePort(packetBuilder.buildAIUIConfigPacket(config).ToArray());
         }
 
-        public void SendLauchVoiceMessage(Boolean isOn) {
-            SendCardToOut(packet.buildVoiceControlPacket(isOn));
+        public void SendLauchVoiceMessage(Boolean isOn)
+        {
+            SerialPort.WritePort(packetBuilder.buildVoiceControlPacket(isOn).ToArray());
         }
 
-        public void SendSmartConfigMessage(Boolean isOn) {
-            SendCardToOut(packet.buildSmartConfigPacket(isOn));
+        public void SendSmartConfigMessage(Boolean isOn)
+        {
+            SerialPort.WritePort(packetBuilder.buildSmartConfigPacket(isOn).ToArray());
         }
 
         public void SendWakeUpMessage(Boolean isReset)
         {
-            SendCardToOut(packet.buildResetWakePacket(isReset));
+            SerialPort.WritePort(packetBuilder.buildResetWakePacket(isReset).ToArray());
         }
 
-        public void SendCustomMessage(byte[] data) {
-            SendCardToOut(packet.buildCustomDataPacket(data));
-        }
-        
-        public void SendCardToOut(List<byte> send)
+        public void SendCustomMessage(byte[] data)
         {
-            if (comm.IsOpen)
-            {
-                comm.WritePort(send.ToArray(), 0, send.Count);
-                if (aiui.getIsConsoleOn()) {
-                    LogSend(send);
-                }
-            }    
+            SerialPort.WritePort(packetBuilder.buildCustomDataPacket(data).ToArray());
         }
 
-        public void SendCmd(string sendCmd) {
-            SendCardToOut(packet.buildCmdPacket(sendCmd));
-        }
-
-        private void LogSend(List<byte> send) {
-            string logData = "";
-            for (int index = 0; index < send.Count; index++)
-            {
-                if (index == 0)
-                {
-                    logData += "Send :[ ";
-                }
-                if (index == send.Count - 1)
-                {
-                    logData += Convert.ToString(send[index]) +  "]\n\n";
-                }
-                else
-                {
-                    logData += Convert.ToString(send[index]) + ", ";
-                }
-            }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(logData);
-        
-        }
-
-        private void LogRecieve(List<byte> recive)
+        public void SendCmd(string sendCmd)
         {
-            string logData = "";
-            for (int index = 0; index < recive.Count; index++)
-            {
-                if (index == 0)
-                {
-                    logData += "Recived :[ ";
-                }
-                if (index == recive.Count - 1)
-                {
-                    logData += Convert.ToString(recive[index]) + "]\n\n";
-                }
-                else
-                {
-                    logData += Convert.ToString(recive[index]) + ", ";
-                }
-            }
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write(logData);
+            SerialPort.WritePort(packetBuilder.buildCmdPacket(sendCmd).ToArray());
         }
     }
 }
