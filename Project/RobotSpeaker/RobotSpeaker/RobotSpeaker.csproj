@@ -68,6 +68,9 @@
     <Reference Include="AForge.Video.FFMPEG">
       <HintPath>..\..\..\Lib\AForge\AForge.Video.FFMPEG.dll</HintPath>
     </Reference>
+    <Reference Include="ManagedWifi">
+      <HintPath>..\..\..\Lib\ManagedWifi.dll</HintPath>
+    </Reference>
     <Reference Include="NLog">
       <HintPath>..\..\..\Lib\NLog\NLog.dll</HintPath>
     </Reference>
@@ -84,6 +87,7 @@
     </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />

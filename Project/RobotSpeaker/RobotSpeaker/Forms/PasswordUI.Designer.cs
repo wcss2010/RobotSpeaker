@@ -37,7 +37,7 @@
             // 
             // tbText
             // 
-            this.tbText.Location = new System.Drawing.Point(10, 43);
+            this.tbText.Location = new System.Drawing.Point(10, 30);
             this.tbText.Name = "tbText";
             this.tbText.PasswordChar = '#';
             this.tbText.Size = new System.Drawing.Size(200, 21);
@@ -46,9 +46,9 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(225, 12);
+            this.btnOK.Location = new System.Drawing.Point(229, 3);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(73, 41);
+            this.btnOK.Size = new System.Drawing.Size(73, 35);
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "确定";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -56,9 +56,9 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(225, 61);
+            this.btnCancel.Location = new System.Drawing.Point(229, 44);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(73, 41);
+            this.btnCancel.Size = new System.Drawing.Size(73, 35);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -69,16 +69,16 @@
             this.groupBox1.Controls.Add(this.tbText);
             this.groupBox1.Location = new System.Drawing.Point(2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(217, 110);
+            this.groupBox1.Size = new System.Drawing.Size(217, 80);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "管理员密码：";
+            this.groupBox1.Text = "密码：";
             // 
             // PasswordUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 114);
+            this.ClientSize = new System.Drawing.Size(313, 89);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
@@ -88,7 +88,7 @@
             this.MinimizeBox = false;
             this.Name = "PasswordUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "请输入管理员密码!";
+            this.Text = "请输入密码!";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
