@@ -28,7 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.trNetworkStatusUpdate = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
+            // 
+            // trNetworkStatusUpdate
+            // 
+            this.trNetworkStatusUpdate.Enabled = true;
+            this.trNetworkStatusUpdate.Interval = 3000;
+            this.trNetworkStatusUpdate.Tick += new System.EventHandler(this.trNetworkStatusUpdate_Tick);
             // 
             // PageUIBase
             // 
@@ -36,6 +44,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1031, 487);
+            this.EnabledDisplayWifiLogo = true;
             this.KeyPreview = true;
             this.Name = "PageUIBase";
             this.Text = "PageFormBase";
@@ -44,5 +53,7 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Timer trNetworkStatusUpdate;
     }
 }
