@@ -11,14 +11,14 @@ namespace AIUISerials
 {
     public class DataHandle
     {
-        SerialPortEx comm;
+        SerialPortExForAIUI comm;
         AIUI aiui;
         int serailDataLength = 0;
         Packet packet = new Packet();
 
         List<byte> dataList = new List<byte>();
 
-        public DataHandle(SerialPortEx comm, AIUI aiui)
+        public DataHandle(SerialPortExForAIUI comm, AIUI aiui)
         {
             this.comm = comm;
             this.aiui = aiui;

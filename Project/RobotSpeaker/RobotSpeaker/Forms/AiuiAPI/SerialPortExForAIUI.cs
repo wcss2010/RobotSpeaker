@@ -8,20 +8,39 @@ using System.Windows.Forms;
 
 namespace AIUISerials
 {
-    public class SerialPortEx
+    public class SerialPortExForAIUI
     {
         public delegate void EventHandle(byte[] readBuffer);
         public event EventHandle DataReceived;
 
-        public SerialPort serialPort;
-        Thread thread;
+        private SerialPort _serialPort;
+        /// <summary>
+        /// 串口连接
+        /// </summary>
+        public SerialPort SerialPort
+        {
+            get { return _serialPort; }
+        }
+        private Thread thread;
         volatile bool _keepReading;
 
-        public SerialPortEx()
+        public SerialPortExForAIUI(string serialPort)
         {
-            serialPort = new SerialPort();
+            _serialPort = new SerialPort();
             thread = null;
             _keepReading = false;
+
+            _serialPort.PortName = serialPort;
+            //波特率
+            _serialPort.BaudRate = 115200;
+            //数据位
+            _serialPort.DataBits = 8;
+            //两个停止位
+            _serialPort.StopBits = System.IO.Ports.StopBits.One;
+            //无奇偶校验位
+            _serialPort.Parity = System.IO.Ports.Parity.None;
+            _serialPort.ReadTimeout = 100;
+            _serialPort.WriteTimeout = -1;
         }
 
         public bool IsOpen
