@@ -129,5 +129,10 @@ namespace AIUISerials
                 serialPort.Write(send, offSet, count);
             }
         }
+
+        public void WritePort(byte[] send)
+        {
+            WritePort(send, 0, send.Length);
+        }
     }
 }

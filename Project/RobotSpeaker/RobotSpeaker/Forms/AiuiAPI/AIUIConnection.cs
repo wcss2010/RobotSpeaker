@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace AIUISerials
 {
-    public class DataHandle
+    public class AIUIConnection
     {
         SerialPortExForAIUI comm;
         AIUI aiui;
