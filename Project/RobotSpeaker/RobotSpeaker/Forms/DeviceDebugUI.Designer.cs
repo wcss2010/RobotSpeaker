@@ -46,12 +46,12 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpAIUI = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnWakeup = new System.Windows.Forms.Button();
-            this.btnTTSRead = new System.Windows.Forms.Button();
-            this.btnGetWakeupState = new System.Windows.Forms.Button();
             this.btnResetWakeup = new System.Windows.Forms.Button();
             this.btnStopVoice = new System.Windows.Forms.Button();
             this.btnStartVoice = new System.Windows.Forms.Button();
+            this.btnWakeup = new System.Windows.Forms.Button();
+            this.btnTTSRead = new System.Windows.Forms.Button();
+            this.btnGetWakeupState = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -208,7 +208,7 @@
             // 
             this.tbDebugLog.Location = new System.Drawing.Point(0, 310);
             this.tbDebugLog.Name = "tbDebugLog";
-            this.tbDebugLog.Size = new System.Drawing.Size(940, 302);
+            this.tbDebugLog.Size = new System.Drawing.Size(940, 272);
             this.tbDebugLog.TabIndex = 1;
             this.tbDebugLog.Text = "";
             // 
@@ -251,36 +251,6 @@
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             // 
-            // btnWakeup
-            // 
-            this.btnWakeup.Location = new System.Drawing.Point(109, 20);
-            this.btnWakeup.Name = "btnWakeup";
-            this.btnWakeup.Size = new System.Drawing.Size(85, 29);
-            this.btnWakeup.TabIndex = 22;
-            this.btnWakeup.Text = "手动唤醒";
-            this.btnWakeup.UseVisualStyleBackColor = true;
-            this.btnWakeup.Click += new System.EventHandler(this.btnWakeup_Click);
-            // 
-            // btnTTSRead
-            // 
-            this.btnTTSRead.Location = new System.Drawing.Point(200, 20);
-            this.btnTTSRead.Name = "btnTTSRead";
-            this.btnTTSRead.Size = new System.Drawing.Size(85, 29);
-            this.btnTTSRead.TabIndex = 21;
-            this.btnTTSRead.Text = "文本合成";
-            this.btnTTSRead.UseVisualStyleBackColor = true;
-            this.btnTTSRead.Click += new System.EventHandler(this.btnTTSRead_Click);
-            // 
-            // btnGetWakeupState
-            // 
-            this.btnGetWakeupState.Location = new System.Drawing.Point(18, 20);
-            this.btnGetWakeupState.Name = "btnGetWakeupState";
-            this.btnGetWakeupState.Size = new System.Drawing.Size(85, 29);
-            this.btnGetWakeupState.TabIndex = 20;
-            this.btnGetWakeupState.Text = "唤醒状态查询";
-            this.btnGetWakeupState.UseVisualStyleBackColor = true;
-            this.btnGetWakeupState.Click += new System.EventHandler(this.btnGetWakeupState_Click);
-            // 
             // btnResetWakeup
             // 
             this.btnResetWakeup.Location = new System.Drawing.Point(200, 67);
@@ -310,6 +280,36 @@
             this.btnStartVoice.Text = "开启声音播放";
             this.btnStartVoice.UseVisualStyleBackColor = true;
             this.btnStartVoice.Click += new System.EventHandler(this.btnStartVoice_Click);
+            // 
+            // btnWakeup
+            // 
+            this.btnWakeup.Location = new System.Drawing.Point(109, 20);
+            this.btnWakeup.Name = "btnWakeup";
+            this.btnWakeup.Size = new System.Drawing.Size(85, 29);
+            this.btnWakeup.TabIndex = 22;
+            this.btnWakeup.Text = "手动唤醒";
+            this.btnWakeup.UseVisualStyleBackColor = true;
+            this.btnWakeup.Click += new System.EventHandler(this.btnWakeup_Click);
+            // 
+            // btnTTSRead
+            // 
+            this.btnTTSRead.Location = new System.Drawing.Point(200, 20);
+            this.btnTTSRead.Name = "btnTTSRead";
+            this.btnTTSRead.Size = new System.Drawing.Size(85, 29);
+            this.btnTTSRead.TabIndex = 21;
+            this.btnTTSRead.Text = "文本合成";
+            this.btnTTSRead.UseVisualStyleBackColor = true;
+            this.btnTTSRead.Click += new System.EventHandler(this.btnTTSRead_Click);
+            // 
+            // btnGetWakeupState
+            // 
+            this.btnGetWakeupState.Location = new System.Drawing.Point(18, 20);
+            this.btnGetWakeupState.Name = "btnGetWakeupState";
+            this.btnGetWakeupState.Size = new System.Drawing.Size(85, 29);
+            this.btnGetWakeupState.TabIndex = 20;
+            this.btnGetWakeupState.Text = "唤醒状态查询";
+            this.btnGetWakeupState.UseVisualStyleBackColor = true;
+            this.btnGetWakeupState.Click += new System.EventHandler(this.btnGetWakeupState_Click);
             // 
             // DeviceDebugUI
             // 

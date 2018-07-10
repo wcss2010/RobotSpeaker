@@ -235,7 +235,7 @@ namespace RobotSpeaker.Forms
                 Invoke(new MethodInvoker(delegate()
                     {
                         debugLogLineCount++;
-                        if (debugLogLineCount >= 30)
+                        if (debugLogLineCount >= 100)
                         {
                             debugLogLineCount = 0;
                             tbDebugLog.Text = "";
