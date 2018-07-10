@@ -604,53 +604,56 @@ namespace RobotSpeaker
                 try
                 {
                     //解析Json字符串
-                    JObject jobj = (JObject)JsonConvert.DeserializeObject(json);
+                    JObject firstObj = (JObject)JsonConvert.DeserializeObject(json);
 
-                    JToken eventStr = jobj["type"];
+                    JToken eventStr = firstObj["type"];
                     if (eventStr.ToString().Equals("aiui_event"))
                     {
                         //是aiui_event才解析
-
-                        //判断是不是结果集消息
-                        if (jobj["result"] != null)
+                        JToken contentObj = firstObj["content"];
+                        if (contentObj != null)
                         {
-                            //结果集消息
-                            if (jobj["result"]["intent"] != null)
+                            //判断是不是结果集消息
+                            if (contentObj["result"] != null)
                             {
-                                JToken answers = jobj["result"]["intent"];
-                                string askStr = string.Empty;
-                                string answerStr = string.Empty;
-
-                                if (answers["text"] != null)
+                                //结果集消息
+                                if (contentObj["result"]["intent"] != null)
                                 {
-                                    //问的话
-                                    askStr = answers["text"].ToString();
-                                }
+                                    JToken answers = contentObj["result"]["intent"];
+                                    string askStr = string.Empty;
+                                    string answerStr = string.Empty;
 
-                                if (answers["answer"] != null && answers["answer"]["text"] != null)
-                                {
-                                    //答的话
-                                    answerStr = answers["answer"]["text"].ToString();
-                                }
+                                    if (answers["text"] != null)
+                                    {
+                                        //问的话
+                                        askStr = answers["text"].ToString();
+                                    }
 
-                                //投递答案
-                                OnXFCardQuestionEvent(askStr, answerStr);
+                                    if (answers["answer"] != null && answers["answer"]["text"] != null)
+                                    {
+                                        //答的话
+                                        answerStr = answers["answer"]["text"].ToString();
+                                    }
+
+                                    //投递答案
+                                    OnXFCardQuestionEvent(askStr, answerStr);
+                                }
                             }
-                        }
-                        else
-                        {
-                            //应该是某个提醒
-                            if (jobj["info"] != null)
+                            else
                             {
-                                if (jobj["info"]["wakeup_mode"] != null)
+                                //应该是某个提醒
+                                if (contentObj["info"] != null)
                                 {
-                                    //唤醒消息
-                                    OnXFCardWakeupEvent();
-                                }
-                                else if (jobj["info"]["angle"] != null)
-                                {
-                                    //角度消息
-                                    OnXFCardLocationEvent(double.Parse(jobj["info"]["angle"].ToString()));
+                                    if (contentObj["info"]["wakeup_mode"] != null)
+                                    {
+                                        //唤醒消息
+                                        OnXFCardWakeupEvent();
+                                    }
+                                    else if (contentObj["info"]["angle"] != null)
+                                    {
+                                        //角度消息
+                                        OnXFCardLocationEvent(double.Parse(contentObj["info"]["angle"].ToString()));
+                                    }
                                 }
                             }
                         }
