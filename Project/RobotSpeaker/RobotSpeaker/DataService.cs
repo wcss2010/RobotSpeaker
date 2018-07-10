@@ -453,19 +453,41 @@ namespace RobotSpeaker
 
         void XfJsonResolver_XFCardWakeupEvent(object sender, EventArgs args)
         {
-            if (DataService.VideoPlayerUIObj != null)
+            if (DataService.MainUIObj.IsHandleCreated)
             {
-                DataService.VideoPlayerUIObj.Close();
-                DataService.VideoPlayerUIObj = null;
+                DataService.MainUIObj.Invoke(new MethodInvoker(delegate()
+                    {
+                        if (DataService.VideoPlayerUIObj != null)
+                        {
+                            try
+                            {
+                                DataService.VideoPlayerUIObj.Close();
+                            }
+                            catch (Exception ex) { }
+
+                            DataService.VideoPlayerUIObj = null;
+                        }
+                    }));
             }
         }
 
         void XfJsonResolver_XFCardLocationEvent(object sender, XFSpeakerLocationEventArgs args)
         {
-            if (DataService.VideoPlayerUIObj != null)
+            if (DataService.MainUIObj.IsHandleCreated)
             {
-                DataService.VideoPlayerUIObj.Close();
-                DataService.VideoPlayerUIObj = null;
+                DataService.MainUIObj.Invoke(new MethodInvoker(delegate()
+                {
+                    if (DataService.VideoPlayerUIObj != null)
+                    {
+                        try
+                        {
+                            DataService.VideoPlayerUIObj.Close();
+                        }
+                        catch (Exception ex) { }
+
+                        DataService.VideoPlayerUIObj = null;
+                    }
+                }));
             }
         }
 
