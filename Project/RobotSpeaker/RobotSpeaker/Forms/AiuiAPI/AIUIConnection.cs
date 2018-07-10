@@ -60,7 +60,7 @@ namespace AIUISerials
         public AIUIConnection(string comPort)
         {
             _serialPort = new SerialPortInput();
-            _serialPort.SetPort(comPort, 115200, System.IO.Ports.StopBits.One, System.IO.Ports.Parity.None);
+            _serialPort.SetPort(comPort, 115200, System.IO.Ports.StopBits.One, System.IO.Ports.Parity.None, 100, -1);
             _serialPort.MessageReceived += _serialPort_MessageReceived;
             
         }
