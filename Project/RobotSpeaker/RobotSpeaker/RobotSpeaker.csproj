@@ -141,11 +141,11 @@
     <Compile Include="Forms\AiuiAPI\PacketBuilder.cs" />
     <Compile Include="Forms\AiuiAPI\CommandConst.cs" />
     <Compile Include="Forms\AiuiAPI\Utils.cs" />
-    <Compile Include="Forms\AIUIInitUI.cs">
+    <Compile Include="Forms\DeviceDebugUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AIUIInitUI.Designer.cs">
-      <DependentUpon>AIUIInitUI.cs</DependentUpon>
+    <Compile Include="Forms\DeviceDebugUI.Designer.cs">
+      <DependentUpon>DeviceDebugUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CameraAPI\AviCapture.cs" />
     <Compile Include="Forms\CameraAPI\Video.cs" />
@@ -271,8 +271,8 @@
     <EmbeddedResource Include="Forms\AboutUI.resx">
       <DependentUpon>AboutUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AIUIInitUI.resx">
-      <DependentUpon>AIUIInitUI.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\DeviceDebugUI.resx">
+      <DependentUpon>DeviceDebugUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FaceUI.resx">
       <DependentUpon>FaceUI.cs</DependentUpon>

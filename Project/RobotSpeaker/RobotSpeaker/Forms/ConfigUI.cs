@@ -191,7 +191,7 @@ namespace RobotSpeaker.Forms
 
         private void btnInitAIUI_Click(object sender, EventArgs e)
         {
-            AIUIInitUI aiui = new AIUIInitUI();
+            DeviceDebugUI aiui = new DeviceDebugUI();
             aiui.ShowDialog();
         }
     }

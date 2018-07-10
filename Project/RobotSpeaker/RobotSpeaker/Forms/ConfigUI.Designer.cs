@@ -54,12 +54,12 @@
             this.tpVoice = new System.Windows.Forms.TabPage();
             this.tpGo = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnSave = new System.Windows.Forms.Button();
             this.btnExitApp = new System.Windows.Forms.Button();
+            this.btnInitAIUI = new System.Windows.Forms.Button();
             this.btnCameraDir = new System.Windows.Forms.Button();
             this.btnReadmeDir = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.ofdApp = new System.Windows.Forms.OpenFileDialog();
-            this.btnInitAIUI = new System.Windows.Forms.Button();
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).BeginInit();
@@ -340,6 +340,17 @@
             this.panel1.Size = new System.Drawing.Size(807, 46);
             this.panel1.TabIndex = 1;
             // 
+            // btnSave
+            // 
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSave.Location = new System.Drawing.Point(732, 0);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 46);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "保存";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // btnExitApp
             // 
             this.btnExitApp.Dock = System.Windows.Forms.DockStyle.Left;
@@ -350,6 +361,17 @@
             this.btnExitApp.Text = "退出软件";
             this.btnExitApp.UseVisualStyleBackColor = true;
             this.btnExitApp.Click += new System.EventHandler(this.btnExitApp_Click);
+            // 
+            // btnInitAIUI
+            // 
+            this.btnInitAIUI.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnInitAIUI.Location = new System.Drawing.Point(150, 0);
+            this.btnInitAIUI.Name = "btnInitAIUI";
+            this.btnInitAIUI.Size = new System.Drawing.Size(75, 46);
+            this.btnInitAIUI.TabIndex = 4;
+            this.btnInitAIUI.Text = "设备调试";
+            this.btnInitAIUI.UseVisualStyleBackColor = true;
+            this.btnInitAIUI.Click += new System.EventHandler(this.btnInitAIUI_Click);
             // 
             // btnCameraDir
             // 
@@ -373,31 +395,9 @@
             this.btnReadmeDir.UseVisualStyleBackColor = true;
             this.btnReadmeDir.Click += new System.EventHandler(this.btnReadmeDir_Click);
             // 
-            // btnSave
-            // 
-            this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSave.Location = new System.Drawing.Point(732, 0);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 46);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "保存";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // ofdApp
             // 
             this.ofdApp.Filter = "*.Exe|*.exe";
-            // 
-            // btnInitAIUI
-            // 
-            this.btnInitAIUI.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnInitAIUI.Location = new System.Drawing.Point(150, 0);
-            this.btnInitAIUI.Name = "btnInitAIUI";
-            this.btnInitAIUI.Size = new System.Drawing.Size(75, 46);
-            this.btnInitAIUI.TabIndex = 4;
-            this.btnInitAIUI.Text = "AIUI测试";
-            this.btnInitAIUI.UseVisualStyleBackColor = true;
-            this.btnInitAIUI.Click += new System.EventHandler(this.btnInitAIUI_Click);
             // 
             // ConfigUI
             // 

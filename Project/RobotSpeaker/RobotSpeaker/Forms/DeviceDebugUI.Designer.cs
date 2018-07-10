@@ -1,6 +1,6 @@
 ﻿namespace RobotSpeaker.Forms
 {
-    partial class AIUIInitUI
+    partial class DeviceDebugUI
     {
         /// <summary>
         /// Required designer variable.
@@ -107,7 +107,7 @@
             this.MinimizeBox = false;
             this.Name = "AIUIInitUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AIUI测试";
+            this.Text = "设备调试";
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 

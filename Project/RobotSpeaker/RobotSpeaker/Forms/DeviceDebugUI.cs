@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace RobotSpeaker.Forms
 {
-    public partial class AIUIInitUI : Form
+    public partial class DeviceDebugUI : Form
     {
         private string WillWifiSSID { get; set; }
         private string WillWifiPassword { get; set; }
@@ -19,7 +19,7 @@ namespace RobotSpeaker.Forms
         private List<WIFISSID> ssids;
         private wifiSo wifiso;
 
-        public AIUIInitUI()
+        public DeviceDebugUI()
         {
             InitializeComponent();
         }
