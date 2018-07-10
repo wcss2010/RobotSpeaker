@@ -14,6 +14,19 @@ namespace RobotSpeaker.Forms
 {
     public partial class DeviceDebugUI : Form
     {
+        /// <summary>
+        /// 语音卡AppId配置项
+        /// </summary>
+        public const string CONFIG_ID_APPID = "Voice_AppId";
+        /// <summary>
+        /// 语音卡AppKey配置项
+        /// </summary>
+        public const string CONFIG_ID_APPKEY = "Voice_AppKey";
+        /// <summary>
+        /// 语音卡情景模式配置项
+        /// </summary>
+        public const string CONFIG_ID_Scene = "Voice_Scene";
+
         private string WillWifiSSID { get; set; }
         private string WillWifiPassword { get; set; }
 
@@ -48,6 +61,10 @@ namespace RobotSpeaker.Forms
             wifiso.ScanSSID();      //显示所有wifi
 
             btnRefreshWifiList.PerformClick();
+
+            tbAppId.Text = SuperObject.Config.GetValue<string>(CONFIG_ID_APPID);
+            tbAppKey.Text = SuperObject.Config.GetValue<string>(CONFIG_ID_APPKEY);
+            tbScene.Text = string.IsNullOrEmpty(SuperObject.Config.GetValue<string>(CONFIG_ID_Scene)) ? "main" : SuperObject.Config.GetValue<string>(CONFIG_ID_Scene);
         }
 
         /// <summary>
@@ -256,6 +273,13 @@ namespace RobotSpeaker.Forms
 
             if (MessageBox.Show("真的要进行吗？", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
             {
+                //保存配置
+                SuperObject.Config.SetValue<string>(CONFIG_ID_APPID, tbAppId.Text.Trim());
+                SuperObject.Config.SetValue<string>(CONFIG_ID_APPKEY, tbAppKey.Text.Trim());
+                SuperObject.Config.SetValue<string>(CONFIG_ID_Scene, tbScene.Text.Trim());
+                SuperObject.SaveConfig();
+
+                //设置AIUI属性
                 string configStr = tbAppId.Text.Trim() + "|" + tbAppKey.Text.Trim() + "|" + tbScene.Text.Trim() + "|" + cbIsEnabledUseAIUIAfter.CheckState;
                 DataService.AiuiService.AiuiConnection.SendAIUIConfigMessage(configStr.Trim());
             }
