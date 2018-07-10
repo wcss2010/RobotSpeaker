@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace RobotSpeaker
 {
@@ -73,13 +75,13 @@ namespace RobotSpeaker
         /// <summary>
         /// 主窗体
         /// </summary>
-        public static MainUI MainUIObj { get; set; } 
+        public static MainUI MainUIObj { get; set; }
 
         /// <summary>
         /// 手柄服务
         /// </summary>
         private static JoystickService _joystickServiceObj = new JoystickService();
-        
+
         private static AIUIService _aiuiService = new AIUIService();
         /// <summary>
         /// AIUI服务
@@ -94,7 +96,7 @@ namespace RobotSpeaker
         /// </summary>
         public static void Init()
         {
-            
+
         }
 
         /// <summary>
@@ -114,7 +116,7 @@ namespace RobotSpeaker
 
         private static void JoystickService_JoystickPressEvent(object sender, JoystickPressEventArgs args)
         {
-            if (ConfigUIObj != null) 
+            if (ConfigUIObj != null)
             {
                 ConfigUIObj.JoystickStateInfo.ProcessorJoystickButtons(args);
             }
@@ -217,7 +219,7 @@ namespace RobotSpeaker
                 if (JoystickRunningMode == JoystickRunningModeType.AutoScan)
                 {
                     //投递方向按键
-                    OnJoystickPressEvent(_joystick_V.X,_joystick_V.Y,_joystick_V.Z, JoystickButtonType.None);
+                    OnJoystickPressEvent(_joystick_V.X, _joystick_V.Y, _joystick_V.Z, JoystickButtonType.None);
 
                     //投递B10-B10按键
                     if (((_joystick_V.CurButtonsState & JoystickButtons.B1) == JoystickButtons.B1))
@@ -396,6 +398,70 @@ namespace RobotSpeaker
     /// </summary>
     public class AIUIService
     {
+        private XFJsonResolver _xfJsonResolver = new XFJsonResolver();
+        /// <summary>
+        /// 讯飞Json解析器
+        /// </summary>
+        public XFJsonResolver XfJsonResolver
+        {
+            get { return _xfJsonResolver; }
+        }
+
+        public AIUIService()
+        {
+            XfJsonResolver.XFCardLocationEvent += XfJsonResolver_XFCardLocationEvent;
+            XfJsonResolver.XFCardWakeupEvent += XfJsonResolver_XFCardWakeupEvent;
+            XfJsonResolver.XFCardQuestionEvent += XfJsonResolver_XFCardQuestionEvent;
+        }
+
+        void XfJsonResolver_XFCardQuestionEvent(object sender, XFQuestionEventArgs args)
+        {
+            if (DataService.MainUIObj.IsHandleCreated)
+            {
+                DataService.MainUIObj.Invoke(new MethodInvoker(delegate()
+                    {
+                        //if (DataService.VoiceUIObj == null)
+                        //{
+                        //    DataService.VoiceUIObj = new VoiceUI();
+                        //    DataService.VoiceUIObj.Show();
+                        //}
+
+                        if (DataService.VoiceUIObj != null)
+                        {
+                            if (args.Ask != null && args.Ask.Length > 0)
+                            {
+                                //显示问话
+                                DataService.VoiceUIObj.ChatPanel.AddUserMsg(args.Ask);
+                            }
+                            if (args.Answer != null && args.Answer.Length > 0)
+                            {
+                                //显示答话
+                                DataService.VoiceUIObj.ChatPanel.AddMachineMsg(args.Answer);
+                            }
+                        }
+
+                    }));
+            }
+        }
+
+        void XfJsonResolver_XFCardWakeupEvent(object sender, EventArgs args)
+        {
+            if (DataService.VideoPlayerUIObj != null)
+            {
+                DataService.VideoPlayerUIObj.Close();
+                DataService.VideoPlayerUIObj = null;
+            }
+        }
+
+        void XfJsonResolver_XFCardLocationEvent(object sender, XFSpeakerLocationEventArgs args)
+        {
+            if (DataService.VideoPlayerUIObj != null)
+            {
+                DataService.VideoPlayerUIObj.Close();
+                DataService.VideoPlayerUIObj = null;
+            }
+        }
+
         private AIUIConnection _aiuiConnection = null;
         /// <summary>
         /// AIUI连接
@@ -421,6 +487,9 @@ namespace RobotSpeaker
             {
                 DataService.DeviceDebugUIObj.PrintDebugLog(args.Json);
             }
+
+            //解析Json
+            XfJsonResolver.Resolve(args.Json);
         }
 
         public void Close()
@@ -431,5 +500,167 @@ namespace RobotSpeaker
             }
         }
 
+    }
+
+    /// <summary>
+    /// 唤醒
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    public delegate void XFCardWakeupDelegate(object sender, EventArgs args);
+
+    /// <summary>
+    /// 讲话人角度
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    public delegate void XFCardSpeakerLocationDelegate(object sender, XFSpeakerLocationEventArgs args);
+
+    public class XFSpeakerLocationEventArgs : EventArgs
+    {
+        /// <summary>
+        /// 角度
+        /// </summary>
+        public double Angle { get; set; }
+    }
+
+    /// <summary>
+    /// 问答
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    public delegate void XFCardQuestionDelegate(object sender, XFQuestionEventArgs args);
+
+    public class XFQuestionEventArgs : EventArgs
+    {
+        /// <summary>
+        /// 问
+        /// </summary>
+        public string Ask { get; set; }
+
+        /// <summary>
+        /// 答
+        /// </summary>
+        public string Answer { get; set; }
+    }
+
+    /// <summary>
+    /// 讯飞Json字符解析器
+    /// </summary>
+    public class XFJsonResolver
+    {
+        /// <summary>
+        /// 唤醒
+        /// </summary>
+        public event XFCardWakeupDelegate XFCardWakeupEvent;
+        /// <summary>
+        /// 角度
+        /// </summary>
+        public event XFCardSpeakerLocationDelegate XFCardLocationEvent;
+        /// <summary>
+        /// 问答
+        /// </summary>
+        public event XFCardQuestionDelegate XFCardQuestionEvent;
+
+        protected void OnXFCardWakeupEvent()
+        {
+            if (XFCardWakeupEvent != null)
+            {
+                XFCardWakeupEvent(this, new EventArgs());
+            }
+        }
+
+        protected void OnXFCardLocationEvent(double angle)
+        {
+            if (XFCardLocationEvent != null)
+            {
+                XFSpeakerLocationEventArgs obj = new XFSpeakerLocationEventArgs();
+                obj.Angle = angle;
+
+                XFCardLocationEvent(this, obj);
+            }
+        }
+
+        protected void OnXFCardQuestionEvent(string ask, string answer)
+        {
+            if (XFCardQuestionEvent != null)
+            {
+                XFQuestionEventArgs obj = new XFQuestionEventArgs();
+                obj.Ask = ask;
+                obj.Answer = answer;
+
+                XFCardQuestionEvent(this, obj);
+            }
+        }
+
+        public void Resolve(string json)
+        {
+            if (string.IsNullOrEmpty(json))
+            {
+                return;
+            }
+            else
+            {
+                try
+                {
+                    //解析Json字符串
+                    JObject jobj = (JObject)JsonConvert.DeserializeObject(json);
+
+                    JToken eventStr = jobj["type"];
+                    if (eventStr.ToString().Equals("aiui_event"))
+                    {
+                        //是aiui_event才解析
+
+                        //判断是不是结果集消息
+                        if (jobj["result"] != null)
+                        {
+                            //结果集消息
+                            if (jobj["result"]["intent"] != null)
+                            {
+                                JToken answers = jobj["result"]["intent"];
+                                string askStr = string.Empty;
+                                string answerStr = string.Empty;
+
+                                if (answers["text"] != null)
+                                {
+                                    //问的话
+                                    askStr = answers["text"].ToString();
+                                }
+
+                                if (answers["answer"] != null && answers["answer"]["text"] != null)
+                                {
+                                    //答的话
+                                    answerStr = answers["answer"]["text"].ToString();
+                                }
+
+                                //投递答案
+                                OnXFCardQuestionEvent(askStr, answerStr);
+                            }
+                        }
+                        else
+                        {
+                            //应该是某个提醒
+                            if (jobj["info"] != null)
+                            {
+                                if (jobj["info"]["wakeup_mode"] != null)
+                                {
+                                    //唤醒消息
+                                    OnXFCardWakeupEvent();
+                                }
+                                else if (jobj["info"]["angle"] != null)
+                                {
+                                    //角度消息
+                                    OnXFCardLocationEvent(double.Parse(jobj["info"]["angle"].ToString()));
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine("解析错误！Ex:" + ex.ToString());
+                }
+            }
+        }
     }
 }
