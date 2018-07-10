@@ -71,6 +71,9 @@
     <Reference Include="ManagedWifi">
       <HintPath>..\..\..\Lib\ManagedWifi.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\Lib\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NLog">
       <HintPath>..\..\..\Lib\NLog\NLog.dll</HintPath>
     </Reference>
