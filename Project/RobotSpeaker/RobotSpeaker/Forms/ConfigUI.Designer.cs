@@ -60,6 +60,7 @@
             this.btnCameraDir = new System.Windows.Forms.Button();
             this.btnReadmeDir = new System.Windows.Forms.Button();
             this.ofdApp = new System.Windows.Forms.OpenFileDialog();
+            this.btnRestartService = new System.Windows.Forms.Button();
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).BeginInit();
@@ -331,9 +332,10 @@
             // 
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Controls.Add(this.btnExitApp);
-            this.panel1.Controls.Add(this.btnInitAIUI);
-            this.panel1.Controls.Add(this.btnCameraDir);
+            this.panel1.Controls.Add(this.btnRestartService);
             this.panel1.Controls.Add(this.btnReadmeDir);
+            this.panel1.Controls.Add(this.btnCameraDir);
+            this.panel1.Controls.Add(this.btnInitAIUI);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 533);
             this.panel1.Name = "panel1";
@@ -354,7 +356,7 @@
             // btnExitApp
             // 
             this.btnExitApp.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnExitApp.Location = new System.Drawing.Point(225, 0);
+            this.btnExitApp.Location = new System.Drawing.Point(320, 0);
             this.btnExitApp.Name = "btnExitApp";
             this.btnExitApp.Size = new System.Drawing.Size(75, 46);
             this.btnExitApp.TabIndex = 3;
@@ -365,7 +367,7 @@
             // btnInitAIUI
             // 
             this.btnInitAIUI.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnInitAIUI.Location = new System.Drawing.Point(150, 0);
+            this.btnInitAIUI.Location = new System.Drawing.Point(0, 0);
             this.btnInitAIUI.Name = "btnInitAIUI";
             this.btnInitAIUI.Size = new System.Drawing.Size(75, 46);
             this.btnInitAIUI.TabIndex = 4;
@@ -387,7 +389,7 @@
             // btnReadmeDir
             // 
             this.btnReadmeDir.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnReadmeDir.Location = new System.Drawing.Point(0, 0);
+            this.btnReadmeDir.Location = new System.Drawing.Point(150, 0);
             this.btnReadmeDir.Name = "btnReadmeDir";
             this.btnReadmeDir.Size = new System.Drawing.Size(75, 46);
             this.btnReadmeDir.TabIndex = 1;
@@ -398,6 +400,17 @@
             // ofdApp
             // 
             this.ofdApp.Filter = "*.Exe|*.exe";
+            // 
+            // btnRestartService
+            // 
+            this.btnRestartService.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRestartService.Location = new System.Drawing.Point(225, 0);
+            this.btnRestartService.Name = "btnRestartService";
+            this.btnRestartService.Size = new System.Drawing.Size(95, 46);
+            this.btnRestartService.TabIndex = 5;
+            this.btnRestartService.Text = "重启本地服务";
+            this.btnRestartService.UseVisualStyleBackColor = true;
+            this.btnRestartService.Click += new System.EventHandler(this.btnRestartService_Click);
             // 
             // ConfigUI
             // 
@@ -456,5 +469,6 @@
         private JoyAPI.JoystickStateInfo jsijoystickInfo;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnInitAIUI;
+        private System.Windows.Forms.Button btnRestartService;
     }
 }

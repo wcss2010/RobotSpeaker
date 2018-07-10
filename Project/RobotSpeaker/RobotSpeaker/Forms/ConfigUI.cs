@@ -194,5 +194,27 @@ namespace RobotSpeaker.Forms
             DeviceDebugUI aiui = new DeviceDebugUI();
             aiui.ShowDialog();
         }
+
+        private void btnRestartService_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("真的要进行吗？", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+            {
+                //重置本地服务
+                ResetDataService();
+            }
+        }
+        
+        /// <summary>
+        /// 重置本地服务
+        /// </summary>
+        private void ResetDataService()
+        {
+            //关闭先前的服务
+            DataService.Close();
+
+            //启动服务
+            DataService.Init();
+            DataService.Open(DataService.MainUIObj);
+        }
     }
 }

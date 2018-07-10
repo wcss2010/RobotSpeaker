@@ -71,6 +71,11 @@ namespace RobotSpeaker
         public static DeviceDebugUI DeviceDebugUIObj { get; set; }
 
         /// <summary>
+        /// 主窗体
+        /// </summary>
+        public static MainUI MainUIObj { get; set; } 
+
+        /// <summary>
         /// 手柄服务
         /// </summary>
         private static JoystickService _joystickServiceObj = new JoystickService();
@@ -95,11 +100,13 @@ namespace RobotSpeaker
         /// <summary>
         /// 打开服务 
         /// </summary>
-        public static void Open(Control main)
+        public static void Open(MainUI mains)
         {
+            MainUIObj = mains;
+
             //打开手柄服务
             _joystickServiceObj.JoystickPressEvent += JoystickService_JoystickPressEvent;
-            _joystickServiceObj.Open(main);
+            _joystickServiceObj.Open(MainUIObj);
 
             //打开语音服务
             _aiuiService.Open();
