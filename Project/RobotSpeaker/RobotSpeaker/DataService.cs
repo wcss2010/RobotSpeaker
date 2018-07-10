@@ -56,24 +56,33 @@ namespace RobotSpeaker
         public static VoiceUI VoiceUIObj { get; set; }
 
         /// <summary>
-        /// 当前的ConfigUI对象
+        /// 配置界面对象
         /// </summary>
         public static ConfigUI ConfigUIObj { get; set; }
 
         /// <summary>
-        /// 视频播放器对象
+        /// 视频播放器界面对象
         /// </summary>
         public static VideoAndAudioPlayerUI VideoPlayerUIObj { get; set; }
+
+        /// <summary>
+        /// 设备调试界面对象
+        /// </summary>
+        public static DeviceDebugUI DeviceDebugUIObj { get; set; }
 
         /// <summary>
         /// 手柄服务
         /// </summary>
         private static JoystickService _joystickServiceObj = new JoystickService();
-
+        
+        private static AIUIService _aiuiService = new AIUIService();
         /// <summary>
         /// AIUI服务
         /// </summary>
-        private static AIUIService _aiuiService = new AIUIService();
+        public static AIUIService AiuiService
+        {
+            get { return DataService._aiuiService; }
+        }
 
         /// <summary>
         /// 初始化
@@ -401,7 +410,10 @@ namespace RobotSpeaker
 
         void _aiuiConnection_AIUIConnectionReceivedEvent(object sender, AIUIConnectionReceivedEventArgs args)
         {
-            System.Console.WriteLine(args.Json);
+            if (DataService.DeviceDebugUIObj != null)
+            {
+                DataService.DeviceDebugUIObj.PrintDebugLog(args.Json);
+            }
         }
 
         public void Close()

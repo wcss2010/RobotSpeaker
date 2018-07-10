@@ -18,10 +18,13 @@ namespace RobotSpeaker.Forms
 
         private List<WIFISSID> ssids;
         private wifiSo wifiso;
+        private int debugLogLineCount = 0;
 
         public DeviceDebugUI()
         {
             InitializeComponent();
+
+            DataService.DeviceDebugUIObj = this;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -200,7 +203,31 @@ namespace RobotSpeaker.Forms
         /// <param name="pwd"></param>
         private void AIUIConnectToWifi(string encryptType, string ssid, string pwd)
         {
+            DataService.AiuiService.AiuiConnection.ConfigWifiMessage(ssid + "|" + pwd + "|" + WifiEncryptType.WPA);
+        }
 
+        /// <summary>
+        /// 打印调试日志
+        /// </summary>
+        /// <param name="message"></param>
+        public void PrintDebugLog(string message)
+        {
+            if (IsHandleCreated)
+            {
+                Invoke(new MethodInvoker(delegate()
+                    {
+                        debugLogLineCount++;
+                        if (debugLogLineCount >= 30)
+                        {
+                            debugLogLineCount = 0;
+                            tbDebugLog.Text = "";
+                        }
+
+                        tbDebugLog.AppendText(message + "\n");
+                        tbDebugLog.Select(tbDebugLog.Text.Length, 0);
+                        tbDebugLog.ScrollToCaret();
+                    }));
+            }
         }
     }
 
