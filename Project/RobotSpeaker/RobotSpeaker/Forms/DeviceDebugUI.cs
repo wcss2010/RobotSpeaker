@@ -138,16 +138,78 @@ namespace RobotSpeaker.Forms
                 DialogResult dr = MessageBox.Show("确定要连接" + lvWifiList.Items[c[0]].Text + "吗?", "wifi连接", messButton);
                 if (dr == DialogResult.OK)//如果点击“确定”按钮
                 {
-                    WillWifiSSID = lvWifiList.Items[c[0]].Text;
-                    WillWifiPassword = "61596159yf";
+                    string pwd = "";
+                    PasswordUI pwdInput = new PasswordUI();
 
-                    ScanSSID();
+                    if (pwdInput.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        //取输入的密码
+                        pwd = pwdInput.TextObj.Text;
 
-                    WillWifiSSID = "";
-                    WillWifiPassword = "";
+                        //连接wifi
+                        try
+                        {
+                            ConnectToWifi(lvWifiList.Items[c[0]].SubItems[2].Text, lvWifiList.Items[c[0]].Text, pwd);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("连接wifi出错！");
+                        }
+                    }
                 }
             }
         }
+
+        /// <summary>
+        /// 连接到wifi
+        /// </summary>
+        /// <param name="ssid"></param>
+        /// <param name="pwd"></param>
+        private void ConnectToWifi(string encryptType,string ssid, string pwd)
+        {
+            //windows连接到wifi
+            WindowsConnectToWifi(encryptType,ssid, pwd);
+
+            //aiui连接到wifi
+            AIUIConnectToWifi(encryptType,ssid, pwd);
+        }
+
+        /// <summary>
+        /// 连接到wifi(Windows)
+        /// </summary>
+        /// <param name="ssid"></param>
+        /// <param name="pwd"></param>
+        private void WindowsConnectToWifi(string encryptType, string ssid, string pwd)
+        {
+            //设置要连接的wifi
+            WillWifiSSID = ssid;
+            WillWifiPassword = pwd;
+
+            //扫描并连接wifi
+            ScanSSID();
+
+            //清空连接设置
+            WillWifiSSID = "";
+            WillWifiPassword = "";
+        }
+
+        /// <summary>
+        /// 连接到wifi(AIUI)
+        /// </summary>
+        /// <param name="ssid"></param>
+        /// <param name="pwd"></param>
+        private void AIUIConnectToWifi(string encryptType, string ssid, string pwd)
+        {
+
+        }
+    }
+
+    /// <summary>
+    /// WIFI加密方式
+    /// </summary>
+    public enum WifiEncryptType
+    {
+        WPA, WEP, NONE
     }
 
     class wifiSo

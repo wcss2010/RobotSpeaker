@@ -51,11 +51,11 @@
             // 
             // lblCurrentWifiName
             // 
-            this.lblCurrentWifiName.Location = new System.Drawing.Point(264, 266);
+            this.lblCurrentWifiName.Location = new System.Drawing.Point(102, 266);
             this.lblCurrentWifiName.Name = "lblCurrentWifiName";
-            this.lblCurrentWifiName.Size = new System.Drawing.Size(266, 23);
+            this.lblCurrentWifiName.Size = new System.Drawing.Size(428, 23);
             this.lblCurrentWifiName.TabIndex = 4;
-            this.lblCurrentWifiName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblCurrentWifiName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnRefreshWifiList
             // 
@@ -95,7 +95,7 @@
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
-            // AIUIInitUI
+            // DeviceDebugUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -105,7 +105,7 @@
             this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "AIUIInitUI";
+            this.Name = "DeviceDebugUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "设备调试";
             this.groupBox1.ResumeLayout(false);
