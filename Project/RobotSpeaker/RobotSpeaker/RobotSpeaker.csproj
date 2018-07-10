@@ -162,6 +162,12 @@
     <Compile Include="Forms\GoUI.Designer.cs">
       <DependentUpon>GoUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InputUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InputUI.Designer.cs">
+      <DependentUpon>InputUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\JoyAPI\API.cs" />
     <Compile Include="Forms\JoyAPI\JoystickAPI.cs" />
     <Compile Include="Forms\JoyAPI\JoystickEventArgs.cs" />
@@ -279,6 +285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GoUI.resx">
       <DependentUpon>GoUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InputUI.resx">
+      <DependentUpon>InputUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\JoyAPI\JoystickStateInfo.resx">
       <DependentUpon>JoystickStateInfo.cs</DependentUpon>

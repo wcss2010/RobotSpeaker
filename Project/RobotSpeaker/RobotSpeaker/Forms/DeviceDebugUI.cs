@@ -1,4 +1,5 @@
-﻿using NativeWifi;
+﻿using AIUISerials;
+using NativeWifi;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -228,6 +229,73 @@ namespace RobotSpeaker.Forms
                         tbDebugLog.ScrollToCaret();
                     }));
             }
+        }
+
+        private void btnGetAIUIWifi_Click(object sender, EventArgs e)
+        {
+            DataService.AiuiService.AiuiConnection.SendCmd(CommandConst.QUERY_WIFI_STATE);
+        }
+
+        private void btnAIUIConfig_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(tbAppId.Text))
+            {
+                MessageBox.Show("对不起，请输入AppId!");
+                return;
+            }
+            if (string.IsNullOrEmpty(tbAppKey.Text))
+            {
+                MessageBox.Show("对不起，请输入AppKey!");
+                return;
+            }
+            if (string.IsNullOrEmpty(tbScene.Text))
+            {
+                MessageBox.Show("对不起，请输入情景模式!");
+                return;
+            }
+
+            if (MessageBox.Show("真的要进行吗？", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+            {
+                string configStr = tbAppId.Text.Trim() + "|" + tbAppKey.Text.Trim() + "|" + tbScene.Text.Trim() + "|" + cbIsEnabledUseAIUIAfter.CheckState;
+                DataService.AiuiService.AiuiConnection.SendAIUIConfigMessage(configStr.Trim());
+            }
+        }
+
+        private void btnGetWakeupState_Click(object sender, EventArgs e)
+        {
+            DataService.AiuiService.AiuiConnection.SendCmd(CommandConst.QUERY_AIUI_STATE);
+        }
+
+        private void btnWakeup_Click(object sender, EventArgs e)
+        {
+            DataService.AiuiService.AiuiConnection.SendWakeUpMessage(false);
+        }
+
+        private void btnTTSRead_Click(object sender, EventArgs e)
+        {
+            InputUI inputBox = new InputUI("请输入要合成的文本:", string.Empty);
+            if (inputBox.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (inputBox.Input.Trim() != string.Empty)
+                {
+                    DataService.AiuiService.AiuiConnection.SendTTSMessage(inputBox.Input);
+                }
+            }
+        }
+
+        private void btnStartVoice_Click(object sender, EventArgs e)
+        {
+            DataService.AiuiService.AiuiConnection.SendLauchVoiceMessage(true);
+        }
+
+        private void btnStopVoice_Click(object sender, EventArgs e)
+        {
+            DataService.AiuiService.AiuiConnection.SendLauchVoiceMessage(false);
+        }
+
+        private void btnResetWakeup_Click(object sender, EventArgs e)
+        {
+            DataService.AiuiService.AiuiConnection.SendWakeUpMessage(true);
         }
     }
 
