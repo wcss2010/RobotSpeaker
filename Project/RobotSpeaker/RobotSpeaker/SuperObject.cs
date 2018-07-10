@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml.Serialization;
@@ -75,6 +76,16 @@ namespace RobotSpeaker
     /// </summary>
     public class RobotConfig
     {
+        public RobotConfig()
+        {
+            Params = new SerializableDictionary<string, object>();
+        }
+
+        /// <summary>
+        /// 参数字典
+        /// </summary>
+        public SerializableDictionary<string, object> Params { get; set; }
+
         /// <summary>
         /// 讯飞语音端口(在线)
         /// </summary>
@@ -130,7 +141,7 @@ namespace RobotSpeaker
             set { _voiceWelcomeText = value; }
         }
 
-        private int _imageListPlayerSleepSeconds = 8;
+        private int _imageListPlayerSleepSeconds = 6;
         /// <summary>
         /// 图片展示每张图的停留时间(秒)
         /// </summary>
@@ -140,6 +151,46 @@ namespace RobotSpeaker
             set { _imageListPlayerSleepSeconds = value; }
         }
 
+        /// <summary>
+        /// 从字典中获得一个值
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public E GetValue<E>(string key)
+        {
+            E result = default(E);
+
+            //检查Params是否为空
+            if (Params == null)
+            {
+                Params = new SerializableDictionary<string, object>();
+            }
+
+            //获得数值
+            if (Params.ContainsKey(key))
+            {
+                result = (E)Params[key];
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 向字典中保存一个值
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void SetValue<E>(string key, E value)
+        {
+            //检查是否Params为空
+            if (Params == null)
+            {
+                Params = new SerializableDictionary<string, object>();
+            }
+
+            //设置数值
+            Params[key] = value;
+        }
     }
 
     /// <summary>
@@ -219,6 +270,102 @@ namespace RobotSpeaker
             Stream.Dispose();
 
             return str;
+        }
+        #endregion
+    }
+
+    /// <summary>
+    /// 支持XML序列化的泛型 Dictionary
+    /// </summary>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
+    [XmlRoot("SerializableDictionary")]
+    public class SerializableDictionary<TKey, TValue>
+        : Dictionary<TKey, TValue>, IXmlSerializable
+    {
+
+        #region 构造函数
+        public SerializableDictionary()
+            : base()
+        {
+        }
+        public SerializableDictionary(IDictionary<TKey, TValue> dictionary)
+            : base(dictionary)
+        {
+        }
+
+        public SerializableDictionary(IEqualityComparer<TKey> comparer)
+            : base(comparer)
+        {
+        }
+
+        public SerializableDictionary(int capacity)
+            : base(capacity)
+        {
+        }
+        public SerializableDictionary(int capacity, IEqualityComparer<TKey> comparer)
+            : base(capacity, comparer)
+        {
+        }
+        protected SerializableDictionary(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+        #endregion
+        #region IXmlSerializable Members
+        public System.Xml.Schema.XmlSchema GetSchema()
+        {
+            return null;
+        }
+        /// <summary>
+        /// 从对象的 XML 表示形式生成该对象
+        /// </summary>
+        /// <param name="reader"></param>
+        public void ReadXml(System.Xml.XmlReader reader)
+        {
+            XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
+            XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue));
+            bool wasEmpty = reader.IsEmptyElement;
+            reader.Read();
+            if (wasEmpty)
+                return;
+            while (reader.NodeType != System.Xml.XmlNodeType.EndElement)
+            {
+                reader.ReadStartElement("item");
+                reader.ReadStartElement("key");
+                TKey key = (TKey)keySerializer.Deserialize(reader);
+                reader.ReadEndElement();
+                reader.ReadStartElement("value");
+                TValue value = (TValue)valueSerializer.Deserialize(reader);
+                reader.ReadEndElement();
+                this.Add(key, value);
+                reader.ReadEndElement();
+                reader.MoveToContent();
+            }
+            reader.ReadEndElement();
+        }
+
+        /**/
+        /// <summary>
+        /// 将对象转换为其 XML 表示形式
+        /// </summary>
+        /// <param name="writer"></param>
+        public void WriteXml(System.Xml.XmlWriter writer)
+        {
+            XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
+            XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue));
+            foreach (TKey key in this.Keys)
+            {
+                writer.WriteStartElement("item");
+                writer.WriteStartElement("key");
+                keySerializer.Serialize(writer, key);
+                writer.WriteEndElement();
+                writer.WriteStartElement("value");
+                TValue value = this[key];
+                valueSerializer.Serialize(writer, value);
+                writer.WriteEndElement();
+                writer.WriteEndElement();
+            }
         }
         #endregion
     }
