@@ -407,8 +407,6 @@ namespace RobotSpeaker
             get { return _xfJsonResolver; }
         }
 
-        private string lastAsk = "";
-
         public AIUIService()
         {
             XfJsonResolver.XFCardLocationEvent += XfJsonResolver_XFCardLocationEvent;
@@ -418,36 +416,30 @@ namespace RobotSpeaker
 
         void XfJsonResolver_XFCardQuestionEvent(object sender, XFQuestionEventArgs args)
         {
-            if (args.Ask != null && !args.Ask.Equals(lastAsk))
+            if (DataService.MainUIObj.IsHandleCreated)
             {
-                lastAsk = args.Ask;
+                DataService.MainUIObj.Invoke(new MethodInvoker(delegate()
+                    {
+                        //if (DataService.VoiceUIObj == null)
+                        //{
+                        //    DataService.VoiceUIObj = new VoiceUI();
+                        //    DataService.VoiceUIObj.Show();
+                        //}
 
-                if (DataService.MainUIObj.IsHandleCreated)
-                {
-                    DataService.MainUIObj.Invoke(new MethodInvoker(delegate()
+                        if (DataService.VoiceUIObj != null)
                         {
-                            //if (DataService.VoiceUIObj == null)
-                            //{
-                            //    DataService.VoiceUIObj = new VoiceUI();
-                            //    DataService.VoiceUIObj.Show();
-                            //}
-
-                            if (DataService.VoiceUIObj != null)
+                            if (args.Ask != null && args.Ask.Trim().Length > 0)
                             {
-                                if (args.Ask != null && args.Ask.Length > 0)
-                                {
-                                    //显示问话
-                                    DataService.VoiceUIObj.ChatPanel.AddUserMsg(args.Ask);
-                                }
-                                if (args.Answer != null && args.Answer.Length > 0)
-                                {
-                                    //显示答话
-                                    DataService.VoiceUIObj.ChatPanel.AddMachineMsg(args.Answer);
-                                }
+                                //显示问话
+                                DataService.VoiceUIObj.ChatPanel.AddUserMsg(args.Ask.Trim());
                             }
-
-                        }));
-                }
+                            if (args.Answer != null && args.Answer.Trim().Length > 0)
+                            {
+                                //显示答话
+                                DataService.VoiceUIObj.ChatPanel.AddMachineMsg(args.Answer.Trim());
+                            }
+                        }
+                    }));
             }
         }
 
