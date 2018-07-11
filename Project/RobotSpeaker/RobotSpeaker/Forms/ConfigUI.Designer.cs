@@ -30,7 +30,6 @@
         {
             this.tcPage = new System.Windows.Forms.TabControl();
             this.tpNormal = new System.Windows.Forms.TabPage();
-            this.jsijoystickInfo = new RobotSpeaker.Forms.JoyAPI.JoystickStateInfo();
             this.label10 = new System.Windows.Forms.Label();
             this.tbImageListPlayerSleepSeconds = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
@@ -51,16 +50,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tpVoice = new System.Windows.Forms.TabPage();
-            this.tpGo = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnExitApp = new System.Windows.Forms.Button();
-            this.btnRestartService = new System.Windows.Forms.Button();
-            this.btnReadmeDir = new System.Windows.Forms.Button();
-            this.btnCameraDir = new System.Windows.Forms.Button();
             this.btnInitAIUI = new System.Windows.Forms.Button();
+            this.btnRestartService = new System.Windows.Forms.Button();
+            this.btnCameraDir = new System.Windows.Forms.Button();
+            this.btnReadmeDir = new System.Windows.Forms.Button();
             this.ofdApp = new System.Windows.Forms.OpenFileDialog();
+            this.jsijoystickInfo = new RobotSpeaker.Forms.JoyAPI.JoystickStateInfo();
+            this.cbEnabledOnlineVoice = new System.Windows.Forms.CheckBox();
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).BeginInit();
@@ -70,8 +69,6 @@
             // tcPage
             // 
             this.tcPage.Controls.Add(this.tpNormal);
-            this.tcPage.Controls.Add(this.tpVoice);
-            this.tcPage.Controls.Add(this.tpGo);
             this.tcPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcPage.Location = new System.Drawing.Point(0, 0);
             this.tcPage.Name = "tcPage";
@@ -81,6 +78,7 @@
             // 
             // tpNormal
             // 
+            this.tpNormal.Controls.Add(this.cbEnabledOnlineVoice);
             this.tpNormal.Controls.Add(this.jsijoystickInfo);
             this.tpNormal.Controls.Add(this.label10);
             this.tpNormal.Controls.Add(this.tbImageListPlayerSleepSeconds);
@@ -109,13 +107,6 @@
             this.tpNormal.TabIndex = 0;
             this.tpNormal.Text = "基础配置";
             this.tpNormal.UseVisualStyleBackColor = true;
-            // 
-            // jsijoystickInfo
-            // 
-            this.jsijoystickInfo.Location = new System.Drawing.Point(166, 337);
-            this.jsijoystickInfo.Name = "jsijoystickInfo";
-            this.jsijoystickInfo.Size = new System.Drawing.Size(416, 167);
-            this.jsijoystickInfo.TabIndex = 7;
             // 
             // label10
             // 
@@ -308,26 +299,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "管理员密码：";
             // 
-            // tpVoice
-            // 
-            this.tpVoice.Location = new System.Drawing.Point(4, 22);
-            this.tpVoice.Name = "tpVoice";
-            this.tpVoice.Padding = new System.Windows.Forms.Padding(3);
-            this.tpVoice.Size = new System.Drawing.Size(799, 507);
-            this.tpVoice.TabIndex = 1;
-            this.tpVoice.Text = "语音问答题库";
-            this.tpVoice.UseVisualStyleBackColor = true;
-            // 
-            // tpGo
-            // 
-            this.tpGo.Location = new System.Drawing.Point(4, 22);
-            this.tpGo.Name = "tpGo";
-            this.tpGo.Padding = new System.Windows.Forms.Padding(3);
-            this.tpGo.Size = new System.Drawing.Size(799, 507);
-            this.tpGo.TabIndex = 2;
-            this.tpGo.Text = "运动指令库";
-            this.tpGo.UseVisualStyleBackColor = true;
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btnSave);
@@ -364,6 +335,17 @@
             this.btnExitApp.UseVisualStyleBackColor = true;
             this.btnExitApp.Click += new System.EventHandler(this.btnExitApp_Click);
             // 
+            // btnInitAIUI
+            // 
+            this.btnInitAIUI.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnInitAIUI.Location = new System.Drawing.Point(245, 0);
+            this.btnInitAIUI.Name = "btnInitAIUI";
+            this.btnInitAIUI.Size = new System.Drawing.Size(75, 46);
+            this.btnInitAIUI.TabIndex = 4;
+            this.btnInitAIUI.Text = "设备调试";
+            this.btnInitAIUI.UseVisualStyleBackColor = true;
+            this.btnInitAIUI.Click += new System.EventHandler(this.btnInitAIUI_Click);
+            // 
             // btnRestartService
             // 
             this.btnRestartService.Dock = System.Windows.Forms.DockStyle.Left;
@@ -374,17 +356,6 @@
             this.btnRestartService.Text = "重启本地服务";
             this.btnRestartService.UseVisualStyleBackColor = true;
             this.btnRestartService.Click += new System.EventHandler(this.btnRestartService_Click);
-            // 
-            // btnReadmeDir
-            // 
-            this.btnReadmeDir.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnReadmeDir.Location = new System.Drawing.Point(0, 0);
-            this.btnReadmeDir.Name = "btnReadmeDir";
-            this.btnReadmeDir.Size = new System.Drawing.Size(75, 46);
-            this.btnReadmeDir.TabIndex = 1;
-            this.btnReadmeDir.Text = "简介目录";
-            this.btnReadmeDir.UseVisualStyleBackColor = true;
-            this.btnReadmeDir.Click += new System.EventHandler(this.btnReadmeDir_Click);
             // 
             // btnCameraDir
             // 
@@ -397,20 +368,39 @@
             this.btnCameraDir.UseVisualStyleBackColor = true;
             this.btnCameraDir.Click += new System.EventHandler(this.btnCameraDir_Click);
             // 
-            // btnInitAIUI
+            // btnReadmeDir
             // 
-            this.btnInitAIUI.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnInitAIUI.Location = new System.Drawing.Point(245, 0);
-            this.btnInitAIUI.Name = "btnInitAIUI";
-            this.btnInitAIUI.Size = new System.Drawing.Size(75, 46);
-            this.btnInitAIUI.TabIndex = 4;
-            this.btnInitAIUI.Text = "设备调试";
-            this.btnInitAIUI.UseVisualStyleBackColor = true;
-            this.btnInitAIUI.Click += new System.EventHandler(this.btnInitAIUI_Click);
+            this.btnReadmeDir.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnReadmeDir.Location = new System.Drawing.Point(0, 0);
+            this.btnReadmeDir.Name = "btnReadmeDir";
+            this.btnReadmeDir.Size = new System.Drawing.Size(75, 46);
+            this.btnReadmeDir.TabIndex = 1;
+            this.btnReadmeDir.Text = "简介目录";
+            this.btnReadmeDir.UseVisualStyleBackColor = true;
+            this.btnReadmeDir.Click += new System.EventHandler(this.btnReadmeDir_Click);
             // 
             // ofdApp
             // 
             this.ofdApp.Filter = "*.Exe|*.exe";
+            // 
+            // jsijoystickInfo
+            // 
+            this.jsijoystickInfo.Location = new System.Drawing.Point(166, 337);
+            this.jsijoystickInfo.Name = "jsijoystickInfo";
+            this.jsijoystickInfo.Size = new System.Drawing.Size(416, 167);
+            this.jsijoystickInfo.TabIndex = 7;
+            // 
+            // cbEnabledOnlineVoice
+            // 
+            this.cbEnabledOnlineVoice.AutoSize = true;
+            this.cbEnabledOnlineVoice.Checked = true;
+            this.cbEnabledOnlineVoice.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbEnabledOnlineVoice.Location = new System.Drawing.Point(294, 148);
+            this.cbEnabledOnlineVoice.Name = "cbEnabledOnlineVoice";
+            this.cbEnabledOnlineVoice.Size = new System.Drawing.Size(48, 16);
+            this.cbEnabledOnlineVoice.TabIndex = 9;
+            this.cbEnabledOnlineVoice.Text = "启用";
+            this.cbEnabledOnlineVoice.UseVisualStyleBackColor = true;
             // 
             // ConfigUI
             // 
@@ -439,8 +429,6 @@
 
         private System.Windows.Forms.TabControl tcPage;
         private System.Windows.Forms.TabPage tpNormal;
-        private System.Windows.Forms.TabPage tpVoice;
-        private System.Windows.Forms.TabPage tpGo;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCameraDir;
@@ -470,5 +458,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnInitAIUI;
         private System.Windows.Forms.Button btnRestartService;
+        private System.Windows.Forms.CheckBox cbEnabledOnlineVoice;
     }
 }

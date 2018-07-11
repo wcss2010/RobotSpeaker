@@ -87,6 +87,11 @@ namespace RobotSpeaker
         public SerializableDictionary<string, object> Params { get; set; }
 
         /// <summary>
+        /// 是否允许使用在线语音模式
+        /// </summary>
+        public bool EnabledOnlineVoice { get; set; }
+
+        /// <summary>
         /// 讯飞语音端口(在线)
         /// </summary>
         public string OnlineVoicePort { get; set; }

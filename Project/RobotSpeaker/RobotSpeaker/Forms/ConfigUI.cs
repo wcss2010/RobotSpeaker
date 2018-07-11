@@ -56,6 +56,7 @@ namespace RobotSpeaker.Forms
             cbOfflineVoicePort.Text = SuperObject.Config.OfflineVoicePort;
             cbGoPort.Text = SuperObject.Config.GoPort;
             tbImageListPlayerSleepSeconds.Value = SuperObject.Config.ImageListPlayerSleepSeconds;
+            cbEnabledOnlineVoice.Checked = SuperObject.Config.EnabledOnlineVoice;
 
             switch (SuperObject.Config.CurrentGoType)
             {
@@ -113,6 +114,7 @@ namespace RobotSpeaker.Forms
                 return false;
             }
 
+            SuperObject.Config.EnabledOnlineVoice = cbEnabledOnlineVoice.Checked;
             SuperObject.Config.ImageListPlayerSleepSeconds = (int)tbImageListPlayerSleepSeconds.Value;
             SuperObject.Config.VoiceWelcomeText = tbVoiceWelcomeText.Text;
             SuperObject.Config.ManagerPassword = tbPassword.Text;
