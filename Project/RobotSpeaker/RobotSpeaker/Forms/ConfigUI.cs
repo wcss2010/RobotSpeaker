@@ -79,7 +79,12 @@ namespace RobotSpeaker.Forms
         {
             if (SaveToConfig())
             {
+                //保存配置
                 SuperObject.SaveConfig();
+
+                //重置本地服务
+                ResetDataService();
+
                 MessageBox.Show("保存完成");
                 Close();
             }

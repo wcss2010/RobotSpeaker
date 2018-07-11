@@ -56,11 +56,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnExitApp = new System.Windows.Forms.Button();
-            this.btnInitAIUI = new System.Windows.Forms.Button();
-            this.btnCameraDir = new System.Windows.Forms.Button();
-            this.btnReadmeDir = new System.Windows.Forms.Button();
-            this.ofdApp = new System.Windows.Forms.OpenFileDialog();
             this.btnRestartService = new System.Windows.Forms.Button();
+            this.btnReadmeDir = new System.Windows.Forms.Button();
+            this.btnCameraDir = new System.Windows.Forms.Button();
+            this.btnInitAIUI = new System.Windows.Forms.Button();
+            this.ofdApp = new System.Windows.Forms.OpenFileDialog();
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).BeginInit();
@@ -332,10 +332,10 @@
             // 
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Controls.Add(this.btnExitApp);
-            this.panel1.Controls.Add(this.btnRestartService);
-            this.panel1.Controls.Add(this.btnReadmeDir);
-            this.panel1.Controls.Add(this.btnCameraDir);
             this.panel1.Controls.Add(this.btnInitAIUI);
+            this.panel1.Controls.Add(this.btnRestartService);
+            this.panel1.Controls.Add(this.btnCameraDir);
+            this.panel1.Controls.Add(this.btnReadmeDir);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 533);
             this.panel1.Name = "panel1";
@@ -364,16 +364,27 @@
             this.btnExitApp.UseVisualStyleBackColor = true;
             this.btnExitApp.Click += new System.EventHandler(this.btnExitApp_Click);
             // 
-            // btnInitAIUI
+            // btnRestartService
             // 
-            this.btnInitAIUI.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnInitAIUI.Location = new System.Drawing.Point(0, 0);
-            this.btnInitAIUI.Name = "btnInitAIUI";
-            this.btnInitAIUI.Size = new System.Drawing.Size(75, 46);
-            this.btnInitAIUI.TabIndex = 4;
-            this.btnInitAIUI.Text = "设备调试";
-            this.btnInitAIUI.UseVisualStyleBackColor = true;
-            this.btnInitAIUI.Click += new System.EventHandler(this.btnInitAIUI_Click);
+            this.btnRestartService.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRestartService.Location = new System.Drawing.Point(150, 0);
+            this.btnRestartService.Name = "btnRestartService";
+            this.btnRestartService.Size = new System.Drawing.Size(95, 46);
+            this.btnRestartService.TabIndex = 5;
+            this.btnRestartService.Text = "重启本地服务";
+            this.btnRestartService.UseVisualStyleBackColor = true;
+            this.btnRestartService.Click += new System.EventHandler(this.btnRestartService_Click);
+            // 
+            // btnReadmeDir
+            // 
+            this.btnReadmeDir.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnReadmeDir.Location = new System.Drawing.Point(0, 0);
+            this.btnReadmeDir.Name = "btnReadmeDir";
+            this.btnReadmeDir.Size = new System.Drawing.Size(75, 46);
+            this.btnReadmeDir.TabIndex = 1;
+            this.btnReadmeDir.Text = "简介目录";
+            this.btnReadmeDir.UseVisualStyleBackColor = true;
+            this.btnReadmeDir.Click += new System.EventHandler(this.btnReadmeDir_Click);
             // 
             // btnCameraDir
             // 
@@ -386,31 +397,20 @@
             this.btnCameraDir.UseVisualStyleBackColor = true;
             this.btnCameraDir.Click += new System.EventHandler(this.btnCameraDir_Click);
             // 
-            // btnReadmeDir
+            // btnInitAIUI
             // 
-            this.btnReadmeDir.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnReadmeDir.Location = new System.Drawing.Point(150, 0);
-            this.btnReadmeDir.Name = "btnReadmeDir";
-            this.btnReadmeDir.Size = new System.Drawing.Size(75, 46);
-            this.btnReadmeDir.TabIndex = 1;
-            this.btnReadmeDir.Text = "简介目录";
-            this.btnReadmeDir.UseVisualStyleBackColor = true;
-            this.btnReadmeDir.Click += new System.EventHandler(this.btnReadmeDir_Click);
+            this.btnInitAIUI.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnInitAIUI.Location = new System.Drawing.Point(245, 0);
+            this.btnInitAIUI.Name = "btnInitAIUI";
+            this.btnInitAIUI.Size = new System.Drawing.Size(75, 46);
+            this.btnInitAIUI.TabIndex = 4;
+            this.btnInitAIUI.Text = "设备调试";
+            this.btnInitAIUI.UseVisualStyleBackColor = true;
+            this.btnInitAIUI.Click += new System.EventHandler(this.btnInitAIUI_Click);
             // 
             // ofdApp
             // 
             this.ofdApp.Filter = "*.Exe|*.exe";
-            // 
-            // btnRestartService
-            // 
-            this.btnRestartService.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnRestartService.Location = new System.Drawing.Point(225, 0);
-            this.btnRestartService.Name = "btnRestartService";
-            this.btnRestartService.Size = new System.Drawing.Size(95, 46);
-            this.btnRestartService.TabIndex = 5;
-            this.btnRestartService.Text = "重启本地服务";
-            this.btnRestartService.UseVisualStyleBackColor = true;
-            this.btnRestartService.Click += new System.EventHandler(this.btnRestartService_Click);
             // 
             // ConfigUI
             // 
