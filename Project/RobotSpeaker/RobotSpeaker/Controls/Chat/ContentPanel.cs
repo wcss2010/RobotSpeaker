@@ -33,6 +33,8 @@ namespace RobotSpeaker.Controls.Chat
         /// <param name="model"></param>
         public void AddMachineMsg(string content)
         {
+            CheckClear();
+
             ContentItem item = new ContentItem();
             item.messageType = ContentItem.MessageType.receive;
             item.SetWeChatContent(content);
@@ -47,11 +49,23 @@ namespace RobotSpeaker.Controls.Chat
             Controls.Add(item);
         }
 
+        private void CheckClear()
+        {
+            if (top >= ((Screen.PrimaryScreen.Bounds.Height) / 10) * 8)
+            {
+                Controls.Clear();
+                top = 0;
+                height = 0;
+            }
+        }
+
         // <summary>
         /// 更新界面，显示发送消息
         /// </summary>
         public void AddUserMsg(string content)
         {
+            CheckClear();
+
             ContentItem item = new ContentItem();
             item.messageType = ContentItem.MessageType.send;
             item.SetWeChatContent(content);
