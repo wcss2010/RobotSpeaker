@@ -116,9 +116,18 @@ namespace RobotSpeaker
 
         private static void JoystickService_JoystickPressEvent(object sender, JoystickPressEventArgs args)
         {
-            if (ConfigUIObj != null)
+            if (MainUIObj != null)
             {
-                ConfigUIObj.JoystickStateInfo.ProcessorJoystickButtons(args);
+                if (MainUIObj.IsHandleCreated)
+                {
+                    MainUIObj.Invoke(new MethodInvoker(delegate()
+                        {
+                            if (ConfigUIObj != null)
+                            {
+                                ConfigUIObj.JoystickStateInfo.ProcessorJoystickButtons(args);
+                            }
+                        }));
+                }
             }
         }
 
@@ -184,7 +193,7 @@ namespace RobotSpeaker
         /// </summary>
         private Joystick_P _joystick_P = null;
 
-        private BackgroundWorker _worker = new BackgroundWorker();
+        private BackgroundWorker _worker = null;
 
         public event JoystickPressEventDelegate JoystickPressEvent;
 
@@ -201,12 +210,6 @@ namespace RobotSpeaker
             OnJoystickPressEvent(0, 0, 0, bttt);
         }
 
-        public JoystickService()
-        {
-            _worker.WorkerSupportsCancellation = true;
-            _worker.DoWork += _worker_DoWork;
-        }
-
         /// <summary>
         /// 主动模式
         /// </summary>
@@ -214,7 +217,7 @@ namespace RobotSpeaker
         /// <param name="e"></param>
         void _worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            while (!_worker.CancellationPending)
+            while (!((BackgroundWorker)sender).CancellationPending)
             {
                 if (JoystickRunningMode == JoystickRunningModeType.AutoScan)
                 {
@@ -283,10 +286,9 @@ namespace RobotSpeaker
             _joystick_V = Joystick_V.ReturnJoystick(API.JOYSTICKID1);
             _joystick_V.Capture();
 
-            if (_worker.IsBusy)
-            {
-                return;
-            }
+            _worker = new BackgroundWorker();
+            _worker.WorkerSupportsCancellation = true;
+            _worker.DoWork += _worker_DoWork;
 
             _worker.RunWorkerAsync();
         }
@@ -302,6 +304,7 @@ namespace RobotSpeaker
             _joystick_V.Dispose();
 
             _worker.CancelAsync();
+            _worker = null;
         }
 
         /// <summary>

@@ -232,19 +232,27 @@ namespace RobotSpeaker.Forms
         {
             if (IsHandleCreated)
             {
-                Invoke(new MethodInvoker(delegate()
-                    {
-                        debugLogLineCount++;
-                        if (debugLogLineCount >= 100)
+                try
+                {
+                    Invoke(new MethodInvoker(delegate()
                         {
-                            debugLogLineCount = 0;
-                            tbDebugLog.Text = "";
-                        }
+                            try
+                            {
+                                debugLogLineCount++;
+                                if (debugLogLineCount >= 100)
+                                {
+                                    debugLogLineCount = 0;
+                                    tbDebugLog.Text = "";
+                                }
 
-                        tbDebugLog.AppendText(message + "\n");
-                        tbDebugLog.Select(tbDebugLog.Text.Length, 0);
-                        tbDebugLog.ScrollToCaret();
-                    }));
+                                tbDebugLog.AppendText(message + "\n");
+                                tbDebugLog.Select(tbDebugLog.Text.Length, 0);
+                                tbDebugLog.ScrollToCaret();
+                            }
+                            catch (Exception ex) { }
+                        }));
+                }
+                catch (Exception ex) { }
             }
         }
 
