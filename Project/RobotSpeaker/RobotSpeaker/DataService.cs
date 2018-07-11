@@ -518,7 +518,10 @@ namespace RobotSpeaker
             }
 
             //解析Json
-            XfJsonResolver.Resolve(args.Json);
+            ThreadPool.QueueUserWorkItem(new WaitCallback(delegate(object state)
+                {
+                    XfJsonResolver.Resolve(args.Json);
+                }));
         }
 
         public void Close()
@@ -528,7 +531,6 @@ namespace RobotSpeaker
                 _aiuiConnection.SerialPort.Disconnect();
             }
         }
-
     }
 
     /// <summary>
