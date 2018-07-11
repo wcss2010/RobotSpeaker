@@ -142,6 +142,19 @@ namespace RobotSpeaker
             //关闭语音服务
             _aiuiService.Close();
         }
+
+        /// <summary>
+        /// 重置本地服务
+        /// </summary>
+        public static void Reset()
+        {
+            //重置AIUI服务
+            AiuiService.Close();
+            AiuiService.Open();
+
+            //重置运动服务
+
+        }
     }
 
     public delegate void JoystickPressEventDelegate(object sender, JoystickPressEventArgs args);

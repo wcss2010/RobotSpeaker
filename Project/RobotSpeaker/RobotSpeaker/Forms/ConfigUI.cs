@@ -216,12 +216,7 @@ namespace RobotSpeaker.Forms
         /// </summary>
         private void ResetDataService()
         {
-            //关闭先前的服务
-            DataService.Close();
-
-            //启动服务
-            DataService.Init();
-            DataService.Open(DataService.MainUIObj);
+            DataService.Reset();
         }
     }
 }
