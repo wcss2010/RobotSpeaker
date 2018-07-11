@@ -39,7 +39,7 @@
             this.plContent.BackColor = System.Drawing.Color.LightGray;
             this.plContent.Controls.Add(this.lblContent);
             this.plContent.Location = new System.Drawing.Point(20, 10);
-            this.plContent.MaximumSize = new System.Drawing.Size(370, 400);
+            this.plContent.MaximumSize = new System.Drawing.Size(700, 400);
             this.plContent.Name = "plContent";
             this.plContent.Padding = new System.Windows.Forms.Padding(10, 10, 5, 10);
             this.plContent.Size = new System.Drawing.Size(28, 47);
@@ -53,7 +53,7 @@
             this.lblContent.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lblContent.Location = new System.Drawing.Point(5, 10);
             this.lblContent.Margin = new System.Windows.Forms.Padding(0);
-            this.lblContent.MaximumSize = new System.Drawing.Size(280, 1000);
+            this.lblContent.MaximumSize = new System.Drawing.Size(700, 1000);
             this.lblContent.Name = "lblContent";
             this.lblContent.Size = new System.Drawing.Size(18, 27);
             this.lblContent.TabIndex = 5;
