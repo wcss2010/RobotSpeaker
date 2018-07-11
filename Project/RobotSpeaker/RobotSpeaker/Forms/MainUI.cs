@@ -73,8 +73,12 @@ namespace RobotSpeaker.Forms
 
         private void ibFace_Click(object sender, EventArgs e)
         {
-            FaceUI ui = new FaceUI();
-            ui.Show();
+            try
+            {
+                FaceUI ui = new FaceUI();
+                ui.Show();
+            }
+            catch (Exception ex) { }
         }
 
         private void ibVoice_Click(object sender, EventArgs e)
