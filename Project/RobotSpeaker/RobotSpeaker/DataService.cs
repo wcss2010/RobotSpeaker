@@ -507,7 +507,12 @@ namespace RobotSpeaker
 
             _aiuiConnection = new AIUIConnection(SuperObject.Config.OnlineVoicePort);
             _aiuiConnection.AIUIConnectionReceivedEvent += _aiuiConnection_AIUIConnectionReceivedEvent;
-            _aiuiConnection.SerialPort.Connect();
+
+            //检查是否启动了在线模式
+            if (SuperObject.Config.EnabledOnlineVoice)
+            {
+                _aiuiConnection.SerialPort.Connect();
+            }
         }
 
         void _aiuiConnection_AIUIConnectionReceivedEvent(object sender, AIUIConnectionReceivedEventArgs args)
