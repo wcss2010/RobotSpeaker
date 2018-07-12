@@ -257,10 +257,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQLHelpers\SQLiteColumn.cs" />
-    <Compile Include="SQLHelpers\SQLiteColumnList.cs" />
     <Compile Include="SQLHelpers\SQLiteHelper.cs" />
-    <Compile Include="SQLHelpers\SQLiteTable.cs" />
     <Compile Include="SuperObject.cs" />
     <EmbeddedResource Include="Controls\Chat\ContentItem.resx">
       <DependentUpon>ContentItem.cs</DependentUpon>

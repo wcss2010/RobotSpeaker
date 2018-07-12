@@ -1,523 +1,485 @@
-﻿// Version 1.2
-// Date: 2014-03-27
-// http://sh.codeplex.com
-// Dedicated to Public Domain
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Data.SQLite;
 using System.Data;
-using System.Globalization;
+using System.Configuration;
+using System.IO;
 
 namespace System.Data.SQLite
 {
-    public enum ColType
-    {
-        Text,
-        DateTime,
-        Integer,
-        Decimal,
-        BLOB
-    }
-
+    /// <summary>   
+    /// SQLite数据库操作帮助类  
+    /// 提供一系列方便的调用:  
+    /// Execute,Save,Update,Delete...  
+    ///   
+    /// 不是线程安全的  
+    ///   
+    /// @author pcenshao  
+    /// </summary>  
     public class SQLiteHelper
     {
-        SQLiteCommand cmd = null;
+        private bool _showSql = true;
 
-        public SQLiteHelper(SQLiteCommand command)
+        /// <summary>  
+        /// 是否输出生成的SQL语句  
+        /// </summary>  
+        public bool ShowSql
         {
-            cmd = command;
-        }
-
-        #region DB Info
-
-        public DataTable GetTableStatus()
-        {
-            return Select("SELECT * FROM sqlite_master;");
-        }
-
-        public DataTable GetTableList()
-        {
-            DataTable dt = GetTableStatus();
-            DataTable dt2 = new DataTable();
-            dt2.Columns.Add("Tables");
-            for (int i = 0; i < dt.Rows.Count; i++)
+            get
             {
-                string t = dt.Rows[i]["name"] + "";
-                if (t != "sqlite_sequence")
-                    dt2.Rows.Add(t);
+                return this._showSql;
             }
-            return dt2;
+            set
+            {
+                this._showSql = value;
+            }
         }
 
-        public DataTable GetColumnStatus(string tableName)
+        private readonly string _dataFile;
+
+        private SQLiteConnection _conn;
+
+        public SQLiteHelper(string dataFile)
         {
-            return Select(string.Format("PRAGMA table_info(`{0}`);", tableName));
+            if (dataFile == null)
+                throw new ArgumentNullException("dataFile=null");
+            this._dataFile = dataFile;
         }
 
-        public DataTable ShowDatabase()
+        /// <summary>  
+        /// <para>打开SQLiteManager使用的数据库连接</para>  
+        /// </summary>  
+        public void Open()
         {
-            return Select("PRAGMA database_list;");
+            this._conn = OpenConnection(this._dataFile);
         }
 
-        #endregion
-
-        #region Query
-
-        public void BeginTransaction()
+        public void Close()
         {
-            cmd.CommandText = "begin transaction;";
-            cmd.ExecuteNonQuery();
+            if (this._conn != null)
+            {
+                this._conn.Close();
+            }
         }
 
-        public void Commit()
+        /// <summary>  
+        /// <para>安静地关闭连接,保存不抛出任何异常</para>  
+        /// </summary>  
+        public void CloseQuietly()
         {
-            cmd.CommandText = "commit;";
-            cmd.ExecuteNonQuery();
+            if (this._conn != null)
+            {
+                try
+                {
+                    this._conn.Close();
+                }
+                catch { }
+            }
         }
 
-        public void Rollback()
+        /// <summary>  
+        /// <para>创建一个连接到指定数据文件的SQLiteConnection,并Open</para>  
+        /// <para>如果文件不存在,创建之</para>  
+        /// </summary>  
+        /// <param name="dataFile"></param>  
+        /// <returns></returns>  
+        public static SQLiteConnection OpenConnection(string dataFile)
         {
-            cmd.CommandText = "rollback";
-            cmd.ExecuteNonQuery();
+            if (dataFile == null)
+                throw new ArgumentNullException("dataFile=null");
+
+            if (!File.Exists(dataFile))
+            {
+                SQLiteConnection.CreateFile(dataFile);
+            }
+
+            SQLiteConnection conn = new SQLiteConnection();
+            SQLiteConnectionStringBuilder conStr = new SQLiteConnectionStringBuilder();
+            conStr.DataSource = dataFile;
+            conn.ConnectionString = conStr.ToString();
+            conn.Open();
+            return conn;
         }
 
-        public DataTable Select(string sql)
+        /// <summary>  
+        /// <para>读取或设置SQLiteManager使用的数据库连接</para>  
+        /// </summary>  
+        public SQLiteConnection Connection
         {
-            return Select(sql, new List<SQLiteParameter>());
+            get
+            {
+                return this._conn;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException();
+                }
+                this._conn = value;
+            }
         }
 
-        public DataTable Select(string sql, Dictionary<string, object> dicParameters = null)
+        protected void EnsureConnection()
         {
-            List<SQLiteParameter> lst = GetParametersList(dicParameters);
-            return Select(sql, lst);
+            if (this._conn == null)
+            {
+                throw new Exception("SQLiteManager.Connection=null");
+            }
         }
 
-        public DataTable Select(string sql, IEnumerable<SQLiteParameter> parameters = null)
+        public string GetDataFile()
         {
+            return this._dataFile;
+        }
+
+        /// <summary>  
+        /// <para>判断表table是否存在</para>  
+        /// </summary>  
+        /// <param name="table"></param>  
+        /// <returns></returns>  
+        public bool TableExists(string table)
+        {
+            if (table == null)
+                throw new ArgumentNullException("table=null");
+            this.EnsureConnection();
+            // SELECT count(*) FROM sqlite_master WHERE type='table' AND name='test';  
+            SQLiteCommand cmd = new SQLiteCommand("SELECT count(*) as c FROM sqlite_master WHERE type='table' AND name=@tableName ");
+            cmd.Connection = this.Connection;
+            cmd.Parameters.Add(new SQLiteParameter("tableName", table));
+            SQLiteDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            int c = reader.GetInt32(0);
+            reader.Close();
+            reader.Dispose();
+            cmd.Dispose();
+            //return false;  
+            return c == 1;
+        }
+
+        /// <summary>  
+        /// <para>执行SQL,返回受影响的行数</para>  
+        /// <para>可用于执行表创建语句</para>  
+        /// <para>paramArr == null 表示无参数</para>  
+        /// </summary>  
+        /// <param name="sql"></param>  
+        /// <returns></returns>  
+        public int ExecuteNonQuery(string sql, SQLiteParameter[] paramArr)
+        {
+            if (sql == null)
+            {
+                throw new ArgumentNullException("sql=null");
+            }
+            this.EnsureConnection();
+
+            if (this.ShowSql)
+            {
+                Console.WriteLine("SQL: " + sql);
+            }
+
+            SQLiteCommand cmd = new SQLiteCommand();
             cmd.CommandText = sql;
-            if (parameters != null)
+            if (paramArr != null)
             {
-                foreach (var param in parameters)
+                foreach (SQLiteParameter p in paramArr)
                 {
-                    cmd.Parameters.Add(param);
+                    cmd.Parameters.Add(p);
                 }
             }
-            SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            return dt;
+            cmd.Connection = this.Connection;
+            int c = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            return c;
         }
 
-        public void Execute(string sql)
+        /// <summary>  
+        /// <para>执行SQL,返回SQLiteDataReader</para>  
+        /// <para>返回的Reader为原始状态,须自行调用Read()方法</para>  
+        /// <para>paramArr=null,则表示无参数</para>  
+        /// </summary>  
+        /// <param name="sql"></param>  
+        /// <param name="paramArr"></param>  
+        /// <returns></returns>  
+        public SQLiteDataReader ExecuteReader(string sql, SQLiteParameter[] paramArr)
         {
-            Execute(sql, new List<SQLiteParameter>());
+            return (SQLiteDataReader)ExecuteReader(sql, paramArr, (ReaderWrapper)null);
         }
 
-        public void Execute(string sql, Dictionary<string, object> dicParameters = null)
+        /// <summary>  
+        /// <para>执行SQL,如果readerWrapper!=null,那么将调用readerWrapper对SQLiteDataReader进行包装,并返回结果</para>  
+        /// </summary>  
+        /// <param name="sql"></param>  
+        /// <param name="paramArr">null 表示无参数</param>  
+        /// <param name="readerWrapper">null 直接返回SQLiteDataReader</param>  
+        /// <returns></returns>  
+        public object ExecuteReader(string sql, SQLiteParameter[] paramArr, ReaderWrapper readerWrapper)
         {
-            List<SQLiteParameter> lst = GetParametersList(dicParameters);
-            Execute(sql, lst);
-        }
-
-        public void Execute(string sql, IEnumerable<SQLiteParameter> parameters = null)
-        {
-            cmd.CommandText = sql;
-            if (parameters != null)
+            if (sql == null)
             {
-                foreach (var param in parameters)
+                throw new ArgumentNullException("sql=null");
+            }
+            this.EnsureConnection();
+
+            SQLiteCommand cmd = new SQLiteCommand(sql, this.Connection);
+            if (paramArr != null)
+            {
+                foreach (SQLiteParameter p in paramArr)
                 {
-                    cmd.Parameters.Add(param);
+                    cmd.Parameters.Add(p);
                 }
             }
-            cmd.ExecuteNonQuery();
-        }
-
-        public object ExecuteScalar(string sql)
-        {
-            cmd.CommandText = sql;
-            return cmd.ExecuteScalar();
-        }
-
-        public object ExecuteScalar(string sql, Dictionary<string, object> dicParameters = null)
-        {
-            List<SQLiteParameter> lst = GetParametersList(dicParameters);
-            return ExecuteScalar(sql, lst);
-        }
-
-        public object ExecuteScalar(string sql, IEnumerable<SQLiteParameter> parameters = null)
-        {
-            cmd.CommandText = sql;
-            if (parameters != null)
+            SQLiteDataReader reader = cmd.ExecuteReader();
+            object result = null;
+            if (readerWrapper != null)
             {
-                foreach (var parameter in parameters)
-                {
-                    cmd.Parameters.Add(parameter);
-                }
+                result = readerWrapper(reader);
             }
-            return cmd.ExecuteScalar();
+            else
+            {
+                result = reader;
+            }
+            reader.Close();
+            reader.Dispose();
+            cmd.Dispose();
+            return result;
         }
 
-        public dataType ExecuteScalar<dataType>(string sql, Dictionary<string, object> dicParameters = null)
+        /// <summary>  
+        /// <para>执行SQL,返回结果集,使用RowWrapper对每一行进行包装</para>  
+        /// <para>如果结果集为空,那么返回空List (List.Count=0)</para>  
+        /// <para>rowWrapper = null时,使用WrapRowToDictionary</para>  
+        /// </summary>  
+        /// <param name="sql"></param>  
+        /// <param name="paramArr"></param>  
+        /// <param name="rowWrapper"></param>  
+        /// <returns></returns>  
+        public List<object> ExecuteRow(string sql, SQLiteParameter[] paramArr, RowWrapper rowWrapper)
         {
-            List<SQLiteParameter> lst = null;
-            if (dicParameters != null)
+            if (sql == null)
             {
-                lst = new List<SQLiteParameter>();
-                foreach (KeyValuePair<string, object> kv in dicParameters)
-                {
-                    lst.Add(new SQLiteParameter(kv.Key, kv.Value));
-                }
+                throw new ArgumentNullException("sql=null");
             }
-            return ExecuteScalar<dataType>(sql, lst);
-        }
+            this.EnsureConnection();
 
-        public dataType ExecuteScalar<dataType>(string sql, IEnumerable<SQLiteParameter> parameters = null)
-        {
-            cmd.CommandText = sql;
-            if (parameters != null)
+            SQLiteCommand cmd = new SQLiteCommand(sql, this.Connection);
+            if (paramArr != null)
             {
-                foreach (var parameter in parameters)
+                foreach (SQLiteParameter p in paramArr)
                 {
-                    cmd.Parameters.Add(parameter);
-                }
-            }
-            return (dataType)Convert.ChangeType(cmd.ExecuteScalar(), typeof(dataType));
-        }
-
-        public dataType ExecuteScalar<dataType>(string sql)
-        {
-            cmd.CommandText = sql;
-            return (dataType)Convert.ChangeType(cmd.ExecuteScalar(), typeof(dataType));
-        }
-
-        private List<SQLiteParameter> GetParametersList(Dictionary<string, object> dicParameters)
-        {
-            List<SQLiteParameter> lst = new List<SQLiteParameter>();
-            if (dicParameters != null)
-            {
-                foreach (KeyValuePair<string, object> kv in dicParameters)
-                {
-                    lst.Add(new SQLiteParameter(kv.Key, kv.Value));
-                }
-            }
-            return lst;
-        }
-
-        public string Escape(string data)
-        {
-            data = data.Replace("'", "''");
-            data = data.Replace("\\", "\\\\");
-            return data;
-        }
-
-        public void Insert(string tableName, Dictionary<string, object> dic)
-        {
-            StringBuilder sbCol = new System.Text.StringBuilder();
-            StringBuilder sbVal = new System.Text.StringBuilder();
-
-            foreach (KeyValuePair<string, object> kv in dic)
-            {
-                if (sbCol.Length == 0)
-                {
-                    sbCol.Append("insert into ");
-                    sbCol.Append(tableName);
-                    sbCol.Append("(");
-                }
-                else
-                {
-                    sbCol.Append(",");
-                }
-
-                sbCol.Append("`");
-                sbCol.Append(kv.Key);
-                sbCol.Append("`");
-
-                if (sbVal.Length == 0)
-                {
-                    sbVal.Append(" values(");
-                }
-                else
-                {
-                    sbVal.Append(", ");
-                }
-
-                sbVal.Append("@v");
-                sbVal.Append(kv.Key);
-            }
-
-            sbCol.Append(") ");
-            sbVal.Append(");");
-
-            cmd.CommandText = sbCol.ToString() + sbVal.ToString();
-
-            foreach (KeyValuePair<string, object> kv in dic)
-            {
-                cmd.Parameters.AddWithValue("@v" + kv.Key, kv.Value);
-            }
-
-            cmd.ExecuteNonQuery();
-        }
-
-        public void Update(string tableName, Dictionary<string, object> dicData, string colCond, object varCond)
-        {
-            Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic[colCond] = varCond;
-            Update(tableName, dicData, dic);
-        }
-
-        public void Update(string tableName, Dictionary<string, object> dicData, Dictionary<string, object> dicCond)
-        {
-            if (dicData.Count == 0)
-                throw new Exception("dicData is empty.");
-
-            StringBuilder sbData = new System.Text.StringBuilder();
-
-            Dictionary<string, object> _dicTypeSource = new Dictionary<string, object>();
-
-            foreach (KeyValuePair<string, object> kv1 in dicData)
-            {
-                _dicTypeSource[kv1.Key] = null;
-            }
-
-            foreach (KeyValuePair<string, object> kv2 in dicCond)
-            {
-                if (!_dicTypeSource.ContainsKey(kv2.Key))
-                    _dicTypeSource[kv2.Key] = null;
-            }
-
-            sbData.Append("update `");
-            sbData.Append(tableName);
-            sbData.Append("` set ");
-
-            bool firstRecord = true;
-
-            foreach (KeyValuePair<string, object> kv in dicData)
-            {
-                if (firstRecord)
-                    firstRecord = false;
-                else
-                    sbData.Append(",");
-
-                sbData.Append("`");
-                sbData.Append(kv.Key);
-                sbData.Append("` = ");
-
-                sbData.Append("@v");
-                sbData.Append(kv.Key);
-            }
-
-            sbData.Append(" where ");
-
-            firstRecord = true;
-
-            foreach (KeyValuePair<string, object> kv in dicCond)
-            {
-                if (firstRecord)
-                    firstRecord = false;
-                else
-                {
-                    sbData.Append(" and ");
-                }
-
-                sbData.Append("`");
-                sbData.Append(kv.Key);
-                sbData.Append("` = ");
-
-                sbData.Append("@c");
-                sbData.Append(kv.Key);
-            }
-
-            sbData.Append(";");
-
-            cmd.CommandText = sbData.ToString();
-
-            foreach (KeyValuePair<string, object> kv in dicData)
-            {
-                cmd.Parameters.AddWithValue("@v" + kv.Key, kv.Value);
-            }
-
-            foreach (KeyValuePair<string, object> kv in dicCond)
-            {
-                cmd.Parameters.AddWithValue("@c" + kv.Key, kv.Value);
-            }
-
-            cmd.ExecuteNonQuery();
-        }
-
-        public long LastInsertRowId()
-        {
-            return ExecuteScalar<long>("select last_insert_rowid();");
-        }
-
-        #endregion
-
-        #region Utilities
-
-        public void CreateTable(SQLiteTable table)
-        {
-            StringBuilder sb = new Text.StringBuilder();
-            sb.Append("create table if not exists `");
-            sb.Append(table.TableName);
-            sb.AppendLine("`(");
-
-            bool firstRecord = true;
-
-            foreach (SQLiteColumn col in table.Columns)
-            {
-                if (col.ColumnName.Trim().Length == 0)
-                {
-                    throw new Exception("Column name cannot be blank.");
-                }
-
-                if (firstRecord)
-                    firstRecord = false;
-                else
-                    sb.AppendLine(",");
-
-                sb.Append(col.ColumnName);
-                sb.Append(" ");
-
-                if (col.AutoIncrement)
-                {
-
-                    sb.Append("integer primary key autoincrement");
-                    continue;
-                }
-
-                switch (col.ColDataType)
-                {
-                    case ColType.Text:
-                        sb.Append("text"); break;
-                    case ColType.Integer:
-                        sb.Append("integer"); break;
-                    case ColType.Decimal:
-                        sb.Append("decimal"); break;
-                    case ColType.DateTime:
-                        sb.Append("datetime"); break;
-                    case ColType.BLOB:
-                        sb.Append("blob"); break;
-                }
-
-                if (col.PrimaryKey)
-                    sb.Append(" primary key");
-                else if (col.NotNull)
-                    sb.Append(" not null");
-                else if (col.DefaultValue.Length > 0)
-                {
-                    sb.Append(" default ");
-
-                    if (col.DefaultValue.Contains(" ") || col.ColDataType == ColType.Text || col.ColDataType == ColType.DateTime)
-                    {
-                        sb.Append("'");
-                        sb.Append(col.DefaultValue);
-                        sb.Append("'");
-                    }
-                    else
-                    {
-                        sb.Append(col.DefaultValue);
-                    }
+                    cmd.Parameters.Add(p);
                 }
             }
 
-            sb.AppendLine(");");
-
-            cmd.CommandText = sb.ToString();
-            cmd.ExecuteNonQuery();
-        }
-
-        public void RenameTable(string tableFrom, string tableTo)
-        {
-            cmd.CommandText = string.Format("alter table `{0}` rename to `{1}`;", tableFrom, tableTo);
-            cmd.ExecuteNonQuery();
-        }
-
-        public void CopyAllData(string tableFrom, string tableTo)
-        {
-            DataTable dt1 = Select(string.Format("select * from `{0}` where 1 = 2;", tableFrom));
-            DataTable dt2 = Select(string.Format("select * from `{0}` where 1 = 2;", tableTo));
-
-            Dictionary<string, bool> dic = new Dictionary<string, bool>();
-
-            foreach (DataColumn dc in dt1.Columns)
+            if (rowWrapper == null)
             {
-                if (dt2.Columns.Contains(dc.ColumnName))
+                rowWrapper = new RowWrapper(SQLiteHelper.WrapRowToDictionary);
+            }
+
+            SQLiteDataReader reader = cmd.ExecuteReader();
+            List<object> result = new List<object>();
+            if (reader.HasRows)
+            {
+                int rowNum = 0;
+                while (reader.Read())
                 {
-                    if (!dic.ContainsKey(dc.ColumnName))
-                    {
-                        dic[dc.ColumnName] = true;
-                    }
+                    object row = rowWrapper(rowNum, reader);
+                    result.Add(row);
+                    rowNum++;
                 }
             }
+            reader.Close();
+            reader.Dispose();
+            cmd.Dispose();
+            return result;
+        }
 
-            foreach (DataColumn dc in dt2.Columns)
+        public static object WrapRowToDictionary(int rowNum, SQLiteDataReader reader)
+        {
+            int fc = reader.FieldCount;
+            Dictionary<string, object> row = new Dictionary<string, object>();
+            for (int i = 0; i < fc; i++)
             {
-                if (dt1.Columns.Contains(dc.ColumnName))
+                string fieldName = reader.GetName(i);
+                object value = reader.GetValue(i);
+                row.Add(fieldName, value);
+            }
+            return row;
+        }
+
+        /// <summary>  
+        /// <para>执行insert into语句</para>  
+        /// </summary>  
+        /// <param name="table"></param>  
+        /// <param name="entity"></param>  
+        /// <returns></returns>  
+        public int Save(string table, Dictionary<string, object> entity)
+        {
+            if (table == null)
+            {
+                throw new ArgumentNullException("table=null");
+            }
+            this.EnsureConnection();
+            string sql = BuildInsert(table, entity);
+            return this.ExecuteNonQuery(sql, BuildParamArray(entity));
+        }
+
+        private static SQLiteParameter[] BuildParamArray(Dictionary<string, object> entity)
+        {
+            List<SQLiteParameter> list = new List<SQLiteParameter>();
+            foreach (string key in entity.Keys)
+            {
+                list.Add(new SQLiteParameter(key, entity[key]));
+            }
+            if (list.Count == 0)
+                return null;
+            return list.ToArray();
+        }
+
+        private static string BuildInsert(string table, Dictionary<string, object> entity)
+        {
+            StringBuilder buf = new StringBuilder();
+            buf.Append("insert into ").Append(table);
+            buf.Append(" (");
+            foreach (string key in entity.Keys)
+            {
+                buf.Append(key).Append(",");
+            }
+            buf.Remove(buf.Length - 1, 1); // 移除最后一个,  
+            buf.Append(") ");
+            buf.Append("values(");
+            foreach (string key in entity.Keys)
+            {
+                buf.Append("@").Append(key).Append(","); // 创建一个参数  
+            }
+            buf.Remove(buf.Length - 1, 1);
+            buf.Append(") ");
+
+            return buf.ToString();
+        }
+
+        private static string BuildUpdate(string table, Dictionary<string, object> entity)
+        {
+            StringBuilder buf = new StringBuilder();
+            buf.Append("update ").Append(table).Append(" set ");
+            foreach (string key in entity.Keys)
+            {
+                buf.Append(key).Append("=").Append("@").Append(key).Append(",");
+            }
+            buf.Remove(buf.Length - 1, 1);
+            buf.Append(" ");
+            return buf.ToString();
+        }
+
+        /// <summary>  
+        /// <para>执行update语句</para>  
+        /// <para>where参数不必要包含'where'关键字</para>  
+        ///   
+        /// <para>如果where=null,那么忽略whereParams</para>  
+        /// <para>如果where!=null,whereParams=null,where部分无参数</para>  
+        /// </summary>  
+        /// <param name="table"></param>  
+        /// <param name="entity"></param>  
+        /// <param name="where"></param>  
+        /// <param name="whereParams"></param>  
+        /// <returns></returns>  
+        public int Update(string table, Dictionary<string, object> entity, string where, SQLiteParameter[] whereParams)
+        {
+            if (table == null)
+            {
+                throw new ArgumentNullException("table=null");
+            }
+            this.EnsureConnection();
+            string sql = BuildUpdate(table, entity);
+            SQLiteParameter[] arr = BuildParamArray(entity);
+            if (where != null)
+            {
+                sql += " where " + where;
+                if (whereParams != null)
                 {
-                    if (!dic.ContainsKey(dc.ColumnName))
-                    {
-                        dic[dc.ColumnName] = true;
-                    }
+                    SQLiteParameter[] newArr = new SQLiteParameter[arr.Length + whereParams.Length];
+                    Array.Copy(arr, newArr, arr.Length);
+                    Array.Copy(whereParams, 0, newArr, arr.Length, whereParams.Length);
+
+                    arr = newArr;
                 }
             }
+            return this.ExecuteNonQuery(sql, arr);
+        }
 
-            StringBuilder sb = new Text.StringBuilder();
-
-            foreach (KeyValuePair<string, bool> kv in dic)
+        /// <summary>  
+        /// <para>查询一行记录,无结果时返回null</para>  
+        /// <para>conditionCol = null时将忽略条件,直接执行select * from table </para>  
+        /// </summary>  
+        /// <param name="table"></param>  
+        /// <param name="conditionCol"></param>  
+        /// <param name="conditionVal"></param>  
+        /// <returns></returns>  
+        public Dictionary<string, object> QueryOne(string table, string conditionCol, object conditionVal)
+        {
+            if (table == null)
             {
-                if (sb.Length > 0)
-                    sb.Append(",");
+                throw new ArgumentNullException("table=null");
+            }
+            this.EnsureConnection();
 
-                sb.Append("`");
-                sb.Append(kv.Key);
-                sb.Append("`");
+            string sql = "select * from " + table;
+            if (conditionCol != null)
+            {
+                sql += " where " + conditionCol + "=@" + conditionCol;
+            }
+            if (this.ShowSql)
+            {
+                Console.WriteLine("SQL: " + sql);
             }
 
-            StringBuilder sb2 = new Text.StringBuilder();
-            sb2.Append("insert into `");
-            sb2.Append(tableTo);
-            sb2.Append("`(");
-            sb2.Append(sb.ToString());
-            sb2.Append(") select ");
-            sb2.Append(sb.ToString());
-            sb2.Append(" from `");
-            sb2.Append(tableFrom);
-            sb2.Append("`;");
-
-            cmd.CommandText = sb2.ToString();
-            cmd.ExecuteNonQuery();
+            List<object> list = this.ExecuteRow(sql, new SQLiteParameter[] {   
+                new SQLiteParameter(conditionCol,conditionVal)  
+            }, null);
+            if (list.Count == 0)
+                return null;
+            return (Dictionary<string, object>)list[0];
         }
 
-        public void DropTable(string table)
+        /// <summary>  
+        /// 执行delete from table 语句  
+        /// where不必包含'where'关键字  
+        /// where=null时将忽略whereParams  
+        /// </summary>  
+        /// <param name="table"></param>  
+        /// <param name="where"></param>  
+        /// <param name="whereParams"></param>  
+        /// <returns></returns>  
+        public int Delete(string table, string where, SQLiteParameter[] whereParams)
         {
-            cmd.CommandText = string.Format("drop table if exists `{0}`", table);
-            cmd.ExecuteNonQuery();
+            if (table == null)
+            {
+                throw new ArgumentNullException("table=null");
+            }
+            this.EnsureConnection();
+            string sql = "delete from " + table + " ";
+            if (where != null)
+            {
+                sql += "where " + where;
+            }
+
+            return this.ExecuteNonQuery(sql, whereParams);
         }
-
-        public void UpdateTableStructure(string targetTable, SQLiteTable newStructure)
-        {
-            newStructure.TableName = targetTable + "_temp";
-
-            CreateTable(newStructure);
-
-            CopyAllData(targetTable, newStructure.TableName);
-
-            DropTable(targetTable);
-
-            RenameTable(newStructure.TableName, targetTable);
-        }
-
-        public void AttachDatabase(string database, string alias)
-        {
-            Execute(string.Format("attach '{0}' as {1};", database, alias));
-        }
-
-        public void DetachDatabase(string alias)
-        {
-            Execute(string.Format("detach {0};", alias));
-        }
-
-        #endregion
-
     }
+
+    /// <summary>  
+    /// 在SQLiteManager.Execute方法中回调,将SQLiteDataReader包装成object   
+    /// </summary>  
+    /// <param name="reader"></param>  
+    /// <returns></returns>  
+    public delegate object ReaderWrapper(SQLiteDataReader reader);
+
+    /// <summary>  
+    /// 将SQLiteDataReader的行包装成object  
+    /// </summary>  
+    /// <param name="rowNum"></param>  
+    /// <param name="reader"></param>  
+    /// <returns></returns>  
+    public delegate object RowWrapper(int rowNum, SQLiteDataReader reader);
 }
