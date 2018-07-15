@@ -22,6 +22,46 @@ namespace RobotSpeaker.SportDB
             _dbHelper = new DbContext("main", "Data Source=" + dbFile, new SQLiteFactory());
             _dbHelper.IsSupportInsertAfterSelectIdentity = false;
         }
+
+        /// <summary>
+        /// 查询问题
+        /// </summary>
+        /// <param name="ask"></param>
+        /// <returns></returns>
+        public static Robot_Questions GetQuestion(string ask)
+        {
+            return DbHelper.table("Robot_Questions").where("Ask=?", new string[] { ask }).select("*").getItem<Robot_Questions>(new Robot_Questions());
+        }
+
+        /// <summary>
+        /// 查询动作
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Robot_Actions GetAction(long id)
+        {
+            return DbHelper.table("Robot_Actions").where("Id=?", new object[] { id }).select("*").getItem<Robot_Actions>(new Robot_Actions());
+        }
+
+        /// <summary>
+        /// 查询动作
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public static Robot_Actions GetAction(string code)
+        {
+            return DbHelper.table("Robot_Actions").where("Code=?", new object[] { code }).select("*").getItem<Robot_Actions>(new Robot_Actions());
+        }
+
+        /// <summary>
+        /// 查询动作指令
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static List<Robot_Steps> GetSteps(long id)
+        {
+            return DbHelper.table("Robot_Steps").where("ActionId=?", new object[] { id }).select("*").getList<Robot_Steps>(new Robot_Steps());
+        }
     }
 
     /// <summary>
