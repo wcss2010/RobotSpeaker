@@ -68,7 +68,7 @@ namespace RobotSpeaker.SportDB
     /// 问答表
     /// </summary>
     [Serializable]
-    public class Robot_Questions : IBinder 
+    public class Robot_Questions : IBinder
     {
         /// <summary>
         /// ID
@@ -85,17 +85,11 @@ namespace RobotSpeaker.SportDB
         /// </summary>
         public string Answer { get; set; }
 
-        /// <summary>
-        /// 动作ID
-        /// </summary>
-        public long ActionId { get; set; }
-
         public void bind(GetHandlerEx source)
         {
             Id = source("Id").value<long>(0);
             Ask = source("Ask").value("");
             Answer = source("Answer").value("");
-            ActionId = source("ActionId").value<long>(0);
         }
 
         public IBinder clone()
@@ -125,11 +119,17 @@ namespace RobotSpeaker.SportDB
         /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// 触发条件
+        /// </summary>
+        public string Condition { get; set; }
+
         public void bind(GetHandlerEx source)
         {
             Id = source("Id").value<long>(0);
             Code = source("Code").value("");
             Name = source("Name").value("");
+            Condition = source("Condition").value("");
         }
 
         public IBinder clone()
@@ -142,7 +142,7 @@ namespace RobotSpeaker.SportDB
     /// 动作序列表
     /// </summary>
     [Serializable]
-    public class Robot_Steps : IBinder 
+    public class Robot_Steps : IBinder
     {
         /// <summary>
         /// ID
