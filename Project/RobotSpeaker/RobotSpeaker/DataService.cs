@@ -12,6 +12,8 @@ using System.Threading;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
+using RobotSpeaker.SportDB;
 
 namespace RobotSpeaker
 {
@@ -96,7 +98,7 @@ namespace RobotSpeaker
         /// </summary>
         public static void Init()
         {
-
+            DBInstance.Init(Path.Combine(Application.StartupPath, "static.db"));
         }
 
         /// <summary>
