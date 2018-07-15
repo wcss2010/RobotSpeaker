@@ -84,15 +84,33 @@ namespace RobotSpeaker
         /// </summary>
         private static JoystickService _joystickServiceObj = new JoystickService();
 
-        private static AIUIService _aiuiService = new AIUIService();
+        private static AIUIOnlineService _aiuiOnlineService = new AIUIOnlineService();
         /// <summary>
-        /// AIUI服务
+        /// AIUI在线服务
         /// </summary>
-        public static AIUIService AiuiService
+        public static AIUIOnlineService AiuiOnlineService
         {
-            get { return DataService._aiuiService; }
+            get { return DataService._aiuiOnlineService; }
         }
 
+        private static ActionService _actionService = new ActionService();
+        /// <summary>
+        /// 动作服务
+        /// </summary>
+        public static ActionService ActionService
+        {
+            get { return DataService._actionService; }
+        }
+
+        private static AiuiOfflineService _aiuiOfflineService = new AiuiOfflineService();
+        /// <summary>
+        /// AIUI离线服务
+        /// </summary>
+        public static AiuiOfflineService AiuiOfflineService
+        {
+            get { return DataService._aiuiOfflineService; }
+        }
+        
         /// <summary>
         /// 初始化
         /// </summary>
@@ -112,8 +130,14 @@ namespace RobotSpeaker
             _joystickServiceObj.JoystickPressEvent += JoystickService_JoystickPressEvent;
             _joystickServiceObj.Open(MainUIObj);
 
-            //打开语音服务
-            _aiuiService.Open();
+            //打开在线语音服务
+            _aiuiOnlineService.Open();
+
+            //打开离线语音服务
+            _aiuiOfflineService.Open();
+
+            //打开动作服务
+            _actionService.Open();
         }
 
         private static void JoystickService_JoystickPressEvent(object sender, JoystickPressEventArgs args)
@@ -141,8 +165,14 @@ namespace RobotSpeaker
             //关闭手柄服务
             _joystickServiceObj.Close();
 
-            //关闭语音服务
-            _aiuiService.Close();
+            //关闭在线语音服务
+            _aiuiOnlineService.Close();
+
+            //关闭离线语音服务
+            _aiuiOfflineService.Close();
+
+            //关闭动作服务
+            _actionService.Close();
         }
 
         /// <summary>
@@ -150,12 +180,17 @@ namespace RobotSpeaker
         /// </summary>
         public static void Reset()
         {
-            //重置AIUI服务
-            AiuiService.Close();
-            AiuiService.Open();
+            //重置AIUI在线服务
+            _aiuiOnlineService.Close();
+            _aiuiOnlineService.Open();
+
+            //重置AIUI离线服务
+            _aiuiOfflineService.Close();
+            _aiuiOfflineService.Open();
 
             //重置运动服务
-
+            _actionService.Close();
+            _actionService.Open();
         }
     }
 
@@ -412,9 +447,9 @@ namespace RobotSpeaker
     }
 
     /// <summary>
-    /// AIUI监听服务
+    /// AIUI在线服务
     /// </summary>
-    public class AIUIService
+    public class AIUIOnlineService
     {
         private XFJsonResolver _xfJsonResolver = new XFJsonResolver();
         /// <summary>
@@ -425,7 +460,7 @@ namespace RobotSpeaker
             get { return _xfJsonResolver; }
         }
 
-        public AIUIService()
+        public AIUIOnlineService()
         {
             XfJsonResolver.XFCardLocationEvent += XfJsonResolver_XFCardLocationEvent;
             XfJsonResolver.XFCardWakeupEvent += XfJsonResolver_XFCardWakeupEvent;
@@ -710,6 +745,38 @@ namespace RobotSpeaker
                     System.Console.WriteLine("解析错误！Ex:" + ex.ToString());
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// AIUI离线语音
+    /// </summary>
+    public class AiuiOfflineService
+    {
+        public void Open()
+        {
+
+        }
+
+        public void Close()
+        {
+
+        }
+    }
+
+    /// <summary>
+    /// 机器人动作服务
+    /// </summary>
+    public class ActionService
+    {
+        public void Open()
+        {
+        
+        }
+
+        public void Close()
+        {
+           
         }
     }
 }

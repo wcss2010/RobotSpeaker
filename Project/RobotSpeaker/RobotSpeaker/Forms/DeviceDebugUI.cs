@@ -221,7 +221,7 @@ namespace RobotSpeaker.Forms
         /// <param name="pwd"></param>
         private void AIUIConnectToWifi(string encryptType, string ssid, string pwd)
         {
-            DataService.AiuiService.AiuiConnection.ConfigWifiMessage(ssid + "|" + pwd + "|" + WifiEncryptType.WPA);
+            DataService.AiuiOnlineService.AiuiConnection.ConfigWifiMessage(ssid + "|" + pwd + "|" + WifiEncryptType.WPA);
         }
 
         /// <summary>
@@ -258,7 +258,7 @@ namespace RobotSpeaker.Forms
 
         private void btnGetAIUIWifi_Click(object sender, EventArgs e)
         {
-            DataService.AiuiService.AiuiConnection.SendCmd(CommandConst.QUERY_WIFI_STATE);
+            DataService.AiuiOnlineService.AiuiConnection.SendCmd(CommandConst.QUERY_WIFI_STATE);
         }
 
         private void btnAIUIConfig_Click(object sender, EventArgs e)
@@ -289,18 +289,18 @@ namespace RobotSpeaker.Forms
 
                 //设置AIUI属性
                 string configStr = tbAppId.Text.Trim() + "|" + tbAppKey.Text.Trim() + "|" + tbScene.Text.Trim() + "|" + cbIsEnabledUseAIUIAfter.CheckState;
-                DataService.AiuiService.AiuiConnection.SendAIUIConfigMessage(configStr.Trim());
+                DataService.AiuiOnlineService.AiuiConnection.SendAIUIConfigMessage(configStr.Trim());
             }
         }
 
         private void btnGetWakeupState_Click(object sender, EventArgs e)
         {
-            DataService.AiuiService.AiuiConnection.SendCmd(CommandConst.QUERY_AIUI_STATE);
+            DataService.AiuiOnlineService.AiuiConnection.SendCmd(CommandConst.QUERY_AIUI_STATE);
         }
 
         private void btnWakeup_Click(object sender, EventArgs e)
         {
-            DataService.AiuiService.AiuiConnection.SendWakeUpMessage(false);
+            DataService.AiuiOnlineService.AiuiConnection.SendWakeUpMessage(false);
         }
 
         private void btnTTSRead_Click(object sender, EventArgs e)
@@ -310,24 +310,24 @@ namespace RobotSpeaker.Forms
             {
                 if (inputBox.Input.Trim() != string.Empty)
                 {
-                    DataService.AiuiService.AiuiConnection.SendTTSMessage(inputBox.Input);
+                    DataService.AiuiOnlineService.AiuiConnection.SendTTSMessage(inputBox.Input);
                 }
             }
         }
 
         private void btnStartVoice_Click(object sender, EventArgs e)
         {
-            DataService.AiuiService.AiuiConnection.SendLauchVoiceMessage(true);
+            DataService.AiuiOnlineService.AiuiConnection.SendLauchVoiceMessage(true);
         }
 
         private void btnStopVoice_Click(object sender, EventArgs e)
         {
-            DataService.AiuiService.AiuiConnection.SendLauchVoiceMessage(false);
+            DataService.AiuiOnlineService.AiuiConnection.SendLauchVoiceMessage(false);
         }
 
         private void btnResetWakeup_Click(object sender, EventArgs e)
         {
-            DataService.AiuiService.AiuiConnection.SendWakeUpMessage(true);
+            DataService.AiuiOnlineService.AiuiConnection.SendWakeUpMessage(true);
         }
     }
 
