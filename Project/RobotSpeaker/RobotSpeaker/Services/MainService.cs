@@ -161,6 +161,10 @@ namespace RobotSpeaker
 
         private static void JoystickService_JoystickPressEvent(object sender, JoystickPressEventArgs args)
         {
+            //保存当前按钮状态
+            TaskService.StateObject.CurrentJoyKey = args.ButtonType;
+
+            //向ConfigUI界面中的手柄测试界面传递按键指令
             if (MainUIObj != null)
             {
                 if (MainUIObj.IsHandleCreated)
