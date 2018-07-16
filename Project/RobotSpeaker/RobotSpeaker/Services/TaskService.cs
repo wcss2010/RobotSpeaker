@@ -82,7 +82,7 @@ namespace RobotSpeaker
         /// <summary>
         /// 当前用户说话的角度
         /// </summary>
-        public short CurrentUserAngle { get; set; }
+        public double CurrentUserAngle { get; set; }
 
         /// <summary>
         /// 当前用户手柄按下了什么按钮

@@ -40,54 +40,144 @@ namespace RobotSpeaker
 
         void XfJsonResolver_XFCardQuestionEvent(object sender, XFQuestionEventArgs args)
         {
-            if (MainService.MainUIObj.IsHandleCreated)
-            {
-                MainService.MainUIObj.Invoke(new MethodInvoker(delegate()
-                {
-                    //if (DataService.VoiceUIObj == null)
-                    //{
-                    //    DataService.VoiceUIObj = new VoiceUI();
-                    //    DataService.VoiceUIObj.Show();
-                    //}
+            //保存用户的问话
+            TaskService.StateObject.CurrentUserSay = args.Ask;
 
-                    if (MainService.VoiceUIObj != null)
-                    {
-                        if (args.Ask != null && args.Ask.Trim().Length > 0)
-                        {
-                            //显示问话
-                            MainService.VoiceUIObj.ChatPanel.AddUserMsg(args.Ask.Trim());
-                        }
-                        if (args.Answer != null && args.Answer.Trim().Length > 0)
-                        {
-                            //显示答话
-                            MainService.VoiceUIObj.ChatPanel.AddMachineMsg(args.Answer.Trim());
-                        }
-                    }
-                }));
+            //显示问话
+            ShowUserText(args.Ask);
+
+            //判断是否需要使用本地问答库
+            if (IsUseLocalQuestion(args.Ask))
+            {
+                return;
+            }
+            else
+            {
+                //显示讯飞的回答
+                ShowMachineText(args.Answer);
             }
         }
 
         void XfJsonResolver_XFCardWakeupEvent(object sender, EventArgs args)
         {
+            //关闭视频播放器(如果有的话)
+            CloseVideoPlayer();
+        }
+
+        void XfJsonResolver_XFCardLocationEvent(object sender, XFSpeakerLocationEventArgs args)
+        {
+            //关闭视频播放器(如果有的话)
+            CloseVideoPlayer();
+
+            //保存说话的角度
+            TaskService.StateObject.CurrentUserAngle = args.Angle;
+        }
+
+        /// <summary>
+        /// 显示人讲话的文本
+        /// </summary>
+        /// <param name="txt"></param>
+        public void ShowUserText(string txt)
+        {
             if (MainService.MainUIObj.IsHandleCreated)
             {
                 MainService.MainUIObj.Invoke(new MethodInvoker(delegate()
                 {
-                    if (MainService.VideoPlayerUIObj != null)
+                    if (MainService.VoiceUIObj != null)
                     {
-                        try
+                        if (txt != null && txt.Trim().Length > 0)
                         {
-                            MainService.VideoPlayerUIObj.Close();
+                            //显示问话
+                            MainService.VoiceUIObj.ChatPanel.AddUserMsg(txt.Trim());
                         }
-                        catch (Exception ex) { }
-
-                        MainService.VideoPlayerUIObj = null;
                     }
                 }));
             }
         }
 
-        void XfJsonResolver_XFCardLocationEvent(object sender, XFSpeakerLocationEventArgs args)
+        /// <summary>
+        /// 显示机器回答的文本
+        /// </summary>
+        /// <param name="txt"></param>
+        public void ShowMachineText(string txt)
+        {
+            if (MainService.MainUIObj.IsHandleCreated)
+            {
+                MainService.MainUIObj.Invoke(new MethodInvoker(delegate()
+                {
+                    if (MainService.VoiceUIObj != null)
+                    {
+                        if (txt != null && txt.Length > 0)
+                        {
+                            //显示答话
+                            MainService.VoiceUIObj.ChatPanel.AddMachineMsg(txt.Trim());
+                        }
+                    }
+                }));
+            }
+        }
+
+        /// <summary>
+        /// 让语音卡朗读一段文字
+        /// </summary>
+        /// <param name="txt"></param>
+        public void TTSPlay(string txt)
+        {
+            if (MainService.MainUIObj != null)
+            {
+                if (MainService.MainUIObj.IsHandleCreated)
+                {
+                    MainService.MainUIObj.Invoke(new MethodInvoker(delegate()
+                        {
+                            if (SuperObject.Config.EnabledOnlineVoice)
+                            {
+                                //在线模式播放
+                                MainService.AiuiOnlineService.AiuiConnection.SendTTSMessage(txt);
+                            }
+                            else
+                            {
+                                //离线模式播放
+
+                            }
+                        }));
+                }
+            }
+        }
+
+        /// <summary>
+        /// 是否可以使用本地问答库
+        /// </summary>
+        /// <param name="ask"></param>
+        /// <returns></returns>
+        public bool IsUseLocalQuestion(string ask)
+        {
+            bool result = false;
+            Robot_Questions question = DBInstance.GetQuestion(ask);
+
+            if (question != null)
+            {
+                //显示回答
+                ShowMachineText(question.Answer);
+
+                //播放回答语音
+                TTSPlay(question.Answer);
+
+                //确定使用本地问答库
+                result = true;
+            }
+            else
+            {
+                //仍然使用讯飞问答结果
+                result = false;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 关闭视频播放器(如果有的话)
+        /// </summary>
+        private void CloseVideoPlayer()
         {
             if (MainService.MainUIObj.IsHandleCreated)
             {
