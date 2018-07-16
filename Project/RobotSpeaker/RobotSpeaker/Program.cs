@@ -37,7 +37,7 @@ namespace RobotSpeaker
             catch (Exception ex) { }
 
             //初始化数据服务
-            DataService.Init();
+            MainService.Init();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

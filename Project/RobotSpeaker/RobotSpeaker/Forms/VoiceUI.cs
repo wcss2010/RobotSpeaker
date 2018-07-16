@@ -22,7 +22,7 @@ namespace RobotSpeaker.Forms
             InitializeComponent();
 
             //保存引用
-            DataService.VoiceUIObj = this;
+            MainService.VoiceUIObj = this;
         }
 
         protected override void OnLoad(EventArgs e)

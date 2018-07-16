@@ -38,7 +38,7 @@ namespace RobotSpeaker.Forms
         {
             InitializeComponent();
 
-            DataService.DeviceDebugUIObj = this;
+            MainService.DeviceDebugUIObj = this;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -221,7 +221,7 @@ namespace RobotSpeaker.Forms
         /// <param name="pwd"></param>
         private void AIUIConnectToWifi(string encryptType, string ssid, string pwd)
         {
-            DataService.AiuiOnlineService.AiuiConnection.ConfigWifiMessage(ssid + "|" + pwd + "|" + WifiEncryptType.WPA);
+            MainService.AiuiOnlineService.AiuiConnection.ConfigWifiMessage(ssid + "|" + pwd + "|" + WifiEncryptType.WPA);
         }
 
         /// <summary>
@@ -258,7 +258,7 @@ namespace RobotSpeaker.Forms
 
         private void btnGetAIUIWifi_Click(object sender, EventArgs e)
         {
-            DataService.AiuiOnlineService.AiuiConnection.SendCmd(CommandConst.QUERY_WIFI_STATE);
+            MainService.AiuiOnlineService.AiuiConnection.SendCmd(CommandConst.QUERY_WIFI_STATE);
         }
 
         private void btnAIUIConfig_Click(object sender, EventArgs e)
@@ -289,18 +289,18 @@ namespace RobotSpeaker.Forms
 
                 //设置AIUI属性
                 string configStr = tbAppId.Text.Trim() + "|" + tbAppKey.Text.Trim() + "|" + tbScene.Text.Trim() + "|" + cbIsEnabledUseAIUIAfter.CheckState;
-                DataService.AiuiOnlineService.AiuiConnection.SendAIUIConfigMessage(configStr.Trim());
+                MainService.AiuiOnlineService.AiuiConnection.SendAIUIConfigMessage(configStr.Trim());
             }
         }
 
         private void btnGetWakeupState_Click(object sender, EventArgs e)
         {
-            DataService.AiuiOnlineService.AiuiConnection.SendCmd(CommandConst.QUERY_AIUI_STATE);
+            MainService.AiuiOnlineService.AiuiConnection.SendCmd(CommandConst.QUERY_AIUI_STATE);
         }
 
         private void btnWakeup_Click(object sender, EventArgs e)
         {
-            DataService.AiuiOnlineService.AiuiConnection.SendWakeUpMessage(false);
+            MainService.AiuiOnlineService.AiuiConnection.SendWakeUpMessage(false);
         }
 
         private void btnTTSRead_Click(object sender, EventArgs e)
@@ -310,24 +310,24 @@ namespace RobotSpeaker.Forms
             {
                 if (inputBox.Input.Trim() != string.Empty)
                 {
-                    DataService.AiuiOnlineService.AiuiConnection.SendTTSMessage(inputBox.Input);
+                    MainService.AiuiOnlineService.AiuiConnection.SendTTSMessage(inputBox.Input);
                 }
             }
         }
 
         private void btnStartVoice_Click(object sender, EventArgs e)
         {
-            DataService.AiuiOnlineService.AiuiConnection.SendLauchVoiceMessage(true);
+            MainService.AiuiOnlineService.AiuiConnection.SendLauchVoiceMessage(true);
         }
 
         private void btnStopVoice_Click(object sender, EventArgs e)
         {
-            DataService.AiuiOnlineService.AiuiConnection.SendLauchVoiceMessage(false);
+            MainService.AiuiOnlineService.AiuiConnection.SendLauchVoiceMessage(false);
         }
 
         private void btnResetWakeup_Click(object sender, EventArgs e)
         {
-            DataService.AiuiOnlineService.AiuiConnection.SendWakeUpMessage(true);
+            MainService.AiuiOnlineService.AiuiConnection.SendWakeUpMessage(true);
         }
     }
 

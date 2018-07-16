@@ -26,7 +26,7 @@ namespace RobotSpeaker.Forms.Player
         {
             base.OnLoad(e);
 
-            listItemC = DataService.GetImage(Path.Combine(Application.StartupPath, "Images/listBar.png"));
+            listItemC = MainService.GetImage(Path.Combine(Application.StartupPath, "Images/listBar.png"));
 
             //plListBar.BackgroundImage = listItemC;
             plListBar.BackgroundImageLayout = ImageLayout.Stretch;

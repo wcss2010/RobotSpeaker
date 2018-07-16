@@ -22,7 +22,7 @@ namespace RobotSpeaker.Forms
         {
             InitializeComponent();
 
-            DataService.ConfigUIObj = this;
+            MainService.ConfigUIObj = this;
 
             foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
             {
@@ -216,7 +216,7 @@ namespace RobotSpeaker.Forms
         /// </summary>
         private void ResetDataService()
         {
-            DataService.Reset();
+            MainService.Reset();
         }
     }
 }

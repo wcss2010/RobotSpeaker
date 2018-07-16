@@ -24,7 +24,7 @@ namespace RobotSpeaker.Forms.Player
             InitializeComponent();
 
             VideoUrl = videoFile;
-            DataService.VideoPlayerUIObj = this;
+            MainService.VideoPlayerUIObj = this;
         }
 
         protected override void OnLoad(EventArgs e)

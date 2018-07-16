@@ -24,16 +24,16 @@ namespace RobotSpeaker.Forms
             plTabPanel.Top = (Screen.PrimaryScreen.Bounds.Height - plTabPanel.Height) / 2;
             plTabPanel.Left = (Screen.PrimaryScreen.Bounds.Width - plTabPanel.Width) / 2;
 
-            ibNormal.NoFocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\goNormal1.png"));
-            ibNormal.FocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\goNormal2.png"));
+            ibNormal.NoFocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\goNormal1.png"));
+            ibNormal.FocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\goNormal2.png"));
             ibNormal.EnabledMouseDownAndMouseUp = false;
 
-            ibUseDevice.NoFocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\goJoy1.png"));
-            ibUseDevice.FocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\goJoy2.png"));
+            ibUseDevice.NoFocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\goJoy1.png"));
+            ibUseDevice.FocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\goJoy2.png"));
             ibUseDevice.EnabledMouseDownAndMouseUp = false;
 
-            ibFree.NoFocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\goFree1.png"));
-            ibFree.FocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\goFree2.png"));
+            ibFree.NoFocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\goFree1.png"));
+            ibFree.FocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\goFree2.png"));
             ibFree.EnabledMouseDownAndMouseUp = false;
 
             //切换按钮状态

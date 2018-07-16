@@ -23,7 +23,7 @@ namespace RobotSpeaker.Forms
             base.OnLoad(e);
 
             //打开服务
-            DataService.Open(this);
+            MainService.Open(this);
 
             plTabPanel.Top = (Screen.PrimaryScreen.Bounds.Height - plTabPanel.Height) / 2;
             plTabPanel.Left = (Screen.PrimaryScreen.Bounds.Width - plTabPanel.Width) / 2;
@@ -31,27 +31,27 @@ namespace RobotSpeaker.Forms
             BackButton.NoFocusImage = null;
             BackButton.FocusImage = null;
 
-            ibAbout.NoFocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\machine1.png"));
-            ibAbout.FocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\machine2.png"));
+            ibAbout.NoFocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\machine1.png"));
+            ibAbout.FocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\machine2.png"));
 
-            ibGo.NoFocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\go1.png"));
-            ibGo.FocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\go2.png"));
+            ibGo.NoFocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\go1.png"));
+            ibGo.FocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\go2.png"));
 
-            ibFace.NoFocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\face1.png"));
-            ibFace.FocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\face2.png"));
+            ibFace.NoFocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\face1.png"));
+            ibFace.FocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\face2.png"));
 
-            ibVoice.NoFocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\voice1.png"));
-            ibVoice.FocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\voice2.png"));
+            ibVoice.NoFocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\voice1.png"));
+            ibVoice.FocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\voice2.png"));
 
-            ibSetting.NoFocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\set1.png"));
-            ibSetting.FocusImage = DataService.GetImage(Path.Combine(Application.StartupPath, @"Images\set2.png"));
+            ibSetting.NoFocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\set1.png"));
+            ibSetting.FocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\set2.png"));
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
 
-            DataService.Close();
+            MainService.Close();
         }
 
         protected override void OnClickBackButton(EventArgs e)
