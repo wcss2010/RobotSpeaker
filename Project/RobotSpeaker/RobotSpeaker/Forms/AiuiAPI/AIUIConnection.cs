@@ -35,7 +35,8 @@ namespace AIUISerials
 
         private int serailDataLength = 0;
         private PacketBuilder packetBuilder = new PacketBuilder();
-        private List<byte> dataList = new List<byte>();
+        private MemoryStream receiveBuffer = null;
+        private byte[] packageHeader = new byte[] { 0xA5, 0x01 };
 
         private bool _enabledAutoReply = true;
         /// <summary>
@@ -67,71 +68,76 @@ namespace AIUISerials
 
         void _serialPort_MessageReceived(object sender, MessageReceivedEventArgs args)
         {
-            byte[] readBuffer = args.Data;
-
-            for (int i = 0; i < readBuffer.Length; i++)
+            if (receiveBuffer == null)
             {
-                dataList.Add(readBuffer[i]);
-                if (dataList.Count == 5)
+                receiveBuffer = new MemoryStream();
+            }
+
+            //查询开始位置
+            int offset = IndexOf(args.Data,packageHeader);
+            if (offset>= 0)
+            {
+               //遇到包头则重新生成内存流开始缓存
+               if (receiveBuffer!= null)
+               {
+                  receiveBuffer.Dispose();
+               }
+
+               receiveBuffer = new MemoryStream();
+               receiveBuffer.Write(args.Data,offset,args.Data.Length - offset);
+            }else
+            {
+               //不是包头继续累加数据
+               receiveBuffer.Position = receiveBuffer.Length;
+               receiveBuffer.Write(args.Data,0,args.Data.Length);
+            }
+
+            //解析长度
+            receiveBuffer.Position = 3;
+            byte[] lengthBytes = new byte[2];
+            receiveBuffer.Read(lengthBytes,0,lengthBytes.Length);
+            short length = BitConverter.ToInt16(lengthBytes,0);
+
+            //判断是否已收到完整数据包
+            if (receiveBuffer.Length >= length + 8)
+            {
+                //取数据
+                byte[] packet = receiveBuffer.ToArray();
+
+                //结束receiveBuffer
+                receiveBuffer.Dispose();
+                receiveBuffer = null;
+
+                if (packet[packet.Length - 1] == Utils.CalcCheckCode(new List<byte>(packet)))
                 {
-                    if (dataList[0] == 0xa5 && dataList[1] == 0x01)
+                    //取ID
+                    int id = ((packet[6] & 0xff) << 8) + packet[5];
+
+                    //设置ID
+                    packetBuilder.setSeqId(id);
+
+                    //自动回复
+                    if (EnabledAutoReply)
                     {
-                        serailDataLength = ((dataList[4] & 0xff) << 8) + (dataList[3] & 0xff);
-                    }
-                    else
-                    {
-                        dataList.RemoveAt(0);
-                    }
-                }
-
-                if (serailDataLength != 0 && dataList.Count != 0 && dataList.Count == 8 + serailDataLength)
-                {
-                    if (dataList[0] == 0xa5 && dataList[1] == 0x01)
-                    {
-                        if (dataList[dataList.Count - 1] == Utils.CalcCheckCode(dataList))
-                        {
-                            //取ID
-                            int id = ((dataList[6] & 0xff) << 8) + dataList[5];
-
-                            //设置ID
-                            packetBuilder.setSeqId(id);
-
-                            //自动回复
-                            if (EnabledAutoReply)
-                            {
-                                SendConfirmMessage();
-                            }
-
-                            //处理消息
-                            dealMsg(dataList, serailDataLength);
-                        }
+                        SendConfirmMessage();
                     }
 
-                    //清理缓冲区
-                    ClearDataList();
+                    //处理消息
+                    ProcessMsg(packet, length);
                 }
             }
-        }
-
-        public void ClearDataList()
-        {
-            dataList.Clear();
-            serailDataLength = 0;
         }
         
         /// <summary>
         /// 投递Json消息
         /// </summary>
-        /// <param name="list"></param>
+        /// <param name="source"></param>
         /// <param name="contentLen"></param>
-        private void dealMsg(List<byte> list, int contentLen) {
-            if (list[2] == 0x04)
+        private void ProcessMsg(byte[] source, int contentLen) {
+            if (source[2] == 0x04)
             {
                 byte[] data = new byte[contentLen];
-                for (int j = 0; j < contentLen; j++)
-                {
-                    data[j] = list[j + 7];
-                }
+                Array.Copy(source, 7, data, 0, data.Length);
 
                 //投递消息事件
                 OnAIUIConnectionReceivedEvent(Utils.Decompress(data));
@@ -186,6 +192,39 @@ namespace AIUISerials
         public void SendCmd(string sendCmd)
         {
             SerialPort.SendMessage(packetBuilder.buildCmdPacket(sendCmd).ToArray());
+        }
+
+        /// <summary>
+        /// 报告指定的 System.Byte[] 在此实例中的第一个匹配项的索引。
+        /// </summary>
+        /// <param name="srcBytes">被执行查找的 System.Byte[]。</param>
+        /// <param name="searchBytes">要查找的 System.Byte[]。</param>
+        /// <returns>如果找到该字节数组，则为 searchBytes 的索引位置；如果未找到该字节数组，则为 -1。如果 searchBytes 为 null 或者长度为0，则返回值为 -1。</returns>
+        public int IndexOf(byte[] srcBytes, byte[] searchBytes)
+        {
+            if (srcBytes == null) { return -1; }
+            if (searchBytes == null) { return -1; }
+            if (srcBytes.Length == 0) { return -1; }
+            if (searchBytes.Length == 0) { return -1; }
+            if (srcBytes.Length < searchBytes.Length) { return -1; }
+            for (int i = 0; i < srcBytes.Length - searchBytes.Length; i++)
+            {
+                if (srcBytes[i] == searchBytes[0])
+                {
+                    if (searchBytes.Length == 1) { return i; }
+                    bool flag = true;
+                    for (int j = 1; j < searchBytes.Length; j++)
+                    {
+                        if (srcBytes[i + j] != searchBytes[j])
+                        {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if (flag) { return i; }
+                }
+            }
+            return -1;
         }
     }
 }
