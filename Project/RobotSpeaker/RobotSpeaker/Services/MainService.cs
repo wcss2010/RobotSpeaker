@@ -152,8 +152,11 @@ namespace RobotSpeaker
             //打开离线语音服务
             _aiuiOfflineService.Open();
 
-            //打开动作服务
+            //打开电机驱动服务
             _motorControlService.Open();
+
+            //打开任务服务
+            _taskService.Open();
         }
 
         private static void JoystickService_JoystickPressEvent(object sender, JoystickPressEventArgs args)
@@ -187,8 +190,11 @@ namespace RobotSpeaker
             //关闭离线语音服务
             _aiuiOfflineService.Close();
 
-            //关闭动作服务
+            //关闭电机驱动服务
             _motorControlService.Close();
+
+            //关闭任务服务
+            _taskService.Close();
         }
 
         /// <summary>
