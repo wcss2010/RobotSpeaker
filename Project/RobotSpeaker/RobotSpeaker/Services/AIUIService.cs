@@ -154,7 +154,7 @@ namespace RobotSpeaker
             bool result = false;
             Robot_Questions question = DBInstance.GetQuestion(ask);
 
-            if (question != null)
+            if (question != null && question.Ask != null && question.Answer != null)
             {
                 //显示回答
                 ShowMachineText(question.Answer);
