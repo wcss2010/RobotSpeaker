@@ -22,14 +22,41 @@ namespace RobotSpeaker
     /// </summary>
     public class TaskService
     {
+        protected BackgroundWorker _scanWorker = new BackgroundWorker();
+
+        public TaskService()
+        {
+            _scanWorker.WorkerSupportsCancellation = true;
+            _scanWorker.DoWork += _worker_DoWork;
+        }
+
+        void _worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (!_scanWorker.CancellationPending)
+            {
+
+
+                try
+                {
+                    Thread.Sleep(200);
+                }
+                catch (Exception ex) { }
+            }
+        }
+
         public void Open()
         {
+            if (_scanWorker.IsBusy)
+            {
+                return;
+            }
 
+            _scanWorker.RunWorkerAsync();
         }
 
         public void Close()
         {
-
+            _scanWorker.CancelAsync();
         }
     }
 }
