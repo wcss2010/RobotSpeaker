@@ -53,7 +53,7 @@ namespace RobotSpeaker
         void XfJsonResolver_XFCardQuestionEvent(object sender, XFQuestionEventArgs args)
         {
             //保存用户的问话
-            TaskService.StateObject.CurrentUserSay = args.Ask;
+            MainService.TaskService.Request(TaskActionType.Voice, args.Ask);
 
             //显示问话
             ShowUserText(args.Ask);
@@ -90,7 +90,7 @@ namespace RobotSpeaker
             }
 
             //保存说话的角度
-            TaskService.StateObject.CurrentUserAngle = args.Angle;
+            MainService.TaskService.Request(TaskActionType.Angle, args.Angle);
         }
 
         /// <summary>
