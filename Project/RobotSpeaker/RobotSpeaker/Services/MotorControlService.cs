@@ -23,25 +23,25 @@ namespace RobotSpeaker
     /// </summary>
     public class MotorControlService
     {
-        SerialPortInput _motorPost = new SerialPortInput();
+        SerialPortInput _motorPort = new SerialPortInput();
+        /// <summary>
+        /// 电机驱动板连接
+        /// </summary>
+        public SerialPortInput MotorPort
+        {
+            get { return _motorPort; }
+        }
 
         public void Open()
         {
-            _motorPost.SetPort(SuperObject.Config.GoPort, 115200, System.IO.Ports.StopBits.One, System.IO.Ports.Parity.None, 100, -1);
-            _motorPost.MessageReceived += _motorPost_MessageReceived;
-            _motorPost.Connect();
+            _motorPort.SetPort(SuperObject.Config.GoPort, 115200, System.IO.Ports.StopBits.One, System.IO.Ports.Parity.None, 100, -1);
+            _motorPort.MessageReceived += _motorPost_MessageReceived;
+            _motorPort.Connect();
         }
 
         void _motorPost_MessageReceived(object sender, MessageReceivedEventArgs args)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("[");
-            foreach (byte b in args.Data)
-            {
-                sb.Append("0x").Append(Convert.ToString(b, 16).Length == 1 ? "0" : "").Append(Convert.ToString(b, 16)).Append(",");
-            }
-            sb.Append("]");
-            System.Console.WriteLine(sb.ToString());
+            System.Console.WriteLine("电机控制器返回:" + CRC.PrintBytesString(args.Data));
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace RobotSpeaker
 
         public void Close()
         {
-            _motorPost.Disconnect();
+            _motorPort.Disconnect();
         }
     }
 
@@ -116,6 +116,24 @@ namespace RobotSpeaker
     /// </summary>
     public class CRC
     {
+        /// <summary>
+        /// 打印Byte数组
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static string PrintBytesString(byte[] data) 
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[");
+            foreach (byte b in data)
+            {
+                sb.Append("0x").Append(Convert.ToString(b, 16).Length == 1 ? "0" : "").Append(Convert.ToString(b, 16)).Append(",");
+            }
+            sb.Append("]");
+
+            return sb.ToString();
+        }
+
         #region  CRC16
         public static byte[] CRC16(byte[] data)
         {
