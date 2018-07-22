@@ -36,6 +36,18 @@ namespace RobotSpeaker
             XfJsonResolver.XFCardLocationEvent += XfJsonResolver_XFCardLocationEvent;
             XfJsonResolver.XFCardWakeupEvent += XfJsonResolver_XFCardWakeupEvent;
             XfJsonResolver.XFCardQuestionEvent += XfJsonResolver_XFCardQuestionEvent;
+            XfJsonResolver.XFCardTTSStartEvent += XfJsonResolver_XFCardTTSStartEvent;
+            XfJsonResolver.XFCardTTSEndEvent += XfJsonResolver_XFCardTTSEndEvent;
+        }
+
+        void XfJsonResolver_XFCardTTSEndEvent(object sender, EventArgs args)
+        {
+            AiuiConnection.SendLauchVoiceMessage(true);
+        }
+
+        void XfJsonResolver_XFCardTTSStartEvent(object sender, EventArgs args)
+        {
+            AiuiConnection.SendLauchVoiceMessage(false);
         }
 
         void XfJsonResolver_XFCardQuestionEvent(object sender, XFQuestionEventArgs args)
@@ -60,14 +72,20 @@ namespace RobotSpeaker
 
         void XfJsonResolver_XFCardWakeupEvent(object sender, EventArgs args)
         {
-            //关闭视频播放器(如果有的话)
-            CloseVideoPlayer();
+            if (SuperObject.Config.EnabledCloseVideoPlayerWithVoice)
+            {
+                //关闭视频播放器(如果有的话)
+                CloseVideoPlayer();
+            }
         }
 
         void XfJsonResolver_XFCardLocationEvent(object sender, XFSpeakerLocationEventArgs args)
         {
-            //关闭视频播放器(如果有的话)
-            CloseVideoPlayer();
+            if (SuperObject.Config.EnabledCloseVideoPlayerWithVoice)
+            {
+                //关闭视频播放器(如果有的话)
+                CloseVideoPlayer();
+            }
 
             //保存说话的角度
             TaskService.StateObject.CurrentUserAngle = args.Angle;
@@ -245,6 +263,20 @@ namespace RobotSpeaker
     }
 
     /// <summary>
+    /// TTS开始
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    public delegate void XFCardTTSStartDelegate(object sender, EventArgs args);
+
+    /// <summary>
+    /// TTS结束
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    public delegate void XFCardTTSEndDelegate(object sender, EventArgs args);
+
+    /// <summary>
     /// 唤醒
     /// </summary>
     /// <param name="sender"></param>
@@ -292,6 +324,16 @@ namespace RobotSpeaker
     public class XFJsonResolver
     {
         /// <summary>
+        /// TTS开始事件
+        /// </summary>
+        public event XFCardTTSStartDelegate XFCardTTSStartEvent;
+
+        /// <summary>
+        /// TTS结束事件
+        /// </summary>
+        public event XFCardTTSEndDelegate XFCardTTSEndEvent;
+
+        /// <summary>
         /// 唤醒
         /// </summary>
         public event XFCardWakeupDelegate XFCardWakeupEvent;
@@ -303,6 +345,22 @@ namespace RobotSpeaker
         /// 问答
         /// </summary>
         public event XFCardQuestionDelegate XFCardQuestionEvent;
+
+        protected void OnXFCardTTSStartEvent()
+        {
+            if (XFCardTTSStartEvent != null)
+            {
+                XFCardTTSStartEvent(this, new EventArgs());
+            }
+        }
+
+        protected void OnXFCardTTSEndEvent()
+        {
+            if (XFCardTTSEndEvent != null)
+            {
+                XFCardTTSEndEvent(this, new EventArgs());
+            }
+        }
 
         protected void OnXFCardWakeupEvent()
         {
@@ -396,6 +454,24 @@ namespace RobotSpeaker
                                         //角度消息
                                         OnXFCardLocationEvent(double.Parse(contentObj["info"]["angle"].ToString()));
                                     }
+                                }
+                            }
+                        }
+                    }
+                    else if (eventStr.ToString().Equals("tts_event"))
+                    {
+                        JToken contentObj = firstObj["content"];
+                        if (contentObj != null)
+                        {
+                            if (contentObj["eventType"] != null)
+                            {
+                                if (contentObj["eventType"].ToString().Equals("0"))
+                                {
+                                    OnXFCardTTSStartEvent();
+                                }
+                                else
+                                {
+                                    OnXFCardTTSEndEvent();
                                 }
                             }
                         }
