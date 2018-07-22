@@ -41,11 +41,12 @@ namespace RobotSpeaker
 
         void _worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            List<Robot_Actions> actionList = DBInstance.DbHelper.table("Robot_Actions").select("*").getList<Robot_Actions>(new Robot_Actions());
+
             while (!_scanWorker.CancellationPending)
             {
                 try
-                {
-                    List<Robot_Actions> actionList = DBInstance.DbHelper.table("Robot_Actions").select("*").getList<Robot_Actions>(new Robot_Actions());
+                {                    
                     if (actionList != null)
                     {
                         foreach (Robot_Actions action in actionList)
@@ -64,7 +65,7 @@ namespace RobotSpeaker
 
                 try
                 {
-                    Thread.Sleep(200);
+                    Thread.Sleep(15);
                 }
                 catch (Exception ex) { }
             }

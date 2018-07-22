@@ -42,12 +42,12 @@ namespace RobotSpeaker
 
         void XfJsonResolver_XFCardTTSEndEvent(object sender, EventArgs args)
         {
-            AiuiConnection.SendLauchVoiceMessage(true);
+            //AiuiConnection.SendLauchVoiceMessage(true);
         }
 
         void XfJsonResolver_XFCardTTSStartEvent(object sender, EventArgs args)
         {
-            AiuiConnection.SendLauchVoiceMessage(false);
+            //AiuiConnection.SendLauchVoiceMessage(false);
         }
 
         void XfJsonResolver_XFCardQuestionEvent(object sender, XFQuestionEventArgs args)
@@ -72,6 +72,8 @@ namespace RobotSpeaker
 
         void XfJsonResolver_XFCardWakeupEvent(object sender, EventArgs args)
         {
+            //AiuiConnection.SendLauchVoiceMessage(true);
+
             if (SuperObject.Config.EnabledCloseVideoPlayerWithVoice)
             {
                 //关闭视频播放器(如果有的话)
