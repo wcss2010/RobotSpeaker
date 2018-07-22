@@ -30,6 +30,8 @@
         {
             this.tcPage = new System.Windows.Forms.TabControl();
             this.tpNormal = new System.Windows.Forms.TabPage();
+            this.cbEnabledOnlineVoice = new System.Windows.Forms.CheckBox();
+            this.jsijoystickInfo = new RobotSpeaker.Forms.JoyAPI.JoystickStateInfo();
             this.label10 = new System.Windows.Forms.Label();
             this.tbImageListPlayerSleepSeconds = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
@@ -58,8 +60,7 @@
             this.btnCameraDir = new System.Windows.Forms.Button();
             this.btnReadmeDir = new System.Windows.Forms.Button();
             this.ofdApp = new System.Windows.Forms.OpenFileDialog();
-            this.jsijoystickInfo = new RobotSpeaker.Forms.JoyAPI.JoystickStateInfo();
-            this.cbEnabledOnlineVoice = new System.Windows.Forms.CheckBox();
+            this.cbEnabledCloseVideoPlayerWithVoice = new System.Windows.Forms.CheckBox();
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).BeginInit();
@@ -78,6 +79,7 @@
             // 
             // tpNormal
             // 
+            this.tpNormal.Controls.Add(this.cbEnabledCloseVideoPlayerWithVoice);
             this.tpNormal.Controls.Add(this.cbEnabledOnlineVoice);
             this.tpNormal.Controls.Add(this.jsijoystickInfo);
             this.tpNormal.Controls.Add(this.label10);
@@ -107,6 +109,25 @@
             this.tpNormal.TabIndex = 0;
             this.tpNormal.Text = "基础配置";
             this.tpNormal.UseVisualStyleBackColor = true;
+            // 
+            // cbEnabledOnlineVoice
+            // 
+            this.cbEnabledOnlineVoice.AutoSize = true;
+            this.cbEnabledOnlineVoice.Checked = true;
+            this.cbEnabledOnlineVoice.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbEnabledOnlineVoice.Location = new System.Drawing.Point(294, 148);
+            this.cbEnabledOnlineVoice.Name = "cbEnabledOnlineVoice";
+            this.cbEnabledOnlineVoice.Size = new System.Drawing.Size(48, 16);
+            this.cbEnabledOnlineVoice.TabIndex = 9;
+            this.cbEnabledOnlineVoice.Text = "启用";
+            this.cbEnabledOnlineVoice.UseVisualStyleBackColor = true;
+            // 
+            // jsijoystickInfo
+            // 
+            this.jsijoystickInfo.Location = new System.Drawing.Point(166, 337);
+            this.jsijoystickInfo.Name = "jsijoystickInfo";
+            this.jsijoystickInfo.Size = new System.Drawing.Size(416, 167);
+            this.jsijoystickInfo.TabIndex = 7;
             // 
             // label10
             // 
@@ -383,24 +404,17 @@
             // 
             this.ofdApp.Filter = "*.Exe|*.exe";
             // 
-            // jsijoystickInfo
+            // cbEnabledCloseVideoPlayerWithVoice
             // 
-            this.jsijoystickInfo.Location = new System.Drawing.Point(166, 337);
-            this.jsijoystickInfo.Name = "jsijoystickInfo";
-            this.jsijoystickInfo.Size = new System.Drawing.Size(416, 167);
-            this.jsijoystickInfo.TabIndex = 7;
-            // 
-            // cbEnabledOnlineVoice
-            // 
-            this.cbEnabledOnlineVoice.AutoSize = true;
-            this.cbEnabledOnlineVoice.Checked = true;
-            this.cbEnabledOnlineVoice.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbEnabledOnlineVoice.Location = new System.Drawing.Point(294, 148);
-            this.cbEnabledOnlineVoice.Name = "cbEnabledOnlineVoice";
-            this.cbEnabledOnlineVoice.Size = new System.Drawing.Size(48, 16);
-            this.cbEnabledOnlineVoice.TabIndex = 9;
-            this.cbEnabledOnlineVoice.Text = "启用";
-            this.cbEnabledOnlineVoice.UseVisualStyleBackColor = true;
+            this.cbEnabledCloseVideoPlayerWithVoice.AutoSize = true;
+            this.cbEnabledCloseVideoPlayerWithVoice.Checked = true;
+            this.cbEnabledCloseVideoPlayerWithVoice.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbEnabledCloseVideoPlayerWithVoice.Location = new System.Drawing.Point(360, 148);
+            this.cbEnabledCloseVideoPlayerWithVoice.Name = "cbEnabledCloseVideoPlayerWithVoice";
+            this.cbEnabledCloseVideoPlayerWithVoice.Size = new System.Drawing.Size(252, 16);
+            this.cbEnabledCloseVideoPlayerWithVoice.TabIndex = 10;
+            this.cbEnabledCloseVideoPlayerWithVoice.Text = "是否允许关闭视频播放器在进行语音对话时";
+            this.cbEnabledCloseVideoPlayerWithVoice.UseVisualStyleBackColor = true;
             // 
             // ConfigUI
             // 
@@ -459,5 +473,6 @@
         private System.Windows.Forms.Button btnInitAIUI;
         private System.Windows.Forms.Button btnRestartService;
         private System.Windows.Forms.CheckBox cbEnabledOnlineVoice;
+        private System.Windows.Forms.CheckBox cbEnabledCloseVideoPlayerWithVoice;
     }
 }

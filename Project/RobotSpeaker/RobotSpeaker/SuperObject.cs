@@ -87,6 +87,11 @@ namespace RobotSpeaker
         public SerializableDictionary<string, object> Params { get; set; }
 
         /// <summary>
+        /// 当进行语音对话时是否允许关闭VideoPlayer
+        /// </summary>
+        public bool EnabledCloseVideoPlayerWithVoice { get; set; }
+
+        /// <summary>
         /// 是否允许使用在线语音模式
         /// </summary>
         public bool EnabledOnlineVoice { get; set; }

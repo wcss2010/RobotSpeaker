@@ -11,7 +11,7 @@ namespace RobotSpeaker.Forms.Player
 {
     public partial class VideoAndAudioPlayerUI : PageUIBase
     {
-        public static List<string> SupportedExtName = new List<string>(new string[] { ".avi",".mp4",".mpg",".3gp",".wav",".mp3",".wmv",".mov" });
+        public static List<string> SupportedExtName = new List<string>(new string[] { ".avi", ".mp4", ".mpg", ".3gp", ".wav", ".mp3", ".wmv", ".mov", ".flv", ".rm", ".rmvb", ".mpeg" });
 
         [Browsable(false)]
         public VLCPlayerLib.VlcPlayerControl PlayerCore 
