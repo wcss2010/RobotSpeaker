@@ -22,13 +22,13 @@ namespace RobotSpeaker
     /// </summary>
     public class TaskService
     {
-        private static UserStateObject _stateObject = new UserStateObject();
+        private System.Collections.Concurrent.ConcurrentQueue<TaskQueueObject> _taskQueues = new System.Collections.Concurrent.ConcurrentQueue<TaskQueueObject>();
         /// <summary>
-        /// 用户状态对象
+        /// 任务队列
         /// </summary>
-        public static UserStateObject StateObject
+        public System.Collections.Concurrent.ConcurrentQueue<TaskQueueObject> TaskQueues
         {
-            get { return TaskService._stateObject; }
+            get { return _taskQueues; }
         }
 
         protected BackgroundWorker _scanWorker = new BackgroundWorker();
@@ -46,14 +46,22 @@ namespace RobotSpeaker
             while (!_scanWorker.CancellationPending)
             {
                 try
-                {                    
+                {
                     if (actionList != null)
                     {
-                        foreach (Robot_Actions action in actionList)
+                        TaskQueueObject queueObj = null;
+                        TaskQueues.TryDequeue(out queueObj);
+
+                        if (queueObj != null)
                         {
-                            if (IsAcceptRun(action))
+                            foreach (Robot_Actions action in actionList)
                             {
-                                SendStepList(action, DBInstance.GetSteps(action.Id));
+                                //检查是否符合条件
+                                if (IsAcceptRun(queueObj, action))
+                                {
+                                    //发送指令序列
+                                    SendStepList(action, DBInstance.GetSteps(action.Id));
+                                }
                             }
                         }
                     }
@@ -69,6 +77,20 @@ namespace RobotSpeaker
                 }
                 catch (Exception ex) { }
             }
+        }
+
+        /// <summary>
+        /// 请求执行任务
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="value"></param>
+        public void Request(TaskActionType type, object value)
+        {
+            TaskQueueObject tqo = new TaskQueueObject();
+            tqo.ActionType = type;
+            tqo.Value = value;
+
+            TaskQueues.Enqueue(tqo);
         }
 
         /// <summary>
@@ -115,9 +137,9 @@ namespace RobotSpeaker
         /// </summary>
         /// <param name="action"></param>
         /// <returns></returns>
-        private bool IsAcceptRun(Robot_Actions action)
+        private bool IsAcceptRun(TaskQueueObject queueObj, Robot_Actions action)
         {
-            if (action != null)
+            if (action != null && queueObj != null && queueObj.Value != null)
             {
                 if (string.IsNullOrEmpty(action.Condition))
                 {
@@ -127,44 +149,47 @@ namespace RobotSpeaker
                 {
                     bool result = false;
 
-                    if (action.Condition.StartsWith("语音="))
+                    switch (queueObj.ActionType)
                     {
-                        result = action.Condition.Replace("语音=", string.Empty).Equals(StateObject.CurrentUserSay);
-                        StateObject.CurrentUserSay = string.Empty;
-                    }
-                    else if (action.Condition.StartsWith("角度="))
-                    {
-                        string angleRangeStr = action.Condition.Replace("角度=", string.Empty);
-                        string[] temps = angleRangeStr.Split(',');
-                        if (temps != null && temps.Length >= 2)
-                        {
-                            short min = 0;
-                            short max = 0;
-                            try
+                        case TaskActionType.Voice:
+                            if (action.Condition.StartsWith("语音="))
                             {
-                                min = short.Parse(temps[0]);
+                                result = action.Condition.Replace("语音=", string.Empty).Equals(queueObj.Value.ToString());
                             }
-                            catch (Exception ex) { }
-                            try
+                            break;
+                        case TaskActionType.Angle:
+                            if (action.Condition.StartsWith("角度="))
                             {
-                                max = short.Parse(temps[1]);
+                                string angleRangeStr = action.Condition.Replace("角度=", string.Empty);
+                                string[] temps = angleRangeStr.Split(',');
+                                if (temps != null && temps.Length >= 2)
+                                {
+                                    short min = 0;
+                                    short max = 0;
+                                    try
+                                    {
+                                        min = short.Parse(temps[0]);
+                                    }
+                                    catch (Exception ex) { }
+                                    try
+                                    {
+                                        max = short.Parse(temps[1]);
+                                    }
+                                    catch (Exception ex) { }
+
+                                    short angle = short.Parse(queueObj.Value.ToString());
+                                    result = angle >= min && angle <= max;
+                                }
                             }
-                            catch (Exception ex) { }
-
-                            result = StateObject.CurrentUserAngle >= min && StateObject.CurrentUserAngle <= max;
-                            StateObject.CurrentUserAngle = -1;
-                        }
+                            break;
+                        case TaskActionType.Joy:
+                            if (action.Condition.StartsWith("手柄="))
+                            {
+                                result = action.Condition.Replace("手柄=", string.Empty).Equals(queueObj.Value.ToString());
+                            }
+                            break;
                     }
-                    else if (action.Condition.StartsWith("手柄="))
-                    {
-                        result = action.Condition.Replace("手柄=", string.Empty).Equals(StateObject.CurrentJoyKey.ToString());
-                        StateObject.CurrentJoyKey = JoystickButtonType.None;
-                    }
-                    else
-                    {
-                        //自定义
-                    }
-
+                    
                     return result;
                 }
             }
@@ -191,23 +216,17 @@ namespace RobotSpeaker
     }
 
     /// <summary>
-    /// 用户状态对象(用于记录当前用户说的话，说话的角度，以及手柄按下的按钮)
+    /// 队列对象
     /// </summary>
-    public class UserStateObject
+    public class TaskQueueObject
     {
-        /// <summary>
-        /// 当前用户说了什么
-        /// </summary>
-        public string CurrentUserSay { get; set; }
+        public TaskActionType ActionType { get; set; }
 
-        /// <summary>
-        /// 当前用户说话的角度
-        /// </summary>
-        public double CurrentUserAngle { get; set; }
+        public object Value { get; set; }
+    }
 
-        /// <summary>
-        /// 当前用户手柄按下了什么按钮
-        /// </summary>
-        public JoystickButtonType CurrentJoyKey { get; set; }
+    public enum TaskActionType
+    {
+        Voice, Angle, Joy
     }
 }
