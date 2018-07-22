@@ -162,7 +162,10 @@ namespace RobotSpeaker
         private static void JoystickService_JoystickPressEvent(object sender, JoystickPressEventArgs args)
         {
             //保存当前按钮状态
-            TaskService.Request(TaskActionType.Joy, args.ButtonType);
+            if (SuperObject.Config.CurrentGoType == GoType.Joy && args.ButtonType != JoystickButtonType.MiddleCenter && args.ButtonType != JoystickButtonType.None)
+            {
+                TaskService.Request(TaskActionType.Joy, args.ButtonType);
+            }
 
             //向ConfigUI界面中的手柄测试界面传递按键指令
             if (MainUIObj != null)

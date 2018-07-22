@@ -35,7 +35,7 @@
             // trNetworkStatusUpdate
             // 
             this.trNetworkStatusUpdate.Enabled = true;
-            this.trNetworkStatusUpdate.Interval = 3000;
+            this.trNetworkStatusUpdate.Interval = 5000;
             this.trNetworkStatusUpdate.Tick += new System.EventHandler(this.trNetworkStatusUpdate_Tick);
             // 
             // PageUIBase
