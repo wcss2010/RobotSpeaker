@@ -91,7 +91,7 @@ namespace RobotSpeaker
                         sb.Append("-------------\n");
                         sb.Append("电机序号:").Append(step.MotorIndex).Append(",类型:").Append(step.MotorType).Append(",值:").Append(step.Value).Append("\n");
                         sb.Append("=============\n");
-                        sb.Append(CRC.PrintBytesString(cmdBytes));
+                        sb.Append(CRC.PrintBytesString(cmdBytes) + "\n");
 
                         //需要停留10ms
                         try
@@ -129,6 +129,7 @@ namespace RobotSpeaker
                     if (action.Condition.StartsWith("语音="))
                     {
                         result = action.Condition.Replace("语音=", string.Empty).Equals(StateObject.CurrentUserSay);
+                        StateObject.CurrentUserSay = string.Empty;
                     }
                     else if (action.Condition.StartsWith("角度="))
                     {
@@ -150,11 +151,13 @@ namespace RobotSpeaker
                             catch (Exception ex) { }
 
                             result = StateObject.CurrentUserAngle >= min && StateObject.CurrentUserAngle <= max;
-                        }                        
+                            StateObject.CurrentUserAngle = -1;
+                        }
                     }
                     else if (action.Condition.StartsWith("手柄="))
                     {
                         result = action.Condition.Replace("手柄=", string.Empty).Equals(StateObject.CurrentJoyKey.ToString());
+                        StateObject.CurrentJoyKey = JoystickButtonType.None;
                     }
                     else
                     {
