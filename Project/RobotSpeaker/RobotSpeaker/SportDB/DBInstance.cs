@@ -165,6 +165,16 @@ namespace RobotSpeaker.SportDB
         public long MotorType { get; set; }
 
         /// <summary>
+        /// 执行前等待时间(毫秒)
+        /// </summary>
+        public long BeforeSleep { get; set; }
+
+        /// <summary>
+        /// 执行后等待时间(毫秒)
+        /// </summary>
+        public long AfterSleep { get; set; }
+
+        /// <summary>
         /// 值
         /// </summary>
         public long Value { get; set; }
@@ -181,6 +191,8 @@ namespace RobotSpeaker.SportDB
             MotorIndex = source("MotorIndex").value<long>(0);
             MotorType = source("MotorType").value<long>(0);
             Value = source("Value").value<long>(0);
+            BeforeSleep = source("BeforeSleep").value<long>(0);
+            AfterSleep = source("AfterSleep").value<long>(0);
             Tag = source("Tag").value("");
         }
 
