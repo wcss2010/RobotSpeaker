@@ -115,16 +115,34 @@ namespace RobotSpeaker
                         sb.Append("电机序号:").Append(step.MotorIndex).Append(",类型:").Append(step.MotorType).Append(",值:").Append(step.Value).Append("\n");
                         sb.Append("=============\n");
                         sb.Append(CRC.PrintBytesString(cmdBytes) + "\n");
-
-                        //需要停留10ms
+                        
+                        //发送前等待
+                        sb.Append("+++++++++++++\n");
+                        sb.Append("等待" + step.BeforeSleep + "毫秒");
                         try
                         {
-                            Thread.Sleep(15);
+                            Thread.Sleep((int)step.BeforeSleep);
                         }
                         catch (Exception ex) { }
 
                         //发送指令 
                         MainService.MotorControlService.MotorPort.SendMessage(cmdBytes);
+
+                        //发送后等待
+                        sb.Append("+++++++++++++\n");
+                        sb.Append("等待" + step.AfterSleep + "毫秒");
+                        try
+                        {
+                            Thread.Sleep((int)step.AfterSleep);
+                        }
+                        catch (Exception ex) { }
+
+                        //需要停留20ms(指令之间固定时间)
+                        try
+                        {
+                            Thread.Sleep(20);
+                        }
+                        catch (Exception ex) { }
                     }
                 }
 
