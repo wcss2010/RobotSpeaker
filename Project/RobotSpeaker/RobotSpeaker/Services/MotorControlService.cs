@@ -34,7 +34,7 @@ namespace RobotSpeaker
 
         public void Open()
         {
-            _motorPort.SetPort(SuperObject.Config.GoPort, 115200, System.IO.Ports.StopBits.One, System.IO.Ports.Parity.None, -1, -1);
+            _motorPort.SetPort(SuperObject.Config.GoPort, 115200, System.IO.Ports.StopBits.One, System.IO.Ports.Parity.None, -1, -1, 10, 4096, 2048);
             _motorPort.MessageReceived += _motorPost_MessageReceived;
             _motorPort.Connect();
         }
