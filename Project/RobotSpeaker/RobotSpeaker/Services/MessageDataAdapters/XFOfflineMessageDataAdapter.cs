@@ -14,41 +14,59 @@ namespace RobotSpeaker
 
         public override byte[] Resolve()
         {
-            List<byte> _recievedData = this.SerialPortInputObject.BufferStream;
-            if (!resAssembling)
+            try
             {
-                while (headerIndex + 3 < _recievedData.Count && !(_recievedData[headerIndex] == 0xFD && _recievedData[headerIndex + 1] == 0x00 && _recievedData[headerIndex + 2] == 0x80 && _recievedData[headerIndex + 3] == 0x00))
+                List<byte> _recievedData = this.SerialPortInputObject.BufferStream;
+                if (!resAssembling)
                 {
-                    headerIndex++;
-                }
-                lock (SerialPortInput.lockObject)
-                {
-                    if (headerIndex >= _recievedData.Count)
+                    while (headerIndex + 3 < _recievedData.Count && !(_recievedData[headerIndex] == 0xFD && _recievedData[headerIndex + 1] == 0x00 && _recievedData[headerIndex + 2] == 0x80 && _recievedData[headerIndex + 3] == 0x00))
                     {
-                        _recievedData.Clear();
+                        headerIndex++;
                     }
+                    lock (SerialPortInput.lockObject)
+                    {
+                        if (headerIndex >= _recievedData.Count)
+                        {
+                            _recievedData.Clear();
+                        }
+                    }
+                    resAssembling = true;
                 }
-                resAssembling = true;
-            }
 
-            if (headerIndex + 2 >= _recievedData.Count)
-            {
-                Thread.Sleep(10);
-            }
+                if (headerIndex + 2 >= _recievedData.Count)
+                {
+                    Thread.Sleep(10);
+                }
 
-            // 帧长度=数据区长度+1
-            int length = 264;
-            if (headerIndex + length > _recievedData.Count)
-            {
-                Thread.Sleep(10);
-            }
+                // 帧长度=数据区长度+1
+                int length = 264;
+                if (headerIndex + length > _recievedData.Count)
+                {
+                    Thread.Sleep(10);
+                }
 
-            if (_recievedData.Count >= 264)
-            {
-                return _recievedData.GetRange(headerIndex, 264).ToArray();
+                //取数据
+                byte[] bytes = _recievedData.GetRange(headerIndex, 264).ToArray();
+
+                //删除解析过的部分
+                _recievedData.RemoveRange(0, headerIndex + length);
+                resAssembling = false;
+                headerIndex = 0;
+
+                if (_recievedData.Count >= 264)
+                {
+                    return bytes;
+                }
+                else
+                {
+                    return new byte[0];
+                }
             }
-            else
+            catch (Exception ex)
             {
+                headerIndex = 0;
+                System.Console.WriteLine(ex.ToString());
+
                 return new byte[0];
             }
         }
