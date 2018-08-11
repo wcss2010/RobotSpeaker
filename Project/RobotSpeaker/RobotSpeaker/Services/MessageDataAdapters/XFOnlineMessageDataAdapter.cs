@@ -10,7 +10,8 @@ namespace RobotSpeaker
 {
     public class XFOnlineMessageDataAdapter : IRobotMessageDataAdapter
     {
-        bool resAssembling = false;
+        byte[] _headerBytes = new byte[] { 0xA5, 0x01 };
+        bool enabledFindNext = true;
         int headerIndex = 0;
 
         public override byte[] Resolve()
@@ -18,20 +19,24 @@ namespace RobotSpeaker
             try
             {
                 List<byte> _recievedData = this.SerialPortInputObject.BufferStream;
-                if (!resAssembling)
+
+                //尝试查找包头
+                if (enabledFindNext)
                 {
-                    while (headerIndex + 8 < _recievedData.Count && !(_recievedData[headerIndex] == 0xa5 && _recievedData[headerIndex + 1] == 0x01))
+                    headerIndex = SearchInBuffer(_headerBytes);
+                    if (headerIndex >= 0)
                     {
-                        headerIndex++;
+                        //有效数据
+                        enabledFindNext = false;
                     }
-                    lock (SerialPortInput.lockObject)
+                    else
                     {
-                        if (headerIndex >= _recievedData.Count)
+                        //无效数据直接清空
+                        lock (SerialPortInput.lockObject)
                         {
                             _recievedData.Clear();
                         }
                     }
-                    resAssembling = true;
                 }
 
                 if (headerIndex + 8 >= _recievedData.Count)
@@ -39,7 +44,6 @@ namespace RobotSpeaker
                     Thread.Sleep(10);
                 }
 
-                // 帧长度=数据区长度+1
                 int length = BitConverter.ToInt16(new byte[] { _recievedData[headerIndex + 3], _recievedData[headerIndex + 4] }, 0);
                 if (headerIndex + length + 8 > _recievedData.Count)
                 {
@@ -74,7 +78,7 @@ namespace RobotSpeaker
                         _recievedData.RemoveRange(0, headerIndex + length + 8);
                     }
 
-                    resAssembling = false;
+                    enabledFindNext = true;
                     headerIndex = 0;
 
                     return bytes;
