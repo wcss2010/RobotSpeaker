@@ -49,6 +49,8 @@ namespace RobotSpeaker
                 if (_recievedData.Count >= length + 8)
                 {
                     byte[] msg = _recievedData.GetRange(headerIndex, length + 8).ToArray();
+
+                    //解析SeqID并且回复确认
                     if (msg[msg.Length - 1] == Utils.CalcCheckCode(new List<byte>(msg)))
                     {
                         //设置SeqId
@@ -60,7 +62,11 @@ namespace RobotSpeaker
                     }
 
                     //取数据
-                    byte[] bytes = _recievedData.GetRange(headerIndex + 7, length).ToArray();
+                    byte[] bytes = new byte[0];
+                    if (msg[2] == 0x04)
+                    {
+                        bytes = _recievedData.GetRange(headerIndex + 7, length).ToArray();
+                    }
 
                     //删除解析过的数据
                     lock (SerialPortInput.lockObject)
