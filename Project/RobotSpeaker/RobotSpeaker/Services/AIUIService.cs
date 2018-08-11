@@ -14,6 +14,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using RobotSpeaker.SportDB;
+using WebSocketSharp;
+using SerialPortLib;
 
 namespace RobotSpeaker
 {
@@ -514,14 +516,84 @@ namespace RobotSpeaker
     /// </summary>
     public class AiuiOfflineService
     {
+        /// <summary>
+        /// WebSocket
+        /// </summary>
+        private WebSocket _webSocket;
+        /// <summary>
+        /// SerialPort
+        /// </summary>
+        private SerialPortInput _portObject;
+
         public void Open()
         {
+            if (SuperObject.Config.EnabledOnlineVoice)
+            {
+                return;
+            }
 
+            //关闭先前的
+            Close();
+
+            // 开启一个WebSocket
+            _webSocket = new WebSocket(SuperObject.Config.OfflineVoiceWebSocketUrl);
+            _webSocket.OnMessage += _webSocket_OnMessage;
+            try
+            {
+                _webSocket.Connect();
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.ToString());
+            }
+
+            //开启一个PortObject
+            _portObject = new SerialPortInput();
+            _portObject.EnabledPrintReceiveLog = false;
+            _portObject.MessageReceived += _portObject_MessageReceived;
+            _portObject.SetPort(SuperObject.Config.OfflineVoicePort, 921600, System.IO.Ports.StopBits.One, System.IO.Ports.Parity.None, -1, -1);
+            try
+            {
+                _portObject.Connect();
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.ToString());
+            }
+        }
+
+        void _portObject_MessageReceived(object sender, MessageReceivedEventArgs args)
+        {
+            //发送语音数据
+            if (_webSocket != null && _webSocket.IsAlive)
+            {
+                _webSocket.Send(args.Data);
+            }
+        }
+
+        /// <summary>
+        /// 离线模式返回字符串
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void _webSocket_OnMessage(object sender, MessageEventArgs e)
+        {
+            
         }
 
         public void Close()
         {
+            try
+            {
+                _webSocket.Close();
+            }
+            catch (Exception ex) { }
 
+            try
+            {
+                _portObject.Disconnect();
+            }
+            catch (Exception ex) { }
         }
     }
 }
