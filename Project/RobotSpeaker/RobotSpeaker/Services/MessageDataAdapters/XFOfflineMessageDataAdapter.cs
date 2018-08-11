@@ -57,7 +57,7 @@ namespace RobotSpeaker
                 resAssembling = false;
                 headerIndex = 0;
 
-                if (_recievedData.Count >= 264)
+                if (bytes.Length >= 264)
                 {
                     return bytes;
                 }

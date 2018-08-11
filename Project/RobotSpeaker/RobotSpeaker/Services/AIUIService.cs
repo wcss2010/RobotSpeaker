@@ -549,6 +549,7 @@ namespace RobotSpeaker
 
             //开启一个PortObject
             _portObject = new SerialPortInput();
+            _portObject.MessageDataAdapterObject = new XFOfflineMessageDataAdapter();
             _portObject.EnabledPrintReceiveLog = false;
             _portObject.MessageReceived += _portObject_MessageReceived;
             _portObject.SetPort(SuperObject.Config.OfflineVoicePort, 921600, System.IO.Ports.StopBits.One, System.IO.Ports.Parity.None, -1, -1);
