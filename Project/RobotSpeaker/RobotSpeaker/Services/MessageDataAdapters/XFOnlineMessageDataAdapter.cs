@@ -63,7 +63,7 @@ namespace RobotSpeaker
                     byte[] bytes = _recievedData.GetRange(headerIndex + 7, length).ToArray();
 
                     //删除解析过的数据
-                    _recievedData.RemoveRange(headerIndex, length + 8);
+                    _recievedData.RemoveRange(0, headerIndex + length + 8);
                     resAssembling = false;
                     headerIndex = 0;
 
