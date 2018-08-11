@@ -49,7 +49,11 @@ namespace RobotSpeaker
                 byte[] bytes = _recievedData.GetRange(headerIndex, 264).ToArray();
 
                 //删除解析过的部分
-                _recievedData.RemoveRange(0, headerIndex + length);
+                lock (SerialPortInput.lockObject)
+                {
+                    _recievedData.RemoveRange(0, headerIndex + length);
+                }
+
                 resAssembling = false;
                 headerIndex = 0;
 
