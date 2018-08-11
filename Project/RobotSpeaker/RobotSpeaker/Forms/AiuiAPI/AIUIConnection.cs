@@ -7,6 +7,7 @@ using System.IO.Compression;
 using System.Runtime.Remoting.Contexts;
 using System.Windows.Forms;
 using SerialPortLib;
+using RobotSpeaker;
 
 namespace AIUISerials
 {
@@ -32,21 +33,7 @@ namespace AIUISerials
         {
             get { return _serialPort; }
         }
-
-        private int serailDataLength = 0;
-        private PacketBuilder packetBuilder = new PacketBuilder();
-        private MemoryStream receiveBuffer = null;
-        private byte[] packageHeader = new byte[] { 0xA5, 0x01 };
-
-        private bool _enabledAutoReply = true;
-        /// <summary>
-        /// 是否支持自动回复
-        /// </summary>
-        public bool EnabledAutoReply
-        {
-            get { return _enabledAutoReply; }
-            set { _enabledAutoReply = value; }
-        }
+        public PacketBuilder packetBuilder = new PacketBuilder();
 
         public event AIUIConnectionReceivedDelegate AIUIConnectionReceivedEvent;
 
@@ -61,6 +48,7 @@ namespace AIUISerials
         public AIUIConnection(string comPort)
         {
             _serialPort = new SerialPortInput();
+            _serialPort.MessageDataAdapterObject = new XFOnlineMessageDataAdapter();
             _serialPort.SetPort(comPort, 115200, System.IO.Ports.StopBits.One, System.IO.Ports.Parity.None, -1, -1);
             _serialPort.MessageReceived += _serialPort_MessageReceived;
             
@@ -68,80 +56,8 @@ namespace AIUISerials
 
         void _serialPort_MessageReceived(object sender, MessageReceivedEventArgs args)
         {
-            if (receiveBuffer == null)
-            {
-                receiveBuffer = new MemoryStream();
-            }
-
-            //查询开始位置
-            int offset = IndexOf(args.Data,packageHeader);
-            if (offset>= 0)
-            {
-               //遇到包头则重新生成内存流开始缓存
-               if (receiveBuffer!= null)
-               {
-                  receiveBuffer.Dispose();
-               }
-
-               receiveBuffer = new MemoryStream();
-               receiveBuffer.Write(args.Data,offset,args.Data.Length - offset);
-            }else
-            {
-               //不是包头继续累加数据
-               receiveBuffer.Position = receiveBuffer.Length;
-               receiveBuffer.Write(args.Data,0,args.Data.Length);
-            }
-
-            //解析长度
-            receiveBuffer.Position = 3;
-            byte[] lengthBytes = new byte[2];
-            receiveBuffer.Read(lengthBytes,0,lengthBytes.Length);
-            short length = BitConverter.ToInt16(lengthBytes,0);
-
-            //判断是否已收到完整数据包
-            if (receiveBuffer.Length >= length + 8)
-            {
-                //取数据
-                byte[] packet = receiveBuffer.ToArray();
-
-                //结束receiveBuffer
-                receiveBuffer.Dispose();
-                receiveBuffer = null;
-
-                if (packet[packet.Length - 1] == Utils.CalcCheckCode(new List<byte>(packet)))
-                {
-                    //取ID
-                    int id = ((packet[6] & 0xff) << 8) + packet[5];
-
-                    //设置ID
-                    packetBuilder.setSeqId(id);
-
-                    //自动回复
-                    if (EnabledAutoReply)
-                    {
-                        SendConfirmMessage();
-                    }
-
-                    //处理消息
-                    ProcessMsg(packet, length);
-                }
-            }
-        }
-        
-        /// <summary>
-        /// 投递Json消息
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="contentLen"></param>
-        private void ProcessMsg(byte[] source, int contentLen) {
-            if (source[2] == 0x04)
-            {
-                byte[] data = new byte[contentLen];
-                Array.Copy(source, 7, data, 0, data.Length);
-
-                //投递消息事件
-                OnAIUIConnectionReceivedEvent(Utils.Decompress(data));
-            }
+            //投递消息事件
+            OnAIUIConnectionReceivedEvent(Utils.Decompress(args.Data));
         }
 
         public void SendShake()

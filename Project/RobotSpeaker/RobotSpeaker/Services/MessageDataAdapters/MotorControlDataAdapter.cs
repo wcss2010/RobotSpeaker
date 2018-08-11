@@ -10,7 +10,7 @@ namespace RobotSpeaker
     {
         public override byte[] Resolve()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
