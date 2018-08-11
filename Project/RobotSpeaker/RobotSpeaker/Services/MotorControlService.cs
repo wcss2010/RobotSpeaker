@@ -37,7 +37,15 @@ namespace RobotSpeaker
             _motorPort.MessageDataAdapterObject = new MotorControlDataAdapter();
             _motorPort.SetPort(SuperObject.Config.GoPort, 115200, System.IO.Ports.StopBits.One, System.IO.Ports.Parity.None, -1, -1);
             _motorPort.MessageReceived += _motorPost_MessageReceived;
-            _motorPort.Connect();
+
+            try
+            {
+                _motorPort.Connect();
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.ToString());
+            }
         }
 
         void _motorPost_MessageReceived(object sender, MessageReceivedEventArgs args)

@@ -237,7 +237,14 @@ namespace RobotSpeaker
             //检查是否启动了在线模式
             if (SuperObject.Config.EnabledOnlineVoice)
             {
-                _aiuiConnection.SerialPort.Connect();
+                try
+                {
+                    _aiuiConnection.SerialPort.Connect();
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine(ex.ToString());
+                }
             }
         }
 
