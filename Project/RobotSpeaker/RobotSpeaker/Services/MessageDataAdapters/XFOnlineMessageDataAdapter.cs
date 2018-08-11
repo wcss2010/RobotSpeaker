@@ -54,34 +54,51 @@ namespace RobotSpeaker
                 {
                     byte[] msg = _recievedData.GetRange(headerIndex, length + 8).ToArray();
 
-                    //解析SeqID并且回复确认
-                    if (msg[msg.Length - 1] == Utils.CalcCheckCode(new List<byte>(msg)))
+                    int newOffset = IRobotMessageDataAdapter.IndexOf(msg, _headerBytes.Length + 1, _headerBytes);
+                    if (newOffset < 0)
                     {
-                        //设置SeqId
-                        int id = BitConverter.ToInt16(new byte[] { msg[5], msg[6] }, 0);
-                        MainService.AiuiOnlineService.AiuiConnection.packetBuilder.setSeqId(id);
+                        //解析SeqID并且回复确认
+                        if (msg[msg.Length - 1] == Utils.CalcCheckCode(new List<byte>(msg)))
+                        {
+                            //设置SeqId
+                            int id = BitConverter.ToInt16(new byte[] { msg[5], msg[6] }, 0);
+                            MainService.AiuiOnlineService.AiuiConnection.packetBuilder.setSeqId(id);
 
-                        //自动回复
-                        MainService.AiuiOnlineService.AiuiConnection.SendConfirmMessage();
+                            //自动回复
+                            MainService.AiuiOnlineService.AiuiConnection.SendConfirmMessage();
+                        }
+
+                        //取数据
+                        byte[] bytes = new byte[0];
+                        if (msg[2] == 0x04)
+                        {
+                            bytes = _recievedData.GetRange(headerIndex + 7, length).ToArray();
+                        }
+
+                        //删除解析过的数据
+                        lock (SerialPortInput.lockObject)
+                        {
+                            _recievedData.RemoveRange(0, headerIndex + length + 8);
+                        }
+
+                        enabledFindNext = true;
+                        headerIndex = 0;
+
+                        return bytes;
                     }
-
-                    //取数据
-                    byte[] bytes = new byte[0];
-                    if (msg[2] == 0x04)
+                    else
                     {
-                        bytes = _recievedData.GetRange(headerIndex + 7, length).ToArray();
+                        //可能已经丢包了，废弃这个包
+                        lock (SerialPortInput.lockObject)
+                        {
+                            _recievedData.RemoveRange(0, newOffset);
+                        }
+
+                        enabledFindNext = true;
+                        headerIndex = 0;
+
+                        return new byte[0];
                     }
-
-                    //删除解析过的数据
-                    lock (SerialPortInput.lockObject)
-                    {
-                        _recievedData.RemoveRange(0, headerIndex + length + 8);
-                    }
-
-                    enabledFindNext = true;
-                    headerIndex = 0;
-
-                    return bytes;
                 }
                 else
                 {
