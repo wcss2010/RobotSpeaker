@@ -250,15 +250,23 @@ namespace RobotSpeaker
 
         void _aiuiConnection_AIUIConnectionReceivedEvent(object sender, AIUIConnectionReceivedEventArgs args)
         {
-            if (MainService.DeviceDebugUIObj != null)
+            try
             {
-                MainService.DeviceDebugUIObj.PrintDebugLog(args.Json);
+                if (MainService.DeviceDebugUIObj != null)
+                {
+                    MainService.DeviceDebugUIObj.PrintDebugLog(args.Json);
+                }
             }
-
+            catch (Exception ex) { }
+            
             //解析Json
             ThreadPool.QueueUserWorkItem(new WaitCallback(delegate(object state)
             {
-                XfJsonResolver.Resolve(args.Json);
+                try
+                {
+                    XfJsonResolver.Resolve(args.Json);
+                }
+                catch (Exception ex) { }
             }));
         }
 
