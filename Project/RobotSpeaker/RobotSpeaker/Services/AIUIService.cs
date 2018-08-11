@@ -266,7 +266,14 @@ namespace RobotSpeaker
         {
             if (_aiuiConnection != null)
             {
-                _aiuiConnection.SerialPort.Disconnect();
+                try
+                {
+                    _aiuiConnection.SerialPort.Disconnect();
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine(ex.ToString());
+                }
             }
         }
     }

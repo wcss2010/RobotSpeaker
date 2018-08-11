@@ -116,7 +116,14 @@ namespace RobotSpeaker
 
         public void Close()
         {
-            _motorPort.Disconnect();
+            try
+            {
+                _motorPort.Disconnect();
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.ToString());
+            }
         }
     }
 
