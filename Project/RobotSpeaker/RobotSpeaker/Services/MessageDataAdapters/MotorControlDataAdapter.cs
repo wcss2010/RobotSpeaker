@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RobotSpeaker
 {
-    public class MotorControlDataAdapter : MessageDataAdapter
+    public class MotorControlDataAdapter : IRobotMessageDataAdapter
     {
         public override byte[] Resolve()
         {

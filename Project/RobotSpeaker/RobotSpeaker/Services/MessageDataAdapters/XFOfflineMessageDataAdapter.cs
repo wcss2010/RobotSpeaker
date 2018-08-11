@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace RobotSpeaker
 {
-    public class XFOfflineMessageDataAdapter : MessageDataAdapter
+    public class XFOfflineMessageDataAdapter : IRobotMessageDataAdapter
     {
         bool resAssembling = false;
         int headerIndex = 0;

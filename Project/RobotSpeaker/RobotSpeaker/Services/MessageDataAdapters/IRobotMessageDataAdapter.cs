@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RobotSpeaker.Services.MessageDataAdapters
+namespace RobotSpeaker
 {
     /// <summary>
     /// 消息适配器基类
