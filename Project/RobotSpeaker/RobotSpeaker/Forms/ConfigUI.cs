@@ -58,6 +58,7 @@ namespace RobotSpeaker.Forms
             tbImageListPlayerSleepSeconds.Value = SuperObject.Config.ImageListPlayerSleepSeconds;
             cbEnabledOnlineVoice.Checked = SuperObject.Config.EnabledOnlineVoice;
             cbEnabledCloseVideoPlayerWithVoice.Checked = SuperObject.Config.EnabledCloseVideoPlayerWithVoice;
+            tbOfflineVoiceWebSocketUrl.Text = SuperObject.Config.OfflineVoiceWebSocketUrl;
 
             switch (SuperObject.Config.CurrentGoType)
             {
@@ -125,6 +126,7 @@ namespace RobotSpeaker.Forms
             SuperObject.Config.OnlineVoicePort = cbOnlineVoicePort.Text;
             SuperObject.Config.OfflineVoicePort = cbOfflineVoicePort.Text;
             SuperObject.Config.GoPort = cbGoPort.Text;
+            SuperObject.Config.OfflineVoiceWebSocketUrl = tbOfflineVoiceWebSocketUrl.Text;
 
             if (clbGoTypes.GetItemChecked(0))
             {

@@ -161,6 +161,16 @@ namespace RobotSpeaker
             set { _imageListPlayerSleepSeconds = value; }
         }
 
+        private string _OfflineVoiceWebSocketUrl = string.Empty;
+        /// <summary>
+        /// 离线语音的WebSocketUrl
+        /// </summary>
+        public string OfflineVoiceWebSocketUrl
+        {
+            get { return _OfflineVoiceWebSocketUrl; }
+            set { _OfflineVoiceWebSocketUrl = value; }
+        }
+
         /// <summary>
         /// 从字典中获得一个值
         /// </summary>

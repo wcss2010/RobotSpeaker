@@ -30,6 +30,7 @@
         {
             this.tcPage = new System.Windows.Forms.TabControl();
             this.tpNormal = new System.Windows.Forms.TabPage();
+            this.cbEnabledCloseVideoPlayerWithVoice = new System.Windows.Forms.CheckBox();
             this.cbEnabledOnlineVoice = new System.Windows.Forms.CheckBox();
             this.jsijoystickInfo = new RobotSpeaker.Forms.JoyAPI.JoystickStateInfo();
             this.label10 = new System.Windows.Forms.Label();
@@ -60,7 +61,8 @@
             this.btnCameraDir = new System.Windows.Forms.Button();
             this.btnReadmeDir = new System.Windows.Forms.Button();
             this.ofdApp = new System.Windows.Forms.OpenFileDialog();
-            this.cbEnabledCloseVideoPlayerWithVoice = new System.Windows.Forms.CheckBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbOfflineVoiceWebSocketUrl = new System.Windows.Forms.TextBox();
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).BeginInit();
@@ -79,6 +81,8 @@
             // 
             // tpNormal
             // 
+            this.tpNormal.Controls.Add(this.tbOfflineVoiceWebSocketUrl);
+            this.tpNormal.Controls.Add(this.label11);
             this.tpNormal.Controls.Add(this.cbEnabledCloseVideoPlayerWithVoice);
             this.tpNormal.Controls.Add(this.cbEnabledOnlineVoice);
             this.tpNormal.Controls.Add(this.jsijoystickInfo);
@@ -109,6 +113,18 @@
             this.tpNormal.TabIndex = 0;
             this.tpNormal.Text = "基础配置";
             this.tpNormal.UseVisualStyleBackColor = true;
+            // 
+            // cbEnabledCloseVideoPlayerWithVoice
+            // 
+            this.cbEnabledCloseVideoPlayerWithVoice.AutoSize = true;
+            this.cbEnabledCloseVideoPlayerWithVoice.Checked = true;
+            this.cbEnabledCloseVideoPlayerWithVoice.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbEnabledCloseVideoPlayerWithVoice.Location = new System.Drawing.Point(360, 148);
+            this.cbEnabledCloseVideoPlayerWithVoice.Name = "cbEnabledCloseVideoPlayerWithVoice";
+            this.cbEnabledCloseVideoPlayerWithVoice.Size = new System.Drawing.Size(252, 16);
+            this.cbEnabledCloseVideoPlayerWithVoice.TabIndex = 10;
+            this.cbEnabledCloseVideoPlayerWithVoice.Text = "是否允许关闭视频播放器在进行语音对话时";
+            this.cbEnabledCloseVideoPlayerWithVoice.UseVisualStyleBackColor = true;
             // 
             // cbEnabledOnlineVoice
             // 
@@ -404,17 +420,21 @@
             // 
             this.ofdApp.Filter = "*.Exe|*.exe";
             // 
-            // cbEnabledCloseVideoPlayerWithVoice
+            // label11
             // 
-            this.cbEnabledCloseVideoPlayerWithVoice.AutoSize = true;
-            this.cbEnabledCloseVideoPlayerWithVoice.Checked = true;
-            this.cbEnabledCloseVideoPlayerWithVoice.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbEnabledCloseVideoPlayerWithVoice.Location = new System.Drawing.Point(360, 148);
-            this.cbEnabledCloseVideoPlayerWithVoice.Name = "cbEnabledCloseVideoPlayerWithVoice";
-            this.cbEnabledCloseVideoPlayerWithVoice.Size = new System.Drawing.Size(252, 16);
-            this.cbEnabledCloseVideoPlayerWithVoice.TabIndex = 10;
-            this.cbEnabledCloseVideoPlayerWithVoice.Text = "是否允许关闭视频播放器在进行语音对话时";
-            this.cbEnabledCloseVideoPlayerWithVoice.UseVisualStyleBackColor = true;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(295, 178);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(101, 12);
+            this.label11.TabIndex = 11;
+            this.label11.Text = "离线服务器地址：";
+            // 
+            // tbOfflineVoiceWebSocketUrl
+            // 
+            this.tbOfflineVoiceWebSocketUrl.Location = new System.Drawing.Point(390, 175);
+            this.tbOfflineVoiceWebSocketUrl.Name = "tbOfflineVoiceWebSocketUrl";
+            this.tbOfflineVoiceWebSocketUrl.Size = new System.Drawing.Size(355, 21);
+            this.tbOfflineVoiceWebSocketUrl.TabIndex = 12;
             // 
             // ConfigUI
             // 
@@ -474,5 +494,7 @@
         private System.Windows.Forms.Button btnRestartService;
         private System.Windows.Forms.CheckBox cbEnabledOnlineVoice;
         private System.Windows.Forms.CheckBox cbEnabledCloseVideoPlayerWithVoice;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox tbOfflineVoiceWebSocketUrl;
     }
 }
