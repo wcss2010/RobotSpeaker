@@ -4,54 +4,64 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace RobotSpeaker
 {
     public class XFOnlineMessageDataAdapter :MessageDataAdapter
     {
+        bool resAssembling = false;
+        int headerIndex = 0;
+
         public override byte[] Resolve()
         {
-            byte[] results = new byte[0];
-
-            List<byte> dataList = SerialPortInputObject.BufferStream;
-            if (dataList.Count == 5)
+            List<byte> _recievedData = this.SerialPortInputObject.BufferStream;
+            if (!resAssembling)
             {
-                if (dataList[0] == 0xa5 && dataList[1] == 0x01)
+                while (headerIndex + 7 < _recievedData.Count && !(_recievedData[headerIndex] == 0xa5 && _recievedData[headerIndex + 1] == 0x01))
                 {
-                    SerailDataLength = ((dataList[4] & 0xff) << 8) + (dataList[3] & 0xff);
+                    headerIndex++;
                 }
-                else
-                {
-                    dataList.RemoveAt(0);
-                }
-            }
-
-            if (SerailDataLength != 0 && dataList.Count != 0 && dataList.Count == 8 + SerailDataLength)
-            {
-                if (dataList[0] == 0xa5 && dataList[1] == 0x01)
-                {
-                    if (dataList[dataList.Count - 1] == Utils.CalcCheckCode(dataList))
-                    {
-                        //设置SeqId
-                        int id = ((dataList[6] & 0xff) << 8) + dataList[5];
-                        MainService.AiuiOnlineService.AiuiConnection.packetBuilder.setSeqId(id);
-
-                        //自动回复
-                        MainService.AiuiOnlineService.AiuiConnection.SendConfirmMessage();
-                        
-                        //取数据
-                        results = dataList.GetRange(7, SerailDataLength).ToArray();
-                    }
-                }
-                
-                //清空数据
                 lock (SerialPortInput.lockObject)
                 {
-                    SerialPortInputObject.BufferStream.Clear();
+                    if (headerIndex >= _recievedData.Count)
+                    {
+                        _recievedData.Clear();
+                    }
                 }
+                resAssembling = true;
             }
 
-            return results;
+            if (headerIndex + 7 >= _recievedData.Count)
+            {
+                Thread.Sleep(10);
+            }
+
+            // 帧长度=数据区长度+1
+            int length = ((_recievedData[4] & 0xff) << 8) + (_recievedData[3] & 0xff);
+            if (headerIndex + length + 7 > _recievedData.Count)
+            {
+                Thread.Sleep(10);
+            }
+
+            if (_recievedData.Count >= length + 7)
+            {
+                if (_recievedData[_recievedData.Count - 1] == Utils.CalcCheckCode(_recievedData))
+                {
+                    //设置SeqId
+                    int id = ((_recievedData[headerIndex + 6] & 0xff) << 8) + _recievedData[headerIndex + 5];
+                    MainService.AiuiOnlineService.AiuiConnection.packetBuilder.setSeqId(id);
+
+                    //自动回复
+                    MainService.AiuiOnlineService.AiuiConnection.SendConfirmMessage();
+                }
+
+                return _recievedData.GetRange(headerIndex + 7, length).ToArray();
+            }
+            else
+            {
+                return new byte[0];
+            }
         }
 
         public int SerailDataLength { get; set; }
