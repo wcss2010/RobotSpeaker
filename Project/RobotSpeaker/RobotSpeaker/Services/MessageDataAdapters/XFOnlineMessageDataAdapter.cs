@@ -91,7 +91,7 @@ namespace RobotSpeaker
                         //可能已经丢包了，废弃这个包
                         lock (SerialPortInput.lockObject)
                         {
-                            _recievedData.RemoveRange(0, newOffset);
+                            _recievedData.RemoveRange(0, headerIndex + newOffset);
                         }
 
                         enabledFindNext = true;
