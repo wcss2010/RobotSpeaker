@@ -260,7 +260,7 @@ namespace RobotSpeaker
                 }
             }
             catch (Exception ex) { }
-            
+
             //解析Json
             ThreadPool.QueueUserWorkItem(new WaitCallback(delegate(object state)
             {
@@ -536,10 +536,10 @@ namespace RobotSpeaker
             Close();
 
             // 开启一个WebSocket
-            _webSocket = new WebSocket(SuperObject.Config.OfflineVoiceWebSocketUrl);
-            _webSocket.OnMessage += _webSocket_OnMessage;
             try
             {
+                _webSocket = new WebSocket(SuperObject.Config.OfflineVoiceWebSocketUrl);
+                _webSocket.OnMessage += _webSocket_OnMessage;
                 _webSocket.Connect();
             }
             catch (Exception ex)
@@ -579,7 +579,7 @@ namespace RobotSpeaker
         /// <param name="e"></param>
         void _webSocket_OnMessage(object sender, MessageEventArgs e)
         {
-            
+
         }
 
         public void Close()
