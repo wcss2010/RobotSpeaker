@@ -56,8 +56,12 @@ namespace AIUISerials
 
         void _serialPort_MessageReceived(object sender, MessageReceivedEventArgs args)
         {
-            //投递消息事件
-            OnAIUIConnectionReceivedEvent(Utils.Decompress(args.Data));
+            try
+            {
+                //投递消息事件
+                OnAIUIConnectionReceivedEvent(Utils.Decompress(args.Data));
+            }
+            catch (Exception ex) { }
         }
 
         public void SendShake()
