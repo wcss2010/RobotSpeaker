@@ -11,7 +11,6 @@ namespace RobotSpeaker
     public class XFOnlineMessageDataAdapter : IRobotMessageDataAdapter
     {
         byte[] _headerBytes = new byte[] { 0xA5, 0x01 };
-        bool enabledFindNext = true;
         int headerIndex = 0;
 
         public override byte[] Resolve()
@@ -21,23 +20,7 @@ namespace RobotSpeaker
                 List<byte> _recievedData = this.SerialPortInputObject.BufferStream;
 
                 //尝试查找包头
-                if (enabledFindNext)
-                {
-                    headerIndex = SearchInBuffer(_headerBytes);
-                    if (headerIndex >= 0)
-                    {
-                        //有效数据
-                        enabledFindNext = false;
-                    }
-                    else
-                    {
-                        //无效数据直接清空
-                        lock (SerialPortInput.lockObject)
-                        {
-                            _recievedData.Clear();
-                        }
-                    }
-                }
+                headerIndex = SearchInBuffer(_headerBytes);
 
                 if (headerIndex + 8 >= _recievedData.Count)
                 {
@@ -45,9 +28,20 @@ namespace RobotSpeaker
                 }
 
                 int length = BitConverter.ToInt16(new byte[] { _recievedData[headerIndex + 3], _recievedData[headerIndex + 4] }, 0);
-                if (headerIndex + length + 8 > _recievedData.Count)
+                if (length >= 0)
                 {
-                    Thread.Sleep(10);
+                    if (headerIndex + length + 8 > _recievedData.Count)
+                    {
+                        Thread.Sleep(10);
+                    }
+                }
+                else
+                {
+                    //出现负数丢弃缓冲区数据
+                    lock (SerialPortInput.lockObject)
+                    {
+                        _recievedData.RemoveRange(0, headerIndex + _headerBytes.Length);
+                    }
                 }
 
                 if (_recievedData.Count >= length + 8)
@@ -80,10 +74,7 @@ namespace RobotSpeaker
                         {
                             _recievedData.RemoveRange(0, headerIndex + length + 8);
                         }
-
-                        enabledFindNext = true;
-                        headerIndex = 0;
-
+                        
                         return bytes;
                     }
                     else
@@ -93,10 +84,6 @@ namespace RobotSpeaker
                         {
                             _recievedData.RemoveRange(0, headerIndex + newOffset);
                         }
-
-                        enabledFindNext = true;
-                        headerIndex = 0;
-
                         return new byte[0];
                     }
                 }
@@ -107,7 +94,6 @@ namespace RobotSpeaker
             }
             catch (Exception ex)
             {
-                headerIndex = 0;
                 return new byte[0];
             }
         }
