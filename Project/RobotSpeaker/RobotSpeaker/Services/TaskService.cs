@@ -22,7 +22,6 @@ namespace RobotSpeaker
     /// </summary>
     public class TaskService
     {
-        private string lastRequestString = "";
         private System.Collections.Concurrent.ConcurrentQueue<TaskQueueObject> _taskQueues = new System.Collections.Concurrent.ConcurrentQueue<TaskQueueObject>();
         /// <summary>
         /// 任务队列
@@ -87,22 +86,11 @@ namespace RobotSpeaker
         /// <param name="value"></param>
         public void Request(TaskActionType type, object value)
         {
-            string currents = type + "," + (value != null ? value.ToString() : string.Empty);
+            TaskQueueObject tqo = new TaskQueueObject();
+            tqo.ActionType = type;
+            tqo.Value = value;
 
-            if (currents.Equals(lastRequestString))
-            {
-                return;
-            }
-            else
-            {
-                lastRequestString = currents;
-
-                TaskQueueObject tqo = new TaskQueueObject();
-                tqo.ActionType = type;
-                tqo.Value = value;
-
-                TaskQueues.Enqueue(tqo);
-            }
+            TaskQueues.Enqueue(tqo);
         }
 
         /// <summary>
@@ -127,7 +115,7 @@ namespace RobotSpeaker
                         sb.Append("电机序号:").Append(step.MotorIndex).Append(",类型:").Append(step.MotorType).Append(",值:").Append(step.Value).Append("\n");
                         sb.Append("=============\n");
                         sb.Append(CRC.PrintBytesString(cmdBytes) + "\n");
-                        
+
                         //发送前等待
                         sb.Append("+++++++++++++\n");
                         sb.Append("等待" + step.BeforeSleep + "毫秒");
@@ -152,7 +140,7 @@ namespace RobotSpeaker
                         //需要停留20ms(指令之间固定时间)
                         try
                         {
-                            Thread.Sleep(20);
+                            Thread.Sleep(200);
                         }
                         catch (Exception ex) { }
                     }
@@ -219,7 +207,7 @@ namespace RobotSpeaker
                             }
                             break;
                     }
-                    
+
                     return result;
                 }
             }
