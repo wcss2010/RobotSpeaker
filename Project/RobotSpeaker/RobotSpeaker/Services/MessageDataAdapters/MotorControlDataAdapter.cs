@@ -3,31 +3,45 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace RobotSpeaker
 {
     public class MotorControlDataAdapter : IRobotMessageDataAdapter
     {
+        private byte[] _headerBytes = new byte[] { 0x01, 0x06 };
+
         public override byte[] Resolve()
         {
             byte[] results = new byte[0];
-            List<byte> dataList = SerialPortInputObject.BufferStream;
-            if (dataList.Count >= 8)
+            List<byte> _receiveData = SerialPortInputObject.BufferStream;
+
+            //查找开头
+            int headerIndex = SearchInBuffer(_headerBytes);
+            if (headerIndex >= 0)
             {
-                if (dataList[0] == 0x01 && dataList[1] == 0x06)
+                //有效值
+                if (headerIndex + 8 > _receiveData.Count)
                 {
-                    results = dataList.GetRange(0, 8).ToArray();
+                    Thread.Sleep(10);
                 }
-                else
+
+                //取数据
+                results = _receiveData.GetRange(headerIndex, 8).ToArray();
+
+                //删除解析过的数据
+                lock (SerialPortInput.lockObject)
                 {
-                    dataList.RemoveAt(0);
+                    _receiveData.RemoveRange(0, headerIndex + 8);
                 }
             }
-
-            //清空数据
-            lock (SerialPortInput.lockObject)
+            else
             {
-                SerialPortInputObject.BufferStream.Clear();
+                //无效的值，丢弃这些数据
+                lock (SerialPortInput.lockObject)
+                {
+                    _receiveData.Clear();
+                }
             }
 
             return results;
