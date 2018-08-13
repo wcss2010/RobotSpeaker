@@ -46,6 +46,12 @@ namespace RobotSpeaker.Controls
         public Panel TitlePanel { get { return this.plTopBar; } }
 
         /// <summary>
+        /// 关机按钮
+        /// </summary>
+        [Browsable(false)]
+        public ImageButton CloseComputerButton { get { return ibCloseComputer; } }
+
+        /// <summary>
         /// 标题文本
         /// </summary>
         public string TitleText

@@ -34,7 +34,7 @@
             this.lblTime = new System.Windows.Forms.Label();
             this.ibBack = new RobotSpeaker.Controls.ImageButton();
             this.lblEmpty = new System.Windows.Forms.Label();
-            this.btnCloseComputer = new RobotSpeaker.Controls.ButtonExt();
+            this.ibCloseComputer = new RobotSpeaker.Controls.ImageButton();
             this.pbWifi = new System.Windows.Forms.PictureBox();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.trTimeUpdate = new System.Windows.Forms.Timer(this.components);
@@ -50,7 +50,7 @@
             this.plTopBar.Controls.Add(this.lblTime);
             this.plTopBar.Controls.Add(this.ibBack);
             this.plTopBar.Controls.Add(this.lblEmpty);
-            this.plTopBar.Controls.Add(this.btnCloseComputer);
+            this.plTopBar.Controls.Add(this.ibCloseComputer);
             this.plTopBar.Controls.Add(this.pbWifi);
             this.plTopBar.Controls.Add(this.pbLogo);
             this.plTopBar.Dock = System.Windows.Forms.DockStyle.Top;
@@ -65,7 +65,7 @@
             this.lblTitle.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTitle.Location = new System.Drawing.Point(97, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(369, 64);
+            this.lblTitle.Size = new System.Drawing.Size(405, 64);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Title";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -74,7 +74,7 @@
             // 
             this.lblTime.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblTime.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblTime.Location = new System.Drawing.Point(466, 0);
+            this.lblTime.Location = new System.Drawing.Point(502, 0);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(337, 64);
             this.lblTime.TabIndex = 5;
@@ -106,21 +106,25 @@
             this.lblEmpty.Size = new System.Drawing.Size(33, 64);
             this.lblEmpty.TabIndex = 3;
             // 
-            // btnCloseComputer
+            // ibCloseComputer
             // 
-            this.btnCloseComputer.ButtonNormalBackColor = System.Drawing.Color.Transparent;
-            this.btnCloseComputer.ButtonNormalForeColor = System.Drawing.Color.White;
-            this.btnCloseComputer.ButtonPressedBackColor = System.Drawing.Color.Orange;
-            this.btnCloseComputer.ButtonPressedForeColor = System.Drawing.Color.White;
-            this.btnCloseComputer.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCloseComputer.EnabledMouseDownAndMouseUp = true;
-            this.btnCloseComputer.Font = new System.Drawing.Font("微软雅黑", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCloseComputer.Location = new System.Drawing.Point(803, 0);
-            this.btnCloseComputer.Name = "btnCloseComputer";
-            this.btnCloseComputer.Size = new System.Drawing.Size(100, 64);
-            this.btnCloseComputer.TabIndex = 6;
-            this.btnCloseComputer.Text = "关机";
-            this.btnCloseComputer.Click += new System.EventHandler(this.btnCloseComputer_Click);
+            this.ibCloseComputer.BottomText = "Text";
+            this.ibCloseComputer.BottomTextColor = System.Drawing.SystemColors.ControlText;
+            this.ibCloseComputer.BottomTextFont = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ibCloseComputer.BottomTextHeight = 0;
+            this.ibCloseComputer.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ibCloseComputer.EnabledMouseDownAndMouseUp = true;
+            this.ibCloseComputer.EnabledTextLabel = false;
+            this.ibCloseComputer.FocusImage = null;
+            this.ibCloseComputer.Font = new System.Drawing.Font("微软雅黑", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ibCloseComputer.IsPressed = false;
+            this.ibCloseComputer.Location = new System.Drawing.Point(839, 0);
+            this.ibCloseComputer.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
+            this.ibCloseComputer.Name = "ibCloseComputer";
+            this.ibCloseComputer.NoFocusImage = null;
+            this.ibCloseComputer.Size = new System.Drawing.Size(64, 64);
+            this.ibCloseComputer.TabIndex = 6;
+            this.ibCloseComputer.Click += new System.EventHandler(this.btnCloseComputer_Click);
             // 
             // pbWifi
             // 
@@ -177,6 +181,6 @@
         private System.Windows.Forms.PictureBox pbWifi;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Timer trTimeUpdate;
-        private ButtonExt btnCloseComputer;
+        private ImageButton ibCloseComputer;
     }
 }
