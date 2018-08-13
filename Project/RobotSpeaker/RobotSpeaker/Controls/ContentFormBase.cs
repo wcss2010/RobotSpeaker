@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -154,6 +155,14 @@ namespace RobotSpeaker.Controls
         private void trTimeUpdate_Tick(object sender, EventArgs e)
         {
             lblTime.Text = DateTime.Now.ToString(CustomTimeFormat);
+        }
+
+        private void btnCloseComputer_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("真的要关机吗？", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+            {
+                Process.Start("shutdown", "/s /t 0"); 
+            }
         }
     }
 }
