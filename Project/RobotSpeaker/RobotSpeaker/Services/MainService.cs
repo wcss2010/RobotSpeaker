@@ -166,6 +166,14 @@ namespace RobotSpeaker
             //保存当前按钮状态
             if (SuperObject.Config.CurrentGoType == GoType.Joy && args.ButtonType != JoystickButtonType.None)
             {
+                if (args.ButtonType == JoystickButtonType.MiddleCenter)
+                {
+                    if (LastJoystickButtonType != JoystickButtonType.TopLeft && LastJoystickButtonType != JoystickButtonType.TopCenter && LastJoystickButtonType != JoystickButtonType.TopRight && LastJoystickButtonType != JoystickButtonType.MiddleLeft && LastJoystickButtonType != JoystickButtonType.MiddleRight && LastJoystickButtonType != JoystickButtonType.BottomLeft && LastJoystickButtonType != JoystickButtonType.BottomCenter && LastJoystickButtonType != JoystickButtonType.MiddleRight)
+                    {
+                        return;
+                    }
+                }
+
                 if (LastJoystickButtonType == args.ButtonType)
                 {
                     return;
