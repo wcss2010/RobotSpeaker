@@ -79,6 +79,11 @@ namespace RobotSpeaker
         public RobotConfig()
         {
             Params = new SerializableDictionary<string, object>();
+            EnabledOnlineVoice = true;
+            EnabledCloseVideoPlayerWithVoice = true;
+            OnlineVoicePort = "COM1";
+            OfflineVoicePort = "COM1";
+            GoPort = "COM1";
         }
 
         /// <summary>
