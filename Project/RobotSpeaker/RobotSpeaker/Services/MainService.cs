@@ -22,6 +22,8 @@ namespace RobotSpeaker
     /// </summary>
     public class MainService
     {
+        private static JoystickButtonType LastJoystickButtonType = JoystickButtonType.None;
+
         /// <summary>
         /// 图片缓存
         /// </summary>
@@ -162,12 +164,18 @@ namespace RobotSpeaker
         private static void JoystickService_JoystickPressEvent(object sender, JoystickPressEventArgs args)
         {
             //保存当前按钮状态
-            if (SuperObject.Config.CurrentGoType == GoType.Joy && args.ButtonType != JoystickButtonType.MiddleCenter && args.ButtonType != JoystickButtonType.None)
+            if (SuperObject.Config.CurrentGoType == GoType.Joy && args.ButtonType != JoystickButtonType.None)
             {
+                if (LastJoystickButtonType == args.ButtonType)
+                {
+                    return;
+                }
+
+                LastJoystickButtonType = args.ButtonType;
                 TaskService.Request(TaskActionType.Joy, args.ButtonType);
             }
 
-            //向ConfigUI界面中的手柄测试界面传递按键指令
+            #region 向ConfigUI界面中的手柄测试界面传递按键指令
             if (MainUIObj != null)
             {
                 if (MainUIObj.IsHandleCreated)
@@ -181,6 +189,7 @@ namespace RobotSpeaker
                         }));
                 }
             }
+            #endregion
         }
 
         /// <summary>
