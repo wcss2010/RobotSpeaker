@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -15,6 +16,10 @@ namespace RobotSpeaker.Controls
     /// </summary>
     public partial class ContentFormBase : FullScreenFormBase
     {
+        [DllImport("user32.dll")]
+        //主要API是这个，注意：必须声明为static extern 
+        private static extern int ExitWindowsEx(int x, int y); 
+
         /// <summary>
         /// 返回按钮
         /// </summary>
@@ -167,7 +172,7 @@ namespace RobotSpeaker.Controls
         {
             if (MessageBox.Show("真的要关机吗？", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
             {
-                Process.Start("shutdown", "/s /t 0"); 
+                ExitWindowsEx(1, 0); 
             }
         }
     }
