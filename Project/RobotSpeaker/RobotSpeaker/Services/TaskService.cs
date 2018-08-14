@@ -22,8 +22,6 @@ namespace RobotSpeaker
     /// </summary>
     public class TaskService
     {
-        private string lastRequestString = "";
-
         private System.Collections.Concurrent.ConcurrentQueue<TaskQueueObject> _taskQueues = new System.Collections.Concurrent.ConcurrentQueue<TaskQueueObject>();
         /// <summary>
         /// 任务队列
@@ -88,22 +86,11 @@ namespace RobotSpeaker
         /// <param name="value"></param>
         public void Request(TaskActionType type, object value)
         {
-            string currents = type + "," + (value != null ? value.ToString() : string.Empty);
+            TaskQueueObject tqo = new TaskQueueObject();
+            tqo.ActionType = type;
+            tqo.Value = value;
 
-            if (currents.Equals(lastRequestString))
-            {
-                return;
-            }
-            else
-            {
-                lastRequestString = currents;
-
-                TaskQueueObject tqo = new TaskQueueObject();
-                tqo.ActionType = type;
-                tqo.Value = value;
-
-                TaskQueues.Enqueue(tqo);
-            }
+            TaskQueues.Enqueue(tqo);
         }
 
         /// <summary>
