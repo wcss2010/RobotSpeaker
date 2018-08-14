@@ -40,6 +40,13 @@ namespace RobotSpeaker
             XfJsonResolver.XFCardQuestionEvent += XfJsonResolver_XFCardQuestionEvent;
             XfJsonResolver.XFCardTTSStartEvent += XfJsonResolver_XFCardTTSStartEvent;
             XfJsonResolver.XFCardTTSEndEvent += XfJsonResolver_XFCardTTSEndEvent;
+            XfJsonResolver.XFCardDictateEvent += XfJsonResolver_XFCardDictateEvent;
+        }
+
+        void XfJsonResolver_XFCardDictateEvent(object sender, XFQuestionEventArgs args)
+        {
+            //保存用户的问话
+            MainService.TaskService.Request(TaskActionType.Voice, args.Ask);
         }
 
         void XfJsonResolver_XFCardTTSEndEvent(object sender, EventArgs args)
@@ -54,9 +61,6 @@ namespace RobotSpeaker
 
         void XfJsonResolver_XFCardQuestionEvent(object sender, XFQuestionEventArgs args)
         {
-            //保存用户的问话
-            MainService.TaskService.Request(TaskActionType.Voice, args.Ask);
-
             //显示问话
             ShowUserText(args.Ask);
 
@@ -372,6 +376,8 @@ namespace RobotSpeaker
         /// </summary>
         public event XFCardQuestionDelegate XFCardQuestionEvent;
 
+        public event XFCardQuestionDelegate XFCardDictateEvent;
+
         protected void OnXFCardTTSStartEvent()
         {
             if (XFCardTTSStartEvent != null)
@@ -416,6 +422,18 @@ namespace RobotSpeaker
                 obj.Answer = answer;
 
                 XFCardQuestionEvent(this, obj);
+            }
+        }
+
+        protected void OnXFCardDictateEvent(string ask, string answer)
+        {
+            if (XFCardDictateEvent != null)
+            {
+                XFQuestionEventArgs obj = new XFQuestionEventArgs();
+                obj.Ask = ask;
+                obj.Answer = answer;
+
+                XFCardDictateEvent(this, obj);
             }
         }
 
@@ -464,6 +482,17 @@ namespace RobotSpeaker
                                     //投递答案
                                     OnXFCardQuestionEvent(askStr, answerStr);
                                 }
+                                else if (contentObj["result"]["text"] != null)
+                                {
+                                    JToken listen = contentObj["result"]["text"];
+                                    StringBuilder sb = new StringBuilder();
+                                    GetVoiceString(sb, listen, "w");
+
+                                    if (sb.Length >= 2)
+                                    {
+                                        OnXFCardDictateEvent(sb.ToString(), string.Empty);
+                                    }
+                                }
                             }
                             else
                             {
@@ -506,6 +535,26 @@ namespace RobotSpeaker
                 catch (Exception ex)
                 {
                     System.Console.WriteLine("解析错误！Ex:" + ex.ToString());
+                }
+            }
+        }
+
+        /// <summary>
+        /// 遍历Json子节点，找出所有字符串
+        /// </summary>
+        /// <param name="stringBuffer"></param>
+        /// <param name="parent"></param>
+        /// <param name="fieldName"></param>
+        protected void GetVoiceString(StringBuilder stringBuffer, JToken parent, string fieldName)
+        {
+            foreach (JToken t in parent.Children())
+            {
+                GetVoiceString(stringBuffer, t, fieldName);
+
+                JProperty pp = t as JProperty;
+                if (pp != null && pp.Name != null && pp.Name.Equals(fieldName))
+                {
+                    stringBuffer.Append(pp.Value);
                 }
             }
         }
