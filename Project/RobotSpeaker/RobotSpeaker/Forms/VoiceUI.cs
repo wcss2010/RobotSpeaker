@@ -1,4 +1,5 @@
-﻿using RobotSpeaker.Controls.Chat;
+﻿using AIUISerials;
+using RobotSpeaker.Controls.Chat;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,7 +30,14 @@ namespace RobotSpeaker.Forms
         {
             base.OnLoad(e);
 
+            //显示欢迎信息
             ChatPanel.AddMachineMsg(SuperObject.Config.VoiceWelcomeText);
+
+            //查询Wifi状态
+            if (MainService.AiuiOnlineService.AiuiConnection.SerialPort.IsConnected)
+            {
+                MainService.AiuiOnlineService.AiuiConnection.SendCmd(CommandConst.QUERY_WIFI_STATE);
+            }
         }
 
         protected override void OnClickBackButton(EventArgs e)
