@@ -490,7 +490,7 @@ namespace RobotSpeaker
 
                                     if (sb.Length >= 2)
                                     {
-                                        OnXFCardDictateEvent(sb.ToString(), string.Empty);
+                                        OnXFCardDictateEvent(sb.ToString().Trim(), string.Empty);
                                     }
                                 }
                             }
