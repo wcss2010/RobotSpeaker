@@ -654,7 +654,7 @@ namespace RobotSpeaker
             }
 
             sWaveFormat.nSamplesPerSec = 44100; // 波形采样
-            sWaveFormat.nAvgBytesPerSec = 176400; // 平均传输率
+            sWaveFormat.nAvgBytesPerSec = 44100 * 16 * 2; // 平均传输率
             sWaveFormat.wFormatTag = 1; // 波形格式
             sWaveFormat.nChannels = 2; // 声道
             sWaveFormat.wBitsPerSample = 16; // 采样位深
