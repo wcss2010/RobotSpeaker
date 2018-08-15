@@ -85,7 +85,7 @@ namespace RobotSpeaker
                         }
                         else if (step.Value < 0)
                         {
-                            value = (ushort)(-step.Value);
+                            value = (ushort)(60 + step.Value);
                         }
                         break;
                     case 1:
