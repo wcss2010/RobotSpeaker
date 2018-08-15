@@ -653,12 +653,12 @@ namespace RobotSpeaker
                 throw new Exception("Cannot find the your computer audio output device."); // 无法找到您电脑的音频输出设备
             }
 
-            sWaveFormat.nSamplesPerSec = 44100; // 波形采样
-            sWaveFormat.nAvgBytesPerSec = 44100 * 16 * 2; // 平均传输率
+            sWaveFormat.nSamplesPerSec = 16000; // 波形采样
+            sWaveFormat.nAvgBytesPerSec = 16000 * 16 * 1; // 平均传输率
             sWaveFormat.wFormatTag = 1; // 波形格式
-            sWaveFormat.nChannels = 2; // 声道
+            sWaveFormat.nChannels = 1; // 声道
             sWaveFormat.wBitsPerSample = 16; // 采样位深
-            sWaveFormat.nBlockAlign = 2 * 16 / 8; // 块对齐
+            sWaveFormat.nBlockAlign = 1 * 16 / 8; // 块对齐
             sWaveFormat.cbSize = 16; // 结构尺寸
 
             pfnDevNotify = DeviceNotify;
