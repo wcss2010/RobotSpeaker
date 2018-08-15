@@ -593,7 +593,21 @@ namespace RobotSpeaker
 
         void WebSocket_OnMessage(object sender, MessageEventArgs e)
         {
-            System.Console.WriteLine(e.Data);
+            try
+            {
+                var jtoken = JObject.Parse(e.Data);
+                string ask = jtoken["q"].ToString();
+                string answer = jtoken["a"].ToString();
+                string audioString = jtoken["audio"].ToString();
+
+                MainService.AiuiOnlineService.ShowUserText(ask);
+                if (MainService.AiuiOnlineService.IsUseLocalQuestion(ask))
+                {
+                    return;
+                }
+                MainService.AiuiOnlineService.ShowMachineText(answer);
+            }
+            catch (Exception ex) { }
         }
 
         public void Close()
