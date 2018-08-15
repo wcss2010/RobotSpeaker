@@ -46,10 +46,15 @@ namespace AIUISerials
             get { return _webSocket; }
         }
 
+        private string _socketUrl = string.Empty;
         /// <summary>
         /// WebSocket服务端地址
         /// </summary>
-        private string _socketUrl = string.Empty;
+        public string SocketUrl
+        {
+            get { return _socketUrl; }
+            set { _socketUrl = value; }
+        }
 
         /// <summary>
         /// 是否需要开启webSocket 0默认是连接 1不需要连接

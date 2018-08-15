@@ -577,8 +577,18 @@ namespace RobotSpeaker
                 return;
             }
 
-            offlineConnection = new AIUIOffineConnection(SuperObject.Config.OfflineVoicePort);
-            offlineConnection.WebSocket.OnMessage += WebSocket_OnMessage;
+            try
+            {
+                offlineConnection = new AIUIOffineConnection(SuperObject.Config.OfflineVoicePort);
+                if (offlineConnection.WebSocket != null)
+                {
+                    offlineConnection.WebSocket.OnMessage += WebSocket_OnMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.ToString());
+            }
         }
 
         void WebSocket_OnMessage(object sender, MessageEventArgs e)
