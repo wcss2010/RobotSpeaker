@@ -579,7 +579,7 @@ namespace RobotSpeaker
 
             try
             {
-                offlineConnection = new AIUIOffineConnection(SuperObject.Config.OfflineVoicePort);
+                offlineConnection = new AIUIOffineConnection(SuperObject.Config.OfflineVoiceWebSocketUrl, SuperObject.Config.OfflineVoicePort);
                 if (offlineConnection.WebSocket != null)
                 {
                     offlineConnection.WebSocket.OnMessage += WebSocket_OnMessage;

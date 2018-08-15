@@ -46,16 +46,6 @@ namespace AIUISerials
             get { return _webSocket; }
         }
 
-        private string _socketUrl = string.Empty;
-        /// <summary>
-        /// WebSocket服务端地址
-        /// </summary>
-        public string SocketUrl
-        {
-            get { return _socketUrl; }
-            set { _socketUrl = value; }
-        }
-
         /// <summary>
         /// 是否需要开启webSocket 0默认是连接 1不需要连接
         /// </summary>
@@ -69,7 +59,7 @@ namespace AIUISerials
         /// <param name="parity"></param>
         /// <param name="dataBits"></param>
         /// <param name="stopBits"></param>
-        public AIUIOffineConnection(string portName, int baudRate = 921600, Parity parity = Parity.None, int dataBits = 8, StopBits stopBits = StopBits.One)
+        public AIUIOffineConnection(string _socketUrl,string portName, int baudRate = 921600, Parity parity = Parity.None, int dataBits = 8, StopBits stopBits = StopBits.One)
         {
             _recievedData = new List<byte>();
             try
