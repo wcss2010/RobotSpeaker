@@ -36,11 +36,15 @@ namespace AIUISerials
         /// 即将发送的数据日志，默认0不写 1写
         /// </summary>
         private string _fulfilLog = "0";
-
+        
+        private WebSocket _webSocket;
         /// <summary>
         /// WebSocket
         /// </summary>
-        private WebSocket _webSocket;
+        public WebSocket WebSocket
+        {
+            get { return _webSocket; }
+        }
 
         /// <summary>
         /// WebSocket服务端地址
