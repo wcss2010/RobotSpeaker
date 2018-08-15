@@ -596,13 +596,15 @@ namespace RobotSpeaker
 
         void WebSocket_OnMessage(object sender, MessageEventArgs e)
         {
+            string audioString = string.Empty;
+
             try
             {
                 //解析数据
                 var jtoken = JObject.Parse(e.Data);
                 string ask = jtoken["q"].ToString();
                 string answer = jtoken["a"].ToString();
-                string audioString = jtoken["audio"].ToString();
+                audioString = jtoken["audio"].ToString();
 
                 //显示答案
                 MainService.AiuiOnlineService.ShowUserText(ask);
@@ -612,7 +614,19 @@ namespace RobotSpeaker
                 }
                 MainService.AiuiOnlineService.ShowMachineText(answer);
 
+            }
+            catch (Exception ex) { }
+            try
+            {
                 //播放音频
+                if (player.PlayStatus == PlayStatus.Playing)
+                {
+                    try
+                    {
+                        player.Stop();
+                    }
+                    catch (Exception ex) { }
+                }
                 byte[] bytes = Convert.FromBase64String(audioString);
                 player.Load(bytes, 0);
                 player.Play();
