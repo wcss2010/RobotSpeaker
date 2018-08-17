@@ -415,7 +415,7 @@ namespace RobotSpeaker
             }
         }
 
-        protected void OnXFCardQuestionEvent(string ask, string answer)
+        public void OnXFCardQuestionEvent(string ask, string answer)
         {
             if (XFCardQuestionEvent != null)
             {
@@ -427,7 +427,7 @@ namespace RobotSpeaker
             }
         }
 
-        protected void OnXFCardDictateEvent(string ask, string answer)
+        public void OnXFCardDictateEvent(string ask, string answer)
         {
             if (XFCardDictateEvent != null)
             {
@@ -597,25 +597,32 @@ namespace RobotSpeaker
         void WebSocket_OnMessage(object sender, MessageEventArgs e)
         {
             string audioString = string.Empty;
+            string ask = string.Empty;
+            string answer = string.Empty;
 
             try
             {
                 //解析数据
                 var jtoken = JObject.Parse(e.Data);
-                string ask = jtoken["q"].ToString();
-                string answer = jtoken["a"].ToString();
+                ask = jtoken["q"].ToString();
+                answer = jtoken["a"].ToString();
                 audioString = jtoken["audio"].ToString();
-
-                //显示答案
-                MainService.AiuiOnlineService.ShowUserText(ask);
-                if (MainService.AiuiOnlineService.IsUseLocalQuestion(ask))
-                {
-                    return;
-                }
-                MainService.AiuiOnlineService.ShowMachineText(answer);
-
             }
             catch (Exception ex) { }
+
+            //检查是否非空
+            if (string.IsNullOrEmpty(ask) || string.IsNullOrEmpty(answer) || string.IsNullOrEmpty(audioString))
+            {
+                return;
+            }
+
+            //投递听写事件
+            MainService.AiuiOnlineService.XfJsonResolver.OnXFCardDictateEvent(ask, answer);
+
+            //投递回答事件
+            MainService.AiuiOnlineService.XfJsonResolver.OnXFCardQuestionEvent(ask, answer);
+            
+
             try
             {
                 //播放音频
