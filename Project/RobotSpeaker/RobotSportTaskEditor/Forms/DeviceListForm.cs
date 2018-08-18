@@ -89,7 +89,25 @@ namespace RobotSportTaskEditor.Forms
 
         private void lvConnectionList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            if (lvConnectionList.SelectedItems.Count > 0)
+            {
+                RobotConfigItem rci = (RobotConfigItem)lvConnectionList.SelectedItems[0].Tag;
 
+                DeviceEditorForm def = new DeviceEditorForm();
+                def.Text = "修改";
+                def.NickName = rci.NickName;
+                def.IP = rci.IP;
+                def.Port = rci.Port;
+                if (def.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    rci.NickName = def.NickName;
+                    rci.IP = def.IP;
+                    rci.Port = def.Port;
+
+                    SaveConfig();
+                    LoadConfig();
+                }
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -104,13 +122,34 @@ namespace RobotSportTaskEditor.Forms
                         lvi.Remove();
                     }
                 }
+
                 SaveConfig();
+                LoadConfig();
             }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            DeviceEditorForm def = new DeviceEditorForm();
+            def.Text = "新增";
+            if (def.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (string.IsNullOrEmpty(def.NickName) || string.IsNullOrEmpty(def.IP) || def.Port <= 100)
+                {
+                    return;
+                }
+                else
+                {
+                    RobotConfigItem rci = new RobotConfigItem();
+                    rci.NickName = def.NickName;
+                    rci.IP = def.IP;
+                    rci.Port = def.Port;
+                    RobotConfigList.Add(rci);
 
+                    SaveConfig();
+                    LoadConfig();
+                }
+            }
         }
     }
 

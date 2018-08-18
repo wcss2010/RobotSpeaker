@@ -20,8 +20,6 @@ namespace RobotSportTaskEditor
 {
     public partial class MainForm : Form
     {
-        DeviceListForm df = new DeviceListForm();
-
         public MainForm()
         {
             InitializeComponent();
@@ -168,7 +166,8 @@ namespace RobotSportTaskEditor
 
         private void btnDeviceList_Click(object sender, EventArgs e)
         {
-            df.Show();
+            DeviceListForm df = new DeviceListForm();
+            df.ShowDialog();
         }
     }
 }
