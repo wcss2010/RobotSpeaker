@@ -49,6 +49,9 @@ namespace RobotSpeaker
         {
             //保存用户的问话
             MainService.TaskService.Request(TaskActionType.Voice, args.Ask);
+
+            //显示问话
+            ShowUserText(args.Ask);
         }
 
         void XfJsonResolver_XFCardTTSEndEvent(object sender, EventArgs args)
@@ -63,9 +66,6 @@ namespace RobotSpeaker
 
         void XfJsonResolver_XFCardQuestionEvent(object sender, XFQuestionEventArgs args)
         {
-            //显示问话
-            ShowUserText(args.Ask);
-
             //判断是否需要使用本地问答库
             if (IsUseLocalQuestion(args.Ask))
             {
