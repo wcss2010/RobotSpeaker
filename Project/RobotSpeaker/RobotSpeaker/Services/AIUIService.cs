@@ -51,12 +51,12 @@ namespace RobotSpeaker
             {
                 return;
             }
+            
+            //显示问话
+            ShowUserText(args.Ask);
 
             //保存用户的问话
             MainService.TaskService.Request(TaskActionType.Voice, args.Ask);
-
-            //显示问话
-            ShowUserText(args.Ask);
         }
 
         void XfJsonResolver_XFCardTTSEndEvent(object sender, EventArgs args)
