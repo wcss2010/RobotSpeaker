@@ -38,6 +38,8 @@ namespace RobotSpeaker.Forms
             {
                 MainService.AiuiOnlineService.AiuiConnection.SendCmd(CommandConst.QUERY_WIFI_STATE);
             }
+
+            TitleText = "语音对话(" + (SuperObject.Config.EnabledOnlineVoice ? "在线对话模式" : "离线对话模式") + (MainService.TaskService.RunMode == RunModeType.Debug ? "_调试状态" : "") + ")";
         }
 
         protected override void OnClickBackButton(EventArgs e)
