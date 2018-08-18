@@ -70,7 +70,7 @@ namespace RobotSpeaker
                                 if (IsAcceptRun(queueObj, action))
                                 {
                                     //发送指令序列
-                                    SendStepList(action, DBInstance.GetSteps(action.Id));
+                                    RunAction(action, DBInstance.GetSteps(action.Id));
                                 }
                             }
                         }
@@ -130,56 +130,59 @@ namespace RobotSpeaker
         /// 发送指令
         /// </summary>
         /// <param name="stepList"></param>
-        public void SendStepList(Robot_Actions action, List<Robot_Steps> stepList)
+        public void RunAction(Robot_Actions action, List<Robot_Steps> stepList)
         {
-            if (action != null && stepList != null)
+            lock (TaskQueues)
             {
-                StringBuilder sb = new StringBuilder();
-                sb.Append("动作名称:").Append(action.Name).Append("\n");
-
-                foreach (Robot_Steps step in stepList)
+                if (action != null && stepList != null)
                 {
-                    //编译指令
-                    byte[] cmdBytes = MainService.MotorControlService.GetCommand(step);
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("动作名称:").Append(action.Name).Append("\n");
 
-                    if (cmdBytes != null)
+                    foreach (Robot_Steps step in stepList)
                     {
-                        sb.Append("-------------\n");
-                        sb.Append("电机序号:").Append(step.MotorIndex).Append(",类型:").Append(step.MotorType).Append(",值:").Append(step.Value).Append("\n");
-                        sb.Append("=============\n");
-                        sb.Append(CRC.PrintBytesString(cmdBytes) + "\n");
+                        //编译指令
+                        byte[] cmdBytes = MainService.MotorControlService.GetCommand(step);
 
-                        //发送前等待
-                        sb.Append("+++++++++++++\n");
-                        sb.Append("等待" + step.BeforeSleep + "毫秒");
-                        try
+                        if (cmdBytes != null)
                         {
-                            Thread.Sleep((int)step.BeforeSleep);
-                        }
-                        catch (Exception ex) { }
+                            sb.Append("-------------\n");
+                            sb.Append("电机序号:").Append(step.MotorIndex).Append(",类型:").Append(step.MotorType).Append(",值:").Append(step.Value).Append("\n");
+                            sb.Append("=============\n");
+                            sb.Append(CRC.PrintBytesString(cmdBytes) + "\n");
 
-                        //发送指令 
-                        MainService.MotorControlService.MotorPort.SendMessage(cmdBytes);
+                            //发送前等待
+                            sb.Append("+++++++++++++\n");
+                            sb.Append("等待" + step.BeforeSleep + "毫秒");
+                            try
+                            {
+                                Thread.Sleep((int)step.BeforeSleep);
+                            }
+                            catch (Exception ex) { }
 
-                        //发送后等待
-                        sb.Append("+++++++++++++\n");
-                        sb.Append("等待" + step.AfterSleep + "毫秒");
-                        try
-                        {
-                            Thread.Sleep((int)step.AfterSleep);
-                        }
-                        catch (Exception ex) { }
+                            //发送指令 
+                            MainService.MotorControlService.MotorPort.SendMessage(cmdBytes);
 
-                        //需要停留20ms(指令之间固定时间)
-                        try
-                        {
-                            Thread.Sleep(200);
+                            //发送后等待
+                            sb.Append("+++++++++++++\n");
+                            sb.Append("等待" + step.AfterSleep + "毫秒");
+                            try
+                            {
+                                Thread.Sleep((int)step.AfterSleep);
+                            }
+                            catch (Exception ex) { }
+
+                            //需要停留20ms(指令之间固定时间)
+                            try
+                            {
+                                Thread.Sleep(200);
+                            }
+                            catch (Exception ex) { }
                         }
-                        catch (Exception ex) { }
                     }
-                }
 
-                System.Console.WriteLine(sb.ToString());
+                    System.Console.WriteLine(sb.ToString());
+                }
             }
         }
 
