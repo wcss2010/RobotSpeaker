@@ -169,7 +169,7 @@ namespace RobotSpeaker
                 switch (dm.Command.ToLower())
                 {
                     case "actionrun":
-                        ActionObject ao = (ActionObject)dm.Content;
+                        ActionObject ao = ((Newtonsoft.Json.Linq.JToken)dm.Content).ToObject<ActionObject>();
                         TaskQueues.Enqueue(ao);
                         break;
                 }
