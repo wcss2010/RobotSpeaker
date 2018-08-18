@@ -160,7 +160,8 @@ namespace RobotSpeaker
                 switch (dm.Command)
                 {
                     case "ActionRun":
-
+                        ActionObject ao = (ActionObject)dm.Content;
+                        TaskQueues.Enqueue(ao);
                         break;
                 }
             }
