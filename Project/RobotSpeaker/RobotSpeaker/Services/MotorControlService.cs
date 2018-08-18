@@ -114,6 +114,21 @@ namespace RobotSpeaker
             return result;
         }
 
+        /// <summary>
+        /// 发送消息
+        /// </summary>
+        /// <param name="bytes"></param>
+        public void SendMessage(byte[] bytes)
+        {
+            if (MotorPort != null)
+            {
+                if (MotorPort.IsConnected)
+                {
+                    MotorPort.SendMessage(bytes);
+                }
+            }
+        }
+
         public void Close()
         {
             try

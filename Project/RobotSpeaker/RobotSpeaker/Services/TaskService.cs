@@ -161,7 +161,7 @@ namespace RobotSpeaker
                             catch (Exception ex) { }
 
                             //发送指令 
-                            MainService.MotorControlService.MotorPort.SendMessage(cmdBytes);
+                            MainService.MotorControlService.SendMessage(cmdBytes);
 
                             //发送后等待
                             sb.Append("+++++++++++++\n");
