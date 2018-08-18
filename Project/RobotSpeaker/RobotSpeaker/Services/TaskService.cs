@@ -22,6 +22,16 @@ namespace RobotSpeaker
     /// </summary>
     public class TaskService
     {
+        private RunModeType _runMode = RunModeType.Normal;
+        /// <summary>
+        /// 运行模式
+        /// </summary>
+        public RunModeType RunMode
+        {
+            get { return _runMode; }
+            set { _runMode = value; }
+        }
+
         private System.Collections.Concurrent.ConcurrentQueue<TaskQueueObject> _taskQueues = new System.Collections.Concurrent.ConcurrentQueue<TaskQueueObject>();
         /// <summary>
         /// 任务队列
@@ -86,18 +96,41 @@ namespace RobotSpeaker
         /// <param name="value"></param>
         public void Request(TaskActionType type, object value)
         {
-            TaskQueueObject tqo = new TaskQueueObject();
-            tqo.ActionType = type;
-            tqo.Value = value;
+            if (RunMode == RunModeType.Normal)
+            {
+                TaskQueueObject tqo = new TaskQueueObject();
+                tqo.ActionType = type;
+                tqo.Value = value;
 
-            TaskQueues.Enqueue(tqo);
+                TaskQueues.Enqueue(tqo);
+            }
+            else
+            {
+                try
+                {
+                    if (MainService.MainUIObj.IsHandleCreated)
+                    {
+                        MainService.MainUIObj.Invoke(new MethodInvoker(delegate()
+                            {
+                                if (MainService.VoiceUIObj != null)
+                                {
+                                    MainService.VoiceUIObj.ChatPanel.AddMachineMsg(SuperObject.Config.DebugModeHintText);
+                                }
+                            }));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine(ex.ToString());
+                }
+            }
         }
 
         /// <summary>
         /// 发送指令
         /// </summary>
         /// <param name="stepList"></param>
-        private void SendStepList(Robot_Actions action, List<Robot_Steps> stepList)
+        public void SendStepList(Robot_Actions action, List<Robot_Steps> stepList)
         {
             if (action != null && stepList != null)
             {
@@ -155,7 +188,7 @@ namespace RobotSpeaker
         /// </summary>
         /// <param name="action"></param>
         /// <returns></returns>
-        private bool IsAcceptRun(TaskQueueObject queueObj, Robot_Actions action)
+        public bool IsAcceptRun(TaskQueueObject queueObj, Robot_Actions action)
         {
             if (action != null && queueObj != null && queueObj.Value != null)
             {
@@ -246,5 +279,10 @@ namespace RobotSpeaker
     public enum TaskActionType
     {
         Voice, Angle, Joy
+    }
+
+    public enum RunModeType
+    {
+       Normal,Debug
     }
 }
