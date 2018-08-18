@@ -172,10 +172,10 @@ namespace RobotSpeaker
                         ActionObject ao = (ActionObject)dm.Content;
                         TaskQueues.Enqueue(ao);
                         break;
-                    case "hello":
-                        e.Connecction.messageQueue.Enqueue(new SocketLibrary.Message(SocketLibrary.Message.CommandType.SendMessage, SpeakerLibrary.Message.DebugMessage.ToJson(dm)));
-                        break;
                 }
+
+                //发送回复
+                e.Connecction.messageQueue.Enqueue(new SocketLibrary.Message(SocketLibrary.Message.CommandType.SendMessage, SpeakerLibrary.Message.DebugMessage.ToJson(dm)));
             }
             catch (Exception ex)
             {

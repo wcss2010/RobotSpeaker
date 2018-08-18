@@ -207,7 +207,7 @@ namespace RobotSportTaskEditor
                     {
                         //构造消息
                         SpeakerLibrary.Message.DebugMessage dm = new SpeakerLibrary.Message.DebugMessage();
-                        dm.Command = "RobotRun";
+                        dm.Command = "ActionRun";
                         SpeakerLibrary.Message.ActionObject actionObject = new SpeakerLibrary.Message.ActionObject();
                         actionObject.Action = (Robot_Actions)dgActions.SelectedRows[0].Tag;
                         actionObject.StepList = DBInstance.DbHelper.table("Robot_Steps").where("ActionId=?", new object[] { actionObject.Action.Id }).select("*").getList<Robot_Steps>(new Robot_Steps()).ToArray();
