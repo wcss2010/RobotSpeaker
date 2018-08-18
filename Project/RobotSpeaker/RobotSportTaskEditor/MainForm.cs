@@ -20,6 +20,8 @@ namespace RobotSportTaskEditor
 {
     public partial class MainForm : Form
     {
+        DebugForm df = new DebugForm();
+
         public MainForm()
         {
             InitializeComponent();
@@ -163,5 +165,10 @@ namespace RobotSportTaskEditor
         public List<Robot_Actions> ActionList { get; set; }
 
         public List<Robot_Questions> QuestionList { get; set; }
+
+        private void btnDeviceList_Click(object sender, EventArgs e)
+        {
+            df.Show();
+        }
     }
 }

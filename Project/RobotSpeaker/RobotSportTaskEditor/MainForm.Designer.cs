@@ -38,19 +38,20 @@
             this.tcActionAndQuestion = new System.Windows.Forms.TabControl();
             this.tpAction = new System.Windows.Forms.TabPage();
             this.dgActions = new System.Windows.Forms.DataGridView();
+            this.clCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnModifyAction = new System.Windows.Forms.Button();
             this.btnDeleteAction = new System.Windows.Forms.Button();
             this.tpQuestion = new System.Windows.Forms.TabPage();
             this.dgQuestions = new System.Windows.Forms.DataGridView();
+            this.clAsk = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clAnswer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnModifyQuestion = new System.Windows.Forms.Button();
             this.btnDeleteQuestion = new System.Windows.Forms.Button();
-            this.clAsk = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clAnswer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnDeviceList = new System.Windows.Forms.ToolStripButton();
             this.tsTopToolBar.SuspendLayout();
             this.ssState.SuspendLayout();
             this.tcActionAndQuestion.SuspendLayout();
@@ -68,6 +69,7 @@
             this.tsTopToolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNewAction,
             this.btnNewQuestion,
+            this.btnDeviceList,
             this.btnExit});
             this.tsTopToolBar.Location = new System.Drawing.Point(0, 0);
             this.tsTopToolBar.Name = "tsTopToolBar";
@@ -108,7 +110,7 @@
             // 
             this.ssState.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatus});
-            this.ssState.Location = new System.Drawing.Point(0, 860);
+            this.ssState.Location = new System.Drawing.Point(0, 859);
             this.ssState.Name = "ssState";
             this.ssState.Size = new System.Drawing.Size(1323, 22);
             this.ssState.TabIndex = 4;
@@ -128,7 +130,7 @@
             this.tcActionAndQuestion.Location = new System.Drawing.Point(0, 56);
             this.tcActionAndQuestion.Name = "tcActionAndQuestion";
             this.tcActionAndQuestion.SelectedIndex = 0;
-            this.tcActionAndQuestion.Size = new System.Drawing.Size(1323, 804);
+            this.tcActionAndQuestion.Size = new System.Drawing.Size(1323, 803);
             this.tcActionAndQuestion.TabIndex = 5;
             // 
             // tpAction
@@ -138,7 +140,7 @@
             this.tpAction.Location = new System.Drawing.Point(4, 22);
             this.tpAction.Name = "tpAction";
             this.tpAction.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAction.Size = new System.Drawing.Size(1315, 778);
+            this.tpAction.Size = new System.Drawing.Size(1315, 777);
             this.tpAction.TabIndex = 0;
             this.tpAction.Text = "动作";
             this.tpAction.UseVisualStyleBackColor = true;
@@ -155,8 +157,29 @@
             this.dgActions.Name = "dgActions";
             this.dgActions.RowTemplate.Height = 23;
             this.dgActions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgActions.Size = new System.Drawing.Size(1309, 715);
+            this.dgActions.Size = new System.Drawing.Size(1309, 714);
             this.dgActions.TabIndex = 1;
+            // 
+            // clCode
+            // 
+            this.clCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clCode.HeaderText = "代码";
+            this.clCode.Name = "clCode";
+            this.clCode.ReadOnly = true;
+            // 
+            // clName
+            // 
+            this.clName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clName.HeaderText = "名称";
+            this.clName.Name = "clName";
+            this.clName.ReadOnly = true;
+            // 
+            // clCondition
+            // 
+            this.clCondition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clCondition.HeaderText = "触发条件";
+            this.clCondition.Name = "clCondition";
+            this.clCondition.ReadOnly = true;
             // 
             // groupBox1
             // 
@@ -217,6 +240,20 @@
             this.dgQuestions.Size = new System.Drawing.Size(1309, 715);
             this.dgQuestions.TabIndex = 3;
             // 
+            // clAsk
+            // 
+            this.clAsk.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clAsk.HeaderText = "问";
+            this.clAsk.Name = "clAsk";
+            this.clAsk.ReadOnly = true;
+            // 
+            // clAnswer
+            // 
+            this.clAnswer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clAnswer.HeaderText = "答";
+            this.clAnswer.Name = "clAnswer";
+            this.clAnswer.ReadOnly = true;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnModifyQuestion);
@@ -250,47 +287,22 @@
             this.btnDeleteQuestion.UseVisualStyleBackColor = true;
             this.btnDeleteQuestion.Click += new System.EventHandler(this.btnDeleteQuestion_Click);
             // 
-            // clAsk
+            // btnDeviceList
             // 
-            this.clAsk.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clAsk.HeaderText = "问";
-            this.clAsk.Name = "clAsk";
-            this.clAsk.ReadOnly = true;
-            // 
-            // clAnswer
-            // 
-            this.clAnswer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clAnswer.HeaderText = "答";
-            this.clAnswer.Name = "clAnswer";
-            this.clAnswer.ReadOnly = true;
-            // 
-            // clCode
-            // 
-            this.clCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clCode.HeaderText = "代码";
-            this.clCode.Name = "clCode";
-            this.clCode.ReadOnly = true;
-            // 
-            // clName
-            // 
-            this.clName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clName.HeaderText = "名称";
-            this.clName.Name = "clName";
-            this.clName.ReadOnly = true;
-            // 
-            // clCondition
-            // 
-            this.clCondition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clCondition.HeaderText = "触发条件";
-            this.clCondition.Name = "clCondition";
-            this.clCondition.ReadOnly = true;
+            this.btnDeviceList.Image = ((System.Drawing.Image)(resources.GetObject("btnDeviceList.Image")));
+            this.btnDeviceList.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDeviceList.Name = "btnDeviceList";
+            this.btnDeviceList.Size = new System.Drawing.Size(60, 53);
+            this.btnDeviceList.Text = "设备列表";
+            this.btnDeviceList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDeviceList.Click += new System.EventHandler(this.btnDeviceList_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1323, 882);
+            this.ClientSize = new System.Drawing.Size(1323, 881);
             this.Controls.Add(this.tcActionAndQuestion);
             this.Controls.Add(this.tsTopToolBar);
             this.Controls.Add(this.ssState);
@@ -341,6 +353,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn clName;
         private System.Windows.Forms.DataGridViewTextBoxColumn clCondition;
+        private System.Windows.Forms.ToolStripButton btnDeviceList;
     }
 }
 
