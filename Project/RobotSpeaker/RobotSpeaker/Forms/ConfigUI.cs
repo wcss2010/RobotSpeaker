@@ -65,6 +65,7 @@ namespace RobotSpeaker.Forms
 
         private void LoadFromConfig()
         {
+            cbEnabledOfflineVoice.Checked = !SuperObject.Config.EnabledOnlineVoice;
             tbDebugHintText.Text = SuperObject.Config.DebugModeHintText;
             tbVoiceWelcomeText.Text = SuperObject.Config.VoiceWelcomeText;
             tbPassword.Text = SuperObject.Config.ManagerPassword;
