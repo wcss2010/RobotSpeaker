@@ -56,6 +56,11 @@ namespace RobotSpeaker
             get { return _debugSocketServer; }
         }
 
+        /// <summary>
+        /// 在线用户数
+        /// </summary>
+        public int OnlineUserCount { get; set; }
+
         private BackgroundWorker _debugActionWorker = new BackgroundWorker();
 
         public void Open()
@@ -137,8 +142,11 @@ namespace RobotSpeaker
 
         void _server_ConnectionClose(object sender, SocketLibrary.SocketBase.ConCloseMessagesEventArgs e)
         {
-            if (DebugSocketServer.Connections.Count == 0)
+            OnlineUserCount--;
+
+            if (OnlineUserCount <= 0)
             {
+                OnlineUserCount = 0;
                 MainService.TaskService.RunMode = RunModeType.Normal;
                 System.Console.WriteLine("切换TaskService的模式为普通模式！");
             }
@@ -146,6 +154,7 @@ namespace RobotSpeaker
 
         void _server_Connected(object sender, SocketLibrary.Connection e)
         {
+            OnlineUserCount++;
             MainService.TaskService.RunMode = RunModeType.Debug;
             System.Console.WriteLine("将TaskService切换为调试模式！");
         }
