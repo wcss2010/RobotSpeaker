@@ -47,6 +47,11 @@ namespace RobotSpeaker
 
         void XfJsonResolver_XFCardDictateEvent(object sender, XFQuestionEventArgs args)
         {
+            if (string.IsNullOrEmpty(args.Ask))
+            {
+                return;
+            }
+
             //保存用户的问话
             MainService.TaskService.Request(TaskActionType.Voice, args.Ask);
 
@@ -66,6 +71,11 @@ namespace RobotSpeaker
 
         void XfJsonResolver_XFCardQuestionEvent(object sender, XFQuestionEventArgs args)
         {
+            if (string.IsNullOrEmpty(args.Answer))
+            {
+                return;
+            }
+
             //判断是否需要使用本地问答库
             if (IsUseLocalQuestion(args.Ask))
             {
