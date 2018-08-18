@@ -48,6 +48,7 @@ namespace RobotSpeaker.Forms
 
         private void LoadFromConfig()
         {
+            tbDebugHintText.Text = SuperObject.Config.DebugModeHintText;
             tbVoiceWelcomeText.Text = SuperObject.Config.VoiceWelcomeText;
             tbPassword.Text = SuperObject.Config.ManagerPassword;
             tbWebSiteUrl.Text = SuperObject.Config.WebSiteUrl;
@@ -96,11 +97,6 @@ namespace RobotSpeaker.Forms
 
         private bool SaveToConfig()
         {
-            if (string.IsNullOrEmpty(tbPassword.Text))
-            {
-                MessageBox.Show("对不起，密码不能为空！");
-                return false;
-            }
             if (string.IsNullOrEmpty(tbWebSiteUrl.Text))
             {
                 MessageBox.Show("对不起，首页不能为空！");
@@ -117,6 +113,7 @@ namespace RobotSpeaker.Forms
                 return false;
             }
 
+            SuperObject.Config.DebugModeHintText = tbDebugHintText.Text;
             SuperObject.Config.EnabledCloseVideoPlayerWithVoice = cbEnabledCloseVideoPlayerWithVoice.Checked; 
             SuperObject.Config.EnabledOnlineVoice = cbEnabledOnlineVoice.Checked;
             SuperObject.Config.ImageListPlayerSleepSeconds = (int)tbImageListPlayerSleepSeconds.Value;

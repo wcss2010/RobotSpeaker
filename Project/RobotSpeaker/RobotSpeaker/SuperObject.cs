@@ -156,6 +156,16 @@ namespace RobotSpeaker
             set { _voiceWelcomeText = value; }
         }
 
+        private string _debugModeHintText = "对不起，当前处在调试模式！";
+        /// <summary>
+        /// 调试模式提示文本
+        /// </summary>
+        public string DebugModeHintText
+        {
+            get { return _debugModeHintText; }
+            set { _debugModeHintText = value; }
+        }
+
         private int _imageListPlayerSleepSeconds = 6;
         /// <summary>
         /// 图片展示每张图的停留时间(秒)
