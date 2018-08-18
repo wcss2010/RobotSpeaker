@@ -79,7 +79,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="TimeBeam">
       <HintPath>..\..\..\Lib\TimeBeam.dll</HintPath>
     </Reference>
