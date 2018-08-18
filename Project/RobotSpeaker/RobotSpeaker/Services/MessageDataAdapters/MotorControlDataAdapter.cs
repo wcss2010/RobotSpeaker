@@ -18,14 +18,15 @@ namespace RobotSpeaker
 
             //查找开头
             int headerIndex = SearchInBuffer(_headerBytes);
+
+            //有效值
+            if (headerIndex + 8 > _receiveData.Count)
+            {
+                Thread.Sleep(10);
+            }
+
             if (headerIndex >= 0)
             {
-                //有效值
-                if (headerIndex + 8 > _receiveData.Count)
-                {
-                    Thread.Sleep(10);
-                }
-
                 //取数据
                 results = _receiveData.GetRange(headerIndex, 8).ToArray();
 
