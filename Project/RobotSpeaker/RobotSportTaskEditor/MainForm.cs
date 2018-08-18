@@ -199,7 +199,37 @@ namespace RobotSportTaskEditor
 
         private void btnRunAction_Click(object sender, EventArgs e)
         {
+            if (dgActions.SelectedRows.Count > 0 && dgActions.SelectedRows[0].Tag != null && Client != null)
+            {
+                if (MessageBox.Show("真的要执行吗？", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    try
+                    {
+                        //构造消息
+                        SpeakerLibrary.Message.DebugMessage dm = new SpeakerLibrary.Message.DebugMessage();
+                        dm.Command = "RobotRun";
+                        SpeakerLibrary.Message.ActionObject actionObject = new SpeakerLibrary.Message.ActionObject();
+                        actionObject.Action = (Robot_Actions)dgActions.SelectedRows[0].Tag;
+                        actionObject.StepList = DBInstance.DbHelper.table("Robot_Steps").where("ActionId=?", new object[] { actionObject.Action.Id }).select("*").getList<Robot_Steps>(new Robot_Steps()).ToArray();
+                        dm.Content = actionObject;
 
+                        //发送消息
+                        SocketLibrary.Connection connection;
+                        Client.Connections.TryGetValue(Client.ClientName, out connection);
+                        if (connection != null)
+                        {
+                            SocketLibrary.Message message = new SocketLibrary.Message(SocketLibrary.Message.CommandType.SendMessage, SpeakerLibrary.Message.DebugMessage.ToJson(dm));
+                            connection.messageQueue.Enqueue(message);
+                        }
+
+                        MessageBox.Show("发送完成");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("发送失败！");
+                    }
+                }
+            }
         }
 
         public void OpenDevice(string nickName, string ip, int port)
@@ -217,12 +247,24 @@ namespace RobotSportTaskEditor
 
         void Client_ConnectionClose(object sender, SocketLibrary.SocketBase.ConCloseMessagesEventArgs e)
         {
-            this.Text = this.Tag + "";
+            if (IsHandleCreated)
+            {
+                Invoke(new MethodInvoker(delegate()
+                    {
+                        this.Text = this.Tag + "";
+                    }));                
+            }
         }
 
         void Client_Connected(object sender, SocketLibrary.Connection e)
         {
-            this.Text = this.Tag + "(已连接到" + e.NickName + ")";
+            if (IsHandleCreated)
+            {
+                Invoke(new MethodInvoker(delegate()
+                {
+                    this.Text = this.Tag + "(已连接到" + e.NickName + ")";
+                }));
+            }            
         }
 
         void Client_MessageSent(object sender, SocketLibrary.SocketBase.MessageEventArgs e)
