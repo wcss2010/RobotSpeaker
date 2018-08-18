@@ -8,6 +8,9 @@ using System.Collections;
 using System.Net;
 using System.Net.Sockets;
 using System.Management;
+using System.ComponentModel;
+using System.Threading;
+using SpeakerLibrary.Message;
 
 namespace RobotSpeaker
 {
@@ -16,6 +19,15 @@ namespace RobotSpeaker
     /// </summary>
     public class DebugService
     {
+        private System.Collections.Concurrent.ConcurrentQueue<ActionObject> _taskQueues = new System.Collections.Concurrent.ConcurrentQueue<ActionObject>();
+        /// <summary>
+        /// 任务队列
+        /// </summary>
+        public System.Collections.Concurrent.ConcurrentQueue<ActionObject> TaskQueues
+        {
+            get { return _taskQueues; }
+        }
+
         private string _listenIP = "0.0.0.0";
         /// <summary>
         /// 本机IP
@@ -44,10 +56,7 @@ namespace RobotSpeaker
             get { return _debugSocketServer; }
         }
 
-        /// <summary>
-        /// 在线用户数
-        /// </summary>
-        public int OnlineUserCount { get; set; }
+        private BackgroundWorker _debugActionWorker = new BackgroundWorker();
 
         public void Open()
         {
@@ -64,6 +73,11 @@ namespace RobotSpeaker
                 _listenIP = lip;
             }
 
+            //守护进程
+            _debugActionWorker.WorkerSupportsCancellation = true;
+            _debugActionWorker.DoWork += _debugActionWorker_DoWork;
+            _debugActionWorker.RunWorkerAsync();
+
             //创建调试Socket
             _debugSocketServer = new SocketLibrary.Server(_listenIP, _listenPort);
             _debugSocketServer.MessageReceived += _server_MessageReceived;
@@ -78,6 +92,41 @@ namespace RobotSpeaker
             catch (Exception ex)
             {
                 System.Console.WriteLine(ex.ToString());
+            }
+        }
+
+        void _debugActionWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (!_debugActionWorker.CancellationPending)
+            {
+                try
+                {
+                    ActionObject ao = null;
+                    TaskQueues.TryDequeue(out ao);
+
+                    if (ao != null && ao.Action.Name != null && ao.Action.Name.Length >= 1 && ao.StepList != null && ao.StepList.Length >= 1)
+                    {
+                        //有效任务
+                        if (MainService.TaskService.RunMode == RunModeType.Debug)
+                        {
+                            //执行动作
+                            MainService.TaskService.RunAction(ao.Action, new List<SpeakerLibrary.SportDB.Robot_Steps>(ao.StepList));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine(ex.ToString());
+                }
+
+                try
+                {
+                    Thread.Sleep(1000);
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine(ex.ToString());
+                }
             }
         }
 
@@ -103,7 +152,22 @@ namespace RobotSpeaker
 
         void _server_MessageReceived(object sender, SocketLibrary.SocketBase.MessageEventArgs e)
         {
-            
+            System.Console.WriteLine("收到调试信息：" + e.Message.MessageBody);
+
+            try
+            {
+                SpeakerLibrary.Message.DebugMessage dm = SpeakerLibrary.Message.DebugMessage.FromJson(e.Message.MessageBody);
+                switch (dm.Command)
+                {
+                    case "ActionRun":
+
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.ToString());
+            }
         }
 
         /// <summary>
@@ -111,6 +175,12 @@ namespace RobotSpeaker
         /// </summary>
         public void Close()
         {
+            if (_debugActionWorker != null)
+            {
+                _debugActionWorker.CancelAsync();
+                _debugActionWorker = null;
+            }
+
             if (_debugSocketServer != null)
             {
                 try
