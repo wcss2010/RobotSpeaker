@@ -44,7 +44,7 @@ namespace RobotSpeaker
                     }
                 }
 
-                if (_recievedData.Count >= length + 8)
+                if (_recievedData.Count >= length + 8 && headerIndex>= 0)
                 {
                     byte[] msg = _recievedData.GetRange(headerIndex, length + 8).ToArray();
 
