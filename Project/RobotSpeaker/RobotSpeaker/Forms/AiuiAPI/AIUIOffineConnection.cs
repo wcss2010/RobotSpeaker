@@ -263,10 +263,23 @@ namespace AIUISerials
         /// </summary>
         public void Dispose()
         {
-            _threadResponse.Abort();
-            _webSocket.Close();
-            _serial.Close();
+            try
+            {
+                _threadResponse.Abort();
+            }
+            catch (Exception ex) { }
 
+            try
+            {
+                _webSocket.Close();
+            }
+            catch (Exception ex) { }
+
+            try
+            {
+                _serial.Close();
+            }
+            catch (Exception ex) { }
         }
     }
 
