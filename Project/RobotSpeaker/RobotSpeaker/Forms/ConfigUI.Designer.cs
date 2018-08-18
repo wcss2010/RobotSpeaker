@@ -30,6 +30,8 @@
         {
             this.tcPage = new System.Windows.Forms.TabControl();
             this.tpNormal = new System.Windows.Forms.TabPage();
+            this.tbOfflineVoiceWebSocketUrl = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.cbEnabledCloseVideoPlayerWithVoice = new System.Windows.Forms.CheckBox();
             this.cbEnabledOnlineVoice = new System.Windows.Forms.CheckBox();
             this.jsijoystickInfo = new RobotSpeaker.Forms.JoyAPI.JoystickStateInfo();
@@ -61,12 +63,21 @@
             this.btnCameraDir = new System.Windows.Forms.Button();
             this.btnReadmeDir = new System.Windows.Forms.Button();
             this.ofdApp = new System.Windows.Forms.OpenFileDialog();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tbOfflineVoiceWebSocketUrl = new System.Windows.Forms.TextBox();
+            this.cbEnabledOfflineVoice = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbOfflineVoiceIP = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.rbOfflineVoiceFeiFei = new System.Windows.Forms.RadioButton();
+            this.rbOfflineVoiceYuanYuan = new System.Windows.Forms.RadioButton();
+            this.label14 = new System.Windows.Forms.Label();
+            this.tbOfflineVoicePort = new System.Windows.Forms.NumericUpDown();
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).BeginInit();
             this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbOfflineVoicePort)).BeginInit();
             this.SuspendLayout();
             // 
             // tcPage
@@ -76,13 +87,13 @@
             this.tcPage.Location = new System.Drawing.Point(0, 0);
             this.tcPage.Name = "tcPage";
             this.tcPage.SelectedIndex = 0;
-            this.tcPage.Size = new System.Drawing.Size(807, 533);
+            this.tcPage.Size = new System.Drawing.Size(807, 630);
             this.tcPage.TabIndex = 0;
             // 
             // tpNormal
             // 
-            this.tpNormal.Controls.Add(this.tbOfflineVoiceWebSocketUrl);
-            this.tpNormal.Controls.Add(this.label11);
+            this.tpNormal.Controls.Add(this.groupBox1);
+            this.tpNormal.Controls.Add(this.cbEnabledOfflineVoice);
             this.tpNormal.Controls.Add(this.cbEnabledCloseVideoPlayerWithVoice);
             this.tpNormal.Controls.Add(this.cbEnabledOnlineVoice);
             this.tpNormal.Controls.Add(this.jsijoystickInfo);
@@ -109,10 +120,27 @@
             this.tpNormal.Location = new System.Drawing.Point(4, 22);
             this.tpNormal.Name = "tpNormal";
             this.tpNormal.Padding = new System.Windows.Forms.Padding(3);
-            this.tpNormal.Size = new System.Drawing.Size(799, 507);
+            this.tpNormal.Size = new System.Drawing.Size(799, 604);
             this.tpNormal.TabIndex = 0;
             this.tpNormal.Text = "基础配置";
             this.tpNormal.UseVisualStyleBackColor = true;
+            // 
+            // tbOfflineVoiceWebSocketUrl
+            // 
+            this.tbOfflineVoiceWebSocketUrl.Location = new System.Drawing.Point(109, 20);
+            this.tbOfflineVoiceWebSocketUrl.Name = "tbOfflineVoiceWebSocketUrl";
+            this.tbOfflineVoiceWebSocketUrl.ReadOnly = true;
+            this.tbOfflineVoiceWebSocketUrl.Size = new System.Drawing.Size(492, 21);
+            this.tbOfflineVoiceWebSocketUrl.TabIndex = 12;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(14, 23);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(101, 12);
+            this.label11.TabIndex = 11;
+            this.label11.Text = "离线服务器地址：";
             // 
             // cbEnabledCloseVideoPlayerWithVoice
             // 
@@ -137,10 +165,11 @@
             this.cbEnabledOnlineVoice.TabIndex = 9;
             this.cbEnabledOnlineVoice.Text = "启用";
             this.cbEnabledOnlineVoice.UseVisualStyleBackColor = true;
+            this.cbEnabledOnlineVoice.CheckedChanged += new System.EventHandler(this.cbEnabledOnlineVoice_CheckedChanged);
             // 
             // jsijoystickInfo
             // 
-            this.jsijoystickInfo.Location = new System.Drawing.Point(166, 337);
+            this.jsijoystickInfo.Location = new System.Drawing.Point(166, 435);
             this.jsijoystickInfo.Name = "jsijoystickInfo";
             this.jsijoystickInfo.Size = new System.Drawing.Size(416, 167);
             this.jsijoystickInfo.TabIndex = 7;
@@ -148,7 +177,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(86, 406);
+            this.label10.Location = new System.Drawing.Point(86, 504);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(89, 12);
             this.label10.TabIndex = 8;
@@ -156,7 +185,7 @@
             // 
             // tbImageListPlayerSleepSeconds
             // 
-            this.tbImageListPlayerSleepSeconds.Location = new System.Drawing.Point(172, 316);
+            this.tbImageListPlayerSleepSeconds.Location = new System.Drawing.Point(172, 414);
             this.tbImageListPlayerSleepSeconds.Maximum = new decimal(new int[] {
             200,
             0,
@@ -179,7 +208,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(14, 318);
+            this.label8.Location = new System.Drawing.Point(14, 416);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(161, 12);
             this.label8.TabIndex = 5;
@@ -203,7 +232,7 @@
             "静止模式",
             "遥控模式",
             "自由导航模式"});
-            this.clbGoTypes.Location = new System.Drawing.Point(172, 239);
+            this.clbGoTypes.Location = new System.Drawing.Point(172, 337);
             this.clbGoTypes.Name = "clbGoTypes";
             this.clbGoTypes.Size = new System.Drawing.Size(208, 67);
             this.clbGoTypes.TabIndex = 3;
@@ -213,7 +242,7 @@
             // 
             this.cbGoPort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGoPort.FormattingEnabled = true;
-            this.cbGoPort.Location = new System.Drawing.Point(172, 208);
+            this.cbGoPort.Location = new System.Drawing.Point(172, 306);
             this.cbGoPort.Name = "cbGoPort";
             this.cbGoPort.Size = new System.Drawing.Size(114, 20);
             this.cbGoPort.TabIndex = 2;
@@ -267,7 +296,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(87, 242);
+            this.label6.Location = new System.Drawing.Point(87, 340);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(89, 12);
             this.label6.TabIndex = 0;
@@ -285,7 +314,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(75, 211);
+            this.label5.Location = new System.Drawing.Point(75, 309);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(101, 12);
             this.label5.TabIndex = 0;
@@ -345,7 +374,7 @@
             this.panel1.Controls.Add(this.btnCameraDir);
             this.panel1.Controls.Add(this.btnReadmeDir);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 533);
+            this.panel1.Location = new System.Drawing.Point(0, 630);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(807, 46);
             this.panel1.TabIndex = 1;
@@ -420,27 +449,111 @@
             // 
             this.ofdApp.Filter = "*.Exe|*.exe";
             // 
-            // label11
+            // cbEnabledOfflineVoice
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(295, 178);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(101, 12);
-            this.label11.TabIndex = 11;
-            this.label11.Text = "离线服务器地址：";
+            this.cbEnabledOfflineVoice.Location = new System.Drawing.Point(294, 177);
+            this.cbEnabledOfflineVoice.Name = "cbEnabledOfflineVoice";
+            this.cbEnabledOfflineVoice.Size = new System.Drawing.Size(48, 16);
+            this.cbEnabledOfflineVoice.TabIndex = 13;
+            this.cbEnabledOfflineVoice.Text = "启用";
+            this.cbEnabledOfflineVoice.UseVisualStyleBackColor = true;
+            this.cbEnabledOfflineVoice.CheckedChanged += new System.EventHandler(this.cbEnabledOfflineVoice_CheckedChanged);
             // 
-            // tbOfflineVoiceWebSocketUrl
+            // groupBox1
             // 
-            this.tbOfflineVoiceWebSocketUrl.Location = new System.Drawing.Point(390, 175);
-            this.tbOfflineVoiceWebSocketUrl.Name = "tbOfflineVoiceWebSocketUrl";
-            this.tbOfflineVoiceWebSocketUrl.Size = new System.Drawing.Size(355, 21);
-            this.tbOfflineVoiceWebSocketUrl.TabIndex = 12;
+            this.groupBox1.Controls.Add(this.tbOfflineVoicePort);
+            this.groupBox1.Controls.Add(this.tbOfflineVoiceIP);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.rbOfflineVoiceYuanYuan);
+            this.groupBox1.Controls.Add(this.rbOfflineVoiceFeiFei);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.tbOfflineVoiceWebSocketUrl);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Location = new System.Drawing.Point(172, 199);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(607, 100);
+            this.groupBox1.TabIndex = 14;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "离线服务器配置";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(26, 63);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(89, 12);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "离线服务器IP：";
+            // 
+            // tbOfflineVoiceIP
+            // 
+            this.tbOfflineVoiceIP.Location = new System.Drawing.Point(108, 60);
+            this.tbOfflineVoiceIP.Name = "tbOfflineVoiceIP";
+            this.tbOfflineVoiceIP.Size = new System.Drawing.Size(111, 21);
+            this.tbOfflineVoiceIP.TabIndex = 14;
+            this.tbOfflineVoiceIP.TextChanged += new System.EventHandler(this.tbOfflineVoiceIP_TextChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(305, 63);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(65, 12);
+            this.label13.TabIndex = 15;
+            this.label13.Text = "角色名称：";
+            // 
+            // rbOfflineVoiceFeiFei
+            // 
+            this.rbOfflineVoiceFeiFei.AutoSize = true;
+            this.rbOfflineVoiceFeiFei.Checked = true;
+            this.rbOfflineVoiceFeiFei.Location = new System.Drawing.Point(376, 50);
+            this.rbOfflineVoiceFeiFei.Name = "rbOfflineVoiceFeiFei";
+            this.rbOfflineVoiceFeiFei.Size = new System.Drawing.Size(47, 16);
+            this.rbOfflineVoiceFeiFei.TabIndex = 16;
+            this.rbOfflineVoiceFeiFei.TabStop = true;
+            this.rbOfflineVoiceFeiFei.Text = "飞飞";
+            this.rbOfflineVoiceFeiFei.UseVisualStyleBackColor = true;
+            this.rbOfflineVoiceFeiFei.CheckedChanged += new System.EventHandler(this.rbOfflineVoiceFeiFei_CheckedChanged);
+            // 
+            // rbOfflineVoiceYuanYuan
+            // 
+            this.rbOfflineVoiceYuanYuan.AutoSize = true;
+            this.rbOfflineVoiceYuanYuan.Location = new System.Drawing.Point(376, 72);
+            this.rbOfflineVoiceYuanYuan.Name = "rbOfflineVoiceYuanYuan";
+            this.rbOfflineVoiceYuanYuan.Size = new System.Drawing.Size(47, 16);
+            this.rbOfflineVoiceYuanYuan.TabIndex = 16;
+            this.rbOfflineVoiceYuanYuan.Text = "圆圆";
+            this.rbOfflineVoiceYuanYuan.UseVisualStyleBackColor = true;
+            this.rbOfflineVoiceYuanYuan.CheckedChanged += new System.EventHandler(this.rbOfflineVoiceFeiFei_CheckedChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(219, 63);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(17, 12);
+            this.label14.TabIndex = 17;
+            this.label14.Text = "：";
+            // 
+            // tbOfflineVoicePort
+            // 
+            this.tbOfflineVoicePort.Location = new System.Drawing.Point(231, 60);
+            this.tbOfflineVoicePort.Maximum = new decimal(new int[] {
+            65539,
+            0,
+            0,
+            0});
+            this.tbOfflineVoicePort.Name = "tbOfflineVoicePort";
+            this.tbOfflineVoicePort.Size = new System.Drawing.Size(68, 21);
+            this.tbOfflineVoicePort.TabIndex = 18;
+            this.tbOfflineVoicePort.ValueChanged += new System.EventHandler(this.tbOfflineVoicePort_ValueChanged);
             // 
             // ConfigUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(807, 579);
+            this.ClientSize = new System.Drawing.Size(807, 676);
             this.Controls.Add(this.tcPage);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
@@ -455,6 +568,9 @@
             this.tpNormal.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbOfflineVoicePort)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -496,5 +612,14 @@
         private System.Windows.Forms.CheckBox cbEnabledCloseVideoPlayerWithVoice;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tbOfflineVoiceWebSocketUrl;
+        private System.Windows.Forms.CheckBox cbEnabledOfflineVoice;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox tbOfflineVoiceIP;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.RadioButton rbOfflineVoiceYuanYuan;
+        private System.Windows.Forms.RadioButton rbOfflineVoiceFeiFei;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.NumericUpDown tbOfflineVoicePort;
     }
 }

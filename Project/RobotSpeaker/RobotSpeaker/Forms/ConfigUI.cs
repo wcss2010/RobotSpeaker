@@ -59,6 +59,7 @@ namespace RobotSpeaker.Forms
             cbEnabledOnlineVoice.Checked = SuperObject.Config.EnabledOnlineVoice;
             cbEnabledCloseVideoPlayerWithVoice.Checked = SuperObject.Config.EnabledCloseVideoPlayerWithVoice;
             tbOfflineVoiceWebSocketUrl.Text = SuperObject.Config.OfflineVoiceWebSocketUrl;
+            ParseOfflineVoiceUrl();
 
             switch (SuperObject.Config.CurrentGoType)
             {
@@ -221,6 +222,74 @@ namespace RobotSpeaker.Forms
         private void ResetDataService()
         {
             MainService.Reset();
+        }
+
+        private void cbEnabledOnlineVoice_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbEnabledOnlineVoice.Checked)
+            {
+                cbEnabledOfflineVoice.Checked = !cbEnabledOnlineVoice.Checked;
+            }
+        }
+
+        private void cbEnabledOfflineVoice_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbEnabledOfflineVoice.Checked)
+            {
+                cbEnabledOnlineVoice.Checked = !cbEnabledOfflineVoice.Checked;
+            }
+        }
+
+        private void tbOfflineVoiceIP_TextChanged(object sender, EventArgs e)
+        {
+            tbOfflineVoiceWebSocketUrl.Text = MakeOfflineVoiceUrl();
+        }
+
+        private void rbOfflineVoiceFeiFei_CheckedChanged(object sender, EventArgs e)
+        {
+            tbOfflineVoiceWebSocketUrl.Text = MakeOfflineVoiceUrl();
+        }
+
+        public string MakeOfflineVoiceUrl()
+        {
+            string ip = tbOfflineVoiceIP.Text;
+            int port = (int)tbOfflineVoicePort.Value;
+            string roleName = rbOfflineVoiceFeiFei.Checked ? "feifei" : "yuanyuan";
+            StringBuilder sb = new StringBuilder();
+            sb.Append("ws://").Append(ip).Append(":").Append(port).Append("/talking/offline/v1/").Append(roleName);
+            return sb.ToString();
+        }
+
+        private void tbOfflineVoicePort_ValueChanged(object sender, EventArgs e)
+        {
+            tbOfflineVoiceWebSocketUrl.Text = MakeOfflineVoiceUrl();
+        }
+
+        public void ParseOfflineVoiceUrl()
+        {
+            if (string.IsNullOrEmpty(SuperObject.Config.OfflineVoiceWebSocketUrl))
+            {
+                return;
+            }
+
+            try
+            {
+                string[] urlConfigs = SuperObject.Config.OfflineVoiceWebSocketUrl.Split('/');
+                string[] ips = urlConfigs[2].Split(':');
+                tbOfflineVoiceIP.Text = ips[0];
+                tbOfflineVoicePort.Value = int.Parse(ips[1]);
+                
+                string roleName = urlConfigs[urlConfigs.Length -1];
+                if (roleName.Equals("feifei"))
+                {
+                    rbOfflineVoiceFeiFei.Checked = true;
+                }
+                else
+                {
+                    rbOfflineVoiceYuanYuan.Checked = true;
+                }
+            }
+            catch (Exception ex) { }
         }
     }
 }
