@@ -14,6 +14,8 @@ namespace RobotSpeaker.Forms
 {
     public partial class PageUIBase : ContentFormBase
     {
+        private int OfflineCount = 0;
+
         public PageUIBase()
         {
             InitializeComponent();
@@ -35,6 +37,9 @@ namespace RobotSpeaker.Forms
                 WifiBox.Image = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\offline.jpg"));
             }
             catch (Exception ex) { }
+
+            //设置在线
+            IsOnline(true);
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -51,6 +56,28 @@ namespace RobotSpeaker.Forms
         private void trNetworkStatusUpdate_Tick(object sender, EventArgs e)
         {
             if (PingIpOrDomainName("www.baidu.com"))
+            {
+                OfflineCount = 0;
+                IsOnline(true);
+            }
+            else
+            {
+                OfflineCount++;
+            }
+
+            if (OfflineCount >= 8)
+            {
+                IsOnline(false);
+            }
+        }
+
+        /// <summary>
+        /// 设置在线状态图标
+        /// </summary>
+        /// <param name="isOnline"></param>
+        protected void IsOnline(bool isOnline)
+        {
+            if (isOnline)
             {
                 WifiBox.Image = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\online.jpg"));
             }
