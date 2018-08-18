@@ -83,17 +83,22 @@ namespace RobotSpeaker
 
         void _server_MessageSent(object sender, SocketLibrary.SocketBase.MessageEventArgs e)
         {
-            
+            System.Console.WriteLine("DebugSend:" + e.Message.ToString());
         }
 
         void _server_ConnectionClose(object sender, SocketLibrary.SocketBase.ConCloseMessagesEventArgs e)
         {
-            
+            if (DebugSocketServer.Connections.Count == 0)
+            {
+                MainService.TaskService.RunMode = RunModeType.Normal;
+                System.Console.WriteLine("切换TaskService的模式为普通模式！");
+            }
         }
 
         void _server_Connected(object sender, SocketLibrary.Connection e)
         {
-            
+            MainService.TaskService.RunMode = RunModeType.Debug;
+            System.Console.WriteLine("将TaskService切换为调试模式！");
         }
 
         void _server_MessageReceived(object sender, SocketLibrary.SocketBase.MessageEventArgs e)
