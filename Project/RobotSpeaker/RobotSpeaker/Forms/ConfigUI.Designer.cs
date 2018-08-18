@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tcPage = new System.Windows.Forms.TabControl();
             this.tpNormal = new System.Windows.Forms.TabPage();
+            this.tbDebugHintText = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tbOfflineVoicePort = new System.Windows.Forms.NumericUpDown();
             this.tbOfflineVoiceIP = new System.Windows.Forms.TextBox();
@@ -43,6 +46,7 @@
             this.cbEnabledOfflineVoice = new System.Windows.Forms.CheckBox();
             this.cbEnabledCloseVideoPlayerWithVoice = new System.Windows.Forms.CheckBox();
             this.cbEnabledOnlineVoice = new System.Windows.Forms.CheckBox();
+            this.jsijoystickInfo = new RobotSpeaker.Forms.JoyAPI.JoystickStateInfo();
             this.label10 = new System.Windows.Forms.Label();
             this.tbImageListPlayerSleepSeconds = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
@@ -63,6 +67,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.tpDebug = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lvConnectionList = new System.Windows.Forms.ListView();
+            this.chIP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblDebug2 = new System.Windows.Forms.Label();
+            this.lblDebug3 = new System.Windows.Forms.Label();
+            this.lblDebug1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnExitApp = new System.Windows.Forms.Button();
@@ -71,22 +84,16 @@
             this.btnCameraDir = new System.Windows.Forms.Button();
             this.btnReadmeDir = new System.Windows.Forms.Button();
             this.ofdApp = new System.Windows.Forms.OpenFileDialog();
-            this.tpDebug = new System.Windows.Forms.TabPage();
-            this.tbDebugHintText = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.jsijoystickInfo = new RobotSpeaker.Forms.JoyAPI.JoystickStateInfo();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lblDebug1 = new System.Windows.Forms.Label();
-            this.lblDebug2 = new System.Windows.Forms.Label();
-            this.lblDebug3 = new System.Windows.Forms.Label();
+            this.trDebugConnectionsInfos = new System.Windows.Forms.Timer(this.components);
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbOfflineVoicePort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).BeginInit();
-            this.panel1.SuspendLayout();
             this.tpDebug.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcPage
@@ -136,6 +143,23 @@
             this.tpNormal.TabIndex = 0;
             this.tpNormal.Text = "基础配置";
             this.tpNormal.UseVisualStyleBackColor = true;
+            // 
+            // tbDebugHintText
+            // 
+            this.tbDebugHintText.Location = new System.Drawing.Point(172, 10);
+            this.tbDebugHintText.Name = "tbDebugHintText";
+            this.tbDebugHintText.Size = new System.Drawing.Size(439, 21);
+            this.tbDebugHintText.TabIndex = 16;
+            this.tbDebugHintText.Text = "对不起，当前处在调试模式！";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(63, 14);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(113, 12);
+            this.label15.TabIndex = 15;
+            this.label15.Text = "调试模式提示文本：";
             // 
             // groupBox1
             // 
@@ -278,6 +302,13 @@
             this.cbEnabledOnlineVoice.Text = "启用";
             this.cbEnabledOnlineVoice.UseVisualStyleBackColor = true;
             this.cbEnabledOnlineVoice.CheckedChanged += new System.EventHandler(this.cbEnabledOnlineVoice_CheckedChanged);
+            // 
+            // jsijoystickInfo
+            // 
+            this.jsijoystickInfo.Location = new System.Drawing.Point(166, 460);
+            this.jsijoystickInfo.Name = "jsijoystickInfo";
+            this.jsijoystickInfo.Size = new System.Drawing.Size(416, 167);
+            this.jsijoystickInfo.TabIndex = 7;
             // 
             // label10
             // 
@@ -470,6 +501,90 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "管理员密码：";
             // 
+            // tpDebug
+            // 
+            this.tpDebug.Controls.Add(this.groupBox3);
+            this.tpDebug.Controls.Add(this.groupBox2);
+            this.tpDebug.Location = new System.Drawing.Point(4, 22);
+            this.tpDebug.Name = "tpDebug";
+            this.tpDebug.Padding = new System.Windows.Forms.Padding(3);
+            this.tpDebug.Size = new System.Drawing.Size(799, 652);
+            this.tpDebug.TabIndex = 1;
+            this.tpDebug.Text = "状态与调试";
+            this.tpDebug.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.lvConnectionList);
+            this.groupBox3.Location = new System.Drawing.Point(17, 149);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(763, 483);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "连接信息";
+            // 
+            // lvConnectionList
+            // 
+            this.lvConnectionList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chIP,
+            this.chTime});
+            this.lvConnectionList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvConnectionList.Location = new System.Drawing.Point(3, 17);
+            this.lvConnectionList.Name = "lvConnectionList";
+            this.lvConnectionList.Size = new System.Drawing.Size(757, 463);
+            this.lvConnectionList.TabIndex = 0;
+            this.lvConnectionList.UseCompatibleStateImageBehavior = false;
+            this.lvConnectionList.View = System.Windows.Forms.View.Details;
+            // 
+            // chIP
+            // 
+            this.chIP.Text = "别名";
+            this.chIP.Width = 150;
+            // 
+            // chTime
+            // 
+            this.chTime.Text = "会话";
+            this.chTime.Width = 200;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lblDebug2);
+            this.groupBox2.Controls.Add(this.lblDebug3);
+            this.groupBox2.Controls.Add(this.lblDebug1);
+            this.groupBox2.Location = new System.Drawing.Point(17, 15);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(477, 128);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "调试服务信息";
+            // 
+            // lblDebug2
+            // 
+            this.lblDebug2.Location = new System.Drawing.Point(19, 60);
+            this.lblDebug2.Name = "lblDebug2";
+            this.lblDebug2.Size = new System.Drawing.Size(433, 23);
+            this.lblDebug2.TabIndex = 0;
+            this.lblDebug2.Text = "0";
+            this.lblDebug2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblDebug3
+            // 
+            this.lblDebug3.Location = new System.Drawing.Point(19, 95);
+            this.lblDebug3.Name = "lblDebug3";
+            this.lblDebug3.Size = new System.Drawing.Size(433, 23);
+            this.lblDebug3.TabIndex = 0;
+            this.lblDebug3.Text = "0";
+            this.lblDebug3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblDebug1
+            // 
+            this.lblDebug1.Location = new System.Drawing.Point(19, 24);
+            this.lblDebug1.Name = "lblDebug1";
+            this.lblDebug1.Size = new System.Drawing.Size(433, 23);
+            this.lblDebug1.TabIndex = 0;
+            this.lblDebug1.Text = "0";
+            this.lblDebug1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btnSave);
@@ -554,79 +669,11 @@
             // 
             this.ofdApp.Filter = "*.Exe|*.exe";
             // 
-            // tpDebug
+            // trDebugConnectionsInfos
             // 
-            this.tpDebug.Controls.Add(this.groupBox2);
-            this.tpDebug.Location = new System.Drawing.Point(4, 22);
-            this.tpDebug.Name = "tpDebug";
-            this.tpDebug.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDebug.Size = new System.Drawing.Size(799, 652);
-            this.tpDebug.TabIndex = 1;
-            this.tpDebug.Text = "状态与调试";
-            this.tpDebug.UseVisualStyleBackColor = true;
-            // 
-            // tbDebugHintText
-            // 
-            this.tbDebugHintText.Location = new System.Drawing.Point(172, 10);
-            this.tbDebugHintText.Name = "tbDebugHintText";
-            this.tbDebugHintText.Size = new System.Drawing.Size(439, 21);
-            this.tbDebugHintText.TabIndex = 16;
-            this.tbDebugHintText.Text = "对不起，当前处在调试模式！";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(63, 14);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(113, 12);
-            this.label15.TabIndex = 15;
-            this.label15.Text = "调试模式提示文本：";
-            // 
-            // jsijoystickInfo
-            // 
-            this.jsijoystickInfo.Location = new System.Drawing.Point(166, 460);
-            this.jsijoystickInfo.Name = "jsijoystickInfo";
-            this.jsijoystickInfo.Size = new System.Drawing.Size(416, 167);
-            this.jsijoystickInfo.TabIndex = 7;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.lblDebug2);
-            this.groupBox2.Controls.Add(this.lblDebug3);
-            this.groupBox2.Controls.Add(this.lblDebug1);
-            this.groupBox2.Location = new System.Drawing.Point(17, 15);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(477, 128);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "调试服务信息";
-            // 
-            // lblDebug1
-            // 
-            this.lblDebug1.Location = new System.Drawing.Point(19, 24);
-            this.lblDebug1.Name = "lblDebug1";
-            this.lblDebug1.Size = new System.Drawing.Size(433, 23);
-            this.lblDebug1.TabIndex = 0;
-            this.lblDebug1.Text = "0";
-            this.lblDebug1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblDebug2
-            // 
-            this.lblDebug2.Location = new System.Drawing.Point(19, 60);
-            this.lblDebug2.Name = "lblDebug2";
-            this.lblDebug2.Size = new System.Drawing.Size(433, 23);
-            this.lblDebug2.TabIndex = 0;
-            this.lblDebug2.Text = "0";
-            this.lblDebug2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblDebug3
-            // 
-            this.lblDebug3.Location = new System.Drawing.Point(19, 95);
-            this.lblDebug3.Name = "lblDebug3";
-            this.lblDebug3.Size = new System.Drawing.Size(433, 23);
-            this.lblDebug3.TabIndex = 0;
-            this.lblDebug3.Text = "0";
-            this.lblDebug3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.trDebugConnectionsInfos.Enabled = true;
+            this.trDebugConnectionsInfos.Interval = 2000;
+            this.trDebugConnectionsInfos.Tick += new System.EventHandler(this.trDebugConnectionsInfos_Tick);
             // 
             // ConfigUI
             // 
@@ -649,9 +696,10 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbOfflineVoicePort)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.tpDebug.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -709,5 +757,10 @@
         private System.Windows.Forms.Label lblDebug1;
         private System.Windows.Forms.Label lblDebug2;
         private System.Windows.Forms.Label lblDebug3;
+        private System.Windows.Forms.Timer trDebugConnectionsInfos;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ListView lvConnectionList;
+        private System.Windows.Forms.ColumnHeader chIP;
+        private System.Windows.Forms.ColumnHeader chTime;
     }
 }

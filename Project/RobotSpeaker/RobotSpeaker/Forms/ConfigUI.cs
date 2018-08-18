@@ -58,7 +58,7 @@ namespace RobotSpeaker.Forms
             {
                 lblDebug1.Text = "本机IP：" + MainService.DebugService.ListenIP;
                 lblDebug2.Text = "本地端口：" + MainService.DebugService.ListenPort;
-                lblDebug3.Text = "在线连接数量：" + MainService.DebugService.OnlineUserCount;
+                lblDebug3.Text = "在线连接数量：" + MainService.DebugService.DebugSocketServer.Connections.Count;
             }
             catch (Exception ex) { }
         }
@@ -304,6 +304,29 @@ namespace RobotSpeaker.Forms
                 }
             }
             catch (Exception ex) { }
+        }
+
+        private void trDebugConnectionsInfos_Tick(object sender, EventArgs e)
+        {
+            ShowDebugServiceInfo();
+
+            try
+            {
+                lvConnectionList.Items.Clear();
+
+                foreach (SocketLibrary.Connection conn in MainService.DebugService.DebugSocketServer.Connections.Values)
+                {
+                    ListViewItem lvi = new ListViewItem();
+                    lvi.Text = conn.NickName;
+                    lvi.SubItems.Add(conn.ConnectionName);
+
+                    lvConnectionList.Items.Add(lvi);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.ToString());
+            }
         }
     }
 }

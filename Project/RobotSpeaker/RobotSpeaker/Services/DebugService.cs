@@ -39,7 +39,7 @@ namespace RobotSpeaker
         /// <summary>
         /// 调试服务Socket
         /// </summary>
-        protected SocketLibrary.Server DebugSocketServer
+        public SocketLibrary.Server DebugSocketServer
         {
             get { return _debugSocketServer; }
         }
