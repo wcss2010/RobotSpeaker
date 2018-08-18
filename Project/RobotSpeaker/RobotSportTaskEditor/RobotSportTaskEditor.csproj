@@ -124,7 +124,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SportDB\DBInstance.cs" />
     <Compile Include="SuperObject.cs" />
     <Compile Include="Tracks\DeviceTrack.cs" />
     <Compile Include="Tracks\DeviceTrackParts.cs" />

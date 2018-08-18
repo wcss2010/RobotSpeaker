@@ -277,7 +277,6 @@
     <Compile Include="Services\MessageDataAdapters\XFOnlineMessageDataAdapter.cs" />
     <Compile Include="Services\MotorControlService.cs" />
     <Compile Include="Services\TaskService.cs" />
-    <Compile Include="SportDB\DBInstance.cs" />
     <Compile Include="SuperObject.cs" />
     <EmbeddedResource Include="Controls\Chat\ContentItem.resx">
       <DependentUpon>ContentItem.cs</DependentUpon>
