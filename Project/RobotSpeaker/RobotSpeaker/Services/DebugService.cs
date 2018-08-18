@@ -166,11 +166,14 @@ namespace RobotSpeaker
             try
             {
                 SpeakerLibrary.Message.DebugMessage dm = SpeakerLibrary.Message.DebugMessage.FromJson(e.Message.MessageBody);
-                switch (dm.Command)
+                switch (dm.Command.ToLower())
                 {
-                    case "ActionRun":
+                    case "actionrun":
                         ActionObject ao = (ActionObject)dm.Content;
                         TaskQueues.Enqueue(ao);
+                        break;
+                    case "hello":
+                        e.Connecction.messageQueue.Enqueue(new SocketLibrary.Message(SocketLibrary.Message.CommandType.SendMessage, SpeakerLibrary.Message.DebugMessage.ToJson(dm)));
                         break;
                 }
             }
