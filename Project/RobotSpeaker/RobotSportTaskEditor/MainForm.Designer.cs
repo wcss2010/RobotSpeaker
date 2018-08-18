@@ -32,6 +32,7 @@
             this.tsTopToolBar = new System.Windows.Forms.ToolStrip();
             this.btnNewAction = new System.Windows.Forms.ToolStripButton();
             this.btnNewQuestion = new System.Windows.Forms.ToolStripButton();
+            this.btnDeviceList = new System.Windows.Forms.ToolStripButton();
             this.btnExit = new System.Windows.Forms.ToolStripButton();
             this.ssState = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
@@ -51,7 +52,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnModifyQuestion = new System.Windows.Forms.Button();
             this.btnDeleteQuestion = new System.Windows.Forms.Button();
-            this.btnDeviceList = new System.Windows.Forms.ToolStripButton();
+            this.btnRunAction = new System.Windows.Forms.Button();
             this.tsTopToolBar.SuspendLayout();
             this.ssState.SuspendLayout();
             this.tcActionAndQuestion.SuspendLayout();
@@ -95,6 +96,16 @@
             this.btnNewQuestion.Text = "新建问答";
             this.btnNewQuestion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNewQuestion.Click += new System.EventHandler(this.btnNewQuestion_Click);
+            // 
+            // btnDeviceList
+            // 
+            this.btnDeviceList.Image = ((System.Drawing.Image)(resources.GetObject("btnDeviceList.Image")));
+            this.btnDeviceList.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDeviceList.Name = "btnDeviceList";
+            this.btnDeviceList.Size = new System.Drawing.Size(60, 53);
+            this.btnDeviceList.Text = "设备列表";
+            this.btnDeviceList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDeviceList.Click += new System.EventHandler(this.btnDeviceList_Click);
             // 
             // btnExit
             // 
@@ -183,6 +194,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnRunAction);
             this.groupBox1.Controls.Add(this.btnModifyAction);
             this.groupBox1.Controls.Add(this.btnDeleteAction);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -221,7 +233,7 @@
             this.tpQuestion.Location = new System.Drawing.Point(4, 22);
             this.tpQuestion.Name = "tpQuestion";
             this.tpQuestion.Padding = new System.Windows.Forms.Padding(3);
-            this.tpQuestion.Size = new System.Drawing.Size(1315, 778);
+            this.tpQuestion.Size = new System.Drawing.Size(1315, 777);
             this.tpQuestion.TabIndex = 1;
             this.tpQuestion.Text = "问答";
             this.tpQuestion.UseVisualStyleBackColor = true;
@@ -237,7 +249,7 @@
             this.dgQuestions.Name = "dgQuestions";
             this.dgQuestions.RowTemplate.Height = 23;
             this.dgQuestions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgQuestions.Size = new System.Drawing.Size(1309, 715);
+            this.dgQuestions.Size = new System.Drawing.Size(1309, 714);
             this.dgQuestions.TabIndex = 3;
             // 
             // clAsk
@@ -287,15 +299,16 @@
             this.btnDeleteQuestion.UseVisualStyleBackColor = true;
             this.btnDeleteQuestion.Click += new System.EventHandler(this.btnDeleteQuestion_Click);
             // 
-            // btnDeviceList
+            // btnRunAction
             // 
-            this.btnDeviceList.Image = ((System.Drawing.Image)(resources.GetObject("btnDeviceList.Image")));
-            this.btnDeviceList.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDeviceList.Name = "btnDeviceList";
-            this.btnDeviceList.Size = new System.Drawing.Size(60, 53);
-            this.btnDeviceList.Text = "设备列表";
-            this.btnDeviceList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDeviceList.Click += new System.EventHandler(this.btnDeviceList_Click);
+            this.btnRunAction.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnRunAction.Location = new System.Drawing.Point(1081, 17);
+            this.btnRunAction.Name = "btnRunAction";
+            this.btnRunAction.Size = new System.Drawing.Size(75, 37);
+            this.btnRunAction.TabIndex = 2;
+            this.btnRunAction.Text = "发送到设备";
+            this.btnRunAction.UseVisualStyleBackColor = true;
+            this.btnRunAction.Click += new System.EventHandler(this.btnRunAction_Click);
             // 
             // MainForm
             // 
@@ -306,9 +319,12 @@
             this.Controls.Add(this.tcActionAndQuestion);
             this.Controls.Add(this.tsTopToolBar);
             this.Controls.Add(this.ssState);
+            this.DoubleBuffered = true;
             this.KeyPreview = true;
             this.Name = "MainForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Tag = "机器人语音动作指令编辑器 V1.0";
             this.Text = "机器人语音动作指令编辑器 V1.0";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -354,6 +370,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clName;
         private System.Windows.Forms.DataGridViewTextBoxColumn clCondition;
         private System.Windows.Forms.ToolStripButton btnDeviceList;
+        private System.Windows.Forms.Button btnRunAction;
     }
 }
 

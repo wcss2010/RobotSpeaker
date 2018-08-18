@@ -56,6 +56,7 @@
             this.tbNickName.Name = "tbNickName";
             this.tbNickName.Size = new System.Drawing.Size(249, 21);
             this.tbNickName.TabIndex = 1;
+            this.tbNickName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbNickName_KeyDown);
             // 
             // label2
             // 
@@ -70,8 +71,9 @@
             // 
             this.tbIP.Location = new System.Drawing.Point(60, 47);
             this.tbIP.Name = "tbIP";
-            this.tbIP.Size = new System.Drawing.Size(249, 21);
+            this.tbIP.Size = new System.Drawing.Size(133, 21);
             this.tbIP.TabIndex = 1;
+            this.tbIP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbNickName_KeyDown);
             // 
             // label3
             // 
@@ -107,6 +109,7 @@
             this.tbPort.Name = "tbPort";
             this.tbPort.Size = new System.Drawing.Size(82, 21);
             this.tbPort.TabIndex = 2;
+            this.tbPort.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbNickName_KeyDown);
             // 
             // btnOK
             // 
@@ -132,6 +135,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(332, 169);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);

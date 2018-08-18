@@ -24,16 +24,7 @@ namespace RobotSportTaskEditor.Forms
             get { return _robotConfigList; }
         }
 
-
-        private SocketLibrary.Client _client = null;
-        /// <summary>
-        /// 客户端
-        /// </summary>
-        public SocketLibrary.Client Client
-        {
-            get { return _client; }
-            set { _client = value; }
-        }
+        public RobotConfigItem SelectedRobot { get; set; }
 
         public DeviceListForm()
         {
@@ -42,7 +33,10 @@ namespace RobotSportTaskEditor.Forms
 
         private void lvConnectionList_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (lvConnectionList.SelectedItems.Count > 0)
+            {
+                SelectedRobot = (RobotConfigItem)lvConnectionList.SelectedItems[0].Tag;
+            }
         }
 
         private void DebugForm_Load(object sender, EventArgs e)
@@ -72,8 +66,25 @@ namespace RobotSportTaskEditor.Forms
                 lvi.Text = rci.NickName;
                 lvi.SubItems.Add(rci.IP);
                 lvi.SubItems.Add(rci.Port.ToString());
-
                 lvi.Tag = rci;
+
+                if (MainForm.Client != null)
+                {
+                    rci.IsUse = MainForm.ClientNickName != null && MainForm.ClientNickName.Equals(rci.NickName);
+                }
+                else
+                {
+                    rci.IsUse = false;
+                }
+
+                if (rci.IsUse)
+                {
+                    lvi.SubItems.Add("已连接");
+                }
+                else
+                {
+                    lvi.SubItems.Add("未连接");
+                }
 
                 lvConnectionList.Items.Add(lvi);
             }
@@ -89,24 +100,9 @@ namespace RobotSportTaskEditor.Forms
 
         private void lvConnectionList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (lvConnectionList.SelectedItems.Count > 0)
+            if (SelectedRobot != null)
             {
-                RobotConfigItem rci = (RobotConfigItem)lvConnectionList.SelectedItems[0].Tag;
-
-                DeviceEditorForm def = new DeviceEditorForm();
-                def.Text = "修改";
-                def.NickName = rci.NickName;
-                def.IP = rci.IP;
-                def.Port = rci.Port;
-                if (def.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    rci.NickName = def.NickName;
-                    rci.IP = def.IP;
-                    rci.Port = def.Port;
-
-                    SaveConfig();
-                    LoadConfig();
-                }
+                btnStartClient.PerformClick();
             }
         }
 
@@ -151,6 +147,61 @@ namespace RobotSportTaskEditor.Forms
                 }
             }
         }
+
+        private void btnModify_Click(object sender, EventArgs e)
+        {
+            if (lvConnectionList.SelectedItems.Count > 0)
+            {
+                RobotConfigItem rci = (RobotConfigItem)lvConnectionList.SelectedItems[0].Tag;
+
+                DeviceEditorForm def = new DeviceEditorForm();
+                def.Text = "修改";
+                def.NickName = rci.NickName;
+                def.IP = rci.IP;
+                def.Port = rci.Port;
+                if (def.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    rci.NickName = def.NickName;
+                    rci.IP = def.IP;
+                    rci.Port = def.Port;
+
+                    SaveConfig();
+                    LoadConfig();
+                }
+            }
+        }
+
+        private void btnCloseClient_Click(object sender, EventArgs e)
+        {
+            if (SelectedRobot != null)
+            {
+                if (MessageBox.Show("真的要断开吗？", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    try
+                    {
+                        MainForm.Instance.CloseDevice();
+                    }
+                    catch (Exception ex) { }
+                    LoadConfig();
+                }
+            }
+        }
+
+        private void btnStartClient_Click(object sender, EventArgs e)
+        {
+            if (SelectedRobot != null)
+            {
+                if (MessageBox.Show("真的要连接吗？", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    try
+                    {
+                        MainForm.Instance.OpenDevice(SelectedRobot.NickName, SelectedRobot.IP, SelectedRobot.Port);
+                    }
+                    catch (Exception ex) { MessageBox.Show("连接失败！Ex:" + ex.ToString()); }
+                    LoadConfig();
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -163,5 +214,7 @@ namespace RobotSportTaskEditor.Forms
         public string IP { get; set; }
 
         public int Port { get; set; }
+
+        public bool IsUse { get; set; }
     }
 }

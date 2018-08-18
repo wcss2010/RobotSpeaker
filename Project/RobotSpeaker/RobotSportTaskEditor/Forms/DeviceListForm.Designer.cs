@@ -33,21 +33,25 @@
             this.chName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chIP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chPort = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.btnModify = new System.Windows.Forms.Button();
+            this.cbIsUse = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnCloseClient = new System.Windows.Forms.Button();
+            this.btnStartClient = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.White;
             this.groupBox1.Controls.Add(this.lvConnectionList);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 57);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(869, 446);
+            this.groupBox1.Size = new System.Drawing.Size(869, 525);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -56,13 +60,15 @@
             this.lvConnectionList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chName,
             this.chIP,
-            this.chPort});
+            this.chPort,
+            this.cbIsUse});
             this.lvConnectionList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvConnectionList.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lvConnectionList.FullRowSelect = true;
+            this.lvConnectionList.GridLines = true;
             this.lvConnectionList.Location = new System.Drawing.Point(3, 17);
             this.lvConnectionList.Name = "lvConnectionList";
-            this.lvConnectionList.Size = new System.Drawing.Size(863, 426);
+            this.lvConnectionList.Size = new System.Drawing.Size(863, 505);
             this.lvConnectionList.TabIndex = 0;
             this.lvConnectionList.UseCompatibleStateImageBehavior = false;
             this.lvConnectionList.View = System.Windows.Forms.View.Details;
@@ -84,17 +90,12 @@
             this.chPort.Text = "端口";
             this.chPort.Width = 80;
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(0, 503);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(869, 79);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            // 
             // groupBox3
             // 
+            this.groupBox3.BackColor = System.Drawing.Color.White;
+            this.groupBox3.Controls.Add(this.btnStartClient);
+            this.groupBox3.Controls.Add(this.btnCloseClient);
+            this.groupBox3.Controls.Add(this.btnModify);
             this.groupBox3.Controls.Add(this.btnDelete);
             this.groupBox3.Controls.Add(this.btnAdd);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -126,17 +127,55 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // DebugForm
+            // btnModify
+            // 
+            this.btnModify.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnModify.Location = new System.Drawing.Point(641, 17);
+            this.btnModify.Name = "btnModify";
+            this.btnModify.Size = new System.Drawing.Size(75, 37);
+            this.btnModify.TabIndex = 3;
+            this.btnModify.Text = "修改";
+            this.btnModify.UseVisualStyleBackColor = true;
+            this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
+            // 
+            // cbIsUse
+            // 
+            this.cbIsUse.Text = "状态";
+            this.cbIsUse.Width = 80;
+            // 
+            // btnCloseClient
+            // 
+            this.btnCloseClient.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnCloseClient.Location = new System.Drawing.Point(566, 17);
+            this.btnCloseClient.Name = "btnCloseClient";
+            this.btnCloseClient.Size = new System.Drawing.Size(75, 37);
+            this.btnCloseClient.TabIndex = 4;
+            this.btnCloseClient.Text = "断开";
+            this.btnCloseClient.UseVisualStyleBackColor = true;
+            this.btnCloseClient.Click += new System.EventHandler(this.btnCloseClient_Click);
+            // 
+            // btnStartClient
+            // 
+            this.btnStartClient.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnStartClient.Location = new System.Drawing.Point(491, 17);
+            this.btnStartClient.Name = "btnStartClient";
+            this.btnStartClient.Size = new System.Drawing.Size(75, 37);
+            this.btnStartClient.TabIndex = 4;
+            this.btnStartClient.Text = "连接";
+            this.btnStartClient.UseVisualStyleBackColor = true;
+            this.btnStartClient.Click += new System.EventHandler(this.btnStartClient_Click);
+            // 
+            // DeviceListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(869, 582);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "DebugForm";
+            this.Name = "DeviceListForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "设备列表";
             this.Load += new System.EventHandler(this.DebugForm_Load);
@@ -149,7 +188,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListView lvConnectionList;
         private System.Windows.Forms.ColumnHeader chIP;
         private System.Windows.Forms.ColumnHeader chPort;
@@ -157,5 +195,9 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnModify;
+        private System.Windows.Forms.ColumnHeader cbIsUse;
+        private System.Windows.Forms.Button btnStartClient;
+        private System.Windows.Forms.Button btnCloseClient;
     }
 }

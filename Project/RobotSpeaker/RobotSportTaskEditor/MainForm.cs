@@ -20,10 +20,28 @@ namespace RobotSportTaskEditor
 {
     public partial class MainForm : Form
     {
+        private static SocketLibrary.Client _client = null;
+        /// <summary>
+        /// 客户端
+        /// </summary>
+        public static SocketLibrary.Client Client
+        {
+            get { return _client; }
+            set { _client = value; }
+        }
+
+        /// <summary>
+        /// 客户端别名
+        /// </summary>
+        public static string ClientNickName { get; set; }
+
+        public static MainForm Instance { get; set; }
+
         public MainForm()
         {
             InitializeComponent();
 
+            Instance = this;
             DBInstance.Init(Path.Combine(Application.StartupPath, "static.db"));
         }
 
@@ -96,6 +114,15 @@ namespace RobotSportTaskEditor
             if (MessageBox.Show("真的要退出吗？", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
             {
                 e.Cancel = false;
+
+                if (Client != null)
+                {
+                    try
+                    {
+                        Client.StopClient();
+                    }
+                    catch (Exception ex) { }
+                }
             }
             else
             {
@@ -168,6 +195,58 @@ namespace RobotSportTaskEditor
         {
             DeviceListForm df = new DeviceListForm();
             df.ShowDialog();
+        }
+
+        private void btnRunAction_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void OpenDevice(string nickName, string ip, int port)
+        {
+            CloseDevice();
+
+            Client = new SocketLibrary.Client(ip, port);//此处输入自己的计算机IP地址，端口不能改变
+            ClientNickName = nickName;
+            Client.MessageReceived += Client_MessageReceived;
+            Client.MessageSent += Client_MessageSent;
+            Client.Connected += Client_Connected;
+            Client.ConnectionClose += Client_ConnectionClose;
+            Client.StartClient();
+        }
+
+        void Client_ConnectionClose(object sender, SocketLibrary.SocketBase.ConCloseMessagesEventArgs e)
+        {
+            this.Text = this.Tag + "";
+        }
+
+        void Client_Connected(object sender, SocketLibrary.Connection e)
+        {
+            this.Text = this.Tag + "(已连接到" + e.NickName + ")";
+        }
+
+        void Client_MessageSent(object sender, SocketLibrary.SocketBase.MessageEventArgs e)
+        {
+            System.Console.WriteLine("Send:" + e.Message.MessageBody);
+        }
+
+        void Client_MessageReceived(object sender, SocketLibrary.SocketBase.MessageEventArgs e)
+        {
+            System.Console.WriteLine("Recv:" + e.Message.MessageBody);
+        }
+
+        public void CloseDevice()
+        {
+            if (Client != null)
+            {
+                try
+                {
+                    Client.StopClient();
+                }
+                catch (Exception ex) { }
+
+                Client = null;
+            }
         }
     }
 }

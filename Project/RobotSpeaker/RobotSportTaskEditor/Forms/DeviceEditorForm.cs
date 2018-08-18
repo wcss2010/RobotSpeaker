@@ -44,5 +44,13 @@ namespace RobotSportTaskEditor.Forms
         {
             DialogResult = System.Windows.Forms.DialogResult.OK;
         }
+
+        private void tbNickName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnOK.PerformClick();
+            }
+        }
     }
 }
