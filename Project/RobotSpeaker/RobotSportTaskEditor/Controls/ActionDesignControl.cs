@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using TimeBeam.Timing;
@@ -12,6 +11,7 @@ using TimeBeam.Events;
 using TimeBeam;
 using System.Diagnostics;
 using RobotSportTaskEditor.Tracks.MotorTrack;
+using SpeakerLibrary.SportDB;
 
 namespace RobotSportTaskEditor.Controls
 {
