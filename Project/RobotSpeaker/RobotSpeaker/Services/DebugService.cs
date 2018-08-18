@@ -97,7 +97,7 @@ namespace RobotSpeaker
 
         void _debugActionWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            while (!_debugActionWorker.CancellationPending)
+            while (!((BackgroundWorker)sender).CancellationPending)
             {
                 try
                 {
@@ -121,7 +121,7 @@ namespace RobotSpeaker
 
                 try
                 {
-                    Thread.Sleep(1000);
+                    Thread.Sleep(15);
                 }
                 catch (Exception ex)
                 {
