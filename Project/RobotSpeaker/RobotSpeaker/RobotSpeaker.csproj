@@ -89,6 +89,9 @@
     <Reference Include="SerialPortLib">
       <HintPath>..\..\..\Lib\SerialPortLib.dll</HintPath>
     </Reference>
+    <Reference Include="SocketLibrary">
+      <HintPath>..\..\..\Lib\SocketLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />

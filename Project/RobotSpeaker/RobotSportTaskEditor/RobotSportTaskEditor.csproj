@@ -64,6 +64,7 @@
     <Reference Include="Noear.Weed3">
       <HintPath>..\..\..\Lib\Noear.Weed3.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="SocketLibrary">
       <HintPath>..\..\..\Lib\SocketLibrary.dll</HintPath>
     </Reference>
@@ -78,12 +79,14 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="TimeBeam">
       <HintPath>..\..\..\Lib\TimeBeam.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
       <HintPath>..\..\..\Lib\websocket-sharp.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ActionConditionEditor.cs">
