@@ -128,7 +128,16 @@ namespace RobotSpeaker
         {
             get { return MainService._taskService; }
         }
-        
+
+        private static DebugService _debugService = new DebugService();
+        /// <summary>
+        /// 调试服务
+        /// </summary>
+        public static DebugService DebugService
+        {
+            get { return MainService._debugService; }
+        }
+
         /// <summary>
         /// 初始化
         /// </summary>
@@ -159,6 +168,9 @@ namespace RobotSpeaker
 
             //打开任务服务
             _taskService.Open();
+
+            //打开调试服务
+            _debugService.Open();
         }
 
         private static void JoystickService_JoystickPressEvent(object sender, JoystickPressEventArgs args)
@@ -205,6 +217,9 @@ namespace RobotSpeaker
         /// </summary>
         public static void Close()
         {
+            //关闭调试服务
+            _debugService.Close();
+
             //关闭手柄服务
             _joystickServiceObj.Close();
 

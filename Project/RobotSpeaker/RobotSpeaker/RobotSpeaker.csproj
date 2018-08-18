@@ -149,6 +149,7 @@
     </Compile>
     <Compile Include="Forms\AiuiAPI\AIUIOffineConnection.cs" />
     <Compile Include="Services\AIUIService.cs" />
+    <Compile Include="Services\DebugService.cs" />
     <Compile Include="Services\JoystickService.cs" />
     <Compile Include="Services\MainService.cs" />
     <Compile Include="Forms\AboutUI.cs">
