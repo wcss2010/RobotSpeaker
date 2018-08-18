@@ -20,7 +20,7 @@ namespace RobotSportTaskEditor
 {
     public partial class MainForm : Form
     {
-        DebugForm df = new DebugForm();
+        DeviceListForm df = new DeviceListForm();
 
         public MainForm()
         {
