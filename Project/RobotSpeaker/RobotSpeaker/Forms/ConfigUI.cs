@@ -6,6 +6,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Windows.Forms;
 
@@ -44,6 +45,22 @@ namespace RobotSpeaker.Forms
             base.OnLoad(e);
 
             LoadFromConfig();
+
+            ShowDebugServiceInfo();
+        }
+
+        /// <summary>
+        /// 显示调试服务信息
+        /// </summary>
+        private void ShowDebugServiceInfo()
+        {
+            try
+            {
+                lblDebug1.Text = "本机IP：" + MainService.DebugService.ListenIP;
+                lblDebug2.Text = "本地端口：" + MainService.DebugService.ListenPort;
+                lblDebug3.Text = "在线连接数量：" + MainService.DebugService.OnlineUserCount;
+            }
+            catch (Exception ex) { }
         }
 
         private void LoadFromConfig()

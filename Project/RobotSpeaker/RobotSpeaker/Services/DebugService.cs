@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using System.Collections;
 using System.Net;
+using System.Net.Sockets;
+using System.Management;
 
 namespace RobotSpeaker
 {
@@ -14,26 +16,64 @@ namespace RobotSpeaker
     /// </summary>
     public class DebugService
     {
-        public string _listenIP = "0.0.0.0";
-        public int _listenPort = 5000;
+        private string _listenIP = "0.0.0.0";
+        /// <summary>
+        /// 本机IP
+        /// </summary>
+        public string ListenIP
+        {
+            get { return _listenIP; }
+            set { _listenIP = value; }
+        }
 
-        protected SocketLibrary.Server _server;
+        private int _listenPort = 4000;
+        /// <summary>
+        /// 本地端口
+        /// </summary>
+        public int ListenPort
+        {
+            get { return _listenPort; }
+        }
+        
+        private SocketLibrary.Server _debugSocketServer;
+        /// <summary>
+        /// 调试服务Socket
+        /// </summary>
+        protected SocketLibrary.Server DebugSocketServer
+        {
+            get { return _debugSocketServer; }
+        }
+
+        /// <summary>
+        /// 在线用户数
+        /// </summary>
+        public int OnlineUserCount { get; set; }
 
         public void Open()
         {
             //查找空闲端口
             _listenPort = GetFirstAvailablePort();
 
+            string lip = GetLocalIP();
+            if (string.IsNullOrEmpty(lip))
+            {
+                _listenIP = "0.0.0.0";
+            }
+            else
+            {
+                _listenIP = lip;
+            }
+
             //创建调试Socket
-            _server = new SocketLibrary.Server(_listenIP, _listenPort);
-            _server.MessageReceived += _server_MessageReceived;
-            _server.Connected += _server_Connected;
-            _server.ConnectionClose += _server_ConnectionClose;
-            _server.MessageSent += _server_MessageSent;
+            _debugSocketServer = new SocketLibrary.Server(_listenIP, _listenPort);
+            _debugSocketServer.MessageReceived += _server_MessageReceived;
+            _debugSocketServer.Connected += _server_Connected;
+            _debugSocketServer.ConnectionClose += _server_ConnectionClose;
+            _debugSocketServer.MessageSent += _server_MessageSent;
 
             try
             {
-                _server.StartServer();
+                _debugSocketServer.StartServer();
             }
             catch (Exception ex)
             {
@@ -43,22 +83,22 @@ namespace RobotSpeaker
 
         void _server_MessageSent(object sender, SocketLibrary.SocketBase.MessageEventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         void _server_ConnectionClose(object sender, SocketLibrary.SocketBase.ConCloseMessagesEventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         void _server_Connected(object sender, SocketLibrary.Connection e)
         {
-            throw new NotImplementedException();
+            
         }
 
         void _server_MessageReceived(object sender, SocketLibrary.SocketBase.MessageEventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         /// <summary>
@@ -66,11 +106,11 @@ namespace RobotSpeaker
         /// </summary>
         public void Close()
         {
-            if (_server != null)
+            if (_debugSocketServer != null)
             {
                 try
                 {
-                    _server.StopServer();
+                    _debugSocketServer.StopServer();
                 }
                 catch (Exception ex)
                 {
@@ -142,6 +182,32 @@ namespace RobotSpeaker
             }
 
             return isAvailable;
+        }
+
+        /// <summary>
+        /// 获取本机IP地址
+        /// </summary>
+        /// <returns>本机IP地址</returns>
+        public string GetLocalIP()
+        {
+            string stringMAC = "";
+            string stringIP = "";
+            ManagementClass managementClass = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            ManagementObjectCollection managementObjectCollection = managementClass.GetInstances();
+            foreach (ManagementObject managementObject in managementObjectCollection)
+            {
+                if ((bool)managementObject["IPEnabled"] == true)
+                {
+                    stringMAC += managementObject["MACAddress"].ToString();
+                    string[] IPAddresses = (string[])managementObject["IPAddress"];
+                    if (IPAddresses.Length > 0)
+                    {
+                        stringIP = IPAddresses[0];
+                    }
+                }
+            }
+
+            return stringIP.ToString();  
         }
     }
 }

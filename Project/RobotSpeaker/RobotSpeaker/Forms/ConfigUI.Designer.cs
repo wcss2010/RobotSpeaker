@@ -43,7 +43,6 @@
             this.cbEnabledOfflineVoice = new System.Windows.Forms.CheckBox();
             this.cbEnabledCloseVideoPlayerWithVoice = new System.Windows.Forms.CheckBox();
             this.cbEnabledOnlineVoice = new System.Windows.Forms.CheckBox();
-            this.jsijoystickInfo = new RobotSpeaker.Forms.JoyAPI.JoystickStateInfo();
             this.label10 = new System.Windows.Forms.Label();
             this.tbImageListPlayerSleepSeconds = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
@@ -75,12 +74,19 @@
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.tbDebugHintText = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.jsijoystickInfo = new RobotSpeaker.Forms.JoyAPI.JoystickStateInfo();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblDebug1 = new System.Windows.Forms.Label();
+            this.lblDebug2 = new System.Windows.Forms.Label();
+            this.lblDebug3 = new System.Windows.Forms.Label();
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbOfflineVoicePort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).BeginInit();
             this.panel1.SuspendLayout();
+            this.tpDebug.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcPage
@@ -272,13 +278,6 @@
             this.cbEnabledOnlineVoice.Text = "启用";
             this.cbEnabledOnlineVoice.UseVisualStyleBackColor = true;
             this.cbEnabledOnlineVoice.CheckedChanged += new System.EventHandler(this.cbEnabledOnlineVoice_CheckedChanged);
-            // 
-            // jsijoystickInfo
-            // 
-            this.jsijoystickInfo.Location = new System.Drawing.Point(166, 460);
-            this.jsijoystickInfo.Name = "jsijoystickInfo";
-            this.jsijoystickInfo.Size = new System.Drawing.Size(416, 167);
-            this.jsijoystickInfo.TabIndex = 7;
             // 
             // label10
             // 
@@ -557,6 +556,7 @@
             // 
             // tpDebug
             // 
+            this.tpDebug.Controls.Add(this.groupBox2);
             this.tpDebug.Location = new System.Drawing.Point(4, 22);
             this.tpDebug.Name = "tpDebug";
             this.tpDebug.Padding = new System.Windows.Forms.Padding(3);
@@ -582,6 +582,52 @@
             this.label15.TabIndex = 15;
             this.label15.Text = "调试模式提示文本：";
             // 
+            // jsijoystickInfo
+            // 
+            this.jsijoystickInfo.Location = new System.Drawing.Point(166, 460);
+            this.jsijoystickInfo.Name = "jsijoystickInfo";
+            this.jsijoystickInfo.Size = new System.Drawing.Size(416, 167);
+            this.jsijoystickInfo.TabIndex = 7;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lblDebug2);
+            this.groupBox2.Controls.Add(this.lblDebug3);
+            this.groupBox2.Controls.Add(this.lblDebug1);
+            this.groupBox2.Location = new System.Drawing.Point(17, 15);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(477, 128);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "调试服务信息";
+            // 
+            // lblDebug1
+            // 
+            this.lblDebug1.Location = new System.Drawing.Point(19, 24);
+            this.lblDebug1.Name = "lblDebug1";
+            this.lblDebug1.Size = new System.Drawing.Size(433, 23);
+            this.lblDebug1.TabIndex = 0;
+            this.lblDebug1.Text = "0";
+            this.lblDebug1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblDebug2
+            // 
+            this.lblDebug2.Location = new System.Drawing.Point(19, 60);
+            this.lblDebug2.Name = "lblDebug2";
+            this.lblDebug2.Size = new System.Drawing.Size(433, 23);
+            this.lblDebug2.TabIndex = 0;
+            this.lblDebug2.Text = "0";
+            this.lblDebug2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblDebug3
+            // 
+            this.lblDebug3.Location = new System.Drawing.Point(19, 95);
+            this.lblDebug3.Name = "lblDebug3";
+            this.lblDebug3.Size = new System.Drawing.Size(433, 23);
+            this.lblDebug3.TabIndex = 0;
+            this.lblDebug3.Text = "0";
+            this.lblDebug3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ConfigUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -604,6 +650,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbOfflineVoicePort)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbImageListPlayerSleepSeconds)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.tpDebug.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -657,5 +705,9 @@
         private System.Windows.Forms.TabPage tpDebug;
         private System.Windows.Forms.TextBox tbDebugHintText;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lblDebug1;
+        private System.Windows.Forms.Label lblDebug2;
+        private System.Windows.Forms.Label lblDebug3;
     }
 }
