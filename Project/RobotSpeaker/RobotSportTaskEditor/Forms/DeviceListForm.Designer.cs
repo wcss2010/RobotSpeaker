@@ -33,13 +33,13 @@
             this.chName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chIP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chPort = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cbIsUse = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnStartClient = new System.Windows.Forms.Button();
+            this.btnCloseClient = new System.Windows.Forms.Button();
+            this.btnModify = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.btnModify = new System.Windows.Forms.Button();
-            this.cbIsUse = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnCloseClient = new System.Windows.Forms.Button();
-            this.btnStartClient = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -90,6 +90,11 @@
             this.chPort.Text = "端口";
             this.chPort.Width = 80;
             // 
+            // cbIsUse
+            // 
+            this.cbIsUse.Text = "状态";
+            this.cbIsUse.Width = 80;
+            // 
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.Color.White;
@@ -104,6 +109,39 @@
             this.groupBox3.Size = new System.Drawing.Size(869, 57);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
+            // 
+            // btnStartClient
+            // 
+            this.btnStartClient.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnStartClient.Location = new System.Drawing.Point(463, 17);
+            this.btnStartClient.Name = "btnStartClient";
+            this.btnStartClient.Size = new System.Drawing.Size(90, 37);
+            this.btnStartClient.TabIndex = 4;
+            this.btnStartClient.Text = "连接到此设备";
+            this.btnStartClient.UseVisualStyleBackColor = true;
+            this.btnStartClient.Click += new System.EventHandler(this.btnStartClient_Click);
+            // 
+            // btnCloseClient
+            // 
+            this.btnCloseClient.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnCloseClient.Location = new System.Drawing.Point(553, 17);
+            this.btnCloseClient.Name = "btnCloseClient";
+            this.btnCloseClient.Size = new System.Drawing.Size(88, 37);
+            this.btnCloseClient.TabIndex = 4;
+            this.btnCloseClient.Text = "断开当前连接";
+            this.btnCloseClient.UseVisualStyleBackColor = true;
+            this.btnCloseClient.Click += new System.EventHandler(this.btnCloseClient_Click);
+            // 
+            // btnModify
+            // 
+            this.btnModify.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnModify.Location = new System.Drawing.Point(641, 17);
+            this.btnModify.Name = "btnModify";
+            this.btnModify.Size = new System.Drawing.Size(75, 37);
+            this.btnModify.TabIndex = 3;
+            this.btnModify.Text = "修改";
+            this.btnModify.UseVisualStyleBackColor = true;
+            this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
             // 
             // btnDelete
             // 
@@ -126,44 +164,6 @@
             this.btnAdd.Text = "添加";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnModify
-            // 
-            this.btnModify.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnModify.Location = new System.Drawing.Point(641, 17);
-            this.btnModify.Name = "btnModify";
-            this.btnModify.Size = new System.Drawing.Size(75, 37);
-            this.btnModify.TabIndex = 3;
-            this.btnModify.Text = "修改";
-            this.btnModify.UseVisualStyleBackColor = true;
-            this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
-            // 
-            // cbIsUse
-            // 
-            this.cbIsUse.Text = "状态";
-            this.cbIsUse.Width = 80;
-            // 
-            // btnCloseClient
-            // 
-            this.btnCloseClient.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCloseClient.Location = new System.Drawing.Point(566, 17);
-            this.btnCloseClient.Name = "btnCloseClient";
-            this.btnCloseClient.Size = new System.Drawing.Size(75, 37);
-            this.btnCloseClient.TabIndex = 4;
-            this.btnCloseClient.Text = "断开";
-            this.btnCloseClient.UseVisualStyleBackColor = true;
-            this.btnCloseClient.Click += new System.EventHandler(this.btnCloseClient_Click);
-            // 
-            // btnStartClient
-            // 
-            this.btnStartClient.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnStartClient.Location = new System.Drawing.Point(491, 17);
-            this.btnStartClient.Name = "btnStartClient";
-            this.btnStartClient.Size = new System.Drawing.Size(75, 37);
-            this.btnStartClient.TabIndex = 4;
-            this.btnStartClient.Text = "连接";
-            this.btnStartClient.UseVisualStyleBackColor = true;
-            this.btnStartClient.Click += new System.EventHandler(this.btnStartClient_Click);
             // 
             // DeviceListForm
             // 

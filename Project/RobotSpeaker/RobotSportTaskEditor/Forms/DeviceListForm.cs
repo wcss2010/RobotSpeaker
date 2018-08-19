@@ -173,10 +173,12 @@ namespace RobotSportTaskEditor.Forms
 
         private void btnCloseClient_Click(object sender, EventArgs e)
         {
-            if (SelectedRobot != null)
+            if (MainForm.Client != null)
             {
                 if (MessageBox.Show("真的要断开吗？", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
+                    MainForm.Instance.Text = MainForm.Instance.Tag + "";
+
                     try
                     {
                         MainForm.Instance.CloseDevice();
@@ -193,6 +195,8 @@ namespace RobotSportTaskEditor.Forms
             {
                 if (MessageBox.Show("真的要连接吗？", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
+                    MainForm.Instance.Text = MainForm.Instance.Tag + "(已连接到" + SelectedRobot.IP + ")";
+
                     try
                     {
                         MainForm.Instance.OpenDevice(SelectedRobot.NickName, SelectedRobot.IP, SelectedRobot.Port);
