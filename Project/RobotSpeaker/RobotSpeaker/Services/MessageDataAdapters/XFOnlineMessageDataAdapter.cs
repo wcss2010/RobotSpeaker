@@ -37,10 +37,10 @@ namespace RobotSpeaker
                 }
                 else
                 {
-                    //出现负数丢弃缓冲区数据
+                    //无效数据
                     lock (SerialPortInput.lockObject)
                     {
-                        _recievedData.RemoveRange(0, headerIndex + _headerBytes.Length);
+                        _recievedData.Clear();
                     }
                 }
 
