@@ -277,7 +277,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MessageDataAdapters\IRobotMessageDataAdapter.cs" />
     <Compile Include="Services\MessageDataAdapters\MotorControlDataAdapter.cs" />
-    <Compile Include="Services\MessageDataAdapters\XFOfflineMessageDataAdapter.cs" />
     <Compile Include="Services\MessageDataAdapters\XFOnlineMessageDataAdapter.cs" />
     <Compile Include="Services\MotorControlService.cs" />
     <Compile Include="Services\TaskService.cs" />
