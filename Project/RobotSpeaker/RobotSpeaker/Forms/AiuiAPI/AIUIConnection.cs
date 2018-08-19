@@ -50,7 +50,7 @@ namespace AIUISerials
             _serialPort = new SerialPortInput();
             _serialPort.SetPort(comPort, 115200, System.IO.Ports.StopBits.One, System.IO.Ports.Parity.None, -1, -1);
             _serialPort.SerialPortObject.ReadBufferSize = 50 * 1024 * 10;
-            _serialPort.SerialPortObject.ReceivedBytesThreshold = 200;
+            _serialPort.SerialPortObject.ReceivedBytesThreshold = 100;
             _serialPort.MessageDataAdapterObject = new XFOnlineMessageDataAdapter();
             _serialPort.MessageReceived += _serialPort_MessageReceived;            
         }
