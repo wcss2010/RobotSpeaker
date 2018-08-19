@@ -15,10 +15,10 @@ namespace RobotSpeaker
 
         public override byte[] Resolve()
         {
+            List<byte> _recievedData = this.SerialPortInputObject.BufferStream;
+
             try
             {
-                List<byte> _recievedData = this.SerialPortInputObject.BufferStream;
-
                 //尝试查找包头
                 headerIndex = SearchInBuffer(_headerBytes);
 
@@ -94,6 +94,12 @@ namespace RobotSpeaker
             }
             catch (Exception ex)
             {
+                //无效数据
+                lock (SerialPortInput.lockObject)
+                {
+                    _recievedData.Clear();
+                }
+
                 return new byte[0];
             }
         }
