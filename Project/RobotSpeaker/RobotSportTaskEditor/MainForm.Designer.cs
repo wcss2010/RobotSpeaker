@@ -43,6 +43,7 @@
             this.clName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnRunAction = new System.Windows.Forms.Button();
             this.btnModifyAction = new System.Windows.Forms.Button();
             this.btnDeleteAction = new System.Windows.Forms.Button();
             this.tpQuestion = new System.Windows.Forms.TabPage();
@@ -52,7 +53,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnModifyQuestion = new System.Windows.Forms.Button();
             this.btnDeleteQuestion = new System.Windows.Forms.Button();
-            this.btnRunAction = new System.Windows.Forms.Button();
             this.tsTopToolBar.SuspendLayout();
             this.ssState.SuspendLayout();
             this.tcActionAndQuestion.SuspendLayout();
@@ -204,6 +204,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
+            // btnRunAction
+            // 
+            this.btnRunAction.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnRunAction.Location = new System.Drawing.Point(1081, 17);
+            this.btnRunAction.Name = "btnRunAction";
+            this.btnRunAction.Size = new System.Drawing.Size(75, 37);
+            this.btnRunAction.TabIndex = 2;
+            this.btnRunAction.Text = "发送到设备";
+            this.btnRunAction.UseVisualStyleBackColor = true;
+            this.btnRunAction.Click += new System.EventHandler(this.btnRunAction_Click);
+            // 
             // btnModifyAction
             // 
             this.btnModifyAction.Dock = System.Windows.Forms.DockStyle.Right;
@@ -299,17 +310,6 @@
             this.btnDeleteQuestion.UseVisualStyleBackColor = true;
             this.btnDeleteQuestion.Click += new System.EventHandler(this.btnDeleteQuestion_Click);
             // 
-            // btnRunAction
-            // 
-            this.btnRunAction.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnRunAction.Location = new System.Drawing.Point(1081, 17);
-            this.btnRunAction.Name = "btnRunAction";
-            this.btnRunAction.Size = new System.Drawing.Size(75, 37);
-            this.btnRunAction.TabIndex = 2;
-            this.btnRunAction.Text = "发送到设备";
-            this.btnRunAction.UseVisualStyleBackColor = true;
-            this.btnRunAction.Click += new System.EventHandler(this.btnRunAction_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -324,8 +324,8 @@
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Tag = "机器人语音动作指令编辑器 V1.0";
-            this.Text = "机器人语音动作指令编辑器 V1.0";
+            this.Tag = "机器人语音动作指令编辑器 V1.1";
+            this.Text = "机器人语音动作指令编辑器 V1.1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
