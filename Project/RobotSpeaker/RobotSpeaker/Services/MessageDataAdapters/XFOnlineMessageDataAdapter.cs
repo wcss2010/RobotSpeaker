@@ -75,6 +75,9 @@ namespace RobotSpeaker
                                 }
                                 else
                                 {
+                                    //删除解析过的数据
+                                    _recievedData.RemoveRangeWithLock(0, headerIndex + length + 8);
+
                                     return null;
                                 }
                             }
