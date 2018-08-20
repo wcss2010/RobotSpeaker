@@ -30,7 +30,7 @@ namespace RobotSpeaker
                     }
                     else
                     {
-                        int length = BitConverter.ToInt16(new byte[] { _recievedData[headerIndex + 3], _recievedData[headerIndex + 4] }, 0);
+                        int length = ((_recievedData[headerIndex + 4] & 0xff) << 8) + (_recievedData[headerIndex + 3] & 0xff);
                         if (length > 0)
                         {
                             if (headerIndex + length + 8 > _recievedData.Count)
@@ -58,7 +58,7 @@ namespace RobotSpeaker
                                 if (msg[msg.Length - 1] == Utils.CalcCheckCode(new List<byte>(msg)))
                                 {
                                     //设置SeqId
-                                    int id = BitConverter.ToInt16(new byte[] { msg[5], msg[6] }, 0);
+                                    int id = ((msg[6] & 0xff) << 8) + msg[5];
                                     MainService.AiuiOnlineService.AiuiConnection.packetBuilder.setSeqId(id);
 
                                     //自动回复
