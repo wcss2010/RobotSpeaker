@@ -50,7 +50,10 @@ namespace RobotSpeaker
 
         void _motorPost_MessageReceived(object sender, MessageReceivedEventArgs args)
         {
-            System.Console.WriteLine("电机控制器返回:" + CRC.PrintBytesString(args.Data));
+            if (args.Data != null && args.Data.Buffer != null)
+            {
+                System.Console.WriteLine("电机控制器返回:" + CRC.PrintBytesString(args.Data.Buffer));
+            }
         }
 
         /// <summary>

@@ -10,30 +10,30 @@ namespace RobotSpeaker
 {
     public class XFOnlineMessageDataAdapter : IRobotMessageDataAdapter
     {
-        byte[] _headerBytes = new byte[] { 0xA5, 0x01 };
-        int headerIndex = 0;
+        private byte[] _headerBytes = new byte[] { 0xA5, 0x01 };
+        private int headerIndex = 0;
+        private int SerailDataLength = 0;
 
-        public override byte[] Resolve()
+        public override IMessageEntity Resolve()
         {
-            List<byte> _recievedData = this.SerialPortInputObject.BufferStream;
-
+            DataBufferObject _recievedData = this.SerialPortInputObject.BufferStream;
             try
             {
                 //尝试查找包头
-                headerIndex = SearchInBuffer(_headerBytes);
+                headerIndex = _recievedData.IndexOf(_headerBytes);
                 if (headerIndex >= 0)
                 {
-                    if (headerIndex + 8 >= _recievedData.Count)
+                    if (headerIndex + 8 >= _recievedData.Buffer.Count)
                     {
                         Thread.Sleep(10);
-                        return new byte[0];
+                        return null;
                     }
                     else
                     {
-                        int length = ((_recievedData[headerIndex + 4] & 0xff) << 8) + (_recievedData[headerIndex + 3] & 0xff);
+                        int length = ((_recievedData.Buffer[headerIndex + 4] & 0xff) << 8) + (_recievedData.Buffer[headerIndex + 3] & 0xff);
                         if (length > 0)
                         {
-                            if (headerIndex + length + 8 > _recievedData.Count)
+                            if (headerIndex + length + 8 > _recievedData.Buffer.Count)
                             {
                                 Thread.Sleep(10);
                             }
@@ -41,24 +41,21 @@ namespace RobotSpeaker
                         else
                         {
                             //无效数据
-                            lock (SerialPortInput.lockObject)
-                            {
-                                _recievedData.Clear();
-                            }
+                            _recievedData.ClearWithLock();
                         }
 
-                        if (_recievedData.Count >= length + 8)
+                        if (_recievedData.Buffer.Count >= length + 8)
                         {
-                            byte[] msg = _recievedData.GetRange(headerIndex, length + 8).ToArray();
-
+                            byte[] msg = _recievedData.Buffer.GetRange(headerIndex, length + 8).ToArray();
                             int newOffset = IRobotMessageDataAdapter.IndexOf(msg, _headerBytes.Length + 1, _headerBytes);
                             if (newOffset < 0)
                             {
+                                int id = 0;
                                 //解析SeqID并且回复确认
                                 if (msg[msg.Length - 1] == Utils.CalcCheckCode(new List<byte>(msg)))
                                 {
                                     //设置SeqId
-                                    int id = ((msg[6] & 0xff) << 8) + msg[5];
+                                    id = ((msg[6] & 0xff) << 8) + msg[5];
                                     MainService.AiuiOnlineService.AiuiConnection.packetBuilder.setSeqId(id);
 
                                     //自动回复
@@ -69,50 +66,39 @@ namespace RobotSpeaker
                                 byte[] bytes = new byte[0];
                                 if (msg[2] == 0x04)
                                 {
-                                    bytes = _recievedData.GetRange(headerIndex + 7, length).ToArray();
+                                    bytes = _recievedData.Buffer.GetRange(headerIndex + 7, length).ToArray();
                                 }
 
                                 //删除解析过的数据
-                                lock (SerialPortInput.lockObject)
-                                {
-                                    _recievedData.RemoveRange(0, headerIndex + length + 8);
-                                }
+                                _recievedData.RemoveRangeWithLock(0, headerIndex + length + 8);
 
-                                return bytes;
+                                return new IMessageEntity(bytes, id, bytes.Length, null);
                             }
                             else
                             {
                                 //可能已经丢包了，废弃这个包
-                                lock (SerialPortInput.lockObject)
-                                {
-                                    _recievedData.RemoveRange(0, headerIndex + newOffset);
-                                }
-                                return new byte[0];
+                                _recievedData.RemoveRangeWithLock(0, headerIndex + newOffset);                                
+                                return null;
                             }
                         }
                         else
                         {
-                            return new byte[0];
+                            return null;
                         }
                     }
                 }
                 else
                 {
                     //无效数据
-                    lock (SerialPortInput.lockObject)
-                    {
-                        _recievedData.Clear();
-                    }
+                     _recievedData.ClearWithLock();                    
 
-                    return new byte[0];
+                    return null;
                 }
             }
             catch (Exception ex)
             {
-                return new byte[0];
+                return null;
             }
         }
-
-        public int SerailDataLength { get; set; }
     }
 }

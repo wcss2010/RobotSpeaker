@@ -11,41 +11,33 @@ namespace RobotSpeaker
     {
         private byte[] _headerBytes = new byte[] { 0x01, 0x06 };
 
-        public override byte[] Resolve()
+        public override IMessageEntity Resolve()
         {
-            byte[] results = new byte[0];
-            List<byte> _receiveData = SerialPortInputObject.BufferStream;
+            DataBufferObject _receiveData = SerialPortInputObject.BufferStream;
 
             //查找开头
-            int headerIndex = SearchInBuffer(_headerBytes);
-
-            //有效值
-            if (headerIndex + 8 > _receiveData.Count)
-            {
-                Thread.Sleep(10);
-            }
-
+            int headerIndex = _receiveData.IndexOf(_headerBytes);
             if (headerIndex >= 0)
             {
-                //取数据
-                results = _receiveData.GetRange(headerIndex, 8).ToArray();
-
-                //删除解析过的数据
-                lock (SerialPortInput.lockObject)
+                //有效值
+                if (headerIndex + 8 > _receiveData.Buffer.Count)
                 {
-                    _receiveData.RemoveRange(0, headerIndex + 8);
+                    Thread.Sleep(10);
+                    return null;
+                }
+                else
+                {
+                    //取数据
+                    byte[] results = _receiveData.GetAndRemoveRangeWithLock(headerIndex, 8);
+                    return new IMessageEntity(results, DateTime.Now.Ticks, 8, null);
                 }
             }
             else
             {
                 //无效的值，丢弃这些数据
-                lock (SerialPortInput.lockObject)
-                {
-                    _receiveData.Clear();
-                }
+                _receiveData.ClearWithLock();
+                return null;
             }
-
-            return results;
         }
     }
 }
