@@ -51,7 +51,7 @@ namespace RobotSpeaker
             {
                 return;
             }
-            
+
             //显示问话
             ShowUserText(args.Ask);
 
@@ -277,15 +277,38 @@ namespace RobotSpeaker
             }
             catch (Exception ex) { }
 
-            //解析Json
-            ThreadPool.QueueUserWorkItem(new WaitCallback(delegate(object state)
+            //解析Json字符串
+            JObject firstObj = (JObject)JsonConvert.DeserializeObject(args.Json);
+
+            bool isNeedResolve = false;
+            JToken eventToken = firstObj["type"];
+            if (eventToken != null)
             {
-                try
+                if (eventToken.ToString().Equals("aiui_event"))
                 {
-                    XfJsonResolver.Resolve(args.Json);
+                    //是aiui_event才解析
+                    JToken contentObj = firstObj["content"];
+                    if (contentObj != null)
+                    {
+                        isNeedResolve = true;
+                    }
                 }
-                catch (Exception ex) { }
-            }));
+                if (eventToken.ToString().Equals("tts_event"))
+                {
+                    //是tts_event才解析
+                    JToken contentObj = firstObj["content"];
+                    if (contentObj != null)
+                    {
+                        isNeedResolve = true;
+                    }
+                }
+
+                if (isNeedResolve)
+                {
+                    //解析Json
+                    XfJsonResolver.Resolve(firstObj);
+                }
+            }
         }
 
         public void Close()
@@ -449,9 +472,9 @@ namespace RobotSpeaker
             }
         }
 
-        public void Resolve(string json)
+        public void Resolve(JObject firstObj)
         {
-            if (string.IsNullOrEmpty(json))
+            if (firstObj == null)
             {
                 return;
             }
@@ -459,9 +482,6 @@ namespace RobotSpeaker
             {
                 try
                 {
-                    //解析Json字符串
-                    JObject firstObj = (JObject)JsonConvert.DeserializeObject(json);
-
                     JToken eventStr = firstObj["type"];
                     if (eventStr.ToString().Equals("aiui_event"))
                     {
@@ -631,7 +651,7 @@ namespace RobotSpeaker
 
             //投递回答事件
             MainService.AiuiOnlineService.XfJsonResolver.OnXFCardQuestionEvent(ask, answer);
-            
+
 
             try
             {
