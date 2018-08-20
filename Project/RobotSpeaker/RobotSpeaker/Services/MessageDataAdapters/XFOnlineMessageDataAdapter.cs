@@ -67,12 +67,16 @@ namespace RobotSpeaker
                                 if (msg[2] == 0x04)
                                 {
                                     bytes = _recievedData.Buffer.GetRange(headerIndex + 7, length).ToArray();
+
+                                    //删除解析过的数据
+                                    _recievedData.RemoveRangeWithLock(0, headerIndex + length + 8);
+
+                                    return new IMessageEntity(bytes, id, bytes.Length, null);
                                 }
-
-                                //删除解析过的数据
-                                _recievedData.RemoveRangeWithLock(0, headerIndex + length + 8);
-
-                                return new IMessageEntity(bytes, id, bytes.Length, null);
+                                else
+                                {
+                                    return null;
+                                }
                             }
                             else
                             {
