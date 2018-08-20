@@ -13,7 +13,7 @@ namespace RobotSpeaker
 
         public override IMessageEntity Resolve()
         {
-            DataBufferObject _receiveData = SerialPortInputObject.BufferStream;
+            DataBufferObject _receiveData = BufferStream;
 
             //查找开头
             int headerIndex = _receiveData.IndexOf(_headerBytes);
