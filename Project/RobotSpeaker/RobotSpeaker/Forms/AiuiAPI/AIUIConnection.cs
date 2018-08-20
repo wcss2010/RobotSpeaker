@@ -57,15 +57,18 @@ namespace AIUISerials
 
         void _serialPort_MessageReceived(object sender, MessageReceivedEventArgs args)
         {
-            try
-            {
-                if (args.Data != null && args.Data.Buffer != null)
+            System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(delegate(object state)
                 {
-                    //投递消息事件
-                    OnAIUIConnectionReceivedEvent(Utils.Decompress(args.Data.Buffer));
-                }
-            }
-            catch (Exception ex) { }
+                    try
+                    {
+                        if (args.Data != null && args.Data.Buffer != null)
+                        {
+                            //投递消息事件
+                            OnAIUIConnectionReceivedEvent(Utils.Decompress(args.Data.Buffer));
+                        }
+                    }
+                    catch (Exception ex) { }
+                }));
         }
 
         public void SendShake()
