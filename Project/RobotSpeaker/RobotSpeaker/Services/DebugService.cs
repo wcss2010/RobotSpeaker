@@ -19,11 +19,11 @@ namespace RobotSpeaker
     /// </summary>
     public class DebugService
     {
-        private System.Collections.Concurrent.ConcurrentQueue<ActionObject> _taskQueues = new System.Collections.Concurrent.ConcurrentQueue<ActionObject>();
+        private System.Collections.Concurrent.ConcurrentQueue<DebugActionQueueObject> _taskQueues = new System.Collections.Concurrent.ConcurrentQueue<DebugActionQueueObject>();
         /// <summary>
         /// 任务队列
         /// </summary>
-        public System.Collections.Concurrent.ConcurrentQueue<ActionObject> TaskQueues
+        public System.Collections.Concurrent.ConcurrentQueue<DebugActionQueueObject> TaskQueues
         {
             get { return _taskQueues; }
         }
@@ -106,16 +106,22 @@ namespace RobotSpeaker
             {
                 try
                 {
-                    ActionObject ao = null;
-                    TaskQueues.TryDequeue(out ao);
+                    DebugActionQueueObject dao = null;
+                    TaskQueues.TryDequeue(out dao);
 
-                    if (ao != null && ao.Action.Name != null && ao.Action.Name.Length >= 1 && ao.StepList != null && ao.StepList.Length >= 1)
+                    if (dao != null && dao.ActionObj.Action.Name != null && dao.ActionObj.Action.Name.Length >= 1 && dao.ActionObj.StepList != null && dao.ActionObj.StepList.Length >= 1)
                     {
                         //有效任务
                         if (MainService.TaskService.RunMode == RunModeType.Debug)
                         {
                             //执行动作
-                            MainService.TaskService.RunAction(ao.Action, new List<SpeakerLibrary.SportDB.Robot_Steps>(ao.StepList));
+                            MainService.TaskService.RunAction(dao.ActionObj.Action, new List<SpeakerLibrary.SportDB.Robot_Steps>(dao.ActionObj.StepList));
+
+                            //发送回复
+                            DebugMessage dm = new DebugMessage();
+                            dm.Command = CommandConst.ActionRunFinish;
+                            dm.Content = dao.MessageId;
+                            SendMessage(dao.ConnectionName, dm);
                         }
                     }
                 }
@@ -166,20 +172,52 @@ namespace RobotSpeaker
             try
             {
                 SpeakerLibrary.Message.DebugMessage dm = SpeakerLibrary.Message.DebugMessage.FromJson(e.Message.MessageBody);
-                switch (dm.Command.ToLower())
+                switch (dm.Command)
                 {
-                    case "actionrun":
+                    case CommandConst.ActionRun:
+                        //动作记录
                         ActionObject ao = ((Newtonsoft.Json.Linq.JToken)dm.Content).ToObject<ActionObject>();
-                        TaskQueues.Enqueue(ao);
+                        //入队
+                        TaskQueues.Enqueue(new DebugActionQueueObject(e.Connecction.ConnectionName, dm.MsgId, ao));
                         break;
                 }
 
                 //发送回复
-                e.Connecction.messageQueue.Enqueue(new SocketLibrary.Message(SocketLibrary.Message.CommandType.SendMessage, SpeakerLibrary.Message.DebugMessage.ToJson(dm)));
+                SendMessage(e.Connecction, dm);
             }
             catch (Exception ex)
             {
                 System.Console.WriteLine(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// 发送消息
+        /// </summary>
+        /// <param name="conObj"></param>
+        /// <param name="msg"></param>
+        public void SendMessage(SocketLibrary.Connection conObj, DebugMessage msg)
+        {
+            if (conObj != null && msg != null)
+            {
+                //生成消息ID
+                msg.MsgId = Guid.NewGuid().ToString();
+
+                //发送消息
+                conObj.messageQueue.Enqueue(new SocketLibrary.Message(SocketLibrary.Message.CommandType.SendMessage, DebugMessage.ToJson(msg)));
+            }
+        }
+
+        /// <summary>
+        /// 发送消息
+        /// </summary>
+        /// <param name="conName"></param>
+        /// <param name="msg"></param>
+        public void SendMessage(string conName, DebugMessage msg)
+        {
+            if (_debugSocketServer.Connections.ContainsKey(conName))
+            {
+                SendMessage(_debugSocketServer.Connections[conName], msg);
             }
         }
 
@@ -297,5 +335,32 @@ namespace RobotSpeaker
 
             return stringIP.ToString();  
         }
+    }
+
+    public class DebugActionQueueObject
+    {
+        public DebugActionQueueObject() { }
+
+        public DebugActionQueueObject(string conName, string msgId, ActionObject actionObject)
+        {
+            ConnectionName = conName;
+            MessageId = msgId;
+            ActionObj = actionObject;
+        }
+
+        /// <summary>
+        /// 连接名称
+        /// </summary>
+        public string ConnectionName { get; set; }
+
+        /// <summary>
+        /// 消息ID
+        /// </summary>
+        public string MessageId { get; set; }
+
+        /// <summary>
+        /// 动作记录
+        /// </summary>
+        public ActionObject ActionObj { get; set; }
     }
 }
