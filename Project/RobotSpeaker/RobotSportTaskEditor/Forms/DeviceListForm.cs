@@ -47,7 +47,7 @@ namespace RobotSportTaskEditor.Forms
         /// <summary>
         /// 载入配置
         /// </summary>
-        private void LoadConfig()
+        public void LoadConfig()
         {
             if (File.Exists(Path.Combine(Application.StartupPath, "RobotConfigList.xml")))
             {
@@ -77,7 +77,7 @@ namespace RobotSportTaskEditor.Forms
                     rci.IsUse = false;
                 }
 
-                if (rci.IsUse)
+                if (rci.IsUse && MainForm.Client.Connections.Count > 0)
                 {
                     lvi.SubItems.Add("已连接");
                 }
@@ -178,7 +178,6 @@ namespace RobotSportTaskEditor.Forms
                 if (MessageBox.Show("真的要断开吗？", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
                     MainForm.Instance.Text = MainForm.Instance.Tag + "";
-
                     try
                     {
                         MainForm.Instance.CloseDevice();
@@ -195,15 +194,37 @@ namespace RobotSportTaskEditor.Forms
             {
                 if (MessageBox.Show("真的要连接吗？", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
-                    MainForm.Instance.Text = MainForm.Instance.Tag + "(已连接到" + SelectedRobot.IP + ")";
-
                     try
                     {
                         MainForm.Instance.OpenDevice(SelectedRobot.NickName, SelectedRobot.IP, SelectedRobot.Port);
+                        MainForm.Client.Connected += Client_Connected;
+                        MainForm.Client.ConnectionClose += Client_ConnectionClose;
                     }
                     catch (Exception ex) { MessageBox.Show("连接失败！Ex:" + ex.ToString()); }
                     LoadConfig();
                 }
+            }
+        }
+
+        void Client_ConnectionClose(object sender, SocketLibrary.SocketBase.ConCloseMessagesEventArgs e)
+        {
+            if (IsHandleCreated)
+            {
+                Invoke(new MethodInvoker(delegate()
+                    {
+                        LoadConfig();
+                    }));
+            }
+        }
+
+        void Client_Connected(object sender, SocketLibrary.Connection e)
+        {
+            if (IsHandleCreated)
+            {
+                Invoke(new MethodInvoker(delegate()
+                {
+                    LoadConfig();
+                }));
             }
         }
     }
