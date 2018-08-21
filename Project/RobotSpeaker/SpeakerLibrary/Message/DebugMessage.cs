@@ -13,10 +13,19 @@ namespace SpeakerLibrary.Message
     /// </summary>
     public class DebugMessage
     {
+        /// <summary>
+        /// 消息ID
+        /// </summary>
         public string MsgId { get; set; }
 
+        /// <summary>
+        /// 指令
+        /// </summary>
         public string Command { get; set; }
 
+        /// <summary>
+        /// 内容
+        /// </summary>
         public object Content { get; set; }
 
         public object Tag { get; set; }
@@ -42,10 +51,35 @@ namespace SpeakerLibrary.Message
         }
     }
 
+    /// <summary>
+    /// 动作记录
+    /// </summary>
     public class ActionObject
     {
+        /// <summary>
+        /// 动作描述
+        /// </summary>
         public Robot_Actions Action { get; set; }
 
+        /// <summary>
+        /// 执行步骤
+        /// </summary>
         public Robot_Steps[] StepList { get; set; }
+    }
+
+    /// <summary>
+    /// 指令定义
+    /// </summary>
+    public class CommandConst
+    {
+        /// <summary>
+        /// 动作执行
+        /// </summary>
+        public const string ActionRun = "ActionRun";
+
+        /// <summary>
+        /// 动作执行完成
+        /// </summary>
+        public const string ActionRunFinish = "ActionRunFinish";
     }
 }
