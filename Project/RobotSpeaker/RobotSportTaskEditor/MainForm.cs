@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using TimeBeam;
 using TimeBeam.Events;
 using TimeBeam.Timing;
+using SpeakerLibrary.Message;
 
 namespace RobotSportTaskEditor
 {
@@ -207,7 +208,8 @@ namespace RobotSportTaskEditor
                     {
                         //构造消息
                         SpeakerLibrary.Message.DebugMessage dm = new SpeakerLibrary.Message.DebugMessage();
-                        dm.Command = "ActionRun";
+                        dm.Command = CommandConst.ActionRun;
+                        dm.MsgId = Guid.NewGuid().ToString();
                         SpeakerLibrary.Message.ActionObject actionObject = new SpeakerLibrary.Message.ActionObject();
                         actionObject.Action = (Robot_Actions)dgActions.SelectedRows[0].Tag;
                         actionObject.StepList = DBInstance.DbHelper.table("Robot_Steps").where("ActionId=?", new object[] { actionObject.Action.Id }).select("*").getList<Robot_Steps>(new Robot_Steps()).ToArray();
