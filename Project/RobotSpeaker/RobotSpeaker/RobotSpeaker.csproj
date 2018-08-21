@@ -148,6 +148,7 @@
       <DependentUpon>ImageButton.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AiuiAPI\AIUIOffineConnection.cs" />
+    <Compile Include="Forms\AiuiAPI\Comm.cs" />
     <Compile Include="Services\AIUIService.cs" />
     <Compile Include="Services\DebugService.cs" />
     <Compile Include="Services\JoystickService.cs" />

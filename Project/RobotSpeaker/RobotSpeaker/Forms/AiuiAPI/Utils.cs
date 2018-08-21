@@ -31,7 +31,7 @@ namespace AIUISerials
             }
             return buffer;
         }
-        
+
         public static byte CalcCheckCode(List<byte> d)
         {
             byte checkCode = 0;

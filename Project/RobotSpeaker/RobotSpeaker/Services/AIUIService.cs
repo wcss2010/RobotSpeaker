@@ -257,7 +257,7 @@ namespace RobotSpeaker
             {
                 try
                 {
-                    _aiuiConnection.SerialPort.Connect();
+                    _aiuiConnection.Connect();
                 }
                 catch (Exception ex)
                 {
