@@ -16,6 +16,7 @@ using TimeBeam;
 using TimeBeam.Events;
 using TimeBeam.Timing;
 using SpeakerLibrary.Message;
+using Newtonsoft.Json;
 
 namespace RobotSportTaskEditor
 {
@@ -277,6 +278,13 @@ namespace RobotSportTaskEditor
         void Client_MessageReceived(object sender, SocketLibrary.SocketBase.MessageEventArgs e)
         {
             System.Console.WriteLine("Recv:" + e.Message.MessageBody);
+            DebugMessage dm = JsonConvert.DeserializeObject<DebugMessage>(e.Message.MessageBody);
+            switch (dm.Command)
+            {
+                case CommandConst.ActionRunFinish:
+                    lblStatus.Text = "动作执行完成！时间：" + DateTime.Now;
+                    break;
+            }
         }
 
         public void CloseDevice()
