@@ -46,7 +46,12 @@ namespace RobotSpeaker
         {
             get { return _listenPort; }
         }
-        
+
+        /// <summary>
+        /// 机器人显示名称
+        /// </summary>
+        public string RobotDisplayName { get; set; }
+
         private SocketLibrary.Server _debugSocketServer;
         /// <summary>
         /// 调试服务Socket
@@ -54,6 +59,15 @@ namespace RobotSpeaker
         public SocketLibrary.Server DebugSocketServer
         {
             get { return _debugSocketServer; }
+        }
+
+        private RobotFinderLibrary.UDPPortScanListener _udpPortScanListener = new RobotFinderLibrary.UDPPortScanListener();
+        /// <summary>
+        /// UDP扫描器监听(主要给编辑器发现调试服务使用)
+        /// </summary>
+        public RobotFinderLibrary.UDPPortScanListener UdpPortScanListener
+        {
+            get { return _udpPortScanListener; }
         }
 
         /// <summary>
@@ -78,6 +92,9 @@ namespace RobotSpeaker
                 _listenIP = lip;
             }
 
+            //机器人显示名称
+            RobotDisplayName = "Robot_" + _listenIP + ":" + _listenPort;
+
             //守护进程
             _debugActionWorker.WorkerSupportsCancellation = true;
             _debugActionWorker.DoWork += _debugActionWorker_DoWork;
@@ -93,6 +110,17 @@ namespace RobotSpeaker
             try
             {
                 _debugSocketServer.StartServer();
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.ToString());
+            }
+
+            //启动端口扫描服务
+            _udpPortScanListener.ResponseText = RobotDisplayName;
+            try
+            {
+                _udpPortScanListener.UdpClient.OpenListener();
             }
             catch (Exception ex)
             {
@@ -237,6 +265,18 @@ namespace RobotSpeaker
                 try
                 {
                     _debugSocketServer.StopServer();
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine(ex.ToString());
+                }
+            }
+
+            if (_udpPortScanListener != null)
+            {
+                try
+                {
+                    _udpPortScanListener.UdpClient.CloseListener();
                 }
                 catch (Exception ex)
                 {
