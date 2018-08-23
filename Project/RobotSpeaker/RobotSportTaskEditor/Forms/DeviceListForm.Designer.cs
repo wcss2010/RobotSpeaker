@@ -40,6 +40,7 @@
             this.btnModify = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.btnScanRobots = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -98,6 +99,7 @@
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.Color.White;
+            this.groupBox3.Controls.Add(this.btnScanRobots);
             this.groupBox3.Controls.Add(this.btnStartClient);
             this.groupBox3.Controls.Add(this.btnCloseClient);
             this.groupBox3.Controls.Add(this.btnModify);
@@ -165,6 +167,17 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // btnScanRobots
+            // 
+            this.btnScanRobots.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnScanRobots.Location = new System.Drawing.Point(316, 17);
+            this.btnScanRobots.Name = "btnScanRobots";
+            this.btnScanRobots.Size = new System.Drawing.Size(147, 37);
+            this.btnScanRobots.TabIndex = 5;
+            this.btnScanRobots.Text = "扫描本网段内所有机器人";
+            this.btnScanRobots.UseVisualStyleBackColor = true;
+            this.btnScanRobots.Click += new System.EventHandler(this.btnScanRobots_Click);
+            // 
             // DeviceListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -199,5 +212,6 @@
         private System.Windows.Forms.ColumnHeader cbIsUse;
         private System.Windows.Forms.Button btnStartClient;
         private System.Windows.Forms.Button btnCloseClient;
+        private System.Windows.Forms.Button btnScanRobots;
     }
 }

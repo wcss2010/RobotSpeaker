@@ -227,6 +227,20 @@ namespace RobotSportTaskEditor.Forms
                 }));
             }
         }
+
+        private void btnScanRobots_Click(object sender, EventArgs e)
+        {
+            DeviceScanForm dsf = new DeviceScanForm(this);
+            if (dsf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (dsf.SelectedList != null)
+                {
+                    RobotConfigList.AddRange(dsf.SelectedList);
+                    SaveConfig();
+                    LoadConfig();
+                }
+            }
+        }
     }
 
     /// <summary>
