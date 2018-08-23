@@ -65,6 +65,9 @@
       <HintPath>..\..\..\Lib\Noear.Weed3.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="RobotFinderLibrary">
+      <HintPath>..\..\..\Lib\RobotFinderLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="SocketLibrary">
       <HintPath>..\..\..\Lib\SocketLibrary.dll</HintPath>
     </Reference>
