@@ -80,6 +80,7 @@
     </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="TimeBeam">
@@ -127,6 +128,12 @@
     <Compile Include="Forms\DeviceListForm.Designer.cs">
       <DependentUpon>DeviceListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DeviceScanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DeviceScanForm.Designer.cs">
+      <DependentUpon>DeviceScanForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\QuestionEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DeviceListForm.resx">
       <DependentUpon>DeviceListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DeviceScanForm.resx">
+      <DependentUpon>DeviceScanForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\QuestionEditor.resx">
       <DependentUpon>QuestionEditor.cs</DependentUpon>
