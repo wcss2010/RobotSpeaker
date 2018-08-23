@@ -51,7 +51,7 @@ namespace RobotSportTaskEditor.Forms
         {
             try
             {
-                Thread.Sleep(8000);
+                Thread.Sleep(3000);
             }
             catch (Exception ex) { }
 
@@ -164,7 +164,7 @@ namespace RobotSportTaskEditor.Forms
         private void btnStartScan_Click(object sender, EventArgs e)
         {
             _udpPortScan.ResultDict.Clear();
-            _udpPortScan.InitQueues(tbUdpBoardCastIp.Text.Trim(), 5000, 6000);
+            _udpPortScan.InitQueues(tbUdpBoardCastIp.Text.Trim(), 60000, 60100);
             _udpPortScan.StartScan();
         }
 
