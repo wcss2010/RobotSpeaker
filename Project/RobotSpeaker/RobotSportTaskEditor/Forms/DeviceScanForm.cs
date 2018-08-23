@@ -147,6 +147,10 @@ namespace RobotSportTaskEditor.Forms
         {
             base.OnFormClosing(e);
 
+            //停止扫描
+            _udpPortScan.StopScan();
+
+            //关闭监听
             try
             {
                 _udpPortScan.UdpClient.CloseListener();
