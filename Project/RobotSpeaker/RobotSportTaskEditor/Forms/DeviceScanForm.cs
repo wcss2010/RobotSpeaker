@@ -166,6 +166,20 @@ namespace RobotSportTaskEditor.Forms
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            SelectedList = new List<RobotConfigItem>();
+            foreach (ListViewItem lvi in lvConnectionList.Items)
+            {
+                if (lvi.Checked)
+                {
+                    SelectedList.Add((RobotConfigItem)lvi.Tag);
+                }
+            }
+
+            if (SelectedList.Count == 0)
+            {
+                return;
+            }
+
             DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 

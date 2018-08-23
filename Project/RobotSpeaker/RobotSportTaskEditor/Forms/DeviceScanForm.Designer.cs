@@ -113,6 +113,7 @@
             // 
             // lvConnectionList
             // 
+            this.lvConnectionList.CheckBoxes = true;
             this.lvConnectionList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
