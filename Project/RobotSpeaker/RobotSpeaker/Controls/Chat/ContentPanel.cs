@@ -33,6 +33,11 @@ namespace RobotSpeaker.Controls.Chat
         /// <param name="model"></param>
         public void AddMachineMsg(string content)
         {
+            if (string.IsNullOrEmpty(content))
+            {
+                return;
+            }
+
             CheckClear();
 
             ContentItem item = new ContentItem();
@@ -64,6 +69,11 @@ namespace RobotSpeaker.Controls.Chat
         /// </summary>
         public void AddUserMsg(string content)
         {
+            if (string.IsNullOrEmpty(content))
+            {
+                return;
+            }
+
             CheckClear();
 
             ContentItem item = new ContentItem();
