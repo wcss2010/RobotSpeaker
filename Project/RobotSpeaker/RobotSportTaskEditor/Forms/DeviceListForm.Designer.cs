@@ -35,12 +35,12 @@
             this.chPort = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cbIsUse = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnScanRobots = new System.Windows.Forms.Button();
             this.btnStartClient = new System.Windows.Forms.Button();
             this.btnCloseClient = new System.Windows.Forms.Button();
             this.btnModify = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.btnScanRobots = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -112,6 +112,17 @@
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             // 
+            // btnScanRobots
+            // 
+            this.btnScanRobots.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnScanRobots.Location = new System.Drawing.Point(293, 17);
+            this.btnScanRobots.Name = "btnScanRobots";
+            this.btnScanRobots.Size = new System.Drawing.Size(170, 37);
+            this.btnScanRobots.TabIndex = 5;
+            this.btnScanRobots.Text = "扫描并添加本网段内所有设备";
+            this.btnScanRobots.UseVisualStyleBackColor = true;
+            this.btnScanRobots.Click += new System.EventHandler(this.btnScanRobots_Click);
+            // 
             // btnStartClient
             // 
             this.btnStartClient.Dock = System.Windows.Forms.DockStyle.Right;
@@ -166,17 +177,6 @@
             this.btnAdd.Text = "添加";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnScanRobots
-            // 
-            this.btnScanRobots.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnScanRobots.Location = new System.Drawing.Point(316, 17);
-            this.btnScanRobots.Name = "btnScanRobots";
-            this.btnScanRobots.Size = new System.Drawing.Size(147, 37);
-            this.btnScanRobots.TabIndex = 5;
-            this.btnScanRobots.Text = "扫描本网段内所有机器人";
-            this.btnScanRobots.UseVisualStyleBackColor = true;
-            this.btnScanRobots.Click += new System.EventHandler(this.btnScanRobots_Click);
             // 
             // DeviceListForm
             // 

@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tbUdpBoardCastIp = new System.Windows.Forms.TextBox();
             this.btnStartScan = new System.Windows.Forms.Button();
+            this.tbUdpBoardCastIp = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnOK = new System.Windows.Forms.Button();
             this.lvConnectionList = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -55,22 +55,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 12);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "UDP广播地址:";
-            // 
-            // tbUdpBoardCastIp
-            // 
-            this.tbUdpBoardCastIp.Location = new System.Drawing.Point(91, 14);
-            this.tbUdpBoardCastIp.Name = "tbUdpBoardCastIp";
-            this.tbUdpBoardCastIp.Size = new System.Drawing.Size(170, 21);
-            this.tbUdpBoardCastIp.TabIndex = 2;
-            // 
             // btnStartScan
             // 
             this.btnStartScan.Location = new System.Drawing.Point(267, 14);
@@ -80,6 +64,22 @@
             this.btnStartScan.Text = "扫描开始";
             this.btnStartScan.UseVisualStyleBackColor = true;
             this.btnStartScan.Click += new System.EventHandler(this.btnStartScan_Click);
+            // 
+            // tbUdpBoardCastIp
+            // 
+            this.tbUdpBoardCastIp.Location = new System.Drawing.Point(91, 14);
+            this.tbUdpBoardCastIp.Name = "tbUdpBoardCastIp";
+            this.tbUdpBoardCastIp.Size = new System.Drawing.Size(170, 21);
+            this.tbUdpBoardCastIp.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 12);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "UDP广播地址:";
             // 
             // panel1
             // 
@@ -91,25 +91,25 @@
             this.panel1.Size = new System.Drawing.Size(630, 46);
             this.panel1.TabIndex = 1;
             // 
-            // btnOK
-            // 
-            this.btnOK.Location = new System.Drawing.Point(228, 11);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 0;
-            this.btnOK.Text = "确定";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-            // 
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(309, 11);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 0;
-            this.btnCancel.Text = "取消";
+            this.btnCancel.Text = "关闭";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnOK
+            // 
+            this.btnOK.Location = new System.Drawing.Point(228, 11);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.TabIndex = 0;
+            this.btnOK.Text = "添加到列表";
+            this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // lvConnectionList
             // 
@@ -156,7 +156,7 @@
             this.Name = "DeviceScanForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "扫描本网段内所有机器人";
+            this.Text = "扫描并添加本网段内所有设备";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
