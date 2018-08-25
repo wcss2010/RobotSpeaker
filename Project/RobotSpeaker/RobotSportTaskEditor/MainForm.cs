@@ -305,20 +305,24 @@ namespace RobotSportTaskEditor
         {
             if (dgActions.SelectedRows.Count > 0 && dgActions.SelectedRows[0].Tag != null)
             {
-                Robot_Actions actionObj = (Robot_Actions)dgActions.SelectedRows[0].Tag;
-                Robot_Steps[] stepList = DBInstance.DbHelper.table("Robot_Steps").where("ActionId=?", new object[] { actionObj.Id }).select("*").getList<Robot_Steps>(new Robot_Steps()).ToArray();
-
-                if (stepList != null)
+                if (MessageBox.Show("真的要克隆吗?", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
-                    //添加Action
-                    actionObj.Id = DBInstance.DbHelper.table("Robot_Actions").select("max(Id)").getValue<long>(0) + 1;
-                    DBInstance.DbHelper.table("Robot_Actions").set("Id", actionObj.Id).set("Code", actionObj.Code).set("Name", actionObj.Name).set("Condition", actionObj.Condition).insert();
+                    Robot_Actions actionObj = (Robot_Actions)dgActions.SelectedRows[0].Tag;
+                    Robot_Steps[] stepList = DBInstance.DbHelper.table("Robot_Steps").where("ActionId=?", new object[] { actionObj.Id }).select("*").getList<Robot_Steps>(new Robot_Steps()).ToArray();
 
-                    //添加StepList
-                    foreach (Robot_Steps step in stepList)
+                    if (stepList != null)
                     {
-                        step.Id = DBInstance.DbHelper.table("Robot_Steps").select("max(Id)").getValue<long>(0) + 1;
-                        DBInstance.DbHelper.table("Robot_Steps").set("Id", step.Id).set("ActionId", step.ActionId).set("MotorIndex", step.MotorIndex).set("MotorType", step.MotorType).set("Value", step.Value).set("BeforeSleep", step.BeforeSleep).set("AfterSleep", step.AfterSleep).insert();
+                        //添加Action
+                        actionObj.Id = DBInstance.DbHelper.table("Robot_Actions").select("max(Id)").getValue<long>(0) + 1;
+                        DBInstance.DbHelper.table("Robot_Actions").set("Id", actionObj.Id).set("Code", actionObj.Code).set("Name", actionObj.Name).set("Condition", actionObj.Condition).insert();
+
+                        //添加StepList
+                        foreach (Robot_Steps step in stepList)
+                        {
+                            step.Id = DBInstance.DbHelper.table("Robot_Steps").select("max(Id)").getValue<long>(0) + 1;
+                            step.ActionId = actionObj.Id;
+                            DBInstance.DbHelper.table("Robot_Steps").set("Id", step.Id).set("ActionId", step.ActionId).set("MotorIndex", step.MotorIndex).set("MotorType", step.MotorType).set("Value", step.Value).set("BeforeSleep", step.BeforeSleep).set("AfterSleep", step.AfterSleep).insert();
+                        }
                     }
                 }
             }
