@@ -300,5 +300,10 @@ namespace RobotSportTaskEditor
                 Client = null;
             }
         }
+
+        private void btnCloneAction_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

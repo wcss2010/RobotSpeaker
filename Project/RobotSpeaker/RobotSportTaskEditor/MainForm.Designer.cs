@@ -44,8 +44,9 @@
             this.clCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnRunAction = new System.Windows.Forms.Button();
-            this.btnModifyAction = new System.Windows.Forms.Button();
+            this.btnCloneAction = new System.Windows.Forms.Button();
             this.btnDeleteAction = new System.Windows.Forms.Button();
+            this.btnModifyAction = new System.Windows.Forms.Button();
             this.tpQuestion = new System.Windows.Forms.TabPage();
             this.dgQuestions = new System.Windows.Forms.DataGridView();
             this.clAsk = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -195,8 +196,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnRunAction);
-            this.groupBox1.Controls.Add(this.btnModifyAction);
+            this.groupBox1.Controls.Add(this.btnCloneAction);
             this.groupBox1.Controls.Add(this.btnDeleteAction);
+            this.groupBox1.Controls.Add(this.btnModifyAction);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
@@ -207,7 +209,7 @@
             // btnRunAction
             // 
             this.btnRunAction.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnRunAction.Location = new System.Drawing.Point(1081, 17);
+            this.btnRunAction.Location = new System.Drawing.Point(1006, 17);
             this.btnRunAction.Name = "btnRunAction";
             this.btnRunAction.Size = new System.Drawing.Size(75, 37);
             this.btnRunAction.TabIndex = 2;
@@ -215,27 +217,38 @@
             this.btnRunAction.UseVisualStyleBackColor = true;
             this.btnRunAction.Click += new System.EventHandler(this.btnRunAction_Click);
             // 
-            // btnModifyAction
+            // btnCloneAction
             // 
-            this.btnModifyAction.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnModifyAction.Location = new System.Drawing.Point(1156, 17);
-            this.btnModifyAction.Name = "btnModifyAction";
-            this.btnModifyAction.Size = new System.Drawing.Size(75, 37);
-            this.btnModifyAction.TabIndex = 1;
-            this.btnModifyAction.Text = "修改";
-            this.btnModifyAction.UseVisualStyleBackColor = true;
-            this.btnModifyAction.Click += new System.EventHandler(this.btnModifyAction_Click);
+            this.btnCloneAction.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnCloneAction.Location = new System.Drawing.Point(1081, 17);
+            this.btnCloneAction.Name = "btnCloneAction";
+            this.btnCloneAction.Size = new System.Drawing.Size(75, 37);
+            this.btnCloneAction.TabIndex = 3;
+            this.btnCloneAction.Text = "克隆此动作";
+            this.btnCloneAction.UseVisualStyleBackColor = true;
+            this.btnCloneAction.Click += new System.EventHandler(this.btnCloneAction_Click);
             // 
             // btnDeleteAction
             // 
             this.btnDeleteAction.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnDeleteAction.Location = new System.Drawing.Point(1231, 17);
+            this.btnDeleteAction.Location = new System.Drawing.Point(1156, 17);
             this.btnDeleteAction.Name = "btnDeleteAction";
             this.btnDeleteAction.Size = new System.Drawing.Size(75, 37);
             this.btnDeleteAction.TabIndex = 0;
             this.btnDeleteAction.Text = "删除";
             this.btnDeleteAction.UseVisualStyleBackColor = true;
             this.btnDeleteAction.Click += new System.EventHandler(this.btnDeleteAction_Click);
+            // 
+            // btnModifyAction
+            // 
+            this.btnModifyAction.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnModifyAction.Location = new System.Drawing.Point(1231, 17);
+            this.btnModifyAction.Name = "btnModifyAction";
+            this.btnModifyAction.Size = new System.Drawing.Size(75, 37);
+            this.btnModifyAction.TabIndex = 1;
+            this.btnModifyAction.Text = "修改";
+            this.btnModifyAction.UseVisualStyleBackColor = true;
+            this.btnModifyAction.Click += new System.EventHandler(this.btnModifyAction_Click);
             // 
             // tpQuestion
             // 
@@ -371,6 +384,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clCondition;
         private System.Windows.Forms.ToolStripButton btnDeviceList;
         private System.Windows.Forms.Button btnRunAction;
+        private System.Windows.Forms.Button btnCloneAction;
     }
 }
 
