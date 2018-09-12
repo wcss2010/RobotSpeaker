@@ -349,6 +349,13 @@ namespace RobotSpeaker
     public delegate void XFCardWakeupDelegate(object sender, EventArgs args);
 
     /// <summary>
+    /// 休眠
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    public delegate void XFCardSleepDelegate(object sender, EventArgs args);
+
+    /// <summary>
     /// 讲话人角度
     /// </summary>
     /// <param name="sender"></param>
@@ -402,14 +409,22 @@ namespace RobotSpeaker
         /// 唤醒
         /// </summary>
         public event XFCardWakeupDelegate XFCardWakeupEvent;
+
+        /// <summary>
+        /// 休眠
+        /// </summary>
+        public event XFCardSleepDelegate XFCardSleepEvent;
+
         /// <summary>
         /// 角度
         /// </summary>
         public event XFCardSpeakerLocationDelegate XFCardLocationEvent;
+
         /// <summary>
         /// 问答
         /// </summary>
         public event XFCardQuestionDelegate XFCardQuestionEvent;
+
 
         public event XFCardQuestionDelegate XFCardDictateEvent;
 
@@ -434,6 +449,14 @@ namespace RobotSpeaker
             if (XFCardWakeupEvent != null)
             {
                 XFCardWakeupEvent(this, new EventArgs());
+            }
+        }
+
+        protected void OnXFCardSleepEvent()
+        {
+            if (XFCardSleepEvent != null)
+            {
+                XFCardSleepEvent(this, new EventArgs());
             }
         }
 
@@ -529,18 +552,32 @@ namespace RobotSpeaker
                             else
                             {
                                 //应该是某个提醒
-                                if (contentObj["info"] != null)
+                                if (contentObj["eventType"] != null)
                                 {
-                                    if (contentObj["info"]["wakeup_mode"] != null)
+                                    string eventTypeStr = contentObj["eventType"].ToString();
+                                    switch (eventTypeStr)
                                     {
-                                        //唤醒消息
-                                        OnXFCardWakeupEvent();
-                                    }
-                                    else if (contentObj["info"]["angle"] != null)
-                                    {
-                                        //角度消息
-                                        OnXFCardLocationEvent(double.Parse(contentObj["info"]["angle"].ToString()));
-                                    }
+                                        case "4":
+                                            //唤醒事件
+                                            if (contentObj["info"] != null)
+                                            {
+                                                if (contentObj["info"]["wakeup_mode"] != null)
+                                                {
+                                                    //唤醒消息
+                                                    OnXFCardWakeupEvent();
+                                                }
+                                                else if (contentObj["info"]["angle"] != null)
+                                                {
+                                                    //角度消息
+                                                    OnXFCardLocationEvent(double.Parse(contentObj["info"]["angle"].ToString()));
+                                                }
+                                            }
+                                            break;
+                                        case "5":
+                                            //休眠事件
+                                            OnXFCardSleepEvent();
+                                            break;                                        
+                                    }                                    
                                 }
                             }
                         }
