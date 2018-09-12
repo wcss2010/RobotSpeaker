@@ -81,5 +81,10 @@ namespace SpeakerLibrary.Message
         /// 动作执行完成
         /// </summary>
         public const string ActionRunFinish = "ActionRunFinish";
+
+        /// <summary>
+        /// 上传数据库
+        /// </summary>
+        public const string UploadDataBase = "UploadDataBase"; 
     }
 }

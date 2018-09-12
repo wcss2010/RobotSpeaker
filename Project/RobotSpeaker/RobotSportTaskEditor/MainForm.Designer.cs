@@ -54,6 +54,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnModifyQuestion = new System.Windows.Forms.Button();
             this.btnDeleteQuestion = new System.Windows.Forms.Button();
+            this.btnUploadData = new System.Windows.Forms.ToolStripButton();
             this.tsTopToolBar.SuspendLayout();
             this.ssState.SuspendLayout();
             this.tcActionAndQuestion.SuspendLayout();
@@ -72,6 +73,7 @@
             this.btnNewAction,
             this.btnNewQuestion,
             this.btnDeviceList,
+            this.btnUploadData,
             this.btnExit});
             this.tsTopToolBar.Location = new System.Drawing.Point(0, 0);
             this.tsTopToolBar.Name = "tsTopToolBar";
@@ -209,11 +211,11 @@
             // btnRunAction
             // 
             this.btnRunAction.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnRunAction.Location = new System.Drawing.Point(1006, 17);
+            this.btnRunAction.Location = new System.Drawing.Point(982, 17);
             this.btnRunAction.Name = "btnRunAction";
-            this.btnRunAction.Size = new System.Drawing.Size(75, 37);
+            this.btnRunAction.Size = new System.Drawing.Size(99, 37);
             this.btnRunAction.TabIndex = 2;
-            this.btnRunAction.Text = "发送到设备";
+            this.btnRunAction.Text = "远程执行此动作";
             this.btnRunAction.UseVisualStyleBackColor = true;
             this.btnRunAction.Click += new System.EventHandler(this.btnRunAction_Click);
             // 
@@ -323,6 +325,16 @@
             this.btnDeleteQuestion.UseVisualStyleBackColor = true;
             this.btnDeleteQuestion.Click += new System.EventHandler(this.btnDeleteQuestion_Click);
             // 
+            // btnUploadData
+            // 
+            this.btnUploadData.Image = ((System.Drawing.Image)(resources.GetObject("btnUploadData.Image")));
+            this.btnUploadData.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnUploadData.Name = "btnUploadData";
+            this.btnUploadData.Size = new System.Drawing.Size(96, 53);
+            this.btnUploadData.Text = "同步远程数据库";
+            this.btnUploadData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnUploadData.Click += new System.EventHandler(this.btnUploadData_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -385,6 +397,7 @@
         private System.Windows.Forms.ToolStripButton btnDeviceList;
         private System.Windows.Forms.Button btnRunAction;
         private System.Windows.Forms.Button btnCloneAction;
+        private System.Windows.Forms.ToolStripButton btnUploadData;
     }
 }
 

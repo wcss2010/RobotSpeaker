@@ -330,5 +330,29 @@ namespace RobotSportTaskEditor
             LoadActions();
             LoadQuestions();
         }
+
+        private void btnUploadData_Click(object sender, EventArgs e)
+        {
+            if (Client != null && Client.Connections.Count >= 1)
+            {
+                if (MessageBox.Show("真的要同步吗?", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    DebugMessage dm = new DebugMessage();
+                    dm.Command = CommandConst.UploadDataBase;
+                    dm.MsgId = Guid.NewGuid().ToString();
+                    dm.Content = Convert.ToBase64String(File.ReadAllBytes(Path.Combine(Application.StartupPath, "static.db")));
+
+                    SocketLibrary.Connection conn = null;
+                    Client.Connections.TryGetValue(Client.ClientName, out conn);
+                    if (conn != null)
+                    {
+                        SocketLibrary.Message msg = new SocketLibrary.Message(SocketLibrary.Message.CommandType.SendMessage, DebugMessage.ToJson(dm));
+                        conn.messageQueue.Enqueue(msg);
+                    }
+
+                    MessageBox.Show("同步完成!");
+                }
+            }
+        }
     }
 }
