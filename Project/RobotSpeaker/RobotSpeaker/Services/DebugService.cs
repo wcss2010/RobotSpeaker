@@ -11,6 +11,8 @@ using System.Management;
 using System.ComponentModel;
 using System.Threading;
 using SpeakerLibrary.Message;
+using System.IO;
+using System.Windows.Forms;
 
 namespace RobotSpeaker
 {
@@ -208,6 +210,10 @@ namespace RobotSpeaker
                         //入队
                         TaskQueues.Enqueue(new DebugActionQueueObject(e.Connecction.ConnectionName, dm.MsgId, ao));
                         break;
+                    case CommandConst.UploadDataBase:
+                        //更新动作库
+                        UpdateDB(dm);
+                        break;
                 }
 
                 //发送回复
@@ -216,6 +222,33 @@ namespace RobotSpeaker
             catch (Exception ex)
             {
                 System.Console.WriteLine(ex.ToString());
+            }
+        }
+
+        private void UpdateDB(DebugMessage dm)
+        {
+            string fileCnt = dm.Content != null ? dm.Content.ToString() : string.Empty;
+            if (string.IsNullOrEmpty(fileCnt))
+            {
+                return;
+            }
+            else
+            {
+                byte[] bytes = Convert.FromBase64String(fileCnt);
+                if (bytes != null && bytes.Length >= 10)
+                {
+                    string sourcePath = Path.Combine(Application.StartupPath, "static.db");
+                    string destPath = Path.Combine(Application.StartupPath, "static" + "_OldDB_" + DateTime.Now.Ticks + ".db");
+
+                    //将static.db改为static_olddb_xxx.db
+                    File.Move(sourcePath, destPath);
+
+                    //写库文件
+                    File.WriteAllBytes(sourcePath, bytes);
+
+                    //刷新数据
+                    MainService.TaskService.UpdateActionList();
+                }
             }
         }
 
