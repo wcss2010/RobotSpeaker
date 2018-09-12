@@ -22,6 +22,11 @@ namespace RobotSpeaker
     /// </summary>
     public class TaskService
     {
+        /// <summary>
+        /// 静态的动作列表
+        /// </summary>
+        private List<Robot_Actions> StaticActionList { get; set; }
+
         private RunModeType _runMode = RunModeType.Normal;
         /// <summary>
         /// 运行模式
@@ -51,26 +56,30 @@ namespace RobotSpeaker
 
         void _worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            List<Robot_Actions> actionList = DBInstance.DbHelper.table("Robot_Actions").select("*").getList<Robot_Actions>(new Robot_Actions());
-
             while (!_scanWorker.CancellationPending)
             {
                 try
                 {
-                    if (actionList != null)
+                    if (RunMode == RunModeType.Normal)
                     {
-                        TaskQueueObject queueObj = null;
-                        TaskQueues.TryDequeue(out queueObj);
-
-                        if (queueObj != null)
+                        lock (StaticActionList)
                         {
-                            foreach (Robot_Actions action in actionList)
+                            if (StaticActionList != null)
                             {
-                                //检查是否符合条件
-                                if (IsAcceptRun(queueObj, action))
+                                TaskQueueObject queueObj = null;
+                                TaskQueues.TryDequeue(out queueObj);
+
+                                if (queueObj != null)
                                 {
-                                    //发送指令序列
-                                    RunAction(action, DBInstance.GetSteps(action.Id));
+                                    foreach (Robot_Actions action in StaticActionList)
+                                    {
+                                        //检查是否符合条件
+                                        if (IsAcceptRun(queueObj, action))
+                                        {
+                                            //发送指令序列
+                                            RunAction(action, DBInstance.GetSteps(action.Id));
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -253,13 +262,26 @@ namespace RobotSpeaker
             }
         }
 
+        /// <summary>
+        /// 更新动作列表
+        /// </summary>
+        public void UpdateActionList()
+        {
+            lock (StaticActionList)
+            {
+                StaticActionList = DBInstance.DbHelper.table("Robot_Actions").select("*").getList<Robot_Actions>(new Robot_Actions());
+            }
+        }
+
         public void Open()
         {
+            //更新动作
+            UpdateActionList();
+
             if (_scanWorker.IsBusy)
             {
                 return;
             }
-
             _scanWorker.RunWorkerAsync();
         }
 
