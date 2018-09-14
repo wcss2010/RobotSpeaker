@@ -62,6 +62,11 @@ namespace RobotSpeaker
         public static VoiceUI VoiceUIObj { get; set; }
 
         /// <summary>
+        /// 锁定界面
+        /// </summary>
+        public static LockUI LockUIObj { get; set; }
+
+        /// <summary>
         /// 配置界面对象
         /// </summary>
         public static ConfigUI ConfigUIObj { get; set; }

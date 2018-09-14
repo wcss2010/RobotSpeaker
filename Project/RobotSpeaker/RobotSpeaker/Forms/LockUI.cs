@@ -21,5 +21,12 @@ namespace RobotSpeaker.Forms
         {
             base.OnLoad(e);
         }
+
+        protected override void OnClickBackButton(EventArgs e)
+        {
+            base.OnClickBackButton(e);
+
+            this.Close();
+        }
     }
 }
