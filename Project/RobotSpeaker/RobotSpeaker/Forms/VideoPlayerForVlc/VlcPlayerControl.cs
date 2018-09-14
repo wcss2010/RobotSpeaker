@@ -165,6 +165,7 @@ namespace VLCPlayerLib
 
             lblVideoName.Text = Path.GetFileNameWithoutExtension(MediaUrl);
             lblVideoName.Show();
+            lblVideoName.BringToFront();
 
             if (StartEvent != null)
             {
