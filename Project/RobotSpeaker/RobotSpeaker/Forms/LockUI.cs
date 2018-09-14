@@ -43,6 +43,9 @@ namespace RobotSpeaker.Forms
         {
             base.OnLoad(e);
 
+            //初始化播放器
+            vpcPlayer.InitPlayer();
+
             //检查是否存在欢迎图片(./welcome.png)
             if (File.Exists(Path.Combine(Application.StartupPath, "welcome.png")))
             {
