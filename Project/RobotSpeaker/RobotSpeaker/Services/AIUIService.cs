@@ -39,10 +39,19 @@ namespace RobotSpeaker
         {
             XfJsonResolver.XFCardLocationEvent += XfJsonResolver_XFCardLocationEvent;
             XfJsonResolver.XFCardWakeupEvent += XfJsonResolver_XFCardWakeupEvent;
+            XfJsonResolver.XFCardSleepEvent += XfJsonResolver_XFCardSleepEvent;
             XfJsonResolver.XFCardQuestionEvent += XfJsonResolver_XFCardQuestionEvent;
             XfJsonResolver.XFCardTTSStartEvent += XfJsonResolver_XFCardTTSStartEvent;
             XfJsonResolver.XFCardTTSEndEvent += XfJsonResolver_XFCardTTSEndEvent;
             XfJsonResolver.XFCardDictateEvent += XfJsonResolver_XFCardDictateEvent;
+        }
+
+        void XfJsonResolver_XFCardSleepEvent(object sender, EventArgs args)
+        {
+            if (MainService.LockUIObj != null)
+            {
+                MainService.LockUIObj.UnLock();
+            }
         }
 
         void XfJsonResolver_XFCardDictateEvent(object sender, XFQuestionEventArgs args)
@@ -96,6 +105,11 @@ namespace RobotSpeaker
             {
                 //关闭视频播放器(如果有的话)
                 CloseVideoPlayer();
+            }
+
+            if (MainService.LockUIObj != null)
+            {
+                MainService.LockUIObj.Lock();
             }
         }
 
