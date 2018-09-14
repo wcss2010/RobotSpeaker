@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -334,7 +335,21 @@ namespace RobotSpeaker.Forms
 
         private void btnSetWelcomeImage_Click(object sender, EventArgs e)
         {
+            if (ofdWelcomeImg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string destPath = Path.Combine(Application.StartupPath, "welcome.png");
 
+                //删除旧的
+                if (File.Exists(destPath))
+                {
+                    File.Delete(destPath);
+                }
+                
+                //复制文件
+                File.Copy(ofdWelcomeImg.FileName, destPath);
+
+                MessageBox.Show("操作完成!");
+            }
         }
     }
 }

@@ -78,15 +78,16 @@
             this.lblDebug3 = new System.Windows.Forms.Label();
             this.lblDebug1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnSave = new System.Windows.Forms.Button();
             this.btnExitApp = new System.Windows.Forms.Button();
+            this.btnSetWelcomeImage = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.btnInitAIUI = new System.Windows.Forms.Button();
             this.btnRestartService = new System.Windows.Forms.Button();
             this.btnCameraDir = new System.Windows.Forms.Button();
             this.btnReadmeDir = new System.Windows.Forms.Button();
             this.ofdApp = new System.Windows.Forms.OpenFileDialog();
             this.trDebugConnectionsInfos = new System.Windows.Forms.Timer(this.components);
-            this.btnSetWelcomeImage = new System.Windows.Forms.Button();
+            this.ofdWelcomeImg = new System.Windows.Forms.OpenFileDialog();
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -613,17 +614,6 @@
             this.panel1.Size = new System.Drawing.Size(807, 46);
             this.panel1.TabIndex = 1;
             // 
-            // btnSave
-            // 
-            this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSave.Location = new System.Drawing.Point(732, 0);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 46);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "保存";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // btnExitApp
             // 
             this.btnExitApp.Dock = System.Windows.Forms.DockStyle.Left;
@@ -634,6 +624,28 @@
             this.btnExitApp.Text = "退出软件";
             this.btnExitApp.UseVisualStyleBackColor = true;
             this.btnExitApp.Click += new System.EventHandler(this.btnExitApp_Click);
+            // 
+            // btnSetWelcomeImage
+            // 
+            this.btnSetWelcomeImage.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSetWelcomeImage.Location = new System.Drawing.Point(320, 0);
+            this.btnSetWelcomeImage.Name = "btnSetWelcomeImage";
+            this.btnSetWelcomeImage.Size = new System.Drawing.Size(92, 46);
+            this.btnSetWelcomeImage.TabIndex = 6;
+            this.btnSetWelcomeImage.Text = "设置待机图片";
+            this.btnSetWelcomeImage.UseVisualStyleBackColor = true;
+            this.btnSetWelcomeImage.Click += new System.EventHandler(this.btnSetWelcomeImage_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSave.Location = new System.Drawing.Point(732, 0);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 46);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "保存";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnInitAIUI
             // 
@@ -689,16 +701,9 @@
             this.trDebugConnectionsInfos.Interval = 2000;
             this.trDebugConnectionsInfos.Tick += new System.EventHandler(this.trDebugConnectionsInfos_Tick);
             // 
-            // btnSetWelcomeImage
+            // ofdWelcomeImg
             // 
-            this.btnSetWelcomeImage.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSetWelcomeImage.Location = new System.Drawing.Point(320, 0);
-            this.btnSetWelcomeImage.Name = "btnSetWelcomeImage";
-            this.btnSetWelcomeImage.Size = new System.Drawing.Size(92, 46);
-            this.btnSetWelcomeImage.TabIndex = 6;
-            this.btnSetWelcomeImage.Text = "设置待机图片";
-            this.btnSetWelcomeImage.UseVisualStyleBackColor = true;
-            this.btnSetWelcomeImage.Click += new System.EventHandler(this.btnSetWelcomeImage_Click);
+            this.ofdWelcomeImg.Filter = "*.png|*.png|*.jpg|*.jpg|*.bmp|*.bmp";
             // 
             // ConfigUI
             // 
@@ -789,5 +794,6 @@
         private System.Windows.Forms.ColumnHeader chTime;
         private System.Windows.Forms.CheckBox cbEnabledSwitchToLockUIOnStartup;
         private System.Windows.Forms.Button btnSetWelcomeImage;
+        private System.Windows.Forms.OpenFileDialog ofdWelcomeImg;
     }
 }
