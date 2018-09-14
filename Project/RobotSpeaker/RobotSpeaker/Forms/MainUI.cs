@@ -45,6 +45,22 @@ namespace RobotSpeaker.Forms
 
             ibSetting.NoFocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\set1.png"));
             ibSetting.FocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\set2.png"));
+
+            if (SuperObject.Config.EnabledSwitchToLockUIOnStartup)
+            {
+                System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(delegate(object stateObj)
+                    {
+                        System.Threading.Thread.Sleep(1500);
+
+                        if (IsHandleCreated)
+                        {
+                            Invoke(new MethodInvoker(delegate()
+                                {
+                                    new LockUI().Show();
+                                }));
+                        }
+                    }));
+            }
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
