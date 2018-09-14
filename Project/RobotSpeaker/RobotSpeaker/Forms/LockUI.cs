@@ -19,6 +19,24 @@ namespace RobotSpeaker.Forms
         public LockUI()
         {
             InitializeComponent();
+
+            vpcPlayer.StopEvent += vpcPlayer_StopEvent;
+        }
+
+        void vpcPlayer_StopEvent(object sender, EventArgs args)
+        {
+            if (vpcPlayer.Visible)
+            {
+                int videoIndex = videoFiles.IndexOf(vpcPlayer.MediaUrl);
+                if (videoIndex >= videoFiles.Count - 1)
+                {
+                    vpcPlayer.SetMediaUrl(videoFiles[0]);
+                }
+                else
+                {
+                    vpcPlayer.SetMediaUrl(videoFiles[videoIndex + 1]);
+                }
+            }
         }
 
         protected override void OnLoad(EventArgs e)
@@ -47,6 +65,11 @@ namespace RobotSpeaker.Forms
 
             pbFace.Visible = false;
             vpcPlayer.Visible = true;
+
+            if (videoFiles.Count > 0)
+            {
+                vpcPlayer.SetMediaUrl(videoFiles[0]);
+            }
         }
 
         protected override void OnClickBackButton(EventArgs e)
@@ -61,7 +84,19 @@ namespace RobotSpeaker.Forms
         /// </summary>
         public void UnLock()
         {
-            
+            if (IsHandleCreated)
+            {
+                Invoke(new MethodInvoker(delegate()
+                {
+                    pbFace.Visible = false;
+                    vpcPlayer.Visible = true;
+
+                    if (videoFiles.Count >= 1)
+                    {
+                        vpcPlayer.SetMediaUrl(videoFiles[0]);
+                    }
+                }));
+            }
         }
 
         /// <summary>
@@ -69,7 +104,15 @@ namespace RobotSpeaker.Forms
         /// </summary>
         public void Lock()
         {
-            
+            if (IsHandleCreated)
+            {
+                Invoke(new MethodInvoker(delegate()
+                    {
+                        pbFace.Visible = true;
+                        vpcPlayer.Visible = false;
+                        vpcPlayer.StopPlayer();
+                    }));
+            }
         }
     }
 }

@@ -332,5 +332,13 @@ namespace VLCPlayerLib
             int second = val % 60;
             return string.Format("{0:00}:{1:00}:{2:00}", hour, minute, second);
         }
+
+        /// <summary>
+        /// 停止播放
+        /// </summary>
+        public void StopPlayer()
+        {
+            btnStop.PerformClick();
+        }
     }
 }
