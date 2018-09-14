@@ -38,6 +38,7 @@
             this.pbWifi = new System.Windows.Forms.PictureBox();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.trTimeUpdate = new System.Windows.Forms.Timer(this.components);
+            this.ibLock = new RobotSpeaker.Controls.ImageButton();
             this.plTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbWifi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
@@ -50,6 +51,7 @@
             this.plTopBar.Controls.Add(this.lblTime);
             this.plTopBar.Controls.Add(this.ibBack);
             this.plTopBar.Controls.Add(this.lblEmpty);
+            this.plTopBar.Controls.Add(this.ibLock);
             this.plTopBar.Controls.Add(this.ibCloseComputer);
             this.plTopBar.Controls.Add(this.pbWifi);
             this.plTopBar.Controls.Add(this.pbLogo);
@@ -65,7 +67,7 @@
             this.lblTitle.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTitle.Location = new System.Drawing.Point(97, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(405, 64);
+            this.lblTitle.Size = new System.Drawing.Size(341, 64);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Title";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -74,7 +76,7 @@
             // 
             this.lblTime.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblTime.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblTime.Location = new System.Drawing.Point(502, 0);
+            this.lblTime.Location = new System.Drawing.Point(438, 0);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(337, 64);
             this.lblTime.TabIndex = 5;
@@ -156,6 +158,25 @@
             this.trTimeUpdate.Interval = 500;
             this.trTimeUpdate.Tick += new System.EventHandler(this.trTimeUpdate_Tick);
             // 
+            // ibLock
+            // 
+            this.ibLock.BottomText = "Text";
+            this.ibLock.BottomTextColor = System.Drawing.SystemColors.ControlText;
+            this.ibLock.BottomTextFont = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ibLock.BottomTextHeight = 0;
+            this.ibLock.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ibLock.EnabledMouseDownAndMouseUp = true;
+            this.ibLock.EnabledTextLabel = false;
+            this.ibLock.FocusImage = null;
+            this.ibLock.Font = new System.Drawing.Font("微软雅黑", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ibLock.IsPressed = false;
+            this.ibLock.Location = new System.Drawing.Point(775, 0);
+            this.ibLock.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
+            this.ibLock.Name = "ibLock";
+            this.ibLock.NoFocusImage = null;
+            this.ibLock.Size = new System.Drawing.Size(64, 64);
+            this.ibLock.TabIndex = 7;
+            // 
             // ContentFormBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -182,5 +203,6 @@
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Timer trTimeUpdate;
         private ImageButton ibCloseComputer;
+        private ImageButton ibLock;
     }
 }

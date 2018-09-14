@@ -33,6 +33,8 @@ namespace RobotSpeaker.Forms
                 BackButton.FocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\back2.png"));
                 CloseComputerButton.NoFocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\power1.png"));
                 CloseComputerButton.FocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\power2.png"));
+                LockButton.NoFocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\welcome1.png"));
+                LockButton.FocusImage = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\welcome2.png"));
                 LogoBox.Image = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\logo.png"));
                 WifiBox.Image = MainService.GetImage(Path.Combine(Application.StartupPath, @"Images\offline.jpg"));
             }

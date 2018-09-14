@@ -53,6 +53,12 @@ namespace RobotSpeaker.Controls
         public ImageButton CloseComputerButton { get { return ibCloseComputer; } }
 
         /// <summary>
+        /// 锁定按钮
+        /// </summary>
+        [Browsable(false)]
+        public ImageButton LockButton { get { return ibLock; } }
+
+        /// <summary>
         /// 标题文本
         /// </summary>
         public string TitleText
