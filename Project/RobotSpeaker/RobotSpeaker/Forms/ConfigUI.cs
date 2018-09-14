@@ -65,6 +65,7 @@ namespace RobotSpeaker.Forms
 
         private void LoadFromConfig()
         {
+            cbEnabledSwitchToLockUIOnStartup.Checked = SuperObject.Config.EnabledSwitchToLockUIOnStartup;
             cbEnabledOfflineVoice.Checked = !SuperObject.Config.EnabledOnlineVoice;
             tbDebugHintText.Text = SuperObject.Config.DebugModeHintText;
             tbVoiceWelcomeText.Text = SuperObject.Config.VoiceWelcomeText;
@@ -131,6 +132,7 @@ namespace RobotSpeaker.Forms
                 return false;
             }
 
+            SuperObject.Config.EnabledSwitchToLockUIOnStartup = cbEnabledSwitchToLockUIOnStartup.Checked;
             SuperObject.Config.DebugModeHintText = tbDebugHintText.Text;
             SuperObject.Config.EnabledCloseVideoPlayerWithVoice = cbEnabledCloseVideoPlayerWithVoice.Checked; 
             SuperObject.Config.EnabledOnlineVoice = cbEnabledOnlineVoice.Checked;

@@ -92,6 +92,11 @@ namespace RobotSpeaker
         public SerializableDictionary<string, object> Params { get; set; }
 
         /// <summary>
+        /// 是否允许开机时自动切换到待机界面
+        /// </summary>
+        public bool EnabledSwitchToLockUIOnStartup { get; set; }
+
+        /// <summary>
         /// 当进行语音对话时是否允许关闭VideoPlayer
         /// </summary>
         public bool EnabledCloseVideoPlayerWithVoice { get; set; }

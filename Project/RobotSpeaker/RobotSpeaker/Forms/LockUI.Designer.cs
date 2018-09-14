@@ -39,7 +39,7 @@
             this.Name = "LockUI";
             this.Text = "LockUI";
             this.TimeTextForeColor = System.Drawing.Color.White;
-            this.TitleText = "锁定中...";
+            this.TitleText = "待机中...";
             this.TitleTextForeColor = System.Drawing.Color.White;
             this.ResumeLayout(false);
 
