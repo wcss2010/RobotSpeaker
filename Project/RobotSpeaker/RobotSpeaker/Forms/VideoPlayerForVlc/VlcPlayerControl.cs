@@ -12,17 +12,6 @@ using System.IO;
 
 namespace VLCPlayerLib
 {
-    public delegate void StartOrStopEventDelegate(object sender,EventArgs args);
-
-    public delegate void ProgressEventDelegate(object sender, ProgressEventArgs args);
-
-    public class ProgressEventArgs : EventArgs
-    {
-        public double Total { get; set; }
-
-        public double Value { get; set; }
-    }
-
     /// <summary>
     /// 基于VLCPlayerCore的一个UI层
     /// </summary>
@@ -341,5 +330,16 @@ namespace VLCPlayerLib
         {
             btnStop.PerformClick();
         }
+    }
+
+    public delegate void StartOrStopEventDelegate(object sender, EventArgs args);
+
+    public delegate void ProgressEventDelegate(object sender, ProgressEventArgs args);
+
+    public class ProgressEventArgs : EventArgs
+    {
+        public double Total { get; set; }
+
+        public double Value { get; set; }
     }
 }

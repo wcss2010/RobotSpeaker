@@ -62,9 +62,10 @@
             // 
             // lblVideoName
             // 
-            this.lblVideoName.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.lblVideoName.BackColor = System.Drawing.Color.Black;
             this.lblVideoName.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblVideoName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblVideoName.ForeColor = System.Drawing.Color.White;
             this.lblVideoName.Location = new System.Drawing.Point(0, 0);
             this.lblVideoName.Name = "lblVideoName";
             this.lblVideoName.Size = new System.Drawing.Size(993, 23);
@@ -113,8 +114,13 @@
             // 
             // btnNext
             // 
+            this.btnNext.ButtonNormalBackColor = System.Drawing.Color.Transparent;
+            this.btnNext.ButtonNormalForeColor = System.Drawing.Color.White;
+            this.btnNext.ButtonPressedBackColor = System.Drawing.Color.Orange;
+            this.btnNext.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnNext.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnNext.Enabled = false;
+            this.btnNext.EnabledMouseDownAndMouseUp = true;
             this.btnNext.Location = new System.Drawing.Point(303, 17);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 39);
@@ -124,8 +130,13 @@
             // 
             // btnLast
             // 
+            this.btnLast.ButtonNormalBackColor = System.Drawing.Color.Transparent;
+            this.btnLast.ButtonNormalForeColor = System.Drawing.Color.White;
+            this.btnLast.ButtonPressedBackColor = System.Drawing.Color.Orange;
+            this.btnLast.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnLast.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnLast.Enabled = false;
+            this.btnLast.EnabledMouseDownAndMouseUp = true;
             this.btnLast.Location = new System.Drawing.Point(228, 17);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(75, 39);
@@ -135,8 +146,13 @@
             // 
             // btnStop
             // 
+            this.btnStop.ButtonNormalBackColor = System.Drawing.Color.Transparent;
+            this.btnStop.ButtonNormalForeColor = System.Drawing.Color.White;
+            this.btnStop.ButtonPressedBackColor = System.Drawing.Color.Orange;
+            this.btnStop.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnStop.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnStop.Enabled = false;
+            this.btnStop.EnabledMouseDownAndMouseUp = true;
             this.btnStop.Location = new System.Drawing.Point(153, 17);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 39);
@@ -146,8 +162,13 @@
             // 
             // btnPause
             // 
+            this.btnPause.ButtonNormalBackColor = System.Drawing.Color.Transparent;
+            this.btnPause.ButtonNormalForeColor = System.Drawing.Color.White;
+            this.btnPause.ButtonPressedBackColor = System.Drawing.Color.Orange;
+            this.btnPause.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnPause.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnPause.Enabled = false;
+            this.btnPause.EnabledMouseDownAndMouseUp = true;
             this.btnPause.Location = new System.Drawing.Point(78, 17);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(75, 39);
@@ -157,7 +178,12 @@
             // 
             // btnPlay
             // 
+            this.btnPlay.ButtonNormalBackColor = System.Drawing.Color.Transparent;
+            this.btnPlay.ButtonNormalForeColor = System.Drawing.Color.White;
+            this.btnPlay.ButtonPressedBackColor = System.Drawing.Color.Orange;
+            this.btnPlay.ButtonPressedForeColor = System.Drawing.Color.White;
             this.btnPlay.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnPlay.EnabledMouseDownAndMouseUp = true;
             this.btnPlay.Location = new System.Drawing.Point(3, 17);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(75, 39);
