@@ -82,6 +82,13 @@ namespace RobotSpeaker.Forms
             this.Close();
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            vpcPlayer.StopPlayer();
+        }
+
         /// <summary>
         /// 继续循环播放视频
         /// </summary>
