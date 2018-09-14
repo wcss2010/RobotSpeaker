@@ -50,6 +50,7 @@ namespace RobotSpeaker
 
         public TaskService()
         {
+            StaticActionList = new List<Robot_Actions>();
             _scanWorker.WorkerSupportsCancellation = true;
             _scanWorker.DoWork += _worker_DoWork;
         }
