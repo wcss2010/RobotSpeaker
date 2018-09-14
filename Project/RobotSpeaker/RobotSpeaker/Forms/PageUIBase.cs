@@ -19,6 +19,20 @@ namespace RobotSpeaker.Forms
         public PageUIBase()
         {
             InitializeComponent();
+
+            LockButton.Click += LockButton_Click;
+        }
+
+        void LockButton_Click(object sender, EventArgs e)
+        {
+            if (GetType().FullName.Equals(typeof(LockUI).FullName))
+            {
+                return;
+            }
+            else
+            {
+                new LockUI().Show();
+            }
         }
 
         protected override void OnLoad(EventArgs e)

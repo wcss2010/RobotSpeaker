@@ -152,6 +152,12 @@
     </Compile>
     <Compile Include="Forms\AiuiAPI\AIUIOffineConnection.cs" />
     <Compile Include="Forms\AiuiAPI\Comm.cs" />
+    <Compile Include="Forms\LockUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LockUI.Designer.cs">
+      <DependentUpon>LockUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\AIUIService.cs" />
     <Compile Include="Services\DebugService.cs" />
     <Compile Include="Services\JoystickService.cs" />
