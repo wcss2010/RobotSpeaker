@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tcPage = new System.Windows.Forms.TabControl();
             this.tpNormal = new System.Windows.Forms.TabPage();
+            this.cbEnabledSwitchToLockUIOnStartup = new System.Windows.Forms.CheckBox();
             this.tbDebugHintText = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -85,7 +86,7 @@
             this.btnReadmeDir = new System.Windows.Forms.Button();
             this.ofdApp = new System.Windows.Forms.OpenFileDialog();
             this.trDebugConnectionsInfos = new System.Windows.Forms.Timer(this.components);
-            this.cbEnabledSwitchToLockUIOnStartup = new System.Windows.Forms.CheckBox();
+            this.btnSetWelcomeImage = new System.Windows.Forms.Button();
             this.tcPage.SuspendLayout();
             this.tpNormal.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -145,6 +146,16 @@
             this.tpNormal.TabIndex = 0;
             this.tpNormal.Text = "基础配置";
             this.tpNormal.UseVisualStyleBackColor = true;
+            // 
+            // cbEnabledSwitchToLockUIOnStartup
+            // 
+            this.cbEnabledSwitchToLockUIOnStartup.AutoSize = true;
+            this.cbEnabledSwitchToLockUIOnStartup.Location = new System.Drawing.Point(173, 12);
+            this.cbEnabledSwitchToLockUIOnStartup.Name = "cbEnabledSwitchToLockUIOnStartup";
+            this.cbEnabledSwitchToLockUIOnStartup.Size = new System.Drawing.Size(216, 16);
+            this.cbEnabledSwitchToLockUIOnStartup.TabIndex = 17;
+            this.cbEnabledSwitchToLockUIOnStartup.Text = "启动时是否允许自动切换到待机界面";
+            this.cbEnabledSwitchToLockUIOnStartup.UseVisualStyleBackColor = true;
             // 
             // tbDebugHintText
             // 
@@ -589,8 +600,9 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnSave);
             this.panel1.Controls.Add(this.btnExitApp);
+            this.panel1.Controls.Add(this.btnSetWelcomeImage);
+            this.panel1.Controls.Add(this.btnSave);
             this.panel1.Controls.Add(this.btnInitAIUI);
             this.panel1.Controls.Add(this.btnRestartService);
             this.panel1.Controls.Add(this.btnCameraDir);
@@ -615,7 +627,7 @@
             // btnExitApp
             // 
             this.btnExitApp.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnExitApp.Location = new System.Drawing.Point(320, 0);
+            this.btnExitApp.Location = new System.Drawing.Point(412, 0);
             this.btnExitApp.Name = "btnExitApp";
             this.btnExitApp.Size = new System.Drawing.Size(75, 46);
             this.btnExitApp.TabIndex = 3;
@@ -677,15 +689,16 @@
             this.trDebugConnectionsInfos.Interval = 2000;
             this.trDebugConnectionsInfos.Tick += new System.EventHandler(this.trDebugConnectionsInfos_Tick);
             // 
-            // cbEnabledSwitchToLockUIOnStartup
+            // btnSetWelcomeImage
             // 
-            this.cbEnabledSwitchToLockUIOnStartup.AutoSize = true;
-            this.cbEnabledSwitchToLockUIOnStartup.Location = new System.Drawing.Point(173, 12);
-            this.cbEnabledSwitchToLockUIOnStartup.Name = "cbEnabledSwitchToLockUIOnStartup";
-            this.cbEnabledSwitchToLockUIOnStartup.Size = new System.Drawing.Size(216, 16);
-            this.cbEnabledSwitchToLockUIOnStartup.TabIndex = 17;
-            this.cbEnabledSwitchToLockUIOnStartup.Text = "启动时是否允许自动切换到待机界面";
-            this.cbEnabledSwitchToLockUIOnStartup.UseVisualStyleBackColor = true;
+            this.btnSetWelcomeImage.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSetWelcomeImage.Location = new System.Drawing.Point(320, 0);
+            this.btnSetWelcomeImage.Name = "btnSetWelcomeImage";
+            this.btnSetWelcomeImage.Size = new System.Drawing.Size(92, 46);
+            this.btnSetWelcomeImage.TabIndex = 6;
+            this.btnSetWelcomeImage.Text = "设置待机图片";
+            this.btnSetWelcomeImage.UseVisualStyleBackColor = true;
+            this.btnSetWelcomeImage.Click += new System.EventHandler(this.btnSetWelcomeImage_Click);
             // 
             // ConfigUI
             // 
@@ -775,5 +788,6 @@
         private System.Windows.Forms.ColumnHeader chIP;
         private System.Windows.Forms.ColumnHeader chTime;
         private System.Windows.Forms.CheckBox cbEnabledSwitchToLockUIOnStartup;
+        private System.Windows.Forms.Button btnSetWelcomeImage;
     }
 }

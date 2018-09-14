@@ -12,11 +12,37 @@ using System.IO;
 
 namespace VLCPlayerLib
 {
+    public delegate void StartOrStopEventDelegate(object sender,EventArgs args);
+
+    public delegate void ProgressEventDelegate(object sender, ProgressEventArgs args);
+
+    public class ProgressEventArgs : EventArgs
+    {
+        public double Total { get; set; }
+
+        public double Value { get; set; }
+    }
+
     /// <summary>
     /// 基于VLCPlayerCore的一个UI层
     /// </summary>
     public partial class VlcPlayerControl : UserControl
     {
+        /// <summary>
+        /// 开始播放事件
+        /// </summary>
+        public event StartOrStopEventDelegate StartEvent;
+
+        /// <summary>
+        /// 停止播放事件
+        /// </summary>
+        public event StartOrStopEventDelegate StopEvent;
+
+        /// <summary>
+        /// 播放进度事件
+        /// </summary>
+        public event ProgressEventDelegate ProgressEvent;
+
         private VlcPlayerCore _vlcPlayerCore = null;
         /// <summary>
         /// VLC播放器核心
@@ -139,6 +165,11 @@ namespace VLCPlayerLib
 
             lblVideoName.Text = Path.GetFileNameWithoutExtension(MediaUrl);
             lblVideoName.Show();
+
+            if (StartEvent != null)
+            {
+                StartEvent(this, new EventArgs());
+            }
         }
 
         /// <summary>
@@ -182,6 +213,11 @@ namespace VLCPlayerLib
             lblPlayerTimeRange.Text = "00:00:00/00:00:00";
             trPlayerProgress.Value = 0;
             lblVideoName.Hide();
+
+            if (StopEvent != null)
+            {
+                StopEvent(this, new EventArgs());
+            }
         }
 
         /// <summary>
@@ -265,14 +301,20 @@ namespace VLCPlayerLib
             {
                 if (trPlayerProgress.Value == trPlayerProgress.Maximum)
                 {
-                    VlcPlayerCore.Stop();
-                    tmrProgress.Stop();
-                    lblVideoName.Hide();
+                    btnStop.PerformClick();
                 }
                 else
                 {
                     trPlayerProgress.Value = trPlayerProgress.Value + 1;
                     lblPlayerTimeRange.Text = string.Format("{0}/{1}", GetTimeString(trPlayerProgress.Value), GetTimeString(trPlayerProgress.Maximum));
+
+                    if (ProgressEvent != null)
+                    {
+                        ProgressEventArgs pea = new ProgressEventArgs();
+                        pea.Total = trPlayerProgress.Maximum;
+                        pea.Value = trPlayerProgress.Value;
+                        ProgressEvent(this, pea);
+                    }
                 }
             }
         }

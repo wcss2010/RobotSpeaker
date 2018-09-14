@@ -331,5 +331,10 @@ namespace RobotSpeaker.Forms
                 System.Console.WriteLine(ex.ToString());
             }
         }
+
+        private void btnSetWelcomeImage_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RobotSpeaker.Forms.Player;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,8 @@ namespace RobotSpeaker.Forms
 {
     public partial class LockUI : PageUIBase
     {
+        private List<string> videoFiles = new List<string>();
+
         public LockUI()
         {
             InitializeComponent();
@@ -30,6 +33,20 @@ namespace RobotSpeaker.Forms
 
             //查找可以播放的视频
             string[] files = Directory.GetFiles(SuperObject.ReadmeDir);
+            foreach (string sss in files)
+            {
+                foreach (string exts in VideoAndAudioPlayerUI.SupportedExtName)
+                {
+                    if (sss.EndsWith(exts))
+                    {
+                        videoFiles.Add(sss);
+                        break;
+                    }
+                }
+            }
+
+            pbFace.Visible = false;
+            vpcPlayer.Visible = true;
         }
 
         protected override void OnClickBackButton(EventArgs e)
