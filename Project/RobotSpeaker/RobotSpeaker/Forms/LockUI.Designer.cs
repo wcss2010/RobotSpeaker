@@ -28,9 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // LockUI
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1031, 487);
+            this.EnabledDisplayWifiLogo = true;
+            this.Name = "LockUI";
             this.Text = "LockUI";
+            this.TimeTextForeColor = System.Drawing.Color.White;
+            this.TitleText = "锁定中...";
+            this.TitleTextForeColor = System.Drawing.Color.White;
+            this.ResumeLayout(false);
+
         }
 
         #endregion

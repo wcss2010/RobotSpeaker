@@ -324,6 +324,9 @@
     <EmbeddedResource Include="Forms\JoyAPI\JoystickStateInfo.resx">
       <DependentUpon>JoystickStateInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LockUI.resx">
+      <DependentUpon>LockUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainUI.resx">
       <DependentUpon>MainUI.cs</DependentUpon>
     </EmbeddedResource>
