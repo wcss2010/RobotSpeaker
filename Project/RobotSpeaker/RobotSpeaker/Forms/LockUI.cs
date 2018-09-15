@@ -144,10 +144,14 @@ namespace RobotSpeaker.Forms
                     pbFace.Dock = DockStyle.None;
                     pbFace.Width = 0;
 
-                    if (videoFiles.Count >= 1)
+                    try
                     {
-                        VpcPlayer.SetMediaUrl(videoFiles[0]);
+                        if (videoFiles.Count >= 1)
+                        {
+                            VpcPlayer.SetMediaUrl(videoFiles[0]);
+                        }
                     }
+                    catch (Exception ex) { }
                 }));
             }
         }
@@ -165,7 +169,11 @@ namespace RobotSpeaker.Forms
                         pbFace.Dock = DockStyle.Fill;
                         pbFace.BringToFront();
 
-                        VpcPlayer.VlcPlayerCore.Pause();
+                        try
+                        {
+                            VpcPlayer.VlcPlayerCore.Pause();
+                        }
+                        catch (Exception ex) { }
                     }));
             }
         }
