@@ -14,6 +14,11 @@ namespace RobotSpeaker.Forms
 {
     public partial class LockUI : PageUIBase
     {
+        /// <summary>
+        /// AIUI状态(talk=对话状态,listen=监听状态)
+        /// </summary>
+        public static string AIUIStatus = "listen";
+
         private List<string> videoFiles = new List<string>();
 
         public LockUI()
@@ -67,12 +72,16 @@ namespace RobotSpeaker.Forms
                 }
             }
 
-            pbFace.Visible = false;
-            vpcPlayer.Visible = true;
-
-            if (videoFiles.Count > 0)
+            //检查当前对话状态
+            if (AIUIStatus == "talk")
             {
-                vpcPlayer.SetMediaUrl(videoFiles[0]);
+                //对话状态
+                Lock();
+            }
+            else
+            {
+                //监听状态
+                UnLock();
             }
         }
 

@@ -48,6 +48,9 @@ namespace RobotSpeaker
 
         void XfJsonResolver_XFCardSleepEvent(object sender, EventArgs args)
         {
+            //设置状态
+            LockUI.AIUIStatus = "listen";
+
             if (MainService.LockUIObj != null)
             {
                 MainService.LockUIObj.UnLock();
@@ -106,6 +109,9 @@ namespace RobotSpeaker
                 //关闭视频播放器(如果有的话)
                 CloseVideoPlayer();
             }
+
+            //设置状态
+            LockUI.AIUIStatus = "talk";
 
             if (MainService.LockUIObj != null)
             {
