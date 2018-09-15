@@ -20,6 +20,7 @@ namespace RobotSpeaker.Forms
         {
             InitializeComponent();
 
+            MainService.LockUIObj = this;
             vpcPlayer.StopEvent += vpcPlayer_StopEvent;
         }
 
