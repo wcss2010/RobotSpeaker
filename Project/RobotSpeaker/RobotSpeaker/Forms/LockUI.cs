@@ -144,7 +144,10 @@ namespace RobotSpeaker.Forms
                     pbFace.Dock = DockStyle.None;
                     pbFace.Width = 0;
 
-                    VpcPlayer.VlcPlayerCore.Play();
+                    if (videoFiles.Count >= 1)
+                    {
+                        VpcPlayer.SetMediaUrl(videoFiles[0]);
+                    }
                 }));
             }
         }
