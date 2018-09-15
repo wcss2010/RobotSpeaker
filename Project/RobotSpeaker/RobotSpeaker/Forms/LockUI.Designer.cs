@@ -68,7 +68,7 @@
             this.Name = "LockUI";
             this.Text = "LockUI";
             this.TimeTextForeColor = System.Drawing.Color.White;
-            this.TitleText = "待机中...";
+            this.TitleText = "";
             this.TitleTextForeColor = System.Drawing.Color.White;
             this.Controls.SetChildIndex(this.pbFace, 0);
             this.Controls.SetChildIndex(this.vpcPlayer, 0);
