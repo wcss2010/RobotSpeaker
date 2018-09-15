@@ -126,6 +126,13 @@ namespace RobotSpeaker.Forms
             if (VpcPlayer != null)
             {
                 VpcPlayer.StopPlayer();
+
+                try
+                {
+                    VpcPlayer.VlcPlayerCore.Stop();
+                }
+                catch (Exception ex) { }
+
                 this.Controls.Remove(VpcPlayer);
                 VpcPlayer = null;
             }
