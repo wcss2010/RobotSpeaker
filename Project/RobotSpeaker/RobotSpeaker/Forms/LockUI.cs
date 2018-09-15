@@ -9,11 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VLCPlayerLib;
 
 namespace RobotSpeaker.Forms
 {
     public partial class LockUI : PageUIBase
     {
+        public VlcPlayerControl VpcPlayer { get; set; }
+
         /// <summary>
         /// AIUI状态(talk=对话状态,listen=监听状态)
         /// </summary>
@@ -26,7 +29,6 @@ namespace RobotSpeaker.Forms
             InitializeComponent();
 
             MainService.LockUIObj = this;
-            vpcPlayer.StopEvent += vpcPlayer_StopEvent;
         }
 
         void vpcPlayer_StopEvent(object sender, EventArgs args)
@@ -37,14 +39,17 @@ namespace RobotSpeaker.Forms
             }
             else
             {
-                int videoIndex = videoFiles.IndexOf(vpcPlayer.MediaUrl);
-                if (videoIndex >= videoFiles.Count - 1)
+                if (VpcPlayer != null)
                 {
-                    vpcPlayer.SetMediaUrl(videoFiles[0]);
-                }
-                else
-                {
-                    vpcPlayer.SetMediaUrl(videoFiles[videoIndex + 1]);
+                    int videoIndex = videoFiles.IndexOf(VpcPlayer.MediaUrl);
+                    if (videoIndex >= videoFiles.Count - 1)
+                    {
+                        VpcPlayer.SetMediaUrl(videoFiles[0]);
+                    }
+                    else
+                    {
+                        VpcPlayer.SetMediaUrl(videoFiles[videoIndex + 1]);
+                    }
                 }
             }
         }
@@ -52,9 +57,6 @@ namespace RobotSpeaker.Forms
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-
-            //初始化播放器
-            vpcPlayer.InitPlayer();
 
             //检查是否存在欢迎图片(./welcome.png)
             if (File.Exists(Path.Combine(Application.StartupPath, "welcome.png")))
@@ -100,7 +102,30 @@ namespace RobotSpeaker.Forms
         {
             base.OnFormClosing(e);
 
-            vpcPlayer.StopPlayer();
+            ReleasePlayer();
+        }
+
+        public void CreatePlayer()
+        {
+            ReleasePlayer();
+
+            VpcPlayer = new VlcPlayerControl();
+            VpcPlayer.Dock = DockStyle.Fill;
+            VpcPlayer.EnabledDisplayPlayerControlPanel = false;
+            VpcPlayer.StopEvent += vpcPlayer_StopEvent;
+            Controls.Add(VpcPlayer);
+            //Init
+            VpcPlayer.InitPlayer();
+        }
+
+        public void ReleasePlayer()
+        {
+            if (VpcPlayer != null)
+            {
+                VpcPlayer.StopPlayer();
+                this.Controls.Remove(VpcPlayer);
+                VpcPlayer = null;
+            }
         }
 
         /// <summary>
@@ -113,11 +138,13 @@ namespace RobotSpeaker.Forms
                 Invoke(new MethodInvoker(delegate()
                 {
                     pbFace.Visible = false;
-                    vpcPlayer.Visible = true;
+                    pbFace.Dock = DockStyle.None;
+                    pbFace.Width = 0;
 
+                    CreatePlayer();
                     if (videoFiles.Count >= 1)
                     {
-                        vpcPlayer.SetMediaUrl(videoFiles[0]);
+                        VpcPlayer.SetMediaUrl(videoFiles[0]);
                     }
                 }));
             }
@@ -132,9 +159,10 @@ namespace RobotSpeaker.Forms
             {
                 Invoke(new MethodInvoker(delegate()
                     {
-                        pbFace.Visible = true;                        
-                        vpcPlayer.StopPlayer();
-                        vpcPlayer.Visible = false;
+                        pbFace.Visible = true;
+                        pbFace.Dock = DockStyle.Fill;
+
+                        ReleasePlayer();
                     }));
             }
         }
