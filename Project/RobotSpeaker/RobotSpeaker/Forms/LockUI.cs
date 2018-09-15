@@ -128,9 +128,9 @@ namespace RobotSpeaker.Forms
             {
                 Invoke(new MethodInvoker(delegate()
                     {
-                        pbFace.Visible = true;
-                        vpcPlayer.Visible = false;
+                        pbFace.Visible = true;                        
                         vpcPlayer.StopPlayer();
+                        vpcPlayer.Visible = false;
                     }));
             }
         }
