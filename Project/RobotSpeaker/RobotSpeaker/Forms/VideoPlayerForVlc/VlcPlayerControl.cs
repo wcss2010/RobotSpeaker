@@ -328,7 +328,11 @@ namespace VLCPlayerLib
         /// </summary>
         public void StopPlayer()
         {
-            btnStop.PerformClick();
+            try
+            {
+                btnStop.PerformClick();
+            }
+            catch (Exception ex) { }
         }
     }
 
