@@ -58,6 +58,9 @@ namespace RobotSpeaker.Forms
         {
             base.OnLoad(e);
 
+            //创建播放器
+            CreatePlayer();
+
             //检查是否存在欢迎图片(./welcome.png)
             if (File.Exists(Path.Combine(Application.StartupPath, "welcome.png")))
             {
@@ -141,11 +144,7 @@ namespace RobotSpeaker.Forms
                     pbFace.Dock = DockStyle.None;
                     pbFace.Width = 0;
 
-                    CreatePlayer();
-                    if (videoFiles.Count >= 1)
-                    {
-                        VpcPlayer.SetMediaUrl(videoFiles[0]);
-                    }
+                    VpcPlayer.VlcPlayerCore.Play();
                 }));
             }
         }
@@ -161,8 +160,9 @@ namespace RobotSpeaker.Forms
                     {
                         pbFace.Visible = true;
                         pbFace.Dock = DockStyle.Fill;
+                        pbFace.BringToFront();
 
-                        ReleasePlayer();
+                        VpcPlayer.VlcPlayerCore.Pause();
                     }));
             }
         }
