@@ -156,26 +156,69 @@ namespace RobotSpeaker
         /// </summary>
         public static void Open(MainUI mains)
         {
+            //设置主窗体
             MainUIObj = mains;
 
             //打开手柄服务
             _joystickServiceObj.JoystickPressEvent += JoystickService_JoystickPressEvent;
-            _joystickServiceObj.Open(MainUIObj);
+            try
+            {
+                _joystickServiceObj.Open(MainUIObj);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
             //打开在线语音服务
-            _aiuiOnlineService.Open();
+            try
+            {
+                _aiuiOnlineService.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
             //打开离线语音服务
-            _aiuiOfflineService.Open();
+            try
+            {
+                _aiuiOfflineService.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
             //打开电机驱动服务
-            _motorControlService.Open();
+            try
+            {
+                _motorControlService.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
             //打开任务服务
-            _taskService.Open();
+            try
+            {
+                _taskService.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
             //打开调试服务
-            _debugService.Open();
+            try
+            {
+                _debugService.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private static void JoystickService_JoystickPressEvent(object sender, JoystickPressEventArgs args)
@@ -247,16 +290,36 @@ namespace RobotSpeaker
         public static void Reset()
         {
             //重置AIUI在线服务
-            _aiuiOnlineService.Close();
-            _aiuiOnlineService.Open();
+            try
+            {
+                _aiuiOnlineService.Close();
+                _aiuiOnlineService.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
             //重置AIUI离线服务
-            _aiuiOfflineService.Close();
-            _aiuiOfflineService.Open();
-
+            try
+            {
+                _aiuiOfflineService.Close();
+                _aiuiOfflineService.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
             //重置运动服务
-            _motorControlService.Close();
-            _motorControlService.Open();
+            try
+            {
+                _motorControlService.Close();
+                _motorControlService.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
