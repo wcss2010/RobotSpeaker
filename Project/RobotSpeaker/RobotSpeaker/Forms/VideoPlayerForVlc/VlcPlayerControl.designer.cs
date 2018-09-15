@@ -68,7 +68,7 @@
             this.lblVideoName.ForeColor = System.Drawing.Color.White;
             this.lblVideoName.Location = new System.Drawing.Point(0, 0);
             this.lblVideoName.Name = "lblVideoName";
-            this.lblVideoName.Size = new System.Drawing.Size(993, 23);
+            this.lblVideoName.Size = new System.Drawing.Size(993, 0);
             this.lblVideoName.TabIndex = 0;
             this.lblVideoName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblVideoName.Visible = false;
