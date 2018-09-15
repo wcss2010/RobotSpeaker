@@ -563,7 +563,7 @@ namespace RobotSpeaker
                                     StringBuilder sb = new StringBuilder();
                                     GetVoiceString(sb, listen, "w");
 
-                                    if (sb.Length >= 2)
+                                    if (sb.Length >= 1)
                                     {
                                         OnXFCardDictateEvent(sb.ToString().Trim(), string.Empty);
                                     }
@@ -577,8 +577,8 @@ namespace RobotSpeaker
                                     string eventTypeStr = contentObj["eventType"].ToString();
                                     switch (eventTypeStr)
                                     {
-                                        case "4":
-                                            //唤醒事件
+                                        case "8":
+                                            //唤醒事件(模式)
                                             if (contentObj["info"] != null)
                                             {
                                                 if (contentObj["info"]["wakeup_mode"] != null)
@@ -586,7 +586,13 @@ namespace RobotSpeaker
                                                     //唤醒消息
                                                     OnXFCardWakeupEvent();
                                                 }
-                                                else if (contentObj["info"]["angle"] != null)
+                                            }
+                                            break;
+                                        case "4":
+                                            //唤醒事件(角度)
+                                            if (contentObj["info"] != null)
+                                            {
+                                                if (contentObj["info"]["angle"] != null)
                                                 {
                                                     //角度消息
                                                     OnXFCardLocationEvent(double.Parse(contentObj["info"]["angle"].ToString()));
