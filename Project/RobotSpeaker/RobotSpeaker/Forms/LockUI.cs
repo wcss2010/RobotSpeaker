@@ -31,7 +31,11 @@ namespace RobotSpeaker.Forms
 
         void vpcPlayer_StopEvent(object sender, EventArgs args)
         {
-            if (vpcPlayer.Visible)
+            if (pbFace.Visible)
+            {
+                return;
+            }
+            else
             {
                 int videoIndex = videoFiles.IndexOf(vpcPlayer.MediaUrl);
                 if (videoIndex >= videoFiles.Count - 1)
