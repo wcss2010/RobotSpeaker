@@ -188,7 +188,7 @@ namespace RobotSportTaskEditor.Controls
             {
                 obj = new LightTrack(motorIndex);
             }
-            else if (motorIndex == 10 || motorIndex == 11 || motorIndex == 13)
+            else if (motorIndex == 10 || motorIndex == 11 || motorIndex == 13 || motorIndex == 14)
             {
                 //行进电机
                 obj = new TravelTrack(motorIndex);

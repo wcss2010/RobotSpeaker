@@ -62,6 +62,7 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblDevice14 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.cmsTimeLineMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scTopAndDown)).BeginInit();
@@ -214,15 +215,15 @@
             // 
             this.plRobotToolBox.BackColor = System.Drawing.Color.White;
             this.plRobotToolBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.plRobotToolBox.Controls.Add(this.lblDesignToolBoxTitle);
             this.plRobotToolBox.Controls.Add(this.plRobotDesignToolBox);
+            this.plRobotToolBox.Controls.Add(this.lblDesignToolBoxTitle);
             this.plRobotToolBox.Controls.Add(this.pictureBox4);
             this.plRobotToolBox.Controls.Add(this.pictureBox3);
             this.plRobotToolBox.Controls.Add(this.pictureBox2);
             this.plRobotToolBox.Controls.Add(this.pictureBox1);
             this.plRobotToolBox.Location = new System.Drawing.Point(25, 40);
             this.plRobotToolBox.Name = "plRobotToolBox";
-            this.plRobotToolBox.Size = new System.Drawing.Size(1011, 565);
+            this.plRobotToolBox.Size = new System.Drawing.Size(1011, 591);
             this.plRobotToolBox.TabIndex = 1;
             // 
             // lblDesignToolBoxTitle
@@ -240,6 +241,7 @@
             // plRobotDesignToolBox
             // 
             this.plRobotDesignToolBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.plRobotDesignToolBox.Controls.Add(this.lblDevice14);
             this.plRobotDesignToolBox.Controls.Add(this.lblDevice13);
             this.plRobotDesignToolBox.Controls.Add(this.lblDevice12);
             this.plRobotDesignToolBox.Controls.Add(this.lblDevice0);
@@ -255,14 +257,14 @@
             this.plRobotDesignToolBox.Controls.Add(this.lblDevice9);
             this.plRobotDesignToolBox.Controls.Add(this.lblDevice7);
             this.plRobotDesignToolBox.Controls.Add(this.lblDevice8);
-            this.plRobotDesignToolBox.Location = new System.Drawing.Point(226, 43);
+            this.plRobotDesignToolBox.Location = new System.Drawing.Point(226, 38);
             this.plRobotDesignToolBox.Name = "plRobotDesignToolBox";
-            this.plRobotDesignToolBox.Size = new System.Drawing.Size(439, 515);
+            this.plRobotDesignToolBox.Size = new System.Drawing.Size(439, 546);
             this.plRobotDesignToolBox.TabIndex = 15;
             // 
             // lblDevice13
             // 
-            this.lblDevice13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.lblDevice13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.lblDevice13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDevice13.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.lblDevice13.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -385,7 +387,7 @@
             this.pbRoBot.Image = ((System.Drawing.Image)(resources.GetObject("pbRoBot.Image")));
             this.pbRoBot.Location = new System.Drawing.Point(0, 0);
             this.pbRoBot.Name = "pbRoBot";
-            this.pbRoBot.Size = new System.Drawing.Size(238, 515);
+            this.pbRoBot.Size = new System.Drawing.Size(238, 546);
             this.pbRoBot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbRoBot.TabIndex = 0;
             this.pbRoBot.TabStop = false;
@@ -513,7 +515,7 @@
             // 
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(674, 238);
+            this.pictureBox4.Location = new System.Drawing.Point(674, 253);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(323, 317);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -524,7 +526,7 @@
             // 
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(15, 241);
+            this.pictureBox3.Location = new System.Drawing.Point(15, 256);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(194, 316);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -552,6 +554,23 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
+            // 
+            // lblDevice14
+            // 
+            this.lblDevice14.BackColor = System.Drawing.Color.Maroon;
+            this.lblDevice14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblDevice14.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lblDevice14.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblDevice14.ForeColor = System.Drawing.Color.White;
+            this.lblDevice14.Location = new System.Drawing.Point(244, 510);
+            this.lblDevice14.Name = "lblDevice14";
+            this.lblDevice14.Size = new System.Drawing.Size(187, 33);
+            this.lblDevice14.TabIndex = 14;
+            this.lblDevice14.Text = "14,自由行动";
+            this.lblDevice14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDevice14.Click += new System.EventHandler(this.lblDevice0_Click);
+            this.lblDevice14.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblDevice11_MouseDown);
+            this.lblDevice14.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lblDevice11_MouseUp);
             // 
             // ActionDesignControl
             // 
@@ -619,5 +638,6 @@
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
         private System.Windows.Forms.Label lblDevice12;
         private System.Windows.Forms.Label lblDevice13;
+        private System.Windows.Forms.Label lblDevice14;
     }
 }
