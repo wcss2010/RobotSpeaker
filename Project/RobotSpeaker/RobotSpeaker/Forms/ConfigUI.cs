@@ -248,6 +248,12 @@ namespace RobotSpeaker.Forms
             {
                 cbEnabledOfflineVoice.Checked = !cbEnabledOnlineVoice.Checked;
             }
+
+            //AIUI播放(开)
+            if (MainService.AiuiOnlineService != null && MainService.AiuiOnlineService.AiuiConnection != null)
+            {
+                MainService.AiuiOnlineService.AiuiConnection.SendLauchVoiceMessage(true);
+            }
         }
 
         private void cbEnabledOfflineVoice_CheckedChanged(object sender, EventArgs e)
@@ -255,6 +261,12 @@ namespace RobotSpeaker.Forms
             if (cbEnabledOfflineVoice.Checked)
             {
                 cbEnabledOnlineVoice.Checked = !cbEnabledOfflineVoice.Checked;
+            }
+
+            //AIUI播放(关)
+            if (MainService.AiuiOnlineService != null && MainService.AiuiOnlineService.AiuiConnection != null)
+            {
+                MainService.AiuiOnlineService.AiuiConnection.SendLauchVoiceMessage(false);
             }
         }
 
