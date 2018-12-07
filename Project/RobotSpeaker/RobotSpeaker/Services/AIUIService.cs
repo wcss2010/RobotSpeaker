@@ -278,6 +278,12 @@ namespace RobotSpeaker
                 try
                 {
                     _aiuiConnection.Connect();
+
+                    //AIUI播放(开)
+                    if (_aiuiConnection != null)
+                    {
+                        _aiuiConnection.SendLauchVoiceMessage(true);
+                    }
                 }
                 catch (Exception ex)
                 {
